@@ -98,14 +98,8 @@
             "cannoneer": 0
           },
           "drag": [
-            [
-              2744,
-              987
-            ],
-            [
-              3026,
-              828
-            ]
+            341.0,
+            -79.5
           ],
           "relative_coordinates": [
             -523,
@@ -136,14 +130,8 @@
             "cannoneer": 0
           },
           "drag": [
-            [
-              2647,
-              1011
-            ],
-            [
-              3072,
-              799
-            ]
+            312.5,
+            -106.0
           ],
           "relative_coordinates": [
             -653,
@@ -174,14 +162,8 @@
             "cannoneer": 168
           },
           "drag": [
-            [
-              2659,
-              995
-            ],
-            [
-              3036,
-              630
-            ]
+            300,
+            -182.5
           ],
           "relative_coordinates": [
             -666,
@@ -264,8 +246,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            3036,
-            678
+            -120,
+            19
           ]
         },
         {
@@ -285,8 +267,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            3181,
-            534
+            -265,
+            163
           ]
         },
         {
@@ -306,8 +288,8 @@
             "cannoneer": 164
           },
           "relative_coordinates": [
-            3122,
-            467
+            -206,
+            230
           ]
         }
       ],
@@ -358,8 +340,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            3327,
-            499
+            -411,
+            198
           ]
         }
       ],
@@ -386,8 +368,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            3327,
-            499
+            -411,
+            198
           ]
         }
       ],
@@ -414,8 +396,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            3162,
-            549
+            -246,
+            148
           ]
         }
       ],
@@ -442,8 +424,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            2633,
-            699
+            283,
+            -2
           ]
         }
       ],
@@ -470,8 +452,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            3408,
-            699
+            -492,
+            -2
           ]
         }
       ],
@@ -498,8 +480,8 @@
             "cannoneer": 221
           },
           "relative_coordinates": [
-            2796,
-            798
+            120,
+            -101
           ]
         }
       ],
@@ -526,8 +508,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            2774,
-            634
+            142,
+            63
           ]
         }
       ],
@@ -554,8 +536,8 @@
             "cannoneer": 170
           },
           "relative_coordinates": [
-            3084,
-            928
+            -168,
+            -231
           ]
         }
       ],
@@ -582,8 +564,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            2754,
-            521
+            162,
+            176
           ]
         }
       ],
@@ -610,8 +592,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            3023,
-            734
+            -107,
+            -37
           ]
         },
         {
@@ -631,8 +613,8 @@
             "cannoneer": 170
           },
           "relative_coordinates": [
-            3076,
-            652
+            -160,
+            45
           ]
         }
       ],
@@ -659,8 +641,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            2728,
-            758
+            188,
+            -61
           ]
         }
       ],
