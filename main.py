@@ -6,38 +6,9 @@ import time
 import pyautogui as pygui
 from pynput import mouse
 
+from my_types import Point
+
 pygui.PAUSE = 1
-
-
-class Point:
-    def __init__(self, x=0, y=0):
-        self.x = int(x)
-        self.y = int(y)
-
-    @classmethod
-    def from_point(cls, point):
-        return cls(point.x, point.y)
-
-    @classmethod
-    def from_list(cls, list_):
-        return cls(list_[0], list_[1])
-
-    def __str__(self):
-        return "({0},{1})".format(self.x, self.y)
-
-    def __sub__(self, other):
-        x = self.x - other.x
-        y = self.y - other.y
-        return Point(x, y)
-
-    def __add__(self, other):
-        x = self.x + other.x
-        y = self.y + other.y
-        return Point(x, y)
-
-    def get(self):
-        print('current coordination:', self.x, self.y)
-        return self.x, self.y
 
 
 class GetClick:
@@ -132,18 +103,26 @@ class Configure:
         pygui.alert(text=text, title='Configuration', button='OK')
         getClick.get()
 
+        text = 'Close General'
+        pygui.alert(text=text, title='Configuration', button='OK')
+        getClick.get()
+
+        text = 'Open same general by clicking him on the map (island)'
+        pygui.alert(text=text, title='Configuration', button='OK')
+        coordinations['center_ref'] = getClick.get()
+
         text = 'Recruit Up'
         pygui.alert(text=text, title='Configuration', button='OK')
         coordinations['r_up'] = getClick.get()
-        coordinations['recruit'] = coordinations['r_up'] + Point(-43, -18)
-        coordinations['bowmen'] = coordinations['r_up'] + Point(86, -18)
-        coordinations['militia'] = coordinations['r_up'] + Point(217, -18)
-        coordinations['cavalry'] = coordinations['r_up'] + Point(-43, 35)
-        coordinations['longbowman'] = coordinations['r_up'] + Point(86, 35)
-        coordinations['soldier'] = coordinations['r_up'] + Point(217, 35)
-        coordinations['crossbowman'] = coordinations['r_up'] + Point(-43, 94)
-        coordinations['elite_soldier'] = coordinations['r_up'] + Point(86, 94)
-        coordinations['cannoneer'] = coordinations['r_up'] + Point(217, 94)
+        coordinations['recruit'] = coordinations['r_up'] + Point(-32, -18)
+        coordinations['bowmen'] = coordinations['r_up'] + Point(95, -18)
+        coordinations['militia'] = coordinations['r_up'] + Point(220, -18)
+        coordinations['cavalry'] = coordinations['r_up'] + Point(-32, 35)
+        coordinations['longbowman'] = coordinations['r_up'] + Point(95, 35)
+        coordinations['soldier'] = coordinations['r_up'] + Point(220, 35)
+        coordinations['crossbowman'] = coordinations['r_up'] + Point(-32, 94)
+        coordinations['elite_soldier'] = coordinations['r_up'] + Point(95, 94)
+        coordinations['cannoneer'] = coordinations['r_up'] + Point(220, 94)
 
         text = 'Unload'
         pygui.alert(text=text, title='Configuration', button='OK')
@@ -372,6 +351,9 @@ class TeachAdventure:
                                        buttons=['I see it. Proceed', 'Drag First'])
                 if answer == 'Drag First':
                     general['drag'] = getClick.get('DRAG')
+                    xm, ym = general['drag'][0]
+                    xd, yd = general['drag'][1]
+                    general['drag'] = [(xd - xm) / 2, (yd - ym) / 2]
                 # pygui.alert(text=text, title='Teaching Adventure {}'.format(name), button='OK')
                 if general['init'] is True:
                     finded = pygui.locateOnScreen('data/{}/loc_reference.png'.format(name), confidence=0.9)
@@ -383,7 +365,9 @@ class TeachAdventure:
                     general['relative_coordinates'] = (getClick.get('DOUBLE') - reference).get()
                 else:
                     pygui.alert(text=text, title='Teaching Adventure {}'.format(name), button='OK')
-                    general['relative_coordinates'] = getClick.get('DOUBLE').get()
+                    xcr, ycr = self.coordinations['center_ref'].get()
+                    xrc, yrc = getClick.get('DOUBLE').get()
+                    general['relative_coordinates'] = [xcr - xrc, ycr - yrc]
 
         with open('data/{}/learned.json'.format(name), 'w') as f:
             json.dump(data, f, indent=2)
@@ -480,14 +464,14 @@ class MakeAdventure:
                     print('Unexpected action type ')
                     raise Exception
                 if 'drag' in general:
-                    pygui.moveTo(general['drag'][0])
-                    pygui.dragTo(general['drag'][1])
+                    pygui.moveTo((self.coordinations['center_ref'] - Point.from_list(general['drag'])).get())
+                    pygui.dragTo((self.coordinations['center_ref'] + Point.from_list(general['drag'])).get())
                 if general['init'] is True:
                     reference = Point.from_point(pygui.center(pygui.locateOnScreen(
                         'data/{}/loc_reference.png'.format(name), confidence=0.9)))
                     target = Point.from_list(general['relative_coordinates']) + reference
                 else:
-                    target = Point.from_list(general['relative_coordinates'])
+                    target = self.coordinations['center_ref'] - Point.from_list(general['relative_coordinates'])
                 pygui.moveTo(target.get())
                 time.sleep(.2)
                 pygui.click(target.get(), clicks=2, interval=0.25)
@@ -526,11 +510,13 @@ class EndAdventure:
 
 
 adventure = 'horseback'
-
-for i in range(4):
+# SendToAdventure(adventure, first=3, last=22)
+MakeAdventure(adventure, start=1, stop=200, delay=0)
+EndAdventure(adventure, 60)
+for i in range(1):
     StartAdventure(adventure, delay=60)
     SendToAdventure(adventure, first=1, last=2)
     SendToAdventure(adventure, delay=16*60, first=3, last=5)
     GoToAdventure(adventure, 16*60)
-    MakeAdventure(adventure, delay=30)
+    MakeAdventure(adventure, delay=0)
     EndAdventure(adventure, 60)
