@@ -1,0 +1,242 @@
+{
+  "generals" :[
+    {
+      "id": 0,
+      "name": "veteran",
+      "army":{
+        "recruit": 250,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      }
+    },
+    {
+      "id": 1,
+      "name": "ponury",
+      "army":{
+        "recruit": 0,
+        "bowmen": 90,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 110,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      }
+    },
+    {
+      "id": 2,
+      "name": "MSW",
+      "army":{
+        "recruit": 98,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 112,
+        "cannoneer": 0
+      }
+    },
+    {
+      "id": 3,
+      "name": "major",
+      "army":{
+        "recruit": 115,
+        "bowmen": 20,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 135,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      }
+    }
+  ],
+  "actions": [
+    {
+      "no": 1,
+      "type":"attack",
+      "generals" :[
+        {
+          "id": 2,
+          "name": "MSW",
+          "preset": true,
+          "init": true,
+          "army":{
+            "recruit": 98,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 112,
+            "cannoneer": 0
+          }
+        }
+      ]
+    },
+    {
+      "no": 2,
+      "type": "attack",
+      "generals": [
+        {
+          "id": 3,
+          "name": "major",
+          "preset": true,
+          "init": true,
+          "army":{
+            "recruit": 115,
+            "bowmen": 20,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 135,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          }
+        }
+      ]
+    },{
+      "no": 3,
+      "type": "unload",
+      "generals": [
+        {
+          "id": 1,
+          "name": "ponury",
+          "preset": false,
+          "init": true,
+          "army":{
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          }
+        },
+        {
+          "id": 0,
+          "name": "veteran",
+          "preset": false,
+          "init": true,
+          "army":{
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          }
+        }
+      ]
+    },
+    {
+      "no": 4,
+      "type": "attack",
+      "generals": [
+        {
+          "id": 2,
+          "name": "MSW",
+          "preset": false,
+          "init": true,
+          "army":{
+            "recruit": 20,
+            "bowmen": 90,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 110,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          }
+        }
+      ]
+    },
+    {
+      "no": 5,
+      "type": "attack",
+      "generals": [
+        {
+          "id": 2,
+          "name": "MSW",
+          "preset": false,
+          "army":{
+            "recruit": 195,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          }
+        }
+      ]
+    },
+    {
+      "no": 6,
+      "type": "attack",
+      "generals": [
+        {
+          "id": 3,
+          "name": "major",
+          "preset": false,
+          "init": true,
+          "army":{
+            "recruit": 25,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 245,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          }
+        }
+      ]
+    },
+    {
+      "no": 7,
+      "type": "load",
+      "generals": [
+        {
+          "id": 0,
+          "name": "veteran",
+          "preset": false,
+          "init": true,
+          "army":{
+            "recruit": 88,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 112,
+            "cannoneer": 0
+          }
+        }
+      ]
+    }
+  ]
+}
