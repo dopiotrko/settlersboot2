@@ -99,7 +99,7 @@
           },
           "drag": [
             341.0,
-            -79.5
+            -150
           ],
           "relative_coordinates": [
             -523,
@@ -246,8 +246,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            -120,
-            19
+            -125,
+            17
           ]
         },
         {
@@ -267,8 +267,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            -265,
-            163
+            -267,
+            154
           ]
         },
         {
@@ -288,8 +288,8 @@
             "cannoneer": 164
           },
           "relative_coordinates": [
-            -206,
-            230
+            -208,
+            218
           ]
         }
       ],
@@ -641,8 +641,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            188,
-            -61
+            182,
+            -72
           ]
         }
       ],
