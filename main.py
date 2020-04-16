@@ -182,7 +182,7 @@ class StartAdventure:
         star_window_corner = self.coordinations['adventures'] - Point(454, 371)
         loc = pygui.locateOnScreen('data/{}/start_adv.png'.format(name),
                                    region=(star_window_corner.x, star_window_corner.y, 600, 400),
-                                   confidence=0.9)
+                                   confidence=0.85)
         if loc is None:
             print('No adventures {} found.'.format(name))
             raise Exception
@@ -290,7 +290,7 @@ class GoToAdventure:
             count -= 1
             time.sleep(1)
             print('sleeping for {} sec'.format(count))
-        loc = pygui.locateOnScreen('data/{}/goto_adv.png'.format(name), confidence=0.9)
+        loc = pygui.locateOnScreen('data/{}/goto_adv.png'.format(name), confidence=0.85)
         if loc is None:
             print('No active adventure {} found on the screen.'.format(name))
             raise Exception
@@ -510,13 +510,12 @@ class EndAdventure:
 
 
 adventure = 'horseback'
-# SendToAdventure(adventure, first=3, last=22)
-MakeAdventure(adventure, start=1, stop=200, delay=0)
-EndAdventure(adventure, 60)
-for i in range(1):
-    StartAdventure(adventure, delay=60)
+# MakeAdventure(adventure, delay=60)
+# EndAdventure(adventure, 60)
+for i in range(9):
+    StartAdventure(adventure, delay=60*3)
     SendToAdventure(adventure, first=1, last=2)
     SendToAdventure(adventure, delay=16*60, first=3, last=5)
     GoToAdventure(adventure, 16*60)
-    MakeAdventure(adventure, delay=0)
+    MakeAdventure(adventure, delay=60)
     EndAdventure(adventure, 60)
