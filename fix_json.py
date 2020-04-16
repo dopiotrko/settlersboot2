@@ -2,6 +2,7 @@ import json
 import pickle
 from my_types import Point
 
+
 class Fix:
     def __init__(self, name):
         self.name = name
@@ -39,5 +40,13 @@ class Fix:
         with open('data/{}/learned.json'.format(self.name), 'w') as f:
             json.dump(self.data, f, indent=2)
 
+    def merge(self):
+        with open('data/{}/learned_backup.json'.format(self.name)) as f:
+            backup = json.load(f)
+        for action, action_backup in zip(self.data['actions'], backup['actions']):
+            if 'delay' in action:
+                action['delay'] = action_backup['delay']
+        self.save()
 
-Fix('horseback').fix_co()
+
+Fix('horseback').merge()
