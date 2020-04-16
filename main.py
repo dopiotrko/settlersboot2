@@ -306,8 +306,8 @@ class GoToAdventure:
 
 
 class TeachAdventure:
-    def __init__(self, name):
-        with open('data/{}/to_learn.json'.format(name)) as f:
+    def __init__(self, name, start=1, stop=1000):
+        with open('data/{}/learned.json'.format(name)) as f:
             data = json.load(f)
         with open('data/conf.dat', 'rb') as config_dictionary_file:
             self.coordinations = pickle.load(config_dictionary_file)
@@ -317,6 +317,8 @@ class TeachAdventure:
         pygui.write('0')
         pygui.scroll(-3, 3200, 700)
         for action in data['actions']:
+            if not(start <= action['no'] <= stop):
+                continue
             start = time.time()
             text = 'Click OK when You want to make Your action ({}) no {}'\
                 .format(action['type'], action['no'])
@@ -374,7 +376,6 @@ class TeachAdventure:
 
 
 # TeachAdventure('LG')
-# TeachAdventure('horseback')
 
 
 class LocateGenerals:
@@ -467,8 +468,11 @@ class MakeAdventure:
                     pygui.moveTo((self.coordinations['center_ref'] - Point.from_list(general['drag'])).get())
                     pygui.dragTo((self.coordinations['center_ref'] + Point.from_list(general['drag'])).get())
                 if general['init'] is True:
-                    reference = Point.from_point(pygui.center(pygui.locateOnScreen(
-                        'data/{}/loc_reference.png'.format(name), confidence=0.9)))
+                    loc = pygui.locateOnScreen('data/{}/loc_reference.png'.format(name), confidence=0.85)
+                    if loc is None:
+                        print('data/{}/loc_reference.png not find'.format(name))
+                        raise Exception
+                    reference = Point.from_point(pygui.center(loc))
                     target = Point.from_list(general['relative_coordinates']) + reference
                 else:
                     target = self.coordinations['center_ref'] - Point.from_list(general['relative_coordinates'])
@@ -500,7 +504,7 @@ class EndAdventure:
             raise Exception
         else:
             pygui.click(pygui.center(loc))
-        time.sleep(10)
+        time.sleep(20)
         loc = pygui.locateOnScreen('data/{}/return_ref.png'.format(name), confidence=0.9)
         if loc is None:
             print('Button not found.')
@@ -510,12 +514,16 @@ class EndAdventure:
 
 
 adventure = 'horseback'
-# MakeAdventure(adventure, delay=60)
+# SendToAdventure(adventure, first=1, last=2)
+# SendToAdventure(adventure, delay=16 * 60, first=3, last=5)
+# GoToAdventure(adventure, 16 * 60)
+MakeAdventure(adventure, delay=0, start=3)
 # EndAdventure(adventure, 60)
-for i in range(9):
-    StartAdventure(adventure, delay=60*3)
-    SendToAdventure(adventure, first=1, last=2)
-    SendToAdventure(adventure, delay=16*60, first=3, last=5)
-    GoToAdventure(adventure, 16*60)
-    MakeAdventure(adventure, delay=60)
-    EndAdventure(adventure, 60)
+
+# for i in range(4):
+#     StartAdventure(adventure, delay=60*3)
+#     SendToAdventure(adventure, first=1, last=2)
+#     SendToAdventure(adventure, delay=16*60, first=3, last=5)
+#     GoToAdventure(adventure, 16*60)
+#     MakeAdventure(adventure, delay=60)
+#     EndAdventure(adventure, 60)
