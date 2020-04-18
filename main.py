@@ -325,9 +325,10 @@ class TeachAdventure:
             self.coordinations = pickle.load(config_dictionary_file)
         getClick = GetClick()
         # TODO temporary way to focus window/to be changed
-        pygui.click((self.coordinations['star']-Point(0, 300)).get())
+        focus_temp_loc = (self.coordinations['star']-Point(0, 300))
+        pygui.click(focus_temp_loc.get())
         pygui.write('0')
-        pygui.scroll(-3, 3200, 700)
+        pygui.scroll(-3, focus_temp_loc.x, focus_temp_loc.y)
         for action in data['actions']:
             if not(start <= action['no'] <= stop):
                 continue
@@ -337,7 +338,7 @@ class TeachAdventure:
             pygui.alert(text=text, title='Teaching Adventure {}'.format(name), button='OK')
             action['delay'] = int(time.time() - start)
             # TODO temporary way to focus window/to be changed
-            pygui.click((self.coordinations['star']-Point(0, 300)).get())
+            pygui.click(focus_temp_loc.get())
             for general in action['generals']:
                 last_general_loc = SelectGeneral(general['name']).location
                 if not general['preset']:
@@ -525,17 +526,18 @@ class EndAdventure:
             pygui.click((Point.from_point(pygui.center(loc)) + Point(160, 234)).get())
 
 
-Configure().run()
-adventure = 'horseback'
-# SendToAdventure(adventure, delay=16*60, first=3, last=5)
+# Configure().run()
+adventure = 'CR'
+# SendToAdventure(adventure, first=0, last=0)
+# SendToAdventure(adventure, first=5, last=5)
 # GoToAdventure(adventure, 16*60)
 # MakeAdventure(adventure, delay=60)
 # EndAdventure(adventure, 60)
 
-for i in range(4):
-    StartAdventure(adventure, delay=60*3)
-    SendToAdventure(adventure, first=1, last=2)
-    SendToAdventure(adventure, delay=16*60, first=3, last=5)
-    GoToAdventure(adventure, 16*60)
-    MakeAdventure(adventure, delay=60)
-    EndAdventure(adventure, 60)
+# for i in range(4):
+#     StartAdventure(adventure, delay=60*3)
+#     SendToAdventure(adventure, first=1, last=2)
+#     SendToAdventure(adventure, delay=16*60, first=3, last=5)
+#     GoToAdventure(adventure, 16*60)
+#     MakeAdventure(adventure, delay=60)
+#     EndAdventure(adventure, 60)
