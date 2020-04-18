@@ -46,7 +46,24 @@ class Fix:
         for action, action_backup in zip(self.data['actions'], backup['actions']):
             if 'delay' in action:
                 action['delay'] = action_backup['delay']
-        self.save()
+        # self.save()
+
+    def fix_id_no(self):
+        # for gen in self.data['generals']:
+        #     gen['id'] -= 1
+        for action in self.data['actions']:
+            action['no'] += 1
+            # for general in action['generals']:
+            #     general['id'] -= 1
+        # self.save()
+
+    def rel_cord_del(self):
+        for action in self.data['actions']:
+            for general in action['generals']:
+                if 'relative_coordinates' in general:
+                    del general['relative_coordinates']
+        # self.save()
 
 
-Fix('horseback').merge()
+# Fix('horseback').merge()
+Fix('CR').fix_id_no()
