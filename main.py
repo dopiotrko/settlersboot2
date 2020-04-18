@@ -413,7 +413,7 @@ class LocateGenerals:
                                                 confidence=0.95)
             locations = [pygui.center(loc) for loc in locations]
             for id_ in ids:
-                general_loc[id_-1] = locations.pop(0)
+                general_loc[id_] = locations.pop(0)
         while True:
             try:
                 general_loc.remove(None)
@@ -460,7 +460,7 @@ class MakeAdventure:
             print(action['no'], time.asctime(time.localtime(time.time())))
             for general in action['generals']:
                 # last_general_loc = SelectGeneral(general['name']).location
-                SelectLastGeneral(generals_loc[general['id']-1])
+                SelectLastGeneral(generals_loc[general['id']])
                 if not general['preset']:
                     SetArmy(general['army'])
                     # TODO replace by: check if general confirmation succeed
@@ -468,7 +468,7 @@ class MakeAdventure:
                         continue
                     time.sleep(4)
                     # SelectLastGeneral(last_general_loc)
-                    SelectLastGeneral(generals_loc[general['id']-1])
+                    SelectLastGeneral(generals_loc[general['id']])
                 if action['type'] in 'attack':
                     pygui.click(self.coordinations['attack'].get())
                 elif action['type'] in 'move':
@@ -525,7 +525,7 @@ class EndAdventure:
             pygui.click((Point.from_point(pygui.center(loc)) + Point(160, 234)).get())
 
 
-# Configure().run()
+Configure().run()
 adventure = 'horseback'
 # SendToAdventure(adventure, delay=16*60, first=3, last=5)
 # GoToAdventure(adventure, 16*60)
