@@ -1,0 +1,620 @@
+{
+  "generals": [
+    {
+      "id": 0,
+      "name": "basic",
+      "army": {
+        "recruit": 0,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 140,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 36,
+        "cannoneer": 0
+      }
+    },
+    {
+      "id": 1,
+      "name": "basic",
+      "army": {
+        "recruit": 0,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 65,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 83,
+        "cannoneer": 0
+      }
+    },
+    {
+      "id": 2,
+      "name": "basic",
+      "army": {
+        "recruit": 71,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 97,
+        "cannoneer": 0
+      }
+    },
+    {
+      "id": 3,
+      "name": "boris",
+      "army": {
+        "recruit": 86,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 94
+      }
+    },
+    {
+      "id": 4,
+      "name": "veteran",
+      "army": {
+        "recruit": 65,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 120,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 64
+      }
+    },
+    {
+      "id": 5,
+      "name": "master",
+      "army": {
+        "recruit": 200,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      }
+    }
+  ],
+  "actions": [
+    {
+      "no": 1,
+      "type": "move",
+      "generals": [
+        {
+          "id": 3,
+          "name": "boris",
+          "preset": true,
+          "init": true,
+          "army": {
+            "recruit": 86,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 94
+          }
+        }
+      ],
+      "delay": 0
+    },
+    {
+      "no": 2,
+      "type": "move",
+      "generals": [
+        {
+          "id": 2,
+          "name": "basic",
+          "preset": true,
+          "init": true,
+          "army": {
+            "recruit": 71,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 97,
+            "cannoneer": 0
+          }
+        }
+      ],
+      "delay": 0
+    },
+    {
+      "no": 3,
+      "type": "move",
+      "generals": [
+        {
+          "id": 1,
+          "name": "basic",
+          "preset": false,
+          "init": true,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 65,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 83,
+            "cannoneer": 0
+          }
+        }
+      ],
+      "delay": 0
+    },
+    {
+      "no": 4,
+      "type": "move",
+      "generals": [
+        {
+          "id": 0,
+          "name": "basic",
+          "preset": false,
+          "init": true,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 36,
+            "cannoneer": 0
+          }
+        }
+      ],
+      "delay": 0
+    },
+    {
+      "no": 5,
+      "type": "move",
+      "generals": [
+        {
+          "id": 4,
+          "name": "veteran",
+          "preset": true,
+          "init": true,
+          "army": {
+            "recruit": 65,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 120,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 64
+          }
+        }
+      ],
+      "delay": 0
+    },
+    {
+      "no": 6,
+      "type": "move",
+      "generals": [
+        {
+          "id": 5,
+          "name": "master",
+          "preset": false,
+          "init": true,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 49,
+            "cannoneer": 0
+          }
+        }
+      ],
+      "delay": 0
+    },
+    {
+      "no": 7,
+      "type": "attack",
+      "generals": [
+        {
+          "id": 0,
+          "name": "basic",
+          "preset": false,
+          "init": true,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 36,
+            "cannoneer": 0
+          }
+        },
+        {
+          "id": 1,
+          "name": "basic",
+          "preset": false,
+          "init": true,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 65,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 83,
+            "cannoneer": 0
+          }
+        },
+        {
+          "id": 2,
+          "name": "basic",
+          "preset": true,
+          "init": true,
+          "army": {
+            "recruit": 71,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 97,
+            "cannoneer": 0
+          }
+        },
+        {
+          "id": 3,
+          "name": "boris",
+          "preset": true,
+          "init": true,
+          "army": {
+            "recruit": 86,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 94
+          }
+        }
+      ],
+      "delay": 0
+    },
+    {
+      "no": 8,
+      "type": "move",
+      "generals": [
+        {
+          "id": 0,
+          "name": "basic",
+          "preset": false,
+          "init": false,
+          "army": {
+            "recruit": 2,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 198,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 2,
+            "cannoneer": 0
+          }
+        }
+      ],
+      "delay": 0
+    },
+    {
+      "no": 9,
+      "type": "move",
+      "generals": [
+        {
+          "id": 3,
+          "name": "boris",
+          "preset": false,
+          "init": false,
+          "army": {
+            "recruit": 86,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 94
+          }
+        }
+      ],
+      "delay": 80
+    },
+    {
+      "no": 10,
+      "type": "attack",
+      "generals": [
+        {
+          "id": 4,
+          "name": "major",
+          "preset": true,
+          "init": false,
+          "army": {
+            "recruit": 43,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 200,
+            "cannoneer": 0
+          }
+        }
+      ],
+      "delay": 119
+    },
+    {
+      "no": 11,
+      "type": "move",
+      "generals": [
+        {
+          "id": 2,
+          "name": "veteran",
+          "preset": true,
+          "init": false,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          }
+        }
+      ],
+      "delay": 101
+    },
+    {
+      "no": 12,
+      "type": "move",
+      "generals": [
+        {
+          "id": 0,
+          "name": "basic",
+          "preset": true,
+          "init": false,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 62,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          }
+        }
+      ],
+      "delay": 0
+    },
+    {
+      "no": 13,
+      "type": "attack",
+      "generals": [
+        {
+          "id": 4,
+          "name": "major",
+          "preset": false,
+          "init": false,
+          "army": {
+            "recruit": 49,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 221
+          }
+        }
+      ],
+      "delay": 13
+    },
+    {
+      "no": 14,
+      "type": "attack",
+      "generals": [
+        {
+          "id": 2,
+          "name": "veteran",
+          "preset": false,
+          "init": false,
+          "army": {
+            "recruit": 36,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 200,
+            "cannoneer": 0
+          }
+        }
+      ],
+      "delay": 3
+    },
+    {
+      "no": 15,
+      "type": "move",
+      "generals": [
+        {
+          "id": 4,
+          "name": "major",
+          "preset": false,
+          "init": false,
+          "army": {
+            "recruit": 24,
+            "bowmen": 75,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 1,
+            "cannoneer": 170
+          }
+        }
+      ],
+      "delay": 50
+    },
+    {
+      "no": 16,
+      "type": "move",
+      "generals": [
+        {
+          "id": 2,
+          "name": "veteran",
+          "preset": false,
+          "init": false,
+          "army": {
+            "recruit": 36,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 200,
+            "cannoneer": 0
+          }
+        }
+      ],
+      "delay": 2
+    },
+    {
+      "no": 17,
+      "type": "attack",
+      "generals": [
+        {
+          "id": 0,
+          "name": "basic",
+          "preset": true,
+          "init": false,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 62,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          }
+        },
+        {
+          "id": 4,
+          "name": "major",
+          "preset": true,
+          "init": false,
+          "army": {
+            "recruit": 24,
+            "bowmen": 75,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 1,
+            "cannoneer": 170
+          }
+        }
+      ],
+      "delay": 62
+    },
+    {
+      "no": 18,
+      "type": "attack",
+      "generals": [
+        {
+          "id": 2,
+          "name": "veteran",
+          "preset": true,
+          "init": false,
+          "army": {
+            "recruit": 36,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 200,
+            "cannoneer": 0
+          }
+        }
+      ],
+      "delay": 3
+    },
+    {
+      "no": 19,
+      "type": "load",
+      "generals": [
+        {
+          "id": 3,
+          "name": "ponury",
+          "preset": false,
+          "init": false,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 72,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 51
+          }
+        }
+      ],
+      "delay": 3
+    }
+  ]
+}
