@@ -254,7 +254,7 @@ class SelectGeneral:
 
 # SelectGeneral('major')
 # SelectGeneral('basic')
-# SelectGeneral('MSW')
+# SelectGeneral('master')
 # SelectGeneral('ponury')
 # SelectGeneral('veteran')
 
@@ -271,7 +271,7 @@ class SelectLastGeneral:
 
 
 class SendToAdventure:
-    def __init__(self, name, delay=0, first=1, last=100):
+    def __init__(self, name, delay=0, first=0, last=100):
         with open('data/{}/learned.json'.format(name)) as f:
             data = json.load(f)
         with open('data/conf.dat', 'rb') as config_dictionary_file:
@@ -325,7 +325,7 @@ class TeachAdventure:
             self.coordinations = pickle.load(config_dictionary_file)
         getClick = GetClick()
         # TODO temporary way to focus window/to be changed
-        pygui.click(3200, 700)
+        pygui.click((self.coordinations['star']-Point(0, 300)).get())
         pygui.write('0')
         pygui.scroll(-3, 3200, 700)
         for action in data['actions']:
@@ -337,7 +337,7 @@ class TeachAdventure:
             pygui.alert(text=text, title='Teaching Adventure {}'.format(name), button='OK')
             action['delay'] = int(time.time() - start)
             # TODO temporary way to focus window/to be changed
-            pygui.click(3200, 700)
+            pygui.click((self.coordinations['star']-Point(0, 300)).get())
             for general in action['generals']:
                 last_general_loc = SelectGeneral(general['name']).location
                 if not general['preset']:
