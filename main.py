@@ -1,5 +1,6 @@
 # sudo apt-get install scrot
-# pip install opencv-contrib-python
+# sudo apt-get install python3-tk python3-dev
+# pip install opencv-contrib-python # in your venv
 import json
 import pickle
 import time
@@ -174,7 +175,7 @@ class StartAdventure:
         while time.time() - start < delay:
             count -= 1
             time.sleep(1)
-            print('sleeping for {} sec'.format(count))
+            print('\rsleeping for {} sec'.format(count), end='', flush=True)
 
         pygui.click(self.coordinations['star'].get())
         pygui.click(self.coordinations['adventures'].get())
@@ -269,7 +270,7 @@ class SendToAdventure:
         while time.time() - start < delay:
             count -= 1
             time.sleep(1)
-            print('sleeping for {} sec'.format(count))
+            print('\rsleeping for {} sec'.format(count), end='', flush=True)
         for general in data['generals']:
             if not(first <= general['id'] <= last):
                 continue
@@ -289,7 +290,7 @@ class GoToAdventure:
         while time.time() - start < delay:
             count -= 1
             time.sleep(1)
-            print('sleeping for {} sec'.format(count))
+            print('\rsleeping for {} sec'.format(count), end='', flush=True)
         loc = pygui.locateOnScreen('data/{}/goto_adv.png'.format(name), confidence=0.85)
         if loc is None:
             print('No active adventure {} found on the screen.'.format(name))
@@ -428,7 +429,7 @@ class MakeAdventure:
         while time.time() - t_start < delay:
             count -= 1
             time.sleep(1)
-            print('sleeping for {} sec'.format(count))
+            print('\rsleeping for {} sec'.format(count), end='', flush=True)
         pygui.click(3200, 700)
         pygui.write('0')
         pygui.scroll(-3, 3200, 700)
@@ -490,7 +491,7 @@ class EndAdventure:
         while time.time() - start < delay:
             count -= 1
             time.sleep(1)
-            print('sleeping for {} sec'.format(count))
+            print('\rsleeping for {} sec'.format(count), end='', flush=True)
         pygui.click(self.coordinations['book'].get())
         loc = pygui.locateOnScreen('resource/start_adventure.png', confidence=0.9)
         if loc is None:
@@ -513,17 +514,17 @@ class EndAdventure:
             pygui.click((Point.from_point(pygui.center(loc)) + Point(160, 234)).get())
 
 
+# Configure().run()
 adventure = 'horseback'
-# SendToAdventure(adventure, first=1, last=2)
-# SendToAdventure(adventure, delay=16 * 60, first=3, last=5)
-# GoToAdventure(adventure, 16 * 60)
-MakeAdventure(adventure, delay=0, start=3)
+# SendToAdventure(adventure, delay=16*60, first=3, last=5)
+# GoToAdventure(adventure, 16*60)
+# MakeAdventure(adventure, delay=60)
 # EndAdventure(adventure, 60)
 
-# for i in range(4):
-#     StartAdventure(adventure, delay=60*3)
-#     SendToAdventure(adventure, first=1, last=2)
-#     SendToAdventure(adventure, delay=16*60, first=3, last=5)
-#     GoToAdventure(adventure, 16*60)
-#     MakeAdventure(adventure, delay=60)
-#     EndAdventure(adventure, 60)
+for i in range(4):
+    StartAdventure(adventure, delay=60*3)
+    SendToAdventure(adventure, first=1, last=2)
+    SendToAdventure(adventure, delay=16*60, first=3, last=5)
+    GoToAdventure(adventure, 16*60)
+    MakeAdventure(adventure, delay=60)
+    EndAdventure(adventure, 60)

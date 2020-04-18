@@ -11,6 +11,10 @@ class Point:
     def from_list(cls, list_):
         return cls(list_[0], list_[1])
 
+    @classmethod
+    def from_box_center(cls, list_):
+        return cls(list_[0] + list_[2] / 2, list_[1] + list_[3] / 2)
+
     def __str__(self):
         return "({0},{1})".format(self.x, self.y)
 
