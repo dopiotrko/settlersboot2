@@ -115,15 +115,17 @@ class Configure:
         text = 'Recruit Up'
         pygui.alert(text=text, title='Configuration', button='OK')
         coordinations['r_up'] = getClick.get()
-        coordinations['recruit'] = coordinations['r_up'] + Point(-32, -18)
-        coordinations['bowmen'] = coordinations['r_up'] + Point(95, -18)
-        coordinations['militia'] = coordinations['r_up'] + Point(220, -18)
-        coordinations['cavalry'] = coordinations['r_up'] + Point(-32, 35)
-        coordinations['longbowman'] = coordinations['r_up'] + Point(95, 35)
-        coordinations['soldier'] = coordinations['r_up'] + Point(220, 35)
-        coordinations['crossbowman'] = coordinations['r_up'] + Point(-32, 94)
-        coordinations['elite_soldier'] = coordinations['r_up'] + Point(95, 94)
-        coordinations['cannoneer'] = coordinations['r_up'] + Point(220, 94)
+        region = (coordinations['r_up'] - Point(116, 46)).get() + (44, 44)
+        loc = pygui.locateOnScreen('resource/army.png', region=region, confidence=.95)
+        coordinations['recruit'] = Point.from_list(loc) + Point(74, 26)
+        coordinations['bowmen'] = Point.from_list(loc) + Point(199, 26)
+        coordinations['militia'] = Point.from_list(loc) + Point(324, 26)
+        coordinations['cavalry'] = Point.from_list(loc) + Point(74, 81)
+        coordinations['longbowman'] = Point.from_list(loc) + Point(199, 81)
+        coordinations['soldier'] = Point.from_list(loc) + Point(324, 81)
+        coordinations['crossbowman'] = Point.from_list(loc) + Point(74, 136)
+        coordinations['elite_soldier'] = Point.from_list(loc) + Point(199, 136)
+        coordinations['cannoneer'] = Point.from_list(loc) + Point(324, 136)
 
         text = 'Unload'
         pygui.alert(text=text, title='Configuration', button='OK')
@@ -212,7 +214,16 @@ class SetArmy:
         pygui.click(self.coordinations['unload'].get())
         for units, quantity in army.items():
             if quantity != 0:
-                pygui.click(self.coordinations[units].get())
+                init_x, y = self.coordinations[units].get()
+                for x in range(init_x, init_x-50, -24):
+                    if not pygui.pixelMatchesColor(x, y, (131, 102, 65), tolerance=10):
+                        loc = x, y-7
+                        break
+                else:
+                    print('text field not found')
+                    raise Exception
+
+                pygui.click(loc)
                 pygui.write('{}'.format(quantity))
 
         pygui.click(self.coordinations['confirm_army'].get())
