@@ -7,6 +7,7 @@ import time
 import pyautogui as pygui
 from pynput import mouse
 
+from files import get_last_filename, get_new_filename
 from my_types import Point
 
 pygui.PAUSE = 1
@@ -100,6 +101,10 @@ class Configure:
         pygui.alert(text=text, title='Configuration', button='OK')
         coordinations['specialists'] = getClick.get()
 
+        text = 'Search tex field'
+        pygui.alert(text=text, title='Configuration', button='OK')
+        coordinations['star_txt'] = getClick.get()
+
         text = 'Any General'
         pygui.alert(text=text, title='Configuration', button='OK')
         getClick.get()
@@ -165,6 +170,61 @@ class Configure:
 
 
 # Configure().run()
+
+
+class LocateGenerals:
+    def __init__(self, name):
+        with open('data/{}/learned.json'.format(name)) as f:
+            data = json.load(f)
+        with open('data/conf.dat', 'rb') as config_dictionary_file:
+            self.coordinations = pickle.load(config_dictionary_file)
+        generals = dict()
+        pygui.click(self.coordinations['star'].get())
+        pygui.click(self.coordinations['specialists'].get())
+        for general in data['generals']:
+            print(general)
+            if general['name'] in generals:
+                generals[general['name']].append(general['id'])
+            else:
+                generals[general['name']] = [general['id']]
+        general_loc = 100 * [None]
+        for general_type, ids in generals.items():
+            star_window_corner = self.coordinations['specialists'] - Point(137, 400)
+            locations = pygui.locateAllOnScreen('resource/{}.png'.format(general_type),
+                                                region=(star_window_corner.x, star_window_corner.y, 600, 400),
+                                                confidence=0.95)
+            locations = [pygui.center(loc) for loc in locations]
+            for id_ in ids:
+                general_loc[id_] = locations.pop(0)
+        while True:
+            try:
+                general_loc.remove(None)
+            except ValueError:
+                break
+        self.general_loc = general_loc
+        pygui.click(self.coordinations['star'].get())
+
+    def get(self):
+        return self.general_loc
+
+
+class GroupGeneralsByTypes:
+    def __init__(self, name):
+        with open('data/{}/learned.json'.format(name)) as f:
+            data = json.load(f)
+        with open('data/conf.dat', 'rb') as config_dictionary_file:
+            self.coordinations = pickle.load(config_dictionary_file)
+        self.generals = dict()
+        # pygui.click(self.coordinations['star'].get())
+        # pygui.click(self.coordinations['specialists'].get())
+        for general in data['generals']:
+            if general['name'] in self.generals:
+                self.generals[general['name']].append(general)
+            else:
+                self.generals[general['name']] = [general]
+
+    def get(self):
+        return self.generals
 
 
 class StartAdventure:
@@ -252,13 +312,6 @@ class SelectGeneral:
         self.location = loc
 
 
-# SelectGeneral('major')
-# SelectGeneral('basic')
-# SelectGeneral('master')
-# SelectGeneral('ponury')
-# SelectGeneral('veteran')
-
-
 class SelectLastGeneral:
     def __init__(self, loc):
         with open('data/conf.dat', 'rb') as config_dictionary_file:
@@ -268,6 +321,62 @@ class SelectLastGeneral:
         pygui.click(self.coordinations['star'].get())
         pygui.click(self.coordinations['specialists'].get())
         pygui.click(loc)
+
+
+class GetGeneralsByType:
+    def __init__(self, general_type):
+        with open('data/conf.dat', 'rb') as config_dictionary_file:
+            self.coordinations = pickle.load(config_dictionary_file)
+        xy = self.coordinations['star'].get()
+        pygui.moveTo(xy[0], xy[1], .2)
+        pygui.click(self.coordinations['star'].get())
+        pygui.click(self.coordinations['specialists'].get())
+        pygui.click(self.coordinations['star_txt'].get())
+        pygui.hotkey('ctrl', 'a')
+        pygui.write(general_type)
+        star_window_corner = self.coordinations['specialists'] - Point(137, 400)
+        locations = pygui.locateAllOnScreen('resource/{}.png'.format(general_type),
+                                            region=(star_window_corner.x, star_window_corner.y, 600, 400),
+                                            confidence=0.95)
+        self.locations = [pygui.center(loc) for loc in locations]
+
+    def get(self):
+        return self.locations
+
+
+class SendGeneralsByType:
+    def __init__(self, name, general_type, generals_of_type_to_send):
+        with open('data/{}/learned.json'.format(name)) as f:
+            data = json.load(f)
+        with open('data/conf.dat', 'rb') as config_dictionary_file:
+            self.coordinations = pickle.load(config_dictionary_file)
+
+        generals_of_type_available = GetGeneralsByType(general_type).get()
+        generals_of_type = list(zip(generals_of_type_to_send, generals_of_type_available))
+        generals_of_type.reverse()
+        pygui.click(self.coordinations['star'].get())
+
+        for to_send, available in generals_of_type:
+            pygui.click(self.coordinations['star'].get())
+            pygui.click(self.coordinations['specialists'].get())
+            print(to_send)
+            print(available)
+            pygui.click(available)
+            SetArmy(to_send['army'])
+            time.sleep(4)
+            SelectLastGeneral(available)
+            pygui.click(self.coordinations['send'].get())
+            pygui.click(self.coordinations['send_confirm'].get())
+
+
+class SendGeneralsTypeByType:
+    @classmethod
+    def send(cls, name):
+        for g_type, gen in GroupGeneralsByTypes(name).get().items():
+            SendGeneralsByType(name, g_type, gen)
+
+
+SendGeneralsTypeByType.send('CR')
 
 
 class SendToAdventure:
@@ -319,7 +428,7 @@ class GoToAdventure:
 
 class TeachAdventure:
     def __init__(self, name, start=1, stop=1000):
-        with open('data/{}/learned.json'.format(name)) as f:
+        with open(get_last_filename(name)) as f:
             data = json.load(f)
         with open('data/conf.dat', 'rb') as config_dictionary_file:
             self.coordinations = pickle.load(config_dictionary_file)
@@ -332,11 +441,11 @@ class TeachAdventure:
         for action in data['actions']:
             if not(start <= action['no'] <= stop):
                 continue
-            start = time.time()
+            t_start = time.time()
             text = 'Click OK when You want to make Your action ({}) no {}'\
                 .format(action['type'], action['no'])
             pygui.alert(text=text, title='Teaching Adventure {}'.format(name), button='OK')
-            action['delay'] = int(time.time() - start)
+            action['delay'] = int(time.time() - t_start)
             # TODO temporary way to focus window/to be changed
             pygui.click(focus_temp_loc.get())
             for general in action['generals']:
@@ -351,6 +460,7 @@ class TeachAdventure:
                         # TODO replace by: check if general confirmation succeed
                         time.sleep(4)
                         SelectLastGeneral(last_general_loc)
+                t_start = time.time()
                 if action['type'] in 'attack':
                     pygui.click(self.coordinations['attack'].get())
                     text = 'Make Your attack no {}'.format(action['no'])
@@ -369,7 +479,7 @@ class TeachAdventure:
                     xm, ym = general['drag'][0]
                     xd, yd = general['drag'][1]
                     general['drag'] = [(xd - xm) / 2, (yd - ym) / 2]
-                # pygui.alert(text=text, title='Teaching Adventure {}'.format(name), button='OK')
+                pygui.alert(text=text, title='Teaching Adventure {}'.format(name), button='OK')
                 if general['init'] is True:
                     finded = pygui.locateOnScreen('data/{}/loc_reference.png'.format(name), confidence=0.9)
                     if not finded:
@@ -383,56 +493,21 @@ class TeachAdventure:
                     xcr, ycr = self.coordinations['center_ref'].get()
                     xrc, yrc = getClick.get('DOUBLE').get()
                     general['relative_coordinates'] = [xcr - xrc, ycr - yrc]
+                if 'delay' in general:
+                    general['delay'] = int(time.time() - t_start)
 
-        with open('data/{}/learned.json'.format(name), 'w') as f:
+        # with open('data/{}/learned.json'.format(name), 'w') as f:
+        with open(get_new_filename(name), 'w') as f:
             json.dump(data, f, indent=2)
 
 
 # TeachAdventure('LG')
 
 
-class LocateGenerals:
-    def __init__(self, name):
-        with open('data/{}/learned.json'.format(name)) as f:
-            data = json.load(f)
-        with open('data/conf.dat', 'rb') as config_dictionary_file:
-            self.coordinations = pickle.load(config_dictionary_file)
-        generals = dict()
-        pygui.click(self.coordinations['star'].get())
-        pygui.click(self.coordinations['specialists'].get())
-        for general in data['generals']:
-            print(general)
-            if general['name'] in generals:
-                generals[general['name']].append(general['id'])
-            else:
-                generals[general['name']] = [general['id']]
-        general_loc = 100 * [None]
-        for general_type, ids in generals.items():
-            star_window_corner = self.coordinations['specialists'] - Point(137, 400)
-            locations = pygui.locateAllOnScreen('resource/{}.png'.format(general_type),
-                                                region=(star_window_corner.x, star_window_corner.y, 600, 400),
-                                                confidence=0.95)
-            locations = [pygui.center(loc) for loc in locations]
-            for id_ in ids:
-                general_loc[id_] = locations.pop(0)
-        while True:
-            try:
-                general_loc.remove(None)
-            except ValueError:
-                break
-        self.general_loc = general_loc
-        pygui.click(self.coordinations['star'].get())
-
-    def get(self):
-        return self.general_loc
-
-
-# LocateGenerals('horseback')
-
-
 class MakeAdventure:
     def __init__(self, name, delay=0, start=1, stop=1000):
         with open('data/{}/learned.json'.format(name)) as f:
+        # with open(get_last_filename(name)) as f:
             data = json.load(f)
         with open('data/conf.dat', 'rb') as config_dictionary_file:
             self.coordinations = pickle.load(config_dictionary_file)
@@ -442,9 +517,11 @@ class MakeAdventure:
             count -= 1
             time.sleep(1)
             print('\rsleeping for {} sec'.format(count), end='', flush=True)
-        pygui.click(3200, 700)
+        # TODO temporary way to focus window/to be changed
+        focus_temp_loc = (self.coordinations['star'] - Point(0, 300))
+        pygui.click(focus_temp_loc.get())
         pygui.write('0')
-        pygui.scroll(-3, 3200, 700)
+        pygui.scroll(-3, focus_temp_loc.x, focus_temp_loc.y)
         if start == 1:
             generals_loc = LocateGenerals(name).get()
             with open('data/{}/generals_loc.dat'.format(name), 'wb') as generals_loc_file:
@@ -490,7 +567,10 @@ class MakeAdventure:
                 else:
                     target = self.coordinations['center_ref'] - Point.from_list(general['relative_coordinates'])
                 pygui.moveTo(target.get())
-                time.sleep(.2)
+                if 'delay' in general:
+                    time.sleep(general['delay'])
+                else:
+                    time.sleep(.2)
                 pygui.click(target.get(), clicks=2, interval=0.25)
 
 
@@ -528,11 +608,20 @@ class EndAdventure:
 
 # Configure().run()
 adventure = 'CR'
-# SendToAdventure(adventure, first=0, last=0)
+# SendGeneralsByType(adventure, 'basic')
+# print(GroupGeneralsByTypes('CR').get())
+# TeachAdventure(adventure, start=17, stop=20)
+
+# StartAdventure(adventure, delay=3)
+# SendToAdventure(adventure, first=0, last=2)
+# SendToAdventure(adventure, first=4, last=4)
+# SendToAdventure(adventure, first=6, last=6)
 # SendToAdventure(adventure, first=5, last=5)
-# GoToAdventure(adventure, 16*60)
-# MakeAdventure(adventure, delay=60)
+# SendToAdventure(adventure, first=3, last=3)
+# GoToAdventure(adventure, 1)
+# MakeAdventure(adventure, delay=1, start=17, stop=228)
 # EndAdventure(adventure, 60)
+
 
 # for i in range(4):
 #     StartAdventure(adventure, delay=60*3)
