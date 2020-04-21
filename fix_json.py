@@ -1,12 +1,14 @@
 import json
 import pickle
+from files import get_last_filename, get_new_filename
 from my_types import Point
 
 
 class Fix:
     def __init__(self, name):
         self.name = name
-        with open('data/{}/learned.json'.format(name)) as f:
+        # with open('data/{}/learned.json'.format(name)) as f:
+        with open(get_last_filename(name)) as f:
             self.data = json.load(f)
         with open('data/conf.dat', 'rb') as config_dictionary_file:
             self.coordinations = pickle.load(config_dictionary_file)
@@ -37,7 +39,8 @@ class Fix:
         self.save()
 
     def save(self):
-        with open('data/{}/learned.json'.format(self.name), 'w') as f:
+        # with open('data/{}/learned.json'.format(self.name), 'w') as f:
+        with open(get_new_filename(self.name), 'w') as f:
             json.dump(self.data, f, indent=2)
 
     def merge(self):
@@ -55,7 +58,7 @@ class Fix:
             action['no'] += 1
             # for general in action['generals']:
             #     general['id'] -= 1
-        # self.save()
+        self.save()
 
     def rel_cord_del(self):
         for action in self.data['actions']:
@@ -64,6 +67,38 @@ class Fix:
                     del general['relative_coordinates']
         # self.save()
 
+    def insert_action(self, to, gen_id=1, type_="move"):
+        action_template = {
+            "no": to,
+            "type": type_,
+            "generals": [
+                {
+                    "id": gen_id,
+                    "name": self.data['generals'][gen_id]['name'],
+                    "preset": False,
+                    "init": False,
+                    "army": {
+                        "recruit": 0,
+                        "bowmen": 0,
+                        "militia": 0,
+                        "cavalry": 0,
+                        "longbowman": 0,
+                        "soldier": 0,
+                        "crossbowman": 0,
+                        "elite_soldier": 0,
+                        "cannoneer": 0
+                    }
+                }
+            ],
+            "delay": 0
+        }
+
+        for action in self.data['actions']:
+            if action['no'] >= to:
+                action['no'] += 1
+        self.data['actions'].insert(to - 1, action_template)
+        self.save()
+
 
 # Fix('horseback').merge()
-Fix('CR').fix_id_no()
+Fix('CR').insert_action(7, 6, 'unload')
