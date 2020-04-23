@@ -29,5 +29,4 @@ class Point:
         return Point(x, y)
 
     def get(self):
-        print('current coordination:', self.x, self.y)
         return self.x, self.y

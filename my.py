@@ -1,5 +1,6 @@
 import os
 import time
+import pyautogui
 
 
 def get_first_free_filename_no(name):
@@ -23,5 +24,5 @@ def wait(delay=0, info=''):
     while time.time() - start < delay:
         count -= 1
         time.sleep(1)
-        print('\r{} in {}:{:2}'.format(info, int(count / 60), count % 60), end='', flush=True)
+        print('\r{} in {}:{:02}'.format(info, int(count / 60), count % 60), end='', flush=True)
     print('')
