@@ -1,6 +1,6 @@
 import json
 import pickle
-from files import get_last_filename, get_new_filename
+from my import get_last_filename, get_new_filename
 from my_types import Point
 
 
@@ -101,4 +101,19 @@ class Fix:
 
 
 # Fix('horseback').merge()
-Fix('CR').insert_action(7, 6, 'unload')
+# Fix('CR').insert_action(7, 6, 'unload')
+
+class AddMyPyGui:
+    @classmethod
+    def add(cls, name):
+
+        text = "class {0}:\n" \
+               "    def __call__(self, *args, **kwargs):\n" \
+               "        print('{0}:', *args, **kwargs)\n" \
+               "        pyautogui.{1}(*args, **kwargs)\n" \
+               "{1} = {0}()\n\n".format(name.capitalize(), name)
+
+        print(text)
+        with open('my_pygui.py', 'a') as f:
+            f.write(text)
+
