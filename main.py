@@ -6,11 +6,11 @@ import pickle
 import time
 import pyautogui as pygui
 from pynput import mouse
-
-from my_functions import get_last_filename, get_new_filename, wait
+import logging
+import my
 from my_types import Point
-
-pygui.PAUSE = 1
+logging.basicConfig(level=logging.INFO)
+STAROPEN = False
 
 
 class GetClick:
@@ -174,6 +174,8 @@ class Configure:
 
 class LocateGenerals:
     def __init__(self, name):
+        logging.info('LocateGenerals:')
+
         with open('data/{}/learned.json'.format(name)) as f:
             data = json.load(f)
         with open('data/conf.dat', 'rb') as config_dictionary_file:
@@ -232,6 +234,8 @@ class GroupGeneralsByTypes:
 class StartAdventure:
 
     def __init__(self, name, delay=0):
+        logging.info('StartAdventure')
+
         with open('data/conf.dat', 'rb') as config_dictionary_file:
             self.coordinations = pickle.load(config_dictionary_file)
         wait(delay, 'Starting adventure')
@@ -266,6 +270,8 @@ class StartAdventure:
 
 class SetArmy:
     def __init__(self, army):
+        logging.info('SetArmy')
+
         with open('data/conf.dat', 'rb') as config_dictionary_file:
             self.coordinations = pickle.load(config_dictionary_file)
         pygui.click(self.coordinations['unload'].get())
@@ -291,6 +297,8 @@ class SetArmy:
 
 class SelectGeneral:
     def __init__(self, general):
+        logging.info('SelectGeneral')
+
         with open('data/conf.dat', 'rb') as config_dictionary_file:
             self.coordinations = pickle.load(config_dictionary_file)
 
@@ -311,6 +319,8 @@ class SelectGeneral:
 
 class SelectLastGeneral:
     def __init__(self, loc):
+        logging.info('SelectLastGeneral')
+
         with open('data/conf.dat', 'rb') as config_dictionary_file:
             self.coordinations = pickle.load(config_dictionary_file)
         xy = self.coordinations['star'].get()
@@ -378,6 +388,8 @@ class SendToAdventure:
 
 class SendToAdventureOld:
     def __init__(self, name, delay=0, first=0, last=100):
+        logging.info('SendToAdventureOld')
+
         with open('data/{}/learned.json'.format(name)) as f:
             data = json.load(f)
         with open('data/conf.dat', 'rb') as config_dictionary_file:
@@ -492,6 +504,8 @@ class TeachAdventure:
 
 class MakeAdventure:
     def __init__(self, name, delay=0, start=1, stop=1000):
+        logging.info('MakeAdventure')
+
         with open('data/{}/learned.json'.format(name)) as f:
         # with open(get_last_filename(name)) as f:
             data = json.load(f)
@@ -559,6 +573,8 @@ class MakeAdventure:
 
 class EndAdventure:
     def __init__(self, name, delay=0):
+        logging.info('EndAdventure')
+
         with open('data/conf.dat', 'rb') as config_dictionary_file:
             self.coordinations = pickle.load(config_dictionary_file)
         wait(delay, 'Ending adventure')
