@@ -2,7 +2,7 @@
   "generals": [
     {
       "id": 0,
-      "name": "basic",
+      "type": "basic",
       "army": {
         "recruit": 0,
         "bowmen": 0,
@@ -17,7 +17,7 @@
     },
     {
       "id": 1,
-      "name": "basic",
+      "type": "basic",
       "army": {
         "recruit": 0,
         "bowmen": 0,
@@ -32,7 +32,8 @@
     },
     {
       "id": 2,
-      "name": "basic",
+      "type": "basic",
+      "name": "basic 3",
       "army": {
         "recruit": 0,
         "bowmen": 0,
@@ -47,7 +48,7 @@
     },
     {
       "id": 3,
-      "name": "boris",
+      "type": "boris",
       "army": {
         "recruit": 86,
         "bowmen": 0,
@@ -62,7 +63,7 @@
     },
     {
       "id": 4,
-      "name": "veteran",
+      "type": "veteran",
       "army": {
         "recruit": 65,
         "bowmen": 0,
@@ -71,13 +72,13 @@
         "longbowman": 0,
         "soldier": 0,
         "crossbowman": 0,
-        "elite_soldier": 0,
+        "elite_soldier": 1,
         "cannoneer": 64
       }
     },
     {
       "id": 5,
-      "name": "master",
+      "type": "master",
       "army": {
         "recruit": 200,
         "bowmen": 0,
@@ -92,7 +93,8 @@
     },
     {
       "id": 6,
-      "name": "grim",
+      "type": "grim",
+      "name": "p2",
       "army": {
         "recruit": 71,
         "bowmen": 0,
@@ -102,7 +104,7 @@
         "soldier": 0,
         "crossbowman": 0,
         "elite_soldier": 0,
-        "cannoneer": 0
+        "cannoneer": 7
       }
     }
   ],
@@ -113,7 +115,7 @@
       "generals": [
         {
           "id": 3,
-          "name": "boris",
+          "type": "boris",
           "preset": true,
           "init": true,
           "army": {
@@ -145,7 +147,7 @@
       "generals": [
         {
           "id": 2,
-          "name": "basic",
+          "type": "basic",
           "preset": true,
           "init": true,
           "army": {
@@ -177,7 +179,7 @@
       "generals": [
         {
           "id": 1,
-          "name": "basic",
+          "type": "basic",
           "preset": true,
           "init": true,
           "army": {
@@ -209,7 +211,7 @@
       "generals": [
         {
           "id": 0,
-          "name": "basic",
+          "type": "basic",
           "preset": true,
           "init": true,
           "army": {
@@ -241,7 +243,7 @@
       "generals": [
         {
           "id": 4,
-          "name": "veteran",
+          "type": "veteran",
           "preset": true,
           "init": true,
           "army": {
@@ -273,7 +275,7 @@
       "generals": [
         {
           "id": 5,
-          "name": "master",
+          "type": "master",
           "preset": false,
           "init": true,
           "army": {
@@ -305,7 +307,7 @@
       "generals": [
         {
           "id": 6,
-          "name": "grim",
+          "type": "grim",
           "preset": false,
           "init": false,
           "army": {
@@ -329,7 +331,7 @@
       "generals": [
         {
           "id": 0,
-          "name": "basic",
+          "type": "basic",
           "preset": true,
           "init": false,
           "army": {
@@ -350,10 +352,10 @@
         },
         {
           "id": 1,
-          "name": "basic",
+          "type": "basic",
           "preset": true,
           "init": false,
-          "delay": 11,
+          "delay": 10,
           "army": {
             "recruit": 0,
             "bowmen": 0,
@@ -372,10 +374,10 @@
         },
         {
           "id": 2,
-          "name": "basic",
+          "type": "basic",
           "preset": true,
           "init": false,
-          "delay": 9,
+          "delay": 8,
           "army": {
             "recruit": 71,
             "bowmen": 0,
@@ -394,7 +396,7 @@
         },
         {
           "id": 3,
-          "name": "boris",
+          "type": "boris",
           "preset": true,
           "init": false,
           "army": {
@@ -422,7 +424,7 @@
       "generals": [
         {
           "id": 4,
-          "name": "veteran",
+          "type": "veteran",
           "preset": true,
           "init": false,
           "army": {
@@ -442,7 +444,7 @@
           ]
         }
       ],
-      "delay": 160
+      "delay": 138
     },
     {
       "no": 10,
@@ -450,7 +452,7 @@
       "generals": [
         {
           "id": 0,
-          "name": "basic",
+          "type": "basic",
           "preset": false,
           "init": false,
           "army": {
@@ -470,7 +472,7 @@
           ]
         }
       ],
-      "delay": 42
+      "delay": 23
     },
     {
       "no": 11,
@@ -478,7 +480,7 @@
       "generals": [
         {
           "id": 1,
-          "name": "basic",
+          "type": "basic",
           "preset": false,
           "init": false,
           "army": {
@@ -498,7 +500,7 @@
           ]
         }
       ],
-      "delay": 40
+      "delay": 3
     },
     {
       "no": 12,
@@ -506,7 +508,7 @@
       "generals": [
         {
           "id": 2,
-          "name": "basic",
+          "type": "basic",
           "preset": false,
           "init": false,
           "army": {
@@ -522,7 +524,7 @@
           }
         }
       ],
-      "delay": 0
+      "delay": 10
     },
     {
       "no": 13,
@@ -530,7 +532,7 @@
       "generals": [
         {
           "id": 3,
-          "name": "boris",
+          "type": "boris",
           "preset": false,
           "init": false,
           "army": {
@@ -550,7 +552,7 @@
           ]
         }
       ],
-      "delay": 0
+      "delay": 3
     },
     {
       "no": 14,
@@ -558,7 +560,7 @@
       "generals": [
         {
           "id": 4,
-          "name": "veteran",
+          "type": "veteran",
           "preset": true,
           "init": false,
           "army": {
@@ -590,7 +592,7 @@
       "generals": [
         {
           "id": 5,
-          "name": "master",
+          "type": "master",
           "preset": true,
           "init": false,
           "army": {
@@ -622,7 +624,7 @@
       "generals": [
         {
           "id": 2,
-          "name": "basic",
+          "type": "basic",
           "preset": true,
           "init": false,
           "army": {
@@ -654,7 +656,7 @@
       "generals": [
         {
           "id": 0,
-          "name": "basic",
+          "type": "basic",
           "preset": false,
           "init": false,
           "army": {
@@ -675,7 +677,7 @@
         },
         {
           "id": 3,
-          "name": "boris",
+          "type": "boris",
           "preset": true,
           "init": false,
           "army": {
@@ -703,7 +705,7 @@
       "generals": [
         {
           "id": 0,
-          "name": "basic",
+          "type": "basic",
           "preset": false,
           "init": false,
           "army": {
@@ -727,7 +729,7 @@
       "generals": [
         {
           "id": 3,
-          "name": "boris",
+          "type": "boris",
           "preset": false,
           "init": false,
           "army": {
@@ -759,7 +761,7 @@
       "generals": [
         {
           "id": 4,
-          "name": "veteran",
+          "type": "veteran",
           "preset": false,
           "init": false,
           "army": {
@@ -791,7 +793,7 @@
       "generals": [
         {
           "id": 1,
-          "name": "basic",
+          "type": "basic",
           "preset": false,
           "init": false,
           "army": {
@@ -815,7 +817,7 @@
       "generals": [
         {
           "id": 3,
-          "name": "boris",
+          "type": "boris",
           "preset": false,
           "init": false,
           "army": {
@@ -843,7 +845,7 @@
       "generals": [
         {
           "id": 0,
-          "name": "basic",
+          "type": "basic",
           "preset": false,
           "init": false,
           "army": {
@@ -867,7 +869,7 @@
       "generals": [
         {
           "id": 6,
-          "name": "grim",
+          "type": "grim",
           "preset": false,
           "init": false,
           "army": {
@@ -891,7 +893,7 @@
       "generals": [
         {
           "id": 4,
-          "name": "veteran",
+          "type": "veteran",
           "preset": false,
           "init": false,
           "army": {

@@ -183,10 +183,10 @@ class LocateGenerals:
         pygui.click(self.coordinations['specialists'].get())
         for general in data['generals']:
             print(general)
-            if general['name'] in generals:
-                generals[general['name']].append(general['id'])
+            if general['type'] in generals:
+                generals[general['type']].append(general['id'])
             else:
-                generals[general['name']] = [general['id']]
+                generals[general['type']] = [general['id']]
         general_loc = 100 * [None]
         for general_type, ids in generals.items():
             star_window_corner = self.coordinations['specialists'] - Point(137, 400)
@@ -220,10 +220,10 @@ class GroupGeneralsByTypes:
         for general in data['generals']:
             if not(first <= general['id'] <= last):
                 continue
-            if general['name'] in self.generals:
-                self.generals[general['name']].append(general)
+            if general['type'] in self.generals:
+                self.generals[general['type']].append(general)
             else:
-                self.generals[general['name']] = [general]
+                self.generals[general['type']] = [general]
 
     def get(self):
         return self.generals
