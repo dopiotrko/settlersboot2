@@ -394,6 +394,8 @@ class SendToAdventure:
                     SendGeneralsByType(name, g_type, (general,), general['name'])
             if generals_of_type:
                 SendGeneralsByType(name, g_type, generals_of_type)
+        my_pygui.click(self.coordinations['star'].get())
+        my_pygui.click(self.coordinations['specialists'].get())
         my_pygui.click(self.coordinations['star_txt'].get())
         my_pygui.hotkey('ctrl', 'a')
         my_pygui.press('del')
@@ -524,11 +526,11 @@ class TeachAdventure:
 
 
 class MakeAdventure:
-    def __init__(self, name, delay=0, start=1, stop=1000):
+    def __init__(self, name, delay=0, start=1, stop=1000, mode='PLAY'):
         logging.info('MakeAdventure')
 
         with open('data/{}/learned.json'.format(name)) as f:
-        # with open(get_last_filename(name)) as f:
+        # with open(my.get_last_filename(name)) as f:
             data = json.load(f)
         with open('data/conf.dat', 'rb') as config_dictionary_file:
             self.coordinations = pickle.load(config_dictionary_file)
@@ -550,7 +552,18 @@ class MakeAdventure:
             if not(start <= action['no'] <= stop):
                 continue
             if not start == action['no']:
-                my.wait(action['delay'], 'Next action ({})in'.format(action['no']))
+                if mode == 'PLAY':
+                    my.wait(action['delay'], 'Next action ({})in'.format(action['no']))
+                else:
+                    t_start = time.time()
+                    text = 'Click OK when you want to do {1} ({0}) with generals:\n'.format(action['no'],
+                                                                                            action['type'])
+                    for gen in action['generals']:
+                        text += '{:3}{:10}\n'.format(gen['id'], gen['type'])
+                    my_pygui.alert(text=text, title='Teaching Adventure {}'.format(name), button='OK')
+                    if mode == 'TEACH':
+                        action['delay'] = int(time.time() - t_start)
+
             print(action['no'], time.asctime(time.localtime(time.time())))
             for general in action['generals']:
                 SelectLastGeneral(generals_loc[general['id']])
@@ -586,6 +599,9 @@ class MakeAdventure:
                 else:
                     time.sleep(.2)
                 my_pygui.click(target.get(), clicks=2, interval=0.25)
+            if mode == 'TEACH':
+                with open(my.get_new_filename(name), 'w') as f:
+                    json.dump(data, f, indent=2)
 
 
 class EndAdventure:
