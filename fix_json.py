@@ -74,7 +74,7 @@ class Fix:
             "generals": [
                 {
                     "id": gen_id,
-                    "name": self.data['generals'][gen_id]['name'],
+                    "type": self.data['generals'][gen_id]['type'],
                     "preset": False,
                     "init": False,
                     "army": {
