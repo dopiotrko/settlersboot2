@@ -559,7 +559,7 @@ class MakeAdventure:
                     text = 'Click OK when you want to do {1} ({0}) with generals:\n'.format(action['no'],
                                                                                             action['type'])
                     for gen in action['generals']:
-                        text += '{:3}{:10}\n'.format(gen['id'], gen['type'])
+                        text += '{:3} - {:10}\n'.format(gen['id'], gen['type'])
                     my_pygui.alert(text=text, title='Teaching Adventure {}'.format(name), button='OK')
                     if mode == 'TEACH':
                         action['delay'] = int(time.time() - t_start)
