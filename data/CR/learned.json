@@ -93,12 +93,11 @@
     {
       "id": 6,
       "type": "grim",
-      "name": "p2",
       "army": {
         "recruit": 71,
         "bowmen": 0,
         "militia": 0,
-        "cavalry": 0,
+        "cavalry": 40,
         "longbowman": 0,
         "soldier": 0,
         "crossbowman": 0,
@@ -376,7 +375,7 @@
           "type": "basic",
           "preset": true,
           "init": false,
-          "delay": 7,
+          "delay": 6,
           "army": {
             "recruit": 0,
             "bowmen": 0,
@@ -700,7 +699,7 @@
     },
     {
       "no": 18,
-      "type": "unload",
+      "type": "attack",
       "generals": [
         {
           "id": 0,
@@ -711,16 +710,24 @@
             "recruit": 0,
             "bowmen": 0,
             "militia": 0,
-            "cavalry": 0,
+            "cavalry": 136,
             "longbowman": 0,
             "soldier": 0,
             "crossbowman": 0,
             "elite_soldier": 0,
             "cannoneer": 0
-          }
+          },
+          "drag": [
+            -184.5,
+            171.5
+          ],
+          "relative_coordinates": [
+            -66,
+            195
+          ]
         }
       ],
-      "delay": 190.54114294052124
+      "delay": 190
     },
     {
       "no": 19,
@@ -732,15 +739,15 @@
           "preset": false,
           "init": false,
           "army": {
-            "recruit": 0,
+            "recruit": 86,
             "bowmen": 0,
             "militia": 0,
-            "cavalry": 50,
+            "cavalry": 0,
             "longbowman": 0,
             "soldier": 0,
             "crossbowman": 0,
             "elite_soldier": 0,
-            "cannoneer": 0
+            "cannoneer": 94
           },
           "relative_coordinates": [
             61,
@@ -748,76 +755,16 @@
           ]
         }
       ],
-      "delay": 29.98065447807312
+      "delay": 10
     },
     {
       "no": 20,
-      "type": "load",
+      "type": "attack",
       "generals": [
         {
           "id": 4,
           "type": "veteran",
           "preset": false,
-          "init": false,
-          "army": {
-            "recruit": 86,
-            "bowmen": 0,
-            "militia": 0,
-            "cavalry": 94,
-            "longbowman": 0,
-            "soldier": 0,
-            "crossbowman": 0,
-            "elite_soldier": 1,
-            "cannoneer": 69
-          },
-          "drag": [
-            -139.0,
-            224.5
-          ]
-        }
-      ],
-      "delay": 0
-    },
-    {
-      "no": 21,
-      "type": "attack",
-      "generals": [
-        {
-          "id": 3,
-          "type": "boris",
-          "preset": true,
-          "init": false,
-          "army": {
-            "recruit": 0,
-            "bowmen": 0,
-            "militia": 0,
-            "cavalry": 50,
-            "longbowman": 0,
-            "soldier": 0,
-            "crossbowman": 0,
-            "elite_soldier": 0,
-            "cannoneer": 0
-          },
-          "drag": [
-            -106.0,
-            182.0
-          ],
-          "relative_coordinates": [
-            -155,
-            337
-          ]
-        }
-      ],
-      "delay": 45
-    },
-    {
-      "no": 22,
-      "type": "attack",
-      "generals": [
-        {
-          "id": 4,
-          "type": "veteran",
-          "preset": true,
           "init": false,
           "army": {
             "recruit": 86,
@@ -840,10 +787,10 @@
           ]
         }
       ],
-      "delay": 31
+      "delay": 0
     },
     {
-      "no": 23,
+      "no": 21,
       "type": "load",
       "generals": [
         {
@@ -867,31 +814,7 @@
       "delay": 0
     },
     {
-      "no": 24,
-      "type": "load",
-      "generals": [
-        {
-          "id": 0,
-          "type": "basic",
-          "preset": false,
-          "init": false,
-          "army": {
-            "recruit": 0,
-            "bowmen": 0,
-            "militia": 0,
-            "cavalry": 96,
-            "longbowman": 0,
-            "soldier": 0,
-            "crossbowman": 0,
-            "elite_soldier": 0,
-            "cannoneer": 0
-          }
-        }
-      ],
-      "delay": 0
-    },
-    {
-      "no": 25,
+      "no": 22,
       "type": "load",
       "generals": [
         {
