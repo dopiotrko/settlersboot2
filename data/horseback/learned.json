@@ -1,8 +1,8 @@
 {
   "generals": [
     {
-      "id": 1,
-      "name": "basic",
+      "id": 0,
+      "type": "basic",
       "army": {
         "recruit": 151,
         "bowmen": 0,
@@ -16,8 +16,8 @@
       }
     },
     {
-      "id": 2,
-      "name": "basic",
+      "id": 1,
+      "type": "basic",
       "army": {
         "recruit": 0,
         "bowmen": 0,
@@ -31,8 +31,8 @@
       }
     },
     {
-      "id": 3,
-      "name": "veteran",
+      "id": 2,
+      "type": "veteran",
       "army": {
         "recruit": 56,
         "bowmen": 75,
@@ -46,8 +46,8 @@
       }
     },
     {
-      "id": 4,
-      "name": "ponury",
+      "id": 3,
+      "type": "grim",
       "army": {
         "recruit": 0,
         "bowmen": 0,
@@ -61,8 +61,8 @@
       }
     },
     {
-      "id": 5,
-      "name": "major",
+      "id": 4,
+      "type": "major",
       "army": {
         "recruit": 106,
         "bowmen": 0,
@@ -82,8 +82,8 @@
       "type": "move",
       "generals": [
         {
-          "id": 1,
-          "name": "basic",
+          "id": 0,
+          "type": "basic",
           "preset": false,
           "init": true,
           "army": {
@@ -114,8 +114,8 @@
       "type": "move",
       "generals": [
         {
-          "id": 2,
-          "name": "basic",
+          "id": 1,
+          "type": "basic",
           "preset": true,
           "init": true,
           "army": {
@@ -146,8 +146,8 @@
       "type": "move",
       "generals": [
         {
-          "id": 5,
-          "name": "major",
+          "id": 4,
+          "type": "major",
           "preset": true,
           "init": true,
           "army": {
@@ -178,8 +178,8 @@
       "type": "move",
       "generals": [
         {
-          "id": 3,
-          "name": "veteran",
+          "id": 2,
+          "type": "veteran",
           "preset": false,
           "init": true,
           "army": {
@@ -206,8 +206,8 @@
       "type": "unload",
       "generals": [
         {
-          "id": 4,
-          "name": "ponury",
+          "id": 3,
+          "type": "grim",
           "preset": false,
           "init": true,
           "army": {
@@ -230,8 +230,8 @@
       "type": "attack",
       "generals": [
         {
-          "id": 1,
-          "name": "basic",
+          "id": 0,
+          "type": "basic",
           "preset": true,
           "init": false,
           "army": {
@@ -251,8 +251,8 @@
           ]
         },
         {
-          "id": 2,
-          "name": "basic",
+          "id": 1,
+          "type": "basic",
           "preset": true,
           "init": false,
           "army": {
@@ -272,8 +272,8 @@
           ]
         },
         {
-          "id": 5,
-          "name": "major",
+          "id": 4,
+          "type": "major",
           "preset": true,
           "init": false,
           "army": {
@@ -300,8 +300,8 @@
       "type": "load",
       "generals": [
         {
-          "id": 1,
-          "name": "basic",
+          "id": 0,
+          "type": "basic",
           "preset": false,
           "init": false,
           "army": {
@@ -324,8 +324,8 @@
       "type": "unload",
       "generals": [
         {
-          "id": 2,
-          "name": "basic",
+          "id": 1,
+          "type": "basic",
           "preset": false,
           "init": false,
           "army": {
@@ -352,8 +352,8 @@
       "type": "move",
       "generals": [
         {
-          "id": 5,
-          "name": "major",
+          "id": 4,
+          "type": "major",
           "preset": false,
           "init": false,
           "army": {
@@ -380,8 +380,8 @@
       "type": "attack",
       "generals": [
         {
-          "id": 5,
-          "name": "major",
+          "id": 4,
+          "type": "major",
           "preset": true,
           "init": false,
           "army": {
@@ -408,8 +408,8 @@
       "type": "move",
       "generals": [
         {
-          "id": 3,
-          "name": "veteran",
+          "id": 2,
+          "type": "veteran",
           "preset": true,
           "init": false,
           "army": {
@@ -436,8 +436,8 @@
       "type": "move",
       "generals": [
         {
-          "id": 1,
-          "name": "basic",
+          "id": 0,
+          "type": "basic",
           "preset": true,
           "init": false,
           "army": {
@@ -464,8 +464,8 @@
       "type": "attack",
       "generals": [
         {
-          "id": 5,
-          "name": "major",
+          "id": 4,
+          "type": "major",
           "preset": false,
           "init": false,
           "army": {
@@ -492,8 +492,8 @@
       "type": "attack",
       "generals": [
         {
-          "id": 3,
-          "name": "veteran",
+          "id": 2,
+          "type": "veteran",
           "preset": false,
           "init": false,
           "army": {
@@ -520,8 +520,8 @@
       "type": "move",
       "generals": [
         {
-          "id": 5,
-          "name": "major",
+          "id": 4,
+          "type": "major",
           "preset": false,
           "init": false,
           "army": {
@@ -548,8 +548,8 @@
       "type": "move",
       "generals": [
         {
-          "id": 3,
-          "name": "veteran",
+          "id": 2,
+          "type": "veteran",
           "preset": false,
           "init": false,
           "army": {
@@ -576,8 +576,8 @@
       "type": "attack",
       "generals": [
         {
-          "id": 1,
-          "name": "basic",
+          "id": 0,
+          "type": "basic",
           "preset": true,
           "init": false,
           "army": {
@@ -597,8 +597,8 @@
           ]
         },
         {
-          "id": 5,
-          "name": "major",
+          "id": 4,
+          "type": "major",
           "preset": true,
           "init": false,
           "army": {
@@ -625,8 +625,8 @@
       "type": "attack",
       "generals": [
         {
-          "id": 3,
-          "name": "veteran",
+          "id": 2,
+          "type": "veteran",
           "preset": true,
           "init": false,
           "army": {
@@ -653,8 +653,8 @@
       "type": "load",
       "generals": [
         {
-          "id": 4,
-          "name": "ponury",
+          "id": 3,
+          "type": "grim",
           "preset": false,
           "init": false,
           "army": {
