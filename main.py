@@ -291,7 +291,8 @@ class Adventure:
         focus_temp_loc = (self.coordinations['star'] - Point(0, 40))
         my_pygui.click(focus_temp_loc.get())
         my_pygui.write('0')
-        my_pygui.scroll(-3, focus_temp_loc.x, focus_temp_loc.y)
+        my_pygui.press('-', presses=2)
+        # my_pygui.scroll(-3, focus_temp_loc.x, focus_temp_loc.y)
         if start == 1:
             generals_loc = self.locate_generals()
             with open('data/{}/generals_loc.dat'.format(self.name), 'wb') as generals_loc_file:
