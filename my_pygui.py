@@ -1,5 +1,19 @@
 import pyautogui
 import logging
+import sys
+if sys.platform == 'win32':
+    # this is to fix memory liking in windows, in original pyautogui.pixel function
+    from ctypes import windll
+
+    def _pixel(x, y):
+        hdc = windll.user32.GetDC(0)
+        color = windll.gdi32.GetPixel(hdc, x, y)
+        r = color % 256
+        g = (color // 256) % 256
+        b = color // (256 ** 2)
+        windll.user32.ReleaseDC(0, hdc)
+        return r, g, b
+    pyautogui.pixel = _pixel
 pyautogui.PAUSE = 1
 
 
