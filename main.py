@@ -1,6 +1,26 @@
 # sudo apt-get install scrot
 # sudo apt-get install python3-tk python3-dev
 # pip install opencv-contrib-python # in your venv
+# pip install pyautogui
+# pip install pynput
+"""
+pytesseract INSTALLATION
+Prerequisites:
+
+Python-tesseract requires Python 2.7 or Python 3.5+
+
+You will need the Python Imaging Library (PIL) (or the Pillow fork). Under Debian/Ubuntu, this is the package python-imaging or python3-imaging.
+
+Install Google Tesseract OCR (additional info how to install the engine on Linux, Mac OSX and Windows). You must be able to invoke the tesseract command as tesseract. If this isn’t the case, for example because tesseract isn’t in your PATH, you will have to change the “tesseract_cmd” variable pytesseract.pytesseract.tesseract_cmd. Under Debian/Ubuntu you can use the package tesseract-ocr. For Mac OS users. please install homebrew package tesseract.
+
+Note: Make sure that you also have installed tessconfigs and configs from tesseract-ocr/tessconfigs or via the OS package manager.
+
+Installing via pip:
+Check the pytesseract package page for more information.
+$ (env)> pip install pillow
+$ (env)> pip install pytesseract
+"""
+
 import json
 import pickle
 import time
@@ -386,7 +406,7 @@ class Adventure:
 adventure = 'CR'
 CR = Adventure(adventure)
 # teach_adventure(adventure, 18, 18)
-# settlers.start_adventure(delay=3)
+CR.start_adventure(delay=3)
 # settlers.send_to_adventure(first=0, last=9)
 # go_to_adventure(adventure, 10)
 # settlers.make_adventure(start=18, stop=19)
@@ -395,7 +415,7 @@ CR = Adventure(adventure)
 # send_to_adventure(adventure, first=5, last=5)
 # send_to_adventure(adventure, first=3, last=4)
 # go_to_adventure(adventure, 1)
-CR.make_adventure(delay=2, start=1, stop=228)
+# CR.make_adventure(delay=2, start=1, stop=228)
 # end_adventure(adventure, 60)
 
 

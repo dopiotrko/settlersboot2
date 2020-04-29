@@ -13,7 +13,23 @@ if sys.platform == 'win32':
         b = color // (256 ** 2)
         windll.user32.ReleaseDC(0, hdc)
         return r, g, b
+
     pyautogui.pixel = _pixel
+
+    def _pixelMatchesColor(x, y, expectedRGBColor, tolerance=0):
+        pix = _pixel(x, y)
+        if len(pix) == 3 or len(expectedRGBColor) == 3:  # RGB mode
+            r, g, b = pix[:3]
+            exR, exG, exB = expectedRGBColor[:3]
+            return (abs(r - exR) <= tolerance) and (abs(g - exG) <= tolerance) and (abs(b - exB) <= tolerance)
+        elif len(pix) == 4 and len(expectedRGBColor) == 4:  # RGBA mode
+            r, g, b, a = pix
+            exR, exG, exB, exA = expectedRGBColor
+            return (abs(r - exR) <= tolerance) and (abs(g - exG) <= tolerance) and (abs(b - exB) <= tolerance) and (
+                        abs(a - exA) <= tolerance)
+
+    pyautogui.pixelMatchesColor = _pixelMatchesColor
+
 pyautogui.PAUSE = 1
 
 
