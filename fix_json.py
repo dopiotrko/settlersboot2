@@ -1,5 +1,6 @@
 import json
 import pickle
+import copy
 from my import get_last_filename, get_new_filename
 from my_types import Point
 
@@ -67,7 +68,7 @@ class Fix:
                     del general['relative_coordinates']
         # self.save()
 
-    def insert_action(self, to, gen_id=1, type_="move"):
+    def insert_action(self, to, gen_id=1, type_="move", init=False):
         action_template = {
             "no": to,
             "type": type_,
@@ -77,7 +78,8 @@ class Fix:
                     "type": self.data['generals'][gen_id]['type'],
                     "preset": False,
                     "init": False,
-                    "army": {
+                    "army": self.data['generals'][gen_id]['army'] if init else
+                    {
                         "recruit": 0,
                         "bowmen": 0,
                         "militia": 0,
@@ -99,8 +101,37 @@ class Fix:
         self.data['actions'].insert(to - 1, action_template)
         self.save()
 
+    def copy_action(self, to, from_):
+        self.data['actions'].insert(to-1, copy.copy(self.data['actions'][from_-1]))
+        self.data['actions'][to-1]['no'] = to
+        for no in range(to, len(self.data['actions'])):
+            self.data['actions'][no]['no'] = no+1
+        self.save()
 
-# Fix('horseback').merge()
+    def move_action(self, to, from_):
+        moving = self.data['actions'].pop(from_-1)
+        self.data['actions'].insert(to-1, moving)
+        self.data['actions'][to-1]['no'] = to
+        for no in range(to if to > from_ else from_, len(self.data['actions'])):
+            self.data['actions'][no]['no'] = no+1
+        self.save()
+
+    def add_multi_attack(self, to, from_):
+        action_template = {
+            "no": to,
+            "type": "attack",
+            "generals": [copy.copy(self.data['actions'][action_no-1]['generals'][0]) for action_no in from_],
+            "delay": 0
+        }
+
+        for action in self.data['actions']:
+            if action['no'] >= to:
+                action['no'] += 1
+        self.data['actions'].insert(to - 1, action_template)
+        self.save()
+
+
+Fix('wiktor').insert_action(33, 0)
 # Fix('CR').insert_action(7, 6, 'unload')
 
 class AddMyPyGui:
@@ -117,7 +148,7 @@ class AddMyPyGui:
         with open('my_pygui.py', 'a') as f:
             f.write(text)
 
-
+"""
 import pytesseract
 import cv2 as cv
 import time
@@ -181,3 +212,4 @@ print('')
 # cv.imwrite('test2.png', test1)
 # cv.imshow('test1', test1)
 # cv.waitKey(0)
+"""
