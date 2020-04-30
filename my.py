@@ -15,7 +15,8 @@ def get_new_filename(name):
 
 
 def get_last_filename(name):
-    return 'data/{}/learned{:03}.json'.format(name, get_first_free_filename_no(name) - 1)
+    no = get_first_free_filename_no(name)
+    return 'data/{}/learned{:03}.json'.format(name, no - 1) if no else 'data/{}/learned.json'.format(name)
 
 
 def wait(delay=0, info=''):
