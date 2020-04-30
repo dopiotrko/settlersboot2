@@ -37,8 +37,10 @@ class Adventure:
     def __init__(self, name):
         logging.info('Init Adventure:')
         self.name = name
-        with open('data/{}/learned.json'.format(name)) as f:
+        with open(my.get_last_filename(name)) as f:
             self.data = json.load(f)
+        # with open('data/{}/learned.json'.format(name)) as f:
+        #     self.data = json.load(f)
         with open('data/conf.dat', 'rb') as config_dictionary_file:
             self.coordinations = pickle.load(config_dictionary_file)
 
@@ -155,7 +157,7 @@ class Adventure:
             raise Exception
         else:
             my_pygui.click(my_pygui.center(loc))
-        return loc
+        return my_pygui.center(loc)
 
     def select_general_by_loc(self, loc):
         logging.info('select_general_by_loc')
@@ -252,7 +254,7 @@ class Adventure:
             # TODO temporary way to focus window/to be changed
             my_pygui.click(focus_temp_loc.get())
             for general in action['generals']:
-                last_general_loc = self.select_general(general['type']).location
+                last_general_loc = self.select_general(general['type'])
                 if not general['preset']:
                     self.set_army(general['army'])
                     if action['type'] in 'unload':
