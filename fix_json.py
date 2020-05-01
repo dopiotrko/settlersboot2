@@ -111,8 +111,7 @@ class Fix:
     def move_action(self, to, from_):
         moving = self.data['actions'].pop(from_-1)
         self.data['actions'].insert(to-1, moving)
-        self.data['actions'][to-1]['no'] = to
-        for no in range(to if to > from_ else from_, len(self.data['actions'])):
+        for no in range(to-1 if to < from_ else from_-1, len(self.data['actions'])):
             self.data['actions'][no]['no'] = no+1
         self.save()
 
