@@ -347,6 +347,8 @@ class Adventure:
 
             print(action['no'], time.asctime(time.localtime(time.time())))
             for general in action['generals']:
+                if 'retreat' in general:
+                    my.wait(5, 'Re selecting general')
                 self.select_general_by_loc(generals_loc[general['id']])
                 if 'retreat' in general:
                     my.wait(general['delay'], 'General retreat')
