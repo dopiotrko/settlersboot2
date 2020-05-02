@@ -131,7 +131,7 @@
           ]
         }
       ],
-      "delay": 0
+      "delay": 3
     },
     {
       "no": 3,
@@ -159,7 +159,7 @@
           ]
         }
       ],
-      "delay": 0
+      "delay": 2
     },
     {
       "no": 4,
@@ -187,7 +187,7 @@
           ]
         }
       ],
-      "delay": 0
+      "delay": 98
     },
     {
       "no": 5,
@@ -211,7 +211,7 @@
           }
         }
       ],
-      "delay": 0
+      "delay": 176
     },
     {
       "no": 6,
@@ -262,7 +262,7 @@
           }
         }
       ],
-      "delay": 0
+      "delay": 6
     },
     {
       "no": 7,
@@ -286,7 +286,7 @@
           }
         }
       ],
-      "delay": 0
+      "delay": 70
     },
     {
       "no": 8,
@@ -318,7 +318,7 @@
           ]
         }
       ],
-      "delay": 0
+      "delay": 2
     },
     {
       "no": 9,
@@ -342,7 +342,7 @@
           }
         }
       ],
-      "delay": 0
+      "delay": 7
     },
     {
       "no": 10,
@@ -370,7 +370,7 @@
           ]
         }
       ],
-      "delay": 0
+      "delay": 517
     },
     {
       "no": 11,
@@ -398,7 +398,7 @@
           ]
         }
       ],
-      "delay": 0
+      "delay": 406
     },
     {
       "no": 12,
@@ -426,7 +426,7 @@
           ]
         }
       ],
-      "delay": 0
+      "delay": 1
     },
     {
       "no": 13,
@@ -458,7 +458,7 @@
           ]
         }
       ],
-      "delay": 0
+      "delay": 1
     },
     {
       "no": 14,
@@ -486,7 +486,7 @@
           ]
         }
       ],
-      "delay": 0
+      "delay": 136
     },
     {
       "no": 15,
@@ -518,7 +518,7 @@
           ]
         }
       ],
-      "delay": 0
+      "delay": 26
     },
     {
       "no": 16,
@@ -546,7 +546,7 @@
           ]
         }
       ],
-      "delay": 0
+      "delay": 222
     },
     {
       "no": 17,
@@ -574,7 +574,7 @@
           ]
         }
       ],
-      "delay": 0
+      "delay": 1
     },
     {
       "no": 18,
@@ -598,7 +598,7 @@
           }
         }
       ],
-      "delay": 0
+      "delay": 35
     },
     {
       "no": 19,
@@ -626,7 +626,7 @@
           ]
         }
       ],
-      "delay": 0
+      "delay": 39
     },
     {
       "no": 20,
@@ -650,7 +650,7 @@
           }
         }
       ],
-      "delay": 0
+      "delay": 168
     },
     {
       "no": 21,
@@ -703,7 +703,7 @@
           ]
         }
       ],
-      "delay": 0
+      "delay": 4
     },
     {
       "no": 22,
@@ -731,42 +731,10 @@
           ]
         }
       ],
-      "delay": 0
+      "delay": 182
     },
     {
       "no": 23,
-      "type": "move",
-      "generals": [
-        {
-          "id": 1,
-          "type": "basic",
-          "preset": false,
-          "init": false,
-          "army": {
-            "recruit": 0,
-            "bowmen": 0,
-            "militia": 0,
-            "cavalry": 0,
-            "longbowman": 0,
-            "soldier": 0,
-            "crossbowman": 0,
-            "elite_soldier": 150,
-            "cannoneer": 0
-          },
-          "drag": [
-            -95.5,
-            146.5
-          ],
-          "relative_coordinates": [
-            -56,
-            180
-          ]
-        }
-      ],
-      "delay": 0
-    },
-    {
-      "no": 24,
       "type": "move",
       "generals": [
         {
@@ -795,7 +763,39 @@
           ]
         }
       ],
-      "delay": 0
+      "delay": 43
+    },
+    {
+      "no": 24,
+      "type": "move",
+      "generals": [
+        {
+          "id": 1,
+          "type": "basic",
+          "preset": false,
+          "init": false,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 150,
+            "cannoneer": 0
+          },
+          "drag": [
+            -95.5,
+            146.5
+          ],
+          "relative_coordinates": [
+            -56,
+            180
+          ]
+        }
+      ],
+      "delay": 20
     },
     {
       "no": 25,
@@ -823,7 +823,7 @@
           ]
         }
       ],
-      "delay": 0
+      "delay": 110
     },
     {
       "no": 26,
@@ -847,7 +847,7 @@
           }
         }
       ],
-      "delay": 0
+      "delay": 195
     },
     {
       "no": 27,
@@ -921,7 +921,7 @@
           ]
         }
       ],
-      "delay": 0
+      "delay": 2
     },
     {
       "no": 28,
@@ -953,7 +953,7 @@
           ]
         }
       ],
-      "delay": 0
+      "delay": 188
     },
     {
       "no": 29,
@@ -977,7 +977,7 @@
           }
         }
       ],
-      "delay": 0
+      "delay": 29
     },
     {
       "no": 30,
@@ -1001,7 +1001,7 @@
           }
         }
       ],
-      "delay": 0
+      "delay": 169
     }
   ]
 }
