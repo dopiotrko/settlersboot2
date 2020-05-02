@@ -28,13 +28,13 @@ class Configure:
         my_pygui.alert(text=text, title='Configuration', button='OK')
         coordinations['star_txt'] = get_click.get()
 
-        text = 'Any General'
+        text = 'First General'
         my_pygui.alert(text=text, title='Configuration', button='OK')
-        get_click.get()
+        coordinations['first_general'] = get_click.get()
 
         text = 'Close General'
         my_pygui.alert(text=text, title='Configuration', button='OK')
-        get_click.get()
+        coordinations['close_general'] = get_click.get()
 
         text = 'Open same general by clicking him on the map (island)'
         my_pygui.alert(text=text, title='Configuration', button='OK')
@@ -51,9 +51,9 @@ class Configure:
         coordinations['cavalry'] = Point.from_list(loc) + Point(74, 81)
         coordinations['longbowman'] = Point.from_list(loc) + Point(199, 81)
         coordinations['soldier'] = Point.from_list(loc) + Point(324, 81)
-        coordinations['crossbowman'] = Point.from_list(loc) + Point(74, 136)
-        coordinations['elite_soldier'] = Point.from_list(loc) + Point(199, 136)
-        coordinations['cannoneer'] = Point.from_list(loc) + Point(324, 136)
+        coordinations['crossbowman'] = Point.from_list(loc) + Point(74, 135)
+        coordinations['elite_soldier'] = Point.from_list(loc) + Point(199, 135)
+        coordinations['cannoneer'] = Point.from_list(loc) + Point(324, 135)
 
         text = 'Unload'
         my_pygui.alert(text=text, title='Configuration', button='OK')

@@ -111,6 +111,12 @@ class Dragto:
         return pyautogui.dragTo(*args, **kwargs)
 
 
+class ScreenShot:
+    def __call__(self, *args, **kwargs):
+        logging.info('ScreenShot: {}, {}'.format(args, kwargs))
+        return pyautogui.screenshot(*args, **kwargs)
+
+
 click = Click()
 write = Write()
 center = Center()
@@ -124,3 +130,4 @@ press = Press()
 scroll = Scroll()
 confirm = Confirm()
 dragTo = Dragto()
+screenshot = ScreenShot()

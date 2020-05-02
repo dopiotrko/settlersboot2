@@ -28,6 +28,7 @@ import my_pygui
 import logging
 import my
 import listener
+import ocr
 from my_types import Point
 logging.basicConfig(level=logging.INFO)
 STAROPEN = False
@@ -174,8 +175,8 @@ class Adventure:
     def get_generals_by_type(self, general_type, general_name=None):
         logging.info('get_generals_by_type')
 
-        xy = self.coordinations['star'].get()
-        my_pygui.moveTo(xy[0], xy[1], .2)
+        x, y = self.coordinations['star'].get()
+        my_pygui.moveTo(x, y, .2)
         my_pygui.click(self.coordinations['star'].get())
         my_pygui.click(self.coordinations['specialists'].get())
         my_pygui.click(self.coordinations['star_txt'].get())
@@ -206,17 +207,52 @@ class Adventure:
                 my_pygui.click(self.coordinations['star'].get())
                 my_pygui.click(self.coordinations['specialists'].get())
 
+    def sum_armies(self, first, last):
+        logging.info('sum_generals_army')
+        army = dict()
+        for general in self.data['generals']:
+            if not(first <= general['id'] <= last):
+                continue
+            army = {key: army.get(key, 0) + val for key, val in general['army'].items()}
+        return army
+
+    def check_if_army_available(self, army):
+        my_pygui.click(self.coordinations['star'].get())
+        my_pygui.click(self.coordinations['specialists'].get())
+        my_pygui.click(self.coordinations['star_txt'].get())
+        my_pygui.hotkey('ctrl', 'a')
+        my_pygui.write('general')
+        my_pygui.click(self.coordinations['first_general'].get())
+        for key, val in army.items():
+            if val:
+                x, y = self.coordinations[key].get()
+                screen = my_pygui.screenshot(region=(x-43, y-13, 82, 13))
+                if ocr.available_unit(screen) != val:
+                    raise Exception('Not enough {}'.format(key))
+        my_pygui.click(self.coordinations['star'].get())
+        my_pygui.click(self.coordinations['specialists'].get())
+        my_pygui.click(self.coordinations['star_txt'].get())
+        my_pygui.hotkey('ctrl', 'a')
+        my_pygui.press('del')
+        my_pygui.click(self.coordinations['star'].get())
+
     def send_to_adventure(self, delay=0, first=0, last=100):
         logging.info('send_to_adventure')
 
         my.wait(delay, 'Sending to adventure')
+        army = self.sum_armies(first, last)
+        print(army)
+        self.check_if_army_available(army)
         for g_type, generals_of_type in self.group_generals_by_types(first, last).items():
             for general in generals_of_type:
+                """sending named generals first"""
                 if 'name' in general:
                     generals_of_type.remove(general)
                     self.send_generals_by_type(g_type, (general,), general['name'])
+            """sending rest of generals"""
             if generals_of_type:
                 self.send_generals_by_type(g_type, generals_of_type)
+        """reset star window to default"""
         my_pygui.click(self.coordinations['star'].get())
         my_pygui.click(self.coordinations['specialists'].get())
         my_pygui.click(self.coordinations['star_txt'].get())
