@@ -76,6 +76,7 @@ class Configure:
         my_pygui.alert(text=text, title='Configuration', button='OK')
         coordinations['move'] = get_click.get()
         coordinations['attack'] = coordinations['move'] - Point(0, 86)
+        coordinations['retreat'] = coordinations['move'] + Point(0, 43)
 
         text = 'Quest Book'
         my_pygui.alert(text=text, title='Configuration', button='OK')

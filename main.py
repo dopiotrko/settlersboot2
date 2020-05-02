@@ -153,10 +153,13 @@ class Adventure:
                                       region=(star_window_corner.x, star_window_corner.y, 600, 400),
                                       confidence=0.95)
         if loc is None:
-            print('No general {} found.'.format(general))
-            raise Exception
-        else:
-            my_pygui.click(my_pygui.center(loc))
+            loc = my_pygui.locateOnScreen('resource/{}_.png'.format(general),
+                                          region=(star_window_corner.x, star_window_corner.y, 600, 400),
+                                          confidence=0.95)
+            if loc is None:
+                print('No general {} found.'.format(general))
+                raise Exception
+        my_pygui.click(my_pygui.center(loc))
         return my_pygui.center(loc)
 
     def select_general_by_loc(self, loc):
@@ -242,19 +245,24 @@ class Adventure:
         focus_temp_loc = (self.coordinations['star']-Point(0, 40))
         my_pygui.click(focus_temp_loc.get())
         my_pygui.write('0')
-        my_pygui.scroll(-3, focus_temp_loc.x, focus_temp_loc.y)
+        my_pygui.press('-', presses=2)
         for action in self.data['actions']:
             if not(start <= action['no'] <= stop):
                 continue
-            t_start = time.time()
             text = 'Click OK when You want to make Your action ({}) no {}'\
                 .format(action['type'], action['no'])
             my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
-            action['delay'] = int(time.time() - t_start)
             # TODO temporary way to focus window/to be changed
             my_pygui.click(focus_temp_loc.get())
             for general in action['generals']:
+                t_start = time.time()
                 last_general_loc = self.select_general(general['type'])
+                if 'retreat' in general:
+                    text = 'Click when You want to retreat general'
+                    my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
+                    my_pygui.click(self.coordinations['retreat'].get())
+                    general['delay'] = int(time.time() - t_start)
+                    continue
                 if not general['preset']:
                     self.set_army(general['army'])
                     if action['type'] in 'unload':
@@ -265,7 +273,6 @@ class Adventure:
                         # TODO replace by: check if general confirmation succeed
                         time.sleep(4)
                         self.select_general_by_loc(last_general_loc)
-                t_start = time.time()
                 if action['type'] in 'attack':
                     my_pygui.click(self.coordinations['attack'].get())
                     text = 'Make Your attack no {}'.format(action['no'])
@@ -301,9 +308,9 @@ class Adventure:
                 if 'delay' in general:
                     general['delay'] = int(time.time() - t_start)
 
-        # with open('data/{}/learned.json'.format(self.name), 'w') as f:
-        with open(my.get_new_filename(self.name), 'w') as f:
-            json.dump(self.data, f, indent=2)
+            # with open('data/{}/learned.json'.format(self.name), 'w') as f:
+            with open(my.get_new_filename(self.name), 'w') as f:
+                json.dump(self.data, f, indent=2)
 
     def make_adventure(self, delay=0, start=1, stop=1000, mode='PLAY'):
         logging.info('make_adventure')
@@ -314,7 +321,6 @@ class Adventure:
         my_pygui.click(focus_temp_loc.get())
         my_pygui.write('0')
         my_pygui.press('-', presses=2)
-        # my_pygui.scroll(-3, focus_temp_loc.x, focus_temp_loc.y)
         if start == 1:
             generals_loc = self.locate_generals()
             with open('data/{}/generals_loc.dat'.format(self.name), 'wb') as generals_loc_file:
@@ -342,6 +348,10 @@ class Adventure:
             print(action['no'], time.asctime(time.localtime(time.time())))
             for general in action['generals']:
                 self.select_general_by_loc(generals_loc[general['id']])
+                if 'retreat' in general:
+                    my.wait(general['delay'], 'General retreat')
+                    my_pygui.click(self.coordinations['retreat'].get())
+                    continue
                 if not general['preset']:
                     self.set_army(general['army'])
                     # TODO replace by: check if general confirmation succeed
