@@ -417,19 +417,17 @@ class Adventure:
 
 
 # Configure().run()
-adventure = 'CR'
-CR = Adventure(adventure)
+adventure = 'the_nords'
+TN = Adventure(adventure)
 # teach_adventure(adventure, 18, 18)
-CR.start_adventure(delay=3)
+# TN.start_adventure(delay=3)
 # settlers.send_to_adventure(first=0, last=9)
 # go_to_adventure(adventure, 10)
 # settlers.make_adventure(start=18, stop=19)
-# send_to_adventure(adventure, first=4, last=4)
-# send_to_adventure(adventure, first=6, last=6)
-# send_to_adventure(adventure, first=5, last=5)
-# send_to_adventure(adventure, first=3, last=4)
-# go_to_adventure(adventure, 1)
-# CR.make_adventure(delay=2, start=1, stop=228)
+# TN.send_to_adventure(first=0, last=0)
+# TN.send_to_adventure(first=2, last=10)
+# TN.go_to_adventure(1)
+TN.make_adventure(delay=2, start=1, stop=228, mode='TEACH')
 # end_adventure(adventure, 60)
 
 
