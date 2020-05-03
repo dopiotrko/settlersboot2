@@ -54,6 +54,7 @@ class Configure:
         coordinations['crossbowman'] = Point.from_list(loc) + Point(74, 135)
         coordinations['elite_soldier'] = Point.from_list(loc) + Point(199, 135)
         coordinations['cannoneer'] = Point.from_list(loc) + Point(324, 135)
+        coordinations['army_sum'] = Point.from_list(loc) + Point(0, -24)
 
         text = 'Unload'
         my_pygui.alert(text=text, title='Configuration', button='OK')

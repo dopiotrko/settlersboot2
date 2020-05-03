@@ -45,7 +45,9 @@ def available_unit(img):
     (x, y, w, h) = (d['left'][-1], d['top'][-1], d['width'][-1], d['height'][-1])
     roi = img[y-1:y + h+1, x + 20:x + w]
     custom_config = r'--oem 3 --psm 7 outputbase digits'
-    return int(pytesseract.image_to_string(roi, config=custom_config))
+    unit = int(pytesseract.image_to_string(roi, config=custom_config))
+    logging.info('Available units: {}'.format(unit))
+    return unit
 
 
 def assigned_army(img):
@@ -71,6 +73,7 @@ def assigned_unit_sum(img):
     text = pytesseract.image_to_string(img, config=custom_config).split()
     for word in text:
         if word.isdigit():
+            logging.info('Units sum: {}'.format(word))
             return int(word)
     else:
         logging.error('OCR recognition error: No digit in {}'.format(text))

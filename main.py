@@ -92,8 +92,6 @@ class Adventure:
     def start_adventure(self, delay=0):
         logging.info('start_adventure')
 
-        with open('data/conf.dat', 'rb') as config_dictionary_file:
-            self.coordinations = pickle.load(config_dictionary_file)
         my.wait(delay, 'Starting adventure')
 
         my_pygui.click(self.coordinations['star'].get())
@@ -120,24 +118,33 @@ class Adventure:
 
     def set_army(self, army):
         logging.info('set_army')
-
-        with open('data/conf.dat', 'rb') as config_dictionary_file:
-            self.coordinations = pickle.load(config_dictionary_file)
-        my_pygui.click(self.coordinations['unload'].get())
-        for units, quantity in army.items():
-            if quantity != 0:
-                init_x, y = self.coordinations[units].get()
-                for x in range(init_x, init_x-50, -24):
-                    if not my_pygui.pixelMatchesColor(x, y, (131, 102, 65), tolerance=10):
-                        loc = x, y-7
-                        break
-                else:
-                    raise Exception('text field not found')
-
-                my_pygui.click(loc)
-                my_pygui.write('{}'.format(quantity))
-
-        my_pygui.click(self.coordinations['confirm_army'].get())
+        done = False
+        count = 0
+        while not done:
+            logging.info('Setting army, try {}'.format(count+1))
+            my_pygui.click(self.coordinations['unload'].get())
+            for units, quantity in army.items():
+                if quantity != 0:
+                    init_x, y = self.coordinations[units].get()
+                    for x in range(init_x, init_x-50, -24):
+                        if not my_pygui.pixelMatchesColor(x, y, (131, 102, 65), tolerance=10):
+                            loc = x, y-7
+                            break
+                    else:
+                        raise Exception('text field not found')
+                    my_pygui.click(loc)
+                    my_pygui.write('{}'.format(quantity))
+            my_pygui.click(self.coordinations['confirm_army'].get())
+            time.sleep(3)
+            x, y = self.coordinations['army_sum'].get()
+            army_sum_screen = my_pygui.screenshot(region=(x, y, 314, 14))
+            if ocr.assigned_unit_sum(army_sum_screen) == sum(army.values()):
+                done = True
+            else:
+                """try again"""
+                count += 1
+                if count >= 3:
+                    raise Exception('Could not set army in 3 tryes')
 
     def select_general(self, general):
         logging.info('select_general')
@@ -193,7 +200,6 @@ class Adventure:
         for item_no, (to_send, available) in enumerate(generals_of_type):
             my_pygui.click(available)
             self.set_army(to_send['army'])
-            time.sleep(4)
             self.select_general_by_loc(available)
             my_pygui.click(self.coordinations['send'].get())
             my_pygui.click(self.coordinations['send_confirm'].get())
@@ -212,6 +218,7 @@ class Adventure:
         return army
 
     def check_if_army_available(self, army):
+        logging.info('check_if_army_available')
         my_pygui.click(self.coordinations['star'].get())
         my_pygui.click(self.coordinations['specialists'].get())
         my_pygui.click(self.coordinations['star_txt'].get())
@@ -220,9 +227,10 @@ class Adventure:
         my_pygui.click(self.coordinations['first_general'].get())
         for key, val in army.items():
             if val:
+                logging.info('Checking available {}'.format(key))
                 x, y = self.coordinations[key].get()
                 screen = my_pygui.screenshot(region=(x-43, y-13, 82, 13))
-                if ocr.available_unit(screen) != val:
+                if ocr.available_unit(screen) < val:
                     raise Exception('Not enough {}'.format(key))
         my_pygui.click(self.coordinations['star'].get())
         my_pygui.click(self.coordinations['specialists'].get())
@@ -301,7 +309,6 @@ class Adventure:
                         continue
                     else:
                         # TODO replace by: check if general confirmation succeed
-                        time.sleep(4)
                         self.select_general_by_loc(last_general_loc)
                 if action['type'] in 'attack':
                     my_pygui.click(self.coordinations['attack'].get())
@@ -387,7 +394,6 @@ class Adventure:
                     # TODO replace by: check if general confirmation succeed
                     if action['type'] in ('unload', 'load'):
                         continue
-                    time.sleep(4)
                     self.select_general_by_loc(generals_loc[general['id']])
                 if action['type'] in 'attack':
                     my_pygui.click(self.coordinations['attack'].get())
