@@ -104,20 +104,17 @@ class Adventure:
                                       region=(star_window_corner.x, star_window_corner.y, 600, 400),
                                       confidence=0.85)
         if loc is None:
-            print('No adventures {} found.'.format(self.name))
-            raise Exception
+            raise Exception('No adventures {} found.'.format(self.name))
         else:
             my_pygui.click(my_pygui.center(loc))
         loc = my_pygui.locateOnScreen('resource/start_adventure.png', confidence=0.9)
         if loc is None:
-            print('No adventures {} found.'.format(self.name))
-            raise Exception
+            raise Exception('Button not found.')
         else:
             my_pygui.click(my_pygui.center(loc))
         loc = my_pygui.locateOnScreen('resource/confirm.png'.format(self.name), confidence=0.9)
         if loc is None:
-            print('No adventures {} found.'.format(self.name))
-            raise Exception
+            raise Exception('Button not found.')
         else:
             my_pygui.click(my_pygui.center(loc))
 
@@ -135,8 +132,7 @@ class Adventure:
                         loc = x, y-7
                         break
                 else:
-                    print('text field not found')
-                    raise Exception
+                    raise Exception('text field not found')
 
                 my_pygui.click(loc)
                 my_pygui.write('{}'.format(quantity))
@@ -158,16 +154,15 @@ class Adventure:
                                           region=(star_window_corner.x, star_window_corner.y, 600, 400),
                                           confidence=0.95)
             if loc is None:
-                print('No general {} found.'.format(general))
-                raise Exception
+                raise Exception('No general {} found.'.format(general))
         my_pygui.click(my_pygui.center(loc))
         return my_pygui.center(loc)
 
     def select_general_by_loc(self, loc):
         logging.info('select_general_by_loc')
 
-        xy = self.coordinations['star'].get()
-        my_pygui.moveTo(xy[0], xy[1], .2)
+        x, y = self.coordinations['star'].get()
+        my_pygui.moveTo(x, y, .2)
         my_pygui.click(self.coordinations['star'].get())
         my_pygui.click(self.coordinations['specialists'].get())
         my_pygui.click(loc)
@@ -266,8 +261,7 @@ class Adventure:
         my.wait(delay, 'Going to adventure')
         loc = my_pygui.locateOnScreen('data/{}/goto_adv.png'.format(self.name), confidence=0.85)
         if loc is None:
-            print('No active adventure {} found on the screen.'.format(self.name))
-            raise Exception
+            raise Exception('No active adventure {} found on the screen.'.format(self.name))
         else:
             loc = my_pygui.center(loc)
             my_pygui.click(loc)
@@ -316,8 +310,7 @@ class Adventure:
                     my_pygui.click(self.coordinations['move'].get())
                     text = 'Move your army'
                 else:
-                    print('Unexpected action type ')
-                    raise Exception
+                    raise Exception('Unexpected action type ')
 
                 answer = my_pygui.confirm(text='Do You see the target?\n'
                                                ' If not chose \'Drag first\' and drag island to see the target',
@@ -331,8 +324,7 @@ class Adventure:
                 if general['init'] is True:
                     finded = my_pygui.locateOnScreen('data/{}/loc_reference.png'.format(self.name), confidence=0.9)
                     if not finded:
-                        print('data/{}/loc_reference.png not found on screen'.format(self.name))
-                        raise Exception
+                        raise Exception('data/{}/loc_reference.png not found on screen'.format(self.name))
                     reference = Point.from_point(my_pygui.center(finded))
                     my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
                     general['relative_coordinates'] = (get_click.get('DOUBLE') - reference).get()
@@ -402,16 +394,14 @@ class Adventure:
                 elif action['type'] in 'move':
                     my_pygui.click(self.coordinations['move'].get())
                 else:
-                    print('Unexpected action type ')
-                    raise Exception
+                    raise Exception('Unexpected action type ')
                 if 'drag' in general:
                     my_pygui.moveTo((self.coordinations['center_ref'] - Point.from_list(general['drag'])).get())
                     my_pygui.dragTo((self.coordinations['center_ref'] + Point.from_list(general['drag'])).get())
                 if general['init'] is True:
                     loc = my_pygui.locateOnScreen('data/{}/loc_reference.png'.format(self.name), confidence=0.85)
                     if loc is None:
-                        print('data/{}/loc_reference.png not find'.format(self.name))
-                        raise Exception
+                        raise Exception('data/{}/loc_reference.png not find'.format(self.name))
                     reference = Point.from_point(my_pygui.center(loc))
                     target = Point.from_list(general['relative_coordinates']) + reference
                 else:
@@ -433,21 +423,18 @@ class Adventure:
         my_pygui.click(self.coordinations['book'].get())
         loc = my_pygui.locateOnScreen('resource/start_adventure.png', confidence=0.9)
         if loc is None:
-            print('Button not found.')
-            raise Exception
+            raise Exception('Button not found.')
         else:
             my_pygui.click(my_pygui.center(loc))
         loc = my_pygui.locateOnScreen('resource/confirm.png', confidence=0.9)
         if loc is None:
-            print('Button not found.')
-            raise Exception
+            raise Exception('Button not found.')
         else:
             my_pygui.click(my_pygui.center(loc))
         time.sleep(20)
         loc = my_pygui.locateOnScreen('data/{}/return_ref.png'.format(self.name), confidence=0.9)
         if loc is None:
-            print('Button not found.')
-            raise Exception
+            raise Exception('Button not found.')
         else:
             my_pygui.click((Point.from_point(my_pygui.center(loc)) + Point(160, 234)).get())
 
