@@ -60,10 +60,14 @@ class Adventure:
         general_loc = 100 * [None]
         for general_type, ids in generals.items():
             star_window_corner = self.coordinations['specialists'] - Point(137, 400)
-            locations = my_pygui.locateAllOnScreen('resource/{}.png'.format(general_type),
-                                                   region=(star_window_corner.x, star_window_corner.y, 600, 400),
-                                                   confidence=0.95)
+            locations = list(my_pygui.locateAllOnScreen('resource/{}.png'.format(general_type),
+                                                        region=(star_window_corner.x, star_window_corner.y, 600, 400),
+                                                        confidence=0.95))
+            locations.extend(my_pygui.locateAllOnScreen('resource/{}_.png'.format(general_type),
+                                                        region=(star_window_corner.x, star_window_corner.y, 600, 400),
+                                                        confidence=0.95))
             locations = [my_pygui.center(loc) for loc in locations]
+            locations = sorted(locations, key=lambda i: i[0]*10000+i[1])
             for id_ in ids:
                 general_loc[id_] = locations.pop(0)
         while True:
@@ -136,6 +140,7 @@ class Adventure:
                     my_pygui.write('{}'.format(quantity))
             my_pygui.click(self.coordinations['confirm_army'].get())
             time.sleep(3)
+            """verify"""
             x, y = self.coordinations['army_sum'].get()
             army_sum_screen = my_pygui.screenshot(region=(x, y, 314, 14))
             if ocr.assigned_unit_sum(army_sum_screen) == sum(army.values()):
@@ -157,6 +162,7 @@ class Adventure:
                                       region=(star_window_corner.x, star_window_corner.y, 600, 400),
                                       confidence=0.95)
         if loc is None:
+            """selecting busy general - useful to preform retreat"""
             loc = my_pygui.locateOnScreen('resource/{}_.png'.format(general),
                                           region=(star_window_corner.x, star_window_corner.y, 600, 400),
                                           confidence=0.95)
