@@ -186,7 +186,7 @@ class Adventure:
         if wait_til_active:
             while True:
                 finded = my_pygui.locateOnScreen('resource/{}.png'.format(general_type),
-                                                 region=(loc.x-25, loc.y-25, 50, 50),
+                                                 region=(loc.x-30, loc.y-30, 60, 60),
                                                  confidence=0.95)
                 if finded:
                     break
