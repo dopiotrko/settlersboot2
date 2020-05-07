@@ -1,5 +1,6 @@
 import os
 import time
+from enum import Enum
 import pyautogui
 
 
@@ -27,3 +28,9 @@ def wait(delay=0, info=''):
         time.sleep(1)
         print('\r{} in {}:{:02}'.format(info, int(count / 60), count % 60), end='', flush=True)
     print('')
+
+
+class Mode(Enum):
+    play = 1
+    teach_co = 2
+    teach_delay = 3
