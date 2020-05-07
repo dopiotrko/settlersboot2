@@ -130,8 +130,9 @@ class Fix:
         self.save()
 
 
-Fix('wiktor').insert_action(33, 0)
+# Fix('wiktor').insert_action(33, 0)
 # Fix('CR').insert_action(7, 6, 'unload')
+
 
 class AddMyPyGui:
     @classmethod

@@ -9,11 +9,18 @@ Prerequisites:
 
 Python-tesseract requires Python 2.7 or Python 3.5+
 
-You will need the Python Imaging Library (PIL) (or the Pillow fork). Under Debian/Ubuntu, this is the package python-imaging or python3-imaging.
+You will need the Python Imaging Library (PIL) (or the Pillow fork). Under Debian/Ubuntu,
+this is the package python-imaging or python3-imaging.
 
-Install Google Tesseract OCR (additional info how to install the engine on Linux, Mac OSX and Windows). You must be able to invoke the tesseract command as tesseract. If this isn’t the case, for example because tesseract isn’t in your PATH, you will have to change the “tesseract_cmd” variable pytesseract.pytesseract.tesseract_cmd. Under Debian/Ubuntu you can use the package tesseract-ocr. For Mac OS users. please install homebrew package tesseract.
+Install Google Tesseract OCR (additional info how to install the engine on Linux, Mac OSX and Windows).
+You must be able to invoke the tesseract command as tesseract.
+If this isn’t the case, for example because tesseract isn’t in your PATH,
+you will have to change the “tesseract_cmd” variable pytesseract.pytesseract.tesseract_cmd.
+Under Debian/Ubuntu you can use the package tesseract-ocr.
+For Mac OS users. please install homebrew package tesseract.
 
-Note: Make sure that you also have installed tessconfigs and configs from tesseract-ocr/tessconfigs or via the OS package manager.
+Note: Make sure that you also have installed tessconfigs and configs from tesseract-ocr/tessconfigs or via the
+OS package manager.
 
 Installing via pip:
 Check the pytesseract package page for more information.
@@ -125,9 +132,10 @@ class Adventure:
         else:
             my_pygui.click(my_pygui.center(loc))
 
-    def set_army(self, army):
+    def set_army(self, general_loc, general):
         logging.info('set_army')
         count = 0
+        army = general['army']
         while True:
             logging.info('Setting army, try {}'.format(count+1))
             my_pygui.click(self.coordinations['unload'].get())
@@ -145,6 +153,27 @@ class Adventure:
             my_pygui.click(self.coordinations['confirm_army'].get())
             time.sleep(3)
             """verify"""
+            x_t, y_t = self.coordinations['move'].get()
+            finded, re_selected = False, False
+            while not finded:
+                for i in range(3):
+                    finded = my_pygui.locateOnScreen('resource/transfer.png',
+                                                     region=(x_t-25, y_t-25, 50, 50),
+                                                     confidence=0.95)
+                    if finded:
+                        break
+                    else:
+                        logging.warning('General not ready yet. Trying again after 3 sec')
+                        my.wait(3, 'Trying again')
+                else:
+                    """re selecting only once"""
+                    if not re_selected:
+                        logging.warning('General not ready after 3 tryes. Re selecting')
+                        self.select_general_by_loc(general_loc, general['type'], wait_til_active=False)
+                        re_selected = True
+                    else:
+                        logging.error('General not ready after re select. Abort')
+                        raise Exception('General not ready after re select.')
             x, y = self.coordinations['army_sum'].get()
             army_sum_screen = my_pygui.screenshot(region=(x, y, 314, 14))
             if ocr.assigned_unit_sum(army_sum_screen) == sum(army.values()):
@@ -218,10 +247,9 @@ class Adventure:
         locations_of_gens_of_that_type = self.get_generals_by_type(general_type, general_name)
         generals_of_type = list(zip(list_of_dicts_with_generals_of_that_type, locations_of_gens_of_that_type))
         generals_of_type.reverse()
-        for item_no, (to_send, available) in enumerate(generals_of_type):
-            my_pygui.click(available)
-            self.set_army(to_send['army'])
-            self.select_general_by_loc(available, general_type, wait_til_active=False)
+        for item_no, (gen_to_send, available_gen_loc) in enumerate(generals_of_type):
+            my_pygui.click(available_gen_loc)
+            self.set_army(available_gen_loc, gen_to_send)
             my_pygui.click(self.coordinations['send'].get())
             my_pygui.click(self.coordinations['send_confirm'].get())
             time.sleep(2)
@@ -314,26 +342,27 @@ class Adventure:
             # TODO temporary way to focus window/to be changed
             my_pygui.click(focus_temp_loc.get())
             generals_loc = self.init_locate_generals(start)
-            for general in action['generals']:
+            for i, general in enumerate(action['generals']):
                 t_start = time.time()
+                general_loc = generals_loc[general['id']]
                 if 'retreat' in general:
-                    self.select_general_by_loc(generals_loc[general['id']], general['type'], wait_til_active=False)
+                    my.wait(5, 'Re selecting general')
+                    self.select_general_by_loc(general_loc, general['type'], wait_til_active=False)
                     text = 'Click when You want to retreat general'
                     my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
                     my_pygui.click(self.coordinations['retreat'].get())
                     general['delay'] = int(time.time() - t_start)
                     continue
                 else:
-                    self.select_general_by_loc(generals_loc[general['id']], general['type'])
+                    """only first general is verified if is active"""
+                    wait_til_active = i == 0
+                    self.select_general_by_loc(general_loc, general['type'], wait_til_active=wait_til_active)
                 if not general['preset']:
-                    self.set_army(general['army'])
+                    self.set_army(general_loc, general)
                     if action['type'] in 'unload':
                         continue
                     elif action['type'] in 'load':
                         continue
-                    else:
-                        # TODO replace by: check if general confirmation succeed
-                        self.select_general_by_loc(generals_loc[general['id']],  general['type'], wait_til_active=False)
                 if action['type'] in 'attack':
                     my_pygui.click(self.coordinations['attack'].get())
                     text = 'Make Your attack no {}'.format(action['no'])
@@ -399,21 +428,22 @@ class Adventure:
                         action['delay'] = int(time.time() - t_start)
 
             print(action['no'], time.asctime(time.localtime(time.time())))
-            for general in action['generals']:
+            for i, general in enumerate(action['generals']):
+                general_loc = generals_loc[general['id']]
                 if 'retreat' in general:
                     my.wait(5, 'Re selecting general')
-                    self.select_general_by_loc(generals_loc[general['id']],  general['type'], wait_til_active=False)
+                    self.select_general_by_loc(general_loc,  general['type'], wait_til_active=False)
                     my.wait(general['delay'], 'General retreat')
                     my_pygui.click(self.coordinations['retreat'].get())
                     continue
                 else:
-                    self.select_general_by_loc(generals_loc[general['id']], general['type'])
+                    """only first general is verified if is active"""
+                    wait_til_active = i == 0
+                    self.select_general_by_loc(general_loc, general['type'], wait_til_active=wait_til_active)
                 if not general['preset']:
-                    self.set_army(general['army'])
-                    # TODO replace by: check if general confirmation succeed
+                    self.set_army(general_loc, general)
                     if action['type'] in ('unload', 'load'):
                         continue
-                    self.select_general_by_loc(generals_loc[general['id']],  general['type'], wait_til_active=False)
                 if action['type'] in 'attack':
                     my_pygui.click(self.coordinations['attack'].get())
                 elif action['type'] in 'move':
