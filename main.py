@@ -71,10 +71,10 @@ class Adventure:
                 star_window_cor = self.coordinations['specialists'] - Point(137, 400)
                 locations = list(my_pygui.locateAllOnScreen('resource/{}.png'.format(general_type),
                                                             region=(star_window_cor.x, star_window_cor.y, 600, 400),
-                                                            confidence=0.95))
+                                                            confidence=0.97))
                 locations.extend(my_pygui.locateAllOnScreen('resource/{}_.png'.format(general_type),
                                                             region=(star_window_cor.x, star_window_cor.y, 600, 400),
-                                                            confidence=0.95))
+                                                            confidence=0.97))
                 locations = [my_pygui.center(loc) for loc in locations]
                 locations = sorted(locations, key=lambda i: i[0]*10000+i[1])
                 for id_ in ids:
@@ -195,12 +195,12 @@ class Adventure:
         star_window_corner = self.coordinations['specialists'] - Point(137, 400)
         loc = my_pygui.locateOnScreen('resource/{}.png'.format(general),
                                       region=(star_window_corner.x, star_window_corner.y, 600, 400),
-                                      confidence=0.95)
+                                      confidence=0.97)
         if loc is None:
             """selecting busy general - useful to preform retreat"""
             loc = my_pygui.locateOnScreen('resource/{}_.png'.format(general),
                                           region=(star_window_corner.x, star_window_corner.y, 600, 400),
-                                          confidence=0.95)
+                                          confidence=0.97)
             if loc is None:
                 raise Exception('No general {} found.'.format(general))
         my_pygui.click(my_pygui.center(loc))
@@ -217,7 +217,7 @@ class Adventure:
             while True:
                 finded = my_pygui.locateOnScreen('resource/{}.png'.format(general_type),
                                                  region=(loc.x-30, loc.y-30, 60, 60),
-                                                 confidence=0.95)
+                                                 confidence=0.97)
                 if finded:
                     break
                 else:
@@ -239,7 +239,7 @@ class Adventure:
         star_window_corner = self.coordinations['specialists'] - Point(137, 400)
         locations = my_pygui.locateAllOnScreen('resource/{}.png'.format(general_type),
                                                region=(star_window_corner.x, star_window_corner.y, 600, 400),
-                                               confidence=0.95)
+                                               confidence=0.97)
         return [my_pygui.center(loc) for loc in locations]
 
     def send_generals_by_type(self, general_type, list_of_dicts_with_generals_of_that_type, general_name=None):
@@ -273,8 +273,9 @@ class Adventure:
         my_pygui.click(self.coordinations['specialists'].get())
         my_pygui.click(self.coordinations['star_txt'].get())
         my_pygui.hotkey('ctrl', 'a')
-        my_pygui.write('general')
+        my_pygui.write('genera')
         my_pygui.click(self.coordinations['first_general'].get())
+        time.sleep(.5)
         for key, val in army.items():
             if val:
                 logging.info('Checking available {}'.format(key))

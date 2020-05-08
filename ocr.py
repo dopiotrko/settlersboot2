@@ -39,11 +39,13 @@ def available_army(img):
 
 
 def available_unit(img):
+    logging.info('available_unit')
     img = image_adjusting(img)
     custom_config = r'-c tessedit_char_whitelist="1234567890/ " --psm 7'
     d = pytesseract.image_to_data(img, output_type=pytesseract.Output.DICT, config=custom_config)
     (x, y, w, h) = (d['left'][-1], d['top'][-1], d['width'][-1], d['height'][-1])
     roi = img[y-1:y + h+1, x + 20:x + w]
+    logging.info(d['text'])
     custom_config = r'--oem 3 --psm 7 outputbase digits'
     unit = int(pytesseract.image_to_string(roi, config=custom_config))
     logging.info('Available units: {}'.format(unit))
