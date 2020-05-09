@@ -3,6 +3,13 @@ import cv2 as cv
 import logging
 import numpy as np
 import time
+import gettext
+import os
+
+localedir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'locale')
+lang_en = gettext.translation('settlersbot', localedir, fallback=True, languages=['en'])
+lang_pl = gettext.translation('settlersbot', localedir, fallback=True, languages=['pl'])
+_ = lang_en.gettext
 
 
 def image_adjusting(img):
@@ -71,7 +78,7 @@ def assigned_unit(img):
 
 def assigned_unit_sum(img):
     img = image_adjusting(img)
-    custom_config = r'-c tessedit_char_whitelist="1234567890 " --psm 7'
+    custom_config = _(r'-c -l lang --psm 7')
     text = pytesseract.image_to_string(img, config=custom_config).split()
     for word in text:
         if word.isdigit():

@@ -24,7 +24,6 @@ OS package manager.
 
 Installing via pip:
 Check the pytesseract package page for more information.
-$ (env)> pip install pillow
 $ (env)> pip install pytesseract
 """
 
