@@ -75,7 +75,14 @@ class Adventure:
                                                             region=(star_window_cor.x, star_window_cor.y, 600, 400),
                                                             confidence=0.97))
                 locations = [my_pygui.center(loc) for loc in locations]
-                locations = sorted(locations, key=lambda i: i[0]*10000+i[1])
+                locations.sort(key=lambda i: i[1])
+                y_standardized = locations[0][1]
+                for loc in locations:
+                    if y_standardized - loc[1] < 10:
+                        loc[1] = y_standardized
+                    else:
+                        y_standardized = loc[1]
+                locations.sort(key=lambda i: i[1]*10000+i[0])
                 for id_ in ids:
                     generals_loc[id_] = locations.pop(0)
             while True:
