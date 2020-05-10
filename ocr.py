@@ -78,7 +78,7 @@ def assigned_unit(img):
 
 def assigned_unit_sum(img):
     img = image_adjusting(img)
-    custom_config = _(r'-c -l lang --psm 7')
+    custom_config = r'-l {} --psm 7'.format(_('lang'))
     text = pytesseract.image_to_string(img, config=custom_config).split()
     for word in text:
         if word.isdigit():

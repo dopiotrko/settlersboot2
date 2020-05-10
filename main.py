@@ -151,7 +151,7 @@ class Adventure:
                     my_pygui.click(loc)
                     my_pygui.write('{}'.format(quantity))
             my_pygui.click(self.coordinations['confirm_army'].get())
-            time.sleep(3)
+            time.sleep(4)
             """verify"""
             x_t, y_t = self.coordinations['move'].get()
             finded, re_selected = False, False
@@ -159,8 +159,9 @@ class Adventure:
                 for i in range(3):
                     finded = my_pygui.locateOnScreen('resource/transfer.png',
                                                      region=(x_t-25, y_t-25, 50, 50),
-                                                     confidence=0.95)
+                                                     confidence=0.97)
                     if finded:
+                        logging.info('General ready = transfer button active')
                         break
                     else:
                         logging.warning('General not ready yet. Trying again after 3 sec')

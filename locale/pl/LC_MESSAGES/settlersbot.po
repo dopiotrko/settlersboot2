@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
 
-#: ocr.py:81
-msgid "-c -l lang --psm 7"
-msgstr "-c -l pol --psm 7"
+#: ocr.py:82
+msgid "lang"
+msgstr "pol"
 
