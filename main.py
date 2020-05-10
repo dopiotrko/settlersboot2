@@ -74,15 +74,15 @@ class Adventure:
                 locations.extend(my_pygui.locateAllOnScreen('resource/{}_.png'.format(general_type),
                                                             region=(star_window_cor.x, star_window_cor.y, 600, 400),
                                                             confidence=0.97))
-                locations = [my_pygui.center(loc) for loc in locations]
-                locations.sort(key=lambda i: i[1])
-                y_standardized = locations[0][1]
+                locations = [Point.from_box_center(loc) for loc in locations]
+                locations.sort(key=lambda i: i.y)
+                y_standardized = locations[0].y
                 for loc in locations:
-                    if y_standardized - loc[1] < 10:
-                        loc[1] = y_standardized
+                    if y_standardized - loc.y < 10:
+                        loc.y = y_standardized
                     else:
-                        y_standardized = loc[1]
-                locations.sort(key=lambda i: i[1]*10000+i[0])
+                        y_standardized = loc.y
+                locations.sort(key=lambda i: i.y*10000+i.x)
                 for id_ in ids:
                     generals_loc[id_] = locations.pop(0)
             while True:
@@ -230,7 +230,7 @@ class Adventure:
                 else:
                     logging.warning('no active general of type {} found in this location. Trying again after 3 sec')
                     my.wait(3, 'Trying again')
-        my_pygui.click(loc)
+        my_pygui.click(loc.get())
 
     def get_generals_by_type(self, general_type, general_name=None):
         logging.info('get_generals_by_type')
@@ -546,7 +546,7 @@ class Adventure:
 
 
 # Configure().run()
-adventure = 'the_nords'
+adventure = 'wiktor'
 TN = Adventure(adventure)
 # teach_adventure(adventure, 18, 18)
 # TN.start_adventure(delay=3)
@@ -554,9 +554,9 @@ TN = Adventure(adventure)
 # go_to_adventure(adventure, 10)
 # settlers.make_adventure(start=18, stop=19)
 # TN.send_to_adventure(first=0, last=0)
-# TN.send_to_adventure(first=2, last=10)
+# TN.send_to_adventure(first=1, last=2)
 # TN.go_to_adventure(1)
-TN.make_adventure(delay=2, start=11, stop=111, mode=my.Mode.play)
+TN.make_adventure(delay=2, start=16, stop=16, mode=my.Mode.play)
 # end_adventure(adventure, 60)
 
 
