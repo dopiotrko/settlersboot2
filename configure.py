@@ -44,7 +44,7 @@ class Configure:
         my_pygui.alert(text=text, title='Configuration', button='OK')
         coordinations['r_up'] = get_click.get()
         region = (coordinations['r_up'] - Point(116, 46)).get() + (44, 44)
-        loc = my_pygui.locateOnScreen('resource/army.png', region=region, confidence=.95)
+        loc = my_pygui.locateOnScreen('resource/army.png', region=region, confidence=.95, center=False)
         coordinations['recruit'] = Point.from_list(loc) + Point(74, 26)
         coordinations['bowmen'] = Point.from_list(loc) + Point(199, 26)
         coordinations['militia'] = Point.from_list(loc) + Point(324, 26)

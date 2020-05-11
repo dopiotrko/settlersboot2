@@ -1,9 +1,12 @@
 import pyautogui
 import logging
 import sys
+from my_types import Point, Box
+
 if sys.platform == 'win32':
     # this is to fix memory liking in windows, in original pyautogui.pixel function
     from ctypes import windll
+
 
     def _pixel(x, y):
         hdc = windll.user32.GetDC(0)
@@ -14,19 +17,16 @@ if sys.platform == 'win32':
         windll.user32.ReleaseDC(0, hdc)
         return r, g, b
 
+
     pyautogui.pixel = _pixel
+
 
     def _pixelMatchesColor(x, y, expectedRGBColor, tolerance=0):
         pix = _pixel(x, y)
-        if len(pix) == 3 or len(expectedRGBColor) == 3:  # RGB mode
-            r, g, b = pix[:3]
-            exR, exG, exB = expectedRGBColor[:3]
-            return (abs(r - exR) <= tolerance) and (abs(g - exG) <= tolerance) and (abs(b - exB) <= tolerance)
-        elif len(pix) == 4 and len(expectedRGBColor) == 4:  # RGBA mode
-            r, g, b, a = pix
-            exR, exG, exB, exA = expectedRGBColor
-            return (abs(r - exR) <= tolerance) and (abs(g - exG) <= tolerance) and (abs(b - exB) <= tolerance) and (
-                        abs(a - exA) <= tolerance)
+        r, g, b = pix[:3]
+        exR, exG, exB = expectedRGBColor[:3]
+        return (abs(r - exR) <= tolerance) and (abs(g - exG) <= tolerance) and (abs(b - exB) <= tolerance)
+
 
     pyautogui.pixelMatchesColor = _pixelMatchesColor
 
@@ -48,19 +48,39 @@ class Write:
 class Center:
     def __call__(self, *args, **kwargs):
         logging.info('Center: {}, {}'.format(args, kwargs))
-        return pyautogui.center(*args, **kwargs)
+        return Point(args[0].x + int(args[0].w / 2), args[0].y + int(args[0].h / 2))
 
 
 class Locateallonscreen:
     def __call__(self, *args, **kwargs):
+        center_ = True
+        if 'center' in kwargs:
+            center_ = kwargs.pop('center')
         logging.info('Locateallonscreen: {}, {}'.format(args, kwargs))
-        return pyautogui.locateAllOnScreen(*args, **kwargs)
+        boxes = pyautogui.locateAllOnScreen(*args, **kwargs)
+        if boxes:
+            if center_:
+                return [Point.from_box_center(box) for box in boxes]
+            else:
+                return [Box.from_box(box) for box in boxes]
+        else:
+            return None
 
 
 class Locateonscreen:
     def __call__(self, *args, **kwargs):
+        center_ = True
+        if 'center' in kwargs:
+            center_ = kwargs.pop('center')
         logging.info('Locateonscreen: {}, {}'.format(args, kwargs))
-        return pyautogui.locateOnScreen(*args, **kwargs)
+        box = pyautogui.locateOnScreen(*args, **kwargs)
+        if box:
+            if center_:
+                return Point.from_box_center(box)
+            else:
+                return Box.from_box(box)
+        else:
+            return None
 
 
 class Pixelmatchescolor:

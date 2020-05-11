@@ -36,7 +36,7 @@ import my
 import listener
 import ocr
 import os
-from my_types import Point
+from my_types import Point, Mode
 logging.basicConfig(level=logging.INFO)
 STAROPEN = False
 
@@ -78,7 +78,7 @@ class Adventure:
                 locations.sort(key=lambda i: i.y)
                 y_standardized = locations[0].y
                 for loc in locations:
-                    if y_standardized - loc.y < 10:
+                    if abs(y_standardized - loc.y) < 10:
                         loc.y = y_standardized
                     else:
                         y_standardized = loc.y
@@ -127,17 +127,17 @@ class Adventure:
         if loc is None:
             raise Exception('No adventures {} found.'.format(self.name))
         else:
-            my_pygui.click(my_pygui.center(loc))
+            my_pygui.click(loc.get())
         loc = my_pygui.locateOnScreen('resource/start_adventure.png', confidence=0.9)
         if loc is None:
             raise Exception('Button not found.')
         else:
-            my_pygui.click(my_pygui.center(loc))
+            my_pygui.click(loc.get())
         loc = my_pygui.locateOnScreen('resource/confirm.png'.format(self.name), confidence=0.9)
         if loc is None:
             raise Exception('Button not found.')
         else:
-            my_pygui.click(my_pygui.center(loc))
+            my_pygui.click(loc.get())
 
     def set_army(self, general_loc, general):
         logging.info('set_army')
@@ -193,26 +193,6 @@ class Adventure:
                 if count >= 3:
                     raise Exception('Could not set army in 3 tryes')
 
-    def select_general(self, general):
-        logging.info('select_general')
-
-        my_pygui.click(self.coordinations['star'].get())
-        my_pygui.click(self.coordinations['specialists'].get())
-
-        star_window_corner = self.coordinations['specialists'] - Point(137, 400)
-        loc = my_pygui.locateOnScreen('resource/{}.png'.format(general),
-                                      region=(star_window_corner.x, star_window_corner.y, 600, 400),
-                                      confidence=0.97)
-        if loc is None:
-            """selecting busy general - useful to preform retreat"""
-            loc = my_pygui.locateOnScreen('resource/{}_.png'.format(general),
-                                          region=(star_window_corner.x, star_window_corner.y, 600, 400),
-                                          confidence=0.97)
-            if loc is None:
-                raise Exception('No general {} found.'.format(general))
-        my_pygui.click(my_pygui.center(loc))
-        return my_pygui.center(loc)
-
     def select_general_by_loc(self, loc, general_type, wait_til_active=True):
         logging.info('select_general_by_loc')
 
@@ -247,7 +227,7 @@ class Adventure:
         locations = my_pygui.locateAllOnScreen('resource/{}.png'.format(general_type),
                                                region=(star_window_corner.x, star_window_corner.y, 600, 400),
                                                confidence=0.97)
-        return [my_pygui.center(loc) for loc in locations]
+        return locations
 
     def send_generals_by_type(self, general_type, list_of_dicts_with_generals_of_that_type, general_name=None):
         logging.info('send_generals_by_type')
@@ -256,7 +236,7 @@ class Adventure:
         generals_of_type = list(zip(list_of_dicts_with_generals_of_that_type, locations_of_gens_of_that_type))
         generals_of_type.reverse()
         for item_no, (gen_to_send, available_gen_loc) in enumerate(generals_of_type):
-            my_pygui.click(available_gen_loc)
+            my_pygui.click(available_gen_loc.get())
             self.set_army(available_gen_loc, gen_to_send)
             my_pygui.click(self.coordinations['send'].get())
             my_pygui.click(self.coordinations['send_confirm'].get())
@@ -329,9 +309,9 @@ class Adventure:
         if loc is None:
             raise Exception('No active adventure {} found on the screen.'.format(self.name))
         else:
-            loc = my_pygui.center(loc)
-            my_pygui.click(loc)
-            my_pygui.click(loc.x, loc.y + 15)
+            x, y = loc.get()
+            my_pygui.click(x, y)
+            my_pygui.click(x, y + 15)
 
     def teach_adventure(self, start=1, stop=1000):
         logging.info('teach_adventure')
@@ -393,9 +373,8 @@ class Adventure:
                     finded = my_pygui.locateOnScreen('data/{}/loc_reference.png'.format(self.name), confidence=0.9)
                     if not finded:
                         raise Exception('data/{}/loc_reference.png not found on screen'.format(self.name))
-                    reference = Point.from_point(my_pygui.center(finded))
                     my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
-                    general['relative_coordinates'] = (get_click.get('DOUBLE') - reference).get()
+                    general['relative_coordinates'] = (get_click.get('DOUBLE') - finded).get()
                 else:
                     my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
                     xcr, ycr = self.coordinations['center_ref'].get()
@@ -408,9 +387,9 @@ class Adventure:
             with open(my.get_new_filename(self.name), 'w') as f:
                 json.dump(self.data, f, indent=2)
 
-    def make_adventure(self, delay=0, start=1, stop=1000, mode=my.Mode.play):
+    def make_adventure(self, delay=0, start=1, stop=1000, mode=Mode.play):
         logging.info('make_adventure')
-        assert(isinstance(mode, my.Mode))
+        assert(isinstance(mode, Mode))
         my.wait(delay, 'Making adventure')
         # TODO temporary way to focus window/to be changed
         focus_temp_loc = (self.coordinations['star'] - Point(0, 40))
@@ -423,9 +402,9 @@ class Adventure:
             if not(start <= action['no'] <= stop):
                 continue
             if not start == action['no']:
-                if mode == my.Mode.play:
+                if mode == Mode.play:
                     my.wait(action['delay'], 'Next action ({})in'.format(action['no']))
-                elif mode == my.Mode.teach_delay:
+                elif mode == Mode.teach_delay:
                     t_start = time.time()
                     text = 'Click OK when you want to do {1} ({0}) with generals:\n'.format(action['no'],
                                                                                             action['type'])
@@ -433,7 +412,7 @@ class Adventure:
                         text += '{:3} - {:10}\n'.format(gen['id'], gen['type'])
                     my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
                     action['delay'] = int(time.time() - t_start)
-                elif mode == my.Mode.teach_co:
+                elif mode == Mode.teach_co:
                     text = 'Click OK when You want to make Your action ({}) no {}' \
                         .format(action['type'], action['no'])
                     my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
@@ -445,10 +424,10 @@ class Adventure:
                 if 'retreat' in general:
                     my.wait(5, 'Re selecting general')
                     self.select_general_by_loc(general_loc,  general['type'], wait_til_active=False)
-                    if mode == my.Mode.play or mode == my.Mode.teach_co:
+                    if mode == Mode.play or mode == Mode.teach_co:
                         my.wait(general['delay'], 'General retreat')
                         my_pygui.click(self.coordinations['retreat'].get())
-                    elif mode == my.Mode.teach_delay:
+                    elif mode == Mode.teach_delay:
                         text = 'Click when You want to retreat general'
                         my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
                         my_pygui.click(self.coordinations['retreat'].get())
@@ -470,11 +449,11 @@ class Adventure:
                     text = 'Move your army'
                 else:
                     raise Exception('Unexpected action type ')
-                if mode == my.Mode.play or mode == my.Mode.teach_delay:
+                if mode == Mode.play or mode == Mode.teach_delay:
                     if 'drag' in general:
                         my_pygui.moveTo((self.coordinations['center_ref'] - Point.from_list(general['drag'])).get())
                         my_pygui.dragTo((self.coordinations['center_ref'] + Point.from_list(general['drag'])).get())
-                elif mode == my.Mode.teach_co:
+                elif mode == Mode.teach_co:
                     answer = my_pygui.confirm(text='Do You see the target?\n'
                                                    ' If not chose \'Drag first\' and drag island to see the target',
                                               title='Teaching Adventure {}'.format(self.name),
@@ -488,37 +467,36 @@ class Adventure:
                     finded = my_pygui.locateOnScreen('data/{}/loc_reference.png'.format(self.name), confidence=0.85)
                     if not finded:
                         raise Exception('data/{}/loc_reference.png not found on screen'.format(self.name))
-                    reference = Point.from_point(my_pygui.center(finded))
-                    if mode == my.Mode.teach_co:
+                    if mode == Mode.teach_co:
                         my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
-                        general['relative_coordinates'] = (get_click.get('DOUBLE') - reference).get()
-                    elif mode == my.Mode.play or mode == my.Mode.teach_delay:
-                        target = Point.from_list(general['relative_coordinates']) + reference
+                        general['relative_coordinates'] = (get_click.get('DOUBLE') - finded).get()
+                    elif mode == Mode.play or mode == Mode.teach_delay:
+                        target = Point.from_list(general['relative_coordinates']) + finded
                         if 'delay' in general:
-                            if mode == my.Mode.play:
+                            if mode == Mode.play:
                                 my.wait(general['delay'], 'Next general attacks')
-                            elif mode == my.Mode.teach_delay:
+                            elif mode == Mode.teach_delay:
                                 my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
                                 general['delay'] = int(time.time() - t_0)
                         my_pygui.click(target.get(), clicks=2, interval=0.25)
                 else:
-                    if mode == my.Mode.play or mode == my.Mode.teach_delay:
+                    if mode == Mode.play or mode == Mode.teach_delay:
                         target = self.coordinations['center_ref'] - Point.from_list(general['relative_coordinates'])
                         my_pygui.moveTo(target.get())
                         if 'delay' in general:
-                            if mode == my.Mode.play:
+                            if mode == Mode.play:
                                 my.wait(general['delay'], 'Next general attacks')
-                            elif mode == my.Mode.teach_delay:
+                            elif mode == Mode.teach_delay:
                                 my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
                                 general['delay'] = int(time.time() - t_0)
                         my_pygui.click(target.get(), clicks=2, interval=0.25)
-                    elif mode == my.Mode.teach_co:
+                    elif mode == Mode.teach_co:
                         my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
                         xcr, ycr = self.coordinations['center_ref'].get()
                         xrc, yrc = get_click.get('DOUBLE').get()
                         general['relative_coordinates'] = [xcr - xrc, ycr - yrc]
 
-            if mode == my.Mode.teach_delay or mode == my.Mode.teach_co:
+            if mode == Mode.teach_delay or mode == Mode.teach_co:
                 with open(my.get_new_filename(self.name), 'w') as f:
                     json.dump(self.data, f, indent=2)
 
@@ -531,18 +509,18 @@ class Adventure:
         if loc is None:
             raise Exception('Button not found.')
         else:
-            my_pygui.click(my_pygui.center(loc))
+            my_pygui.click(loc.get())
         loc = my_pygui.locateOnScreen('resource/confirm.png', confidence=0.9)
         if loc is None:
             raise Exception('Button not found.')
         else:
-            my_pygui.click(my_pygui.center(loc))
+            my_pygui.click(loc.get())
         time.sleep(20)
         loc = my_pygui.locateOnScreen('data/{}/return_ref.png'.format(self.name), confidence=0.9)
         if loc is None:
             raise Exception('Button not found.')
         else:
-            my_pygui.click((Point.from_point(my_pygui.center(loc)) + Point(160, 234)).get())
+            my_pygui.click((loc + Point(160, 234)).get())
 
 
 # Configure().run()
@@ -556,7 +534,7 @@ TN = Adventure(adventure)
 # TN.send_to_adventure(first=0, last=0)
 # TN.send_to_adventure(first=1, last=2)
 # TN.go_to_adventure(1)
-TN.make_adventure(delay=2, start=16, stop=16, mode=my.Mode.play)
+TN.make_adventure(delay=2, start=18, stop=116, mode=Mode.play)
 # end_adventure(adventure, 60)
 
 

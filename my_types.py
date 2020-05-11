@@ -1,3 +1,6 @@
+from enum import Enum
+
+
 class Point:
     def __init__(self, x=0, y=0):
         self.x = int(x)
@@ -30,3 +33,27 @@ class Point:
 
     def get(self):
         return self.x, self.y
+
+    def __repr__(self):
+        return 'Point(x={}, y={})'.format(self.x, self.y)
+
+
+class Box:
+    def __init__(self, x=0, y=0, w=0, h=0):
+        self.x = int(x)
+        self.y = int(y)
+        self.w = int(w)
+        self.h = int(h)
+
+    @classmethod
+    def from_box(cls, box):
+        return cls(box.left, box.top, box.width, box.height)
+
+    def __repr__(self):
+        return 'Box(x={}, y={}, w={}, h={})'.format(self.x, self.y, self.w, self.h)
+
+
+class Mode(Enum):
+    play = 1
+    teach_co = 2
+    teach_delay = 3
