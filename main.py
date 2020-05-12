@@ -74,7 +74,9 @@ class Adventure:
                 locations.extend(my_pygui.locateAllOnScreen('resource/{}_.png'.format(general_type),
                                                             region=(star_window_cor.x, star_window_cor.y, 600, 400),
                                                             confidence=0.97))
-                locations = [Point.from_box_center(loc) for loc in locations]
+                # TODO necessary if part of army sent back. Temporary solution.
+                if not locations:
+                    continue
                 locations.sort(key=lambda i: i.y)
                 y_standardized = locations[0].y
                 for loc in locations:
@@ -524,17 +526,17 @@ class Adventure:
 
 
 # Configure().run()
-adventure = 'wiktor'
+adventure = 'wild_mary'
 TN = Adventure(adventure)
 # teach_adventure(adventure, 18, 18)
 # TN.start_adventure(delay=3)
 # settlers.send_to_adventure(first=0, last=9)
 # go_to_adventure(adventure, 10)
 # settlers.make_adventure(start=18, stop=19)
-# TN.send_to_adventure(first=0, last=0)
+# TN.send_to_adventure(first=0, last=111)
 # TN.send_to_adventure(first=1, last=2)
 # TN.go_to_adventure(1)
-TN.make_adventure(delay=2, start=18, stop=116, mode=Mode.play)
+TN.make_adventure(delay=2, start=10, stop=137, mode=Mode.play)
 # end_adventure(adventure, 60)
 
 
