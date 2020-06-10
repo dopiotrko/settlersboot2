@@ -315,80 +315,6 @@ class Adventure:
             my_pygui.click(x, y)
             my_pygui.click(x, y + 15)
 
-    def teach_adventure(self, start=1, stop=1000):
-        logging.info('teach_adventure')
-
-        get_click = listener.GetClick()
-        # TODO temporary way to focus window/to be changed
-        focus_temp_loc = (self.coordinations['star']-Point(0, 40))
-        my_pygui.click(focus_temp_loc.get())
-        my_pygui.write('0')
-        my_pygui.press('-', presses=2)
-        generals_loc = self.init_locate_generals(start)
-
-        for action in self.data['actions']:
-            if not(start <= action['no'] <= stop):
-                continue
-            text = 'Click OK when You want to make Your action ({}) no {}'\
-                .format(action['type'], action['no'])
-            my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
-            for i, general in enumerate(action['generals']):
-                t_start = time.time()
-                general_loc = generals_loc[general['id']]
-                if 'retreat' in general:
-                    my.wait(5, 'Re selecting general')
-                    self.select_general_by_loc(general_loc, general['type'], wait_til_active=False)
-                    text = 'Click when You want to retreat general'
-                    my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
-                    my_pygui.click(self.coordinations['retreat'].get())
-                    general['delay'] = int(time.time() - t_start)
-                    continue
-                else:
-                    """only first general is verified if is active"""
-                    wait_til_active = i == 0
-                    self.select_general_by_loc(general_loc, general['type'], wait_til_active=wait_til_active)
-                if not general['preset']:
-                    self.set_army(general_loc, general)
-                    if action['type'] in 'unload':
-                        continue
-                    elif action['type'] in 'load':
-                        continue
-                if action['type'] in 'attack':
-                    my_pygui.click(self.coordinations['attack'].get())
-                    text = 'Make Your attack no {}'.format(action['no'])
-                elif action['type'] in 'move':
-                    my_pygui.click(self.coordinations['move'].get())
-                    text = 'Move your army'
-                else:
-                    raise Exception('Unexpected action type ')
-
-                answer = my_pygui.confirm(text='Do You see the target?\n'
-                                               ' If not chose \'Drag first\' and drag island to see the target',
-                                          title='Teaching Adventure {}'.format(self.name),
-                                          buttons=['I see it. Proceed', 'Drag First'])
-                if answer == 'Drag First':
-                    general['drag'] = get_click.get('DRAG')
-                    xm, ym = general['drag'][0]
-                    xd, yd = general['drag'][1]
-                    general['drag'] = [(xd - xm) / 2, (yd - ym) / 2]
-                if general['init'] is True:
-                    finded = my_pygui.locateOnScreen('data/{}/loc_reference.png'.format(self.name), confidence=0.9)
-                    if not finded:
-                        raise Exception('data/{}/loc_reference.png not found on screen'.format(self.name))
-                    my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
-                    general['relative_coordinates'] = (get_click.get('DOUBLE') - finded).get()
-                else:
-                    my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
-                    xcr, ycr = self.coordinations['center_ref'].get()
-                    xrc, yrc = get_click.get('DOUBLE').get()
-                    general['relative_coordinates'] = [xcr - xrc, ycr - yrc]
-                if 'delay' in general:
-                    general['delay'] = int(time.time() - t_start)
-
-            # with open('data/{}/learned.json'.format(self.name), 'w') as f:
-            with open(my.get_new_filename(self.name), 'w') as f:
-                json.dump(self.data, f, indent=2)
-
     def make_adventure(self, delay=0, start=1, stop=1000, mode=Mode.play):
         logging.info('make_adventure')
         assert(isinstance(mode, Mode))
@@ -436,7 +362,7 @@ class Adventure:
                         general['delay'] = int(time.time() - t_0)
                     continue
                 else:
-                    """only first general is verified if is active"""
+                    """only first general is verified if is active (assume rest is - to save time)"""
                     wait_til_active = i == 0
                     self.select_general_by_loc(general_loc, general['type'], wait_til_active=wait_til_active)
                 if not general['preset']:
@@ -528,16 +454,12 @@ class Adventure:
 # Configure().run()
 adventure = 'wild_mary'
 TN = Adventure(adventure)
-# teach_adventure(adventure, 18, 18)
 # TN.start_adventure(delay=3)
-# settlers.send_to_adventure(first=0, last=9)
-# go_to_adventure(adventure, 10)
-# settlers.make_adventure(start=18, stop=19)
 # TN.send_to_adventure(first=0, last=111)
 # TN.send_to_adventure(first=1, last=2)
 # TN.go_to_adventure(1)
 TN.make_adventure(delay=2, start=10, stop=137, mode=Mode.play)
-# end_adventure(adventure, 60)
+# TN.end_adventure(60)
 
 
 # for i in range(4):
