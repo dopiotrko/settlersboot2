@@ -1,5 +1,7 @@
 import os
 import time
+import json
+from my_types import Action
 
 
 def get_first_free_filename_no(name):
@@ -26,3 +28,16 @@ def wait(delay=0, info=''):
         time.sleep(1)
         print('\r{} in {}:{:02}'.format(info, int(count / 60), count % 60), end='', flush=True)
     print('')
+
+
+def load_json(name):
+    with open(get_last_filename(name)) as f:
+        j_data = json.load(f)
+    data = [Action(**action) for action in j_data['actions']]
+    return data
+
+
+def load_generals():
+    with open('data/generals.json') as f:
+        data = json.load(f)
+    return data
