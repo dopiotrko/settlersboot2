@@ -6,7 +6,7 @@ import wx.dataview as dv
 import sys
 import json
 import my_types
-MY_WIDTH = 348
+MY_SIZE = (348, 788)
 
 
 class ActionsTable(grid.GridTableBase):
@@ -190,7 +190,7 @@ class GeneralEdit(wx.Panel):
 
         self.delay = wx.SpinCtrl(self, id=wx.ID_ANY, style=wx.SP_ARROW_KEYS, min=0)
         gbs.Add(self.delay, (8, 1))
-        separator = wx.StaticLine(self, id=wx.ID_ANY, size=wx.Size(int(MY_WIDTH/2), 1), style=wx.LI_HORIZONTAL)
+        separator = wx.StaticLine(self, id=wx.ID_ANY, size=wx.Size(300, 1), style=wx.LI_HORIZONTAL)
         gbs.Add(separator, (6, 1), (1, 3), flag=wx.ALIGN_CENTER)
 
         # ----------------------------------------------------
@@ -313,7 +313,7 @@ class GeneralsEdit(aui.AuiNotebook):
         self.show_generals(0)
 
     def show_generals(self, action_no):
-        generals = self.parent.GetParent().table.get_action(action_no).get_generals()
+        generals = self.parent.table.get_action(action_no).get_generals()
         generals_add_index = self.GetPageIndex(self.generals_add)
         # delete all pages, accept generals_add page
         for p in range(generals_add_index-1, -1, -1):
@@ -337,36 +337,23 @@ class GeneralsEdit(aui.AuiNotebook):
             event.Veto()
 
 
-class ActionFrame(wx.Frame):
+class AdventurePanel(wx.Panel):
     def __init__(self, parent, log):
-        wx.Frame.__init__(self, parent, -1, "Custom Table, data driven Grid  Demo",
+        wx.Panel.__init__(self, parent, wx.ID_ANY,
                           style=wx.STAY_ON_TOP | wx.DEFAULT_FRAME_STYLE)
-
-        self.panel = wx.Panel(self, wx.ID_ANY)
-        # self.CreateStatusBar()
 
         self.last_row = 9999999
         self.sizer = wx.BoxSizer(wx.VERTICAL)
-        self.table = ActionsGrid(self.panel, 'CR', log)
+        self.table = ActionsGrid(self, 'CR', log)
         self.sizer.Add(self.table, 1, wx.EXPAND)
-        self.generals_edt = GeneralsEdit(self.panel)
+        self.generals_edt = GeneralsEdit(self)
         self.sizer.Add(self.generals_edt, 0, wx.EXPAND)
-        self.Bind(wx.EVT_SIZE, self.on_size)
-        self.Bind(grid.EVT_GRID_COL_SIZE, self.on_size)
         self.Bind(grid.EVT_GRID_SELECT_CELL, self.on_select_cell)
 
         self.generals_edt.Show()
-        self.panel.SetSizer(self.sizer)
-        self.SetMinSize(size=(MY_WIDTH, 788))
-        self.sizer.Fit(self.panel)
+        self.SetSizer(self.sizer)
+        self.sizer.Fit(self)
         self.Fit()
-
-    def on_size(self, event):
-        width, height = self.GetClientSize()
-        self.panel.SetSize(width, height)
-        self.table.SetColSize(1, width
-                              - sum(self.table.GetColSize(col) for col in (0, 2, 3))
-                              - self.table.GetRowLabelSize())
 
     def on_select_cell(self, event):
         if isinstance(event, grid.GridEvent):
@@ -383,45 +370,25 @@ class Frame(wx.Frame):
         wx.Frame.__init__(self, parent, -1, "Custom Table, data driven Grid  Demo",
                           style=wx.STAY_ON_TOP | wx.DEFAULT_FRAME_STYLE)
 
-        self._notebook_style = aui.AUI_NB_WINDOWLIST_BUTTON | aui.AUI_NB_SCROLL_BUTTONS | aui.AUI_NB_CLOSE_ON_ALL_TABS
+        self._notebook_style = aui.AUI_NB_WINDOWLIST_BUTTON | aui.AUI_NB_SCROLL_BUTTONS
         self.main_notebook = aui.AuiNotebook(self, wx.ID_ANY, style=self._notebook_style)
-
-        self.panel = wx.Panel(self, wx.ID_ANY)
+        self.action_adv_panel = AdventurePanel(self, log)
         # self.CreateStatusBar()
-
-        self.last_row = 9999999
-        self.sizer = wx.BoxSizer(wx.VERTICAL)
-        self.table = ActionsGrid(self.panel, 'CR', log)
-        self.sizer.Add(self.table, 1, wx.EXPAND)
-        self.generals_edt = GeneralsEdit(self.panel)
-        self.sizer.Add(self.generals_edt, 0, wx.EXPAND)
         self.Bind(wx.EVT_SIZE, self.on_size)
         self.Bind(grid.EVT_GRID_COL_SIZE, self.on_size)
-        self.Bind(grid.EVT_GRID_SELECT_CELL, self.on_select_cell)
 
-        self.generals_edt.Show()
-        self.panel.SetSizer(self.sizer)
-        self.SetMinSize(size=(MY_WIDTH, 788))
-        self.sizer.Fit(self.panel)
-
-        self.main_notebook.AddPage(self.panel, 'Actions')
+        self.main_notebook.AddPage(self.action_adv_panel, 'Adventure Actions')
+        self.main_notebook.Fit()
+        self.SetMinSize(size=MY_SIZE)
         self.Fit()
 
     def on_size(self, event):
         width, height = self.GetClientSize()
-        self.panel.SetSize(width, height)
-        self.table.SetColSize(1, width
-                              - sum(self.table.GetColSize(col) for col in (0, 2, 3))
-                              - self.table.GetRowLabelSize())
-
-    def on_select_cell(self, event):
-        if isinstance(event, grid.GridEvent):
-            row = event.GetRow()
-        else:
-            row = event.row
-        if self.last_row != row:
-            self.generals_edt.show_generals(row)
-            self.last_row = row
+        self.action_adv_panel.SetSize(width, height)
+        self.action_adv_panel.table.SetColSize(1, width
+                                               - sum(self.action_adv_panel.table.GetColSize(col) for col in (0, 2, 3))
+                                               - self.action_adv_panel.table.GetRowLabelSize())
+        self.main_notebook.SetSize(self.GetClientSize())
 
 
 if __name__ == '__main__':
