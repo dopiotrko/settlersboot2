@@ -9,11 +9,48 @@ import my_types
 MY_SIZE = (348, 788)
 
 
-class ActionsTable(grid.GridTableBase):
+class DataTable(grid.GridTableBase):
     def __init__(self, data, log):
         grid.GridTableBase.__init__(self)
         self.log = log
         self.data = data
+        self.colLabels = []
+        self.colIds = []
+        self.dataTypes = []
+
+    def GetNumberRows(self):
+        return len(self.data)
+
+    # --------------------------------------------------
+    # Some optional methods
+
+    # Called when the grid needs to display labels
+    def GetColLabelValue(self, col):
+        return self.colLabels[col]
+
+    # Called to determine the kind of editor/renderer to use by
+    # default, doesn't necessarily have to be the same type used
+    # natively by the editor/renderer if they know how to convert.
+    def GetTypeName(self, row, col):
+        return self.dataTypes[col]
+
+    # Called to determine how the data can be fetched and stored by the
+    # editor and renderer.  This allows you to enforce some type-safety
+    # in the grid.
+    def CanGetValueAs(self, row, col, type_name):
+        col_type = self.dataTypes[col].split(':')[0]
+        if type_name == col_type:
+            return True
+        else:
+            return False
+
+    def CanSetValueAs(self, row, col, type_name):
+        return self.CanGetValueAs(row, col, type_name)
+
+
+class ActionsTable(DataTable):
+    def __init__(self, data, log):
+        super().__init__(data, log)
         self.colLabels = ['Type', 'Generals', 'Delay', 'Active']
         self.colIds = ['type', 'generals', 'delay', 'active']
         self.dataTypes = [
@@ -24,9 +61,6 @@ class ActionsTable(grid.GridTableBase):
                          ]
     # --------------------------------------------------
     # required methods for the wxPyGridTableBase interface
-
-    def GetNumberRows(self):
-        return len(self.data)
 
     def GetNumberCols(self):
         return 4
@@ -54,26 +88,66 @@ class ActionsTable(grid.GridTableBase):
 
     # Called when the grid needs to display labels
     def GetColLabelValue(self, col):
-        return self.colLabels[col]
+        return super().GetColLabelValue(col)
 
-    # Called to determine the kind of editor/renderer to use by
-    # default, doesn't necessarily have to be the same type used
-    # natively by the editor/renderer if they know how to convert.
     def GetTypeName(self, row, col):
-        return self.dataTypes[col]
+        return super().GetTypeName(row, col)
 
-    # Called to determine how the data can be fetched and stored by the
-    # editor and renderer.  This allows you to enforce some type-safety
-    # in the grid.
     def CanGetValueAs(self, row, col, type_name):
-        col_type = self.dataTypes[col].split(':')[0]
-        if type_name == col_type:
-            return True
-        else:
-            return False
+        return super().CanGetValueAs(row, col, type_name)
 
     def CanSetValueAs(self, row, col, type_name):
-        return self.CanGetValueAs(row, col, type_name)
+        return super().CanSetValueAs(row, col, type_name)
+
+
+class GeneralsTable(DataTable):
+    def __init__(self, data, log):
+        super().__init__(data, log)
+        self.colLabels = ['Type', 'Name', 'Capacity']
+        self.colIds = ['type', 'name', 'capacity']
+        self.dataTypes = [
+                              grid.GRID_VALUE_STRING,
+                              grid.GRID_VALUE_STRING,
+                              grid.GRID_VALUE_NUMBER + ':0,99999999'
+                         ]
+    # --------------------------------------------------
+    # required methods for the wxPyGridTableBase interface
+
+    def GetNumberCols(self):
+        return 3
+
+    def IsEmptyCell(self, row, col):
+        # pretending newer empty, so newer overflow
+        return False
+
+    # Get/Set values in the table.  The Python version of these
+    # methods can handle any data-type, (as long as the Editor and
+    # Renderer understands the type too,) not just strings as in the
+    # C++ version.
+    def GetValue(self, row, col):
+        try:
+            return self.data[row][self.colIds[col]]
+        except IndexError:
+            return ''
+
+    def SetValue(self, row, col, value):
+        pass
+
+    # --------------------------------------------------
+    # Some optional methods
+
+    # Called when the grid needs to display labels
+    def GetColLabelValue(self, col):
+        return super().GetColLabelValue(col)
+
+    def GetTypeName(self, row, col):
+        return super().GetTypeName(row, col)
+
+    def CanGetValueAs(self, row, col, type_name):
+        return super().CanGetValueAs(row, col, type_name)
+
+    def CanSetValueAs(self, row, col, type_name):
+        return super().CanSetValueAs(row, col, type_name)
 
 
 class ActionsGrid(grid.Grid):
