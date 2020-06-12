@@ -69,10 +69,6 @@ class ActionsTable(DataTable):
         # pretending newer empty, so newer overflow
         return False
 
-    # Get/Set values in the table.  The Python version of these
-    # methods can handle any data-type, (as long as the Editor and
-    # Renderer understands the type too,) not just strings as in the
-    # C++ version.
     def GetValue(self, row, col):
         try:
             return self.data[row].get_data_for_table(self.colIds[col])
@@ -120,10 +116,6 @@ class GeneralsTable(DataTable):
         # pretending newer empty, so newer overflow
         return False
 
-    # Get/Set values in the table.  The Python version of these
-    # methods can handle any data-type, (as long as the Editor and
-    # Renderer understands the type too,) not just strings as in the
-    # C++ version.
     def GetValue(self, row, col):
         try:
             return self.data[row][self.colIds[col]]
@@ -150,18 +142,15 @@ class GeneralsTable(DataTable):
         return super().CanSetValueAs(row, col, type_name)
 
 
-class ActionsGrid(grid.Grid):
-    def __init__(self, parent, name, log):
+class DataGrid(grid.Grid):
+    def __init__(self, parent, table, log):
         grid.Grid.__init__(self, parent, -1)
-        with open(my.get_last_filename(name)) as f:
-            data = json.load(f)
-            self.actions = [my_types.Action(self, **action) for action in data['actions']]
-        self.actions_table = ActionsTable(self.actions, log)
+        self.table = table
 
         # The second parameter means that the grid is to take ownership of the
         # table and will destroy it when done.  Otherwise you would need to keep
         # a reference to it and call it's Destroy method later.
-        self.SetTable(self.actions_table, True)
+        self.SetTable(self.table, True)
         self.SetSelectionMode(grid.Grid.GridSelectRows)
         self.SelectRow(0)
         self.SetRowLabelSize(grid.GRID_AUTOSIZE)
@@ -169,7 +158,7 @@ class ActionsGrid(grid.Grid):
         self.AutoSizeColumns(True)
 
         self.Bind(grid.EVT_GRID_CELL_LEFT_DCLICK, self.on_left_d_click)
-        self.GetGridWindow().Bind(wx.EVT_MOTION, self.on_mouse_over)
+        # self.GetGridWindow().Bind(wx.EVT_MOTION, self.on_mouse_over)
         self.Bind(grid.EVT_GRID_CELL_RIGHT_CLICK, self.on_right_click)
         # ---------------------------------------------------
         # ids for context menu
@@ -188,26 +177,26 @@ class ActionsGrid(grid.Grid):
         if event.GetCol() == 1:
             self.action_context_menu(event)
 
-    def on_mouse_over(self, event):
-        """
-        Method to calculate where the mouse is pointing and
-        then set the tooltip dynamically.
-        """
-
-        # Use CalcUnscrolledPosition() to get the mouse position
-        # within the
-        # entire grid including what's offscreen
-        x, y = self.CalcUnscrolledPosition(event.GetX(), event.GetY())
-        row, col = self.XYToCell(x, y)
-        # you only need these if you need the value in the cell
-        if col == 1:
-            gens = self.GetCellValue(row, col)
-            if gens:
-                event.GetEventObject().SetToolTip(gens.replace(', ', '\n'))
-        event.Skip()
+    # def on_mouse_over(self, event):
+    #     """
+    #     Method to calculate where the mouse is pointing and
+    #     then set the tooltip dynamically.
+    #     """
+    #
+    #     # Use CalcUnscrolledPosition() to get the mouse position
+    #     # within the
+    #     # entire grid including what's offscreen
+    #     x, y = self.CalcUnscrolledPosition(event.GetX(), event.GetY())
+    #     row, col = self.XYToCell(x, y)
+    #     # you only need these if you need the value in the cell
+    #     if col == 1:
+    #         gens = self.GetCellValue(row, col)
+    #         if gens:
+    #             event.GetEventObject().SetToolTip(gens.replace(', ', '\n'))
+    #     event.Skip()
 
     def get_action(self, no):
-        return self.actions_table.data[no]
+        return self.table.data[no]
 
     def action_context_menu(self, event):
 
@@ -230,6 +219,95 @@ class ActionsGrid(grid.Grid):
         row = self.GetSelectedRows()[0]
         print('add-v')
         print(GeneralEdit.get_min_size(self))
+
+
+class ActionsGrid(DataGrid):
+    def __init__(self, parent, name, log):
+        with open(my.get_last_filename(name)) as f:
+            data = json.load(f)
+            self.actions = [my_types.Action(self, **action) for action in data['actions']]
+        self.table = ActionsTable(self.actions, log)
+        super().__init__(parent, self.table, log)
+
+        self.GetGridWindow().Bind(wx.EVT_MOTION, self.on_mouse_over)
+
+    # def on_right_click(self, event):
+    #     if event.GetCol() == 1:
+    #         self.action_context_menu(event)
+
+    def on_mouse_over(self, event):
+        """
+        Method to calculate where the mouse is pointing and
+        then set the tooltip dynamically.
+        """
+
+        # Use CalcUnscrolledPosition() to get the mouse position
+        # within the
+        # entire grid including what's offscreen
+        x, y = self.CalcUnscrolledPosition(event.GetX(), event.GetY())
+        row, col = self.XYToCell(x, y)
+        # you only need these if you need the value in the cell
+        if col == 1:
+            gens = self.GetCellValue(row, col)
+            if gens:
+                event.GetEventObject().SetToolTip(gens.replace(', ', '\n'))
+        event.Skip()
+
+    # def get_action(self, no):
+    #     return self.table.data[no]
+
+    # def action_context_menu(self, event):
+    #
+    #     self.SelectRow(event.GetRow())
+    #     # noinspection PyPep8Naming
+    #     MY_EVT_GRID_SELECT_CELL = wx.PyCommandEvent(grid.EVT_GRID_SELECT_CELL.typeId, self.GetId())
+    #     MY_EVT_GRID_SELECT_CELL.row = event.GetRow()
+    #     wx.PostEvent(self.GetEventHandler(), MY_EVT_GRID_SELECT_CELL)
+    #     context_menu = wx.Menu()
+    #     context_menu.Append(self.add_above_id, 'Add action above')
+    #     context_menu.Append(self.add_below_id, 'Add action below')
+    #     self.PopupMenu(context_menu)
+    #     context_menu.Destroy()
+    #
+    # def add_above(self, event):
+    #     row = self.GetSelectedRows()[0]
+    #     print('add-^')
+    #
+    # def add_below(self, event):
+    #     row = self.GetSelectedRows()[0]
+    #     print('add-v')
+    #     print(GeneralEdit.get_min_size(self))
+
+
+class GeneralsGrid(DataGrid):
+    def __init__(self, parent, log):
+        self.data = my.load_generals()
+        self.table = GeneralsTable(self.data, log)
+        super().__init__(parent, self.table, log)
+
+        # self.GetGridWindow().Bind(wx.EVT_MOTION, self.on_mouse_over)
+
+    # def on_right_click(self, event):
+    #     if event.GetCol() == 1:
+    #         self.action_context_menu(event)
+
+    # def on_mouse_over(self, event):
+    #     """
+    #     Method to calculate where the mouse is pointing and
+    #     then set the tooltip dynamically.
+    #     """
+    #
+    #     # Use CalcUnscrolledPosition() to get the mouse position
+    #     # within the
+    #     # entire grid including what's offscreen
+    #     x, y = self.CalcUnscrolledPosition(event.GetX(), event.GetY())
+    #     row, col = self.XYToCell(x, y)
+    #     # you only need these if you need the value in the cell
+    #     if col == 1:
+    #         gens = self.GetCellValue(row, col)
+    #         if gens:
+    #             event.GetEventObject().SetToolTip(gens.replace(', ', '\n'))
+    #     event.Skip()
 
 
 class GeneralEdit(wx.Panel):
@@ -447,11 +525,13 @@ class Frame(wx.Frame):
         self._notebook_style = aui.AUI_NB_WINDOWLIST_BUTTON | aui.AUI_NB_SCROLL_BUTTONS
         self.main_notebook = aui.AuiNotebook(self, wx.ID_ANY, style=self._notebook_style)
         self.action_adv_panel = AdventurePanel(self, log)
+        self.main_notebook.AddPage(self.action_adv_panel, 'Adventure Actions')
+        self.generals_adv_panel = GeneralsGrid(self, log)
+        self.main_notebook.AddPage(self.generals_adv_panel, 'Generals in adv')
         # self.CreateStatusBar()
         self.Bind(wx.EVT_SIZE, self.on_size)
         self.Bind(grid.EVT_GRID_COL_SIZE, self.on_size)
 
-        self.main_notebook.AddPage(self.action_adv_panel, 'Adventure Actions')
         self.main_notebook.Fit()
         self.SetMinSize(size=MY_SIZE)
         self.Fit()
