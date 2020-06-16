@@ -144,9 +144,10 @@ class GeneralsTable(DataTable):
 
     def GetValue(self, row, col):
         try:
-            return self.data[row][self.colIds[col]]
+            return getattr(self.data[row], self.colIds[col])
         except IndexError:
-            return ''
+            empty = ['Add', '', 0]
+            return empty[col]
 
     def SetValue(self, row, col, value):
         pass
@@ -179,6 +180,7 @@ class DataGrid(grid.Grid):
         self.SetTable(self.table, True)
         self.SetSelectionMode(grid.Grid.GridSelectRows)
         self.SelectRow(0)
+        self.SetCellSize(self.GetNumberRows()-1, 0, 1, 3)
         self.SetRowLabelSize(grid.GRID_AUTOSIZE)
         self.SetMargins(0, 0)
         self.AutoSizeColumns(True)
@@ -186,7 +188,7 @@ class DataGrid(grid.Grid):
         self.Bind(grid.EVT_GRID_CELL_LEFT_DCLICK, self.on_left_d_click)
         # self.GetGridWindow().Bind(wx.EVT_MOTION, self.on_mouse_over)
         self.Bind(grid.EVT_GRID_CELL_RIGHT_CLICK, self.on_right_click)
-        self.Bind(grid.EVT_GRID_CELL_CHANGED, self.reset)
+        # self.Bind(grid.EVT_GRID_CELL_CHANGED, self.reset)
         # ---------------------------------------------------
         # ids for context menu
         self.add_below_id = wx.NewIdRef()
@@ -194,12 +196,14 @@ class DataGrid(grid.Grid):
         self.Bind(wx.EVT_MENU, self.add_below, id=self.add_below_id)
         self.Bind(wx.EVT_MENU, self.add_above, id=self.add_above_id)
 
-    # I do this because I don't like the default behaviour of not starting the
-    # cell editor on double clicks, but only a second click.
-
-    def reset(self, event):
+    def reset(self):
+        for row in range(self.GetNumberRows()):
+            self.SetCellSize(row, 0, 1, 1)
+        self.SetCellSize(self.GetNumberRows(), 0, 1, 3)
         self.table.reset_view(self)
 
+    # I do this because I don't like the default behaviour of not starting the
+    # cell editor on double clicks, but only a second click.
     def on_left_d_click(self, evt):
         if self.CanEnableCellControl():
             self.EnableCellEditControl()
@@ -310,12 +314,42 @@ class ActionsGrid(DataGrid):
 
 
 class GeneralsGrid(DataGrid):
-    def __init__(self, parent, log):
-        self.data = my.load_generals()
+    def __init__(self, parent, adventure, log):
+        self.parent = parent
+        self.adventure = adventure
+        self.data = adventure.generals
+        self.my_generals = my.load_generals()
         self.table = GeneralsTable(self.data, log)
         super().__init__(parent, self.table, log)
+        self.context_menu_ids()
 
         # self.GetGridWindow().Bind(wx.EVT_MOTION, self.on_mouse_over)
+
+    def context_menu_ids(self):
+        for gen in self.my_generals:
+            gen['id_ref'] = wx.NewIdRef()
+            self.Bind(wx.EVT_MENU, self.add_general, id=gen['id_ref'])
+
+    def add_general(self, event):
+        evt_id = event.GetId()
+        row = self.GetSelectedRows()[0]
+        for gen in self.my_generals:
+            if gen['id_ref'] == evt_id:
+                self.parent.adventure.add_general(row, **gen)
+        self.reset()
+
+    def on_right_click(self, event):
+        row = event.GetRow()
+        self.SelectRow(row)
+        # noinspection PyPep8Naming
+        # MY_EVT_GRID_SELECT_CELL = wx.PyCommandEvent(grid.EVT_GRID_SELECT_CELL.typeId, self.GetId())
+        # MY_EVT_GRID_SELECT_CELL.row = row
+        # wx.PostEvent(self.GetEventHandler(), MY_EVT_GRID_SELECT_CELL)
+        context_menu = wx.Menu()
+        for gen in self.my_generals:
+            context_menu.Append(gen['id_ref'], gen['name'])
+        self.PopupMenu(context_menu)
+        context_menu.Destroy()
 
     # def on_right_click(self, event):
     #     if event.GetCol() == 1:
@@ -551,12 +585,12 @@ class Frame(wx.Frame):
     def __init__(self, parent, log):
         wx.Frame.__init__(self, parent, -1, "Custom Table, data driven Grid  Demo",
                           style=wx.STAY_ON_TOP | wx.DEFAULT_FRAME_STYLE)
-
+        self.adventure = adventure = my_types.Adventure('CR')
         self._notebook_style = aui.AUI_NB_WINDOWLIST_BUTTON | aui.AUI_NB_SCROLL_BUTTONS
         self.main_notebook = aui.AuiNotebook(self, wx.ID_ANY, style=self._notebook_style)
         self.action_adv_panel = AdventurePanel(self, log)
         self.main_notebook.AddPage(self.action_adv_panel, 'Adventure Actions')
-        self.generals_adv_panel = GeneralsGrid(self, log)
+        self.generals_adv_panel = GeneralsGrid(self, adventure, log)
         self.main_notebook.AddPage(self.generals_adv_panel, 'Generals in adv')
         # self.CreateStatusBar()
         self.Bind(wx.EVT_SIZE, self.on_size)

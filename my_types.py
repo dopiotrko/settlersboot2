@@ -59,6 +59,18 @@ class Mode(Enum):
     teach_delay = 3
 
 
+class Adventure:
+    def __init__(self, name, description=''):
+        self.name = name
+        self.description = description
+        self.generals = list()
+
+    def add_general(self, index, **kwargs):
+        """inserting general at index, or at the end when index==None"""
+        kwargs['id'] = index
+        self.generals.insert(index, General(**kwargs))
+
+
 class Action:
     def __init__(self, *args, **kwargs):
         self.no = kwargs['no']
@@ -86,6 +98,7 @@ class General:
                      "crossbowman", "elite_soldier", "cannoneer"]
         self.id = kwargs.get('id', 0)
         self.type = kwargs.get('type', 'empty')
+        self.name = kwargs.get('name', None)
         self.delay = kwargs.get('delay', 0)
         self.preset = kwargs.get('preset', False)
         self.init = kwargs.get('init', False)
@@ -93,9 +106,8 @@ class General:
         self.retreat = kwargs.get('retreat', False)
         self.relative_coordinates = kwargs.get('relative_coordinates', None)
         self.drag = kwargs.get('drag')
-        self.parent = args[0]
-        # TODO how to set this? from conf file?
-        self.capacity = 250
+        self.parent = args[0] if args else None
+        self.capacity = kwargs.get('capacity', 0)
 
     def get_units(self, key_or_index):
         key = self._key_to_index(key_or_index)
