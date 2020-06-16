@@ -17,9 +17,35 @@ class DataTable(grid.GridTableBase):
         self.colLabels = []
         self.colIds = []
         self.dataTypes = []
+        # we need to store the row length and column length to see if the table has changed size
+        self._rows = self.GetNumberRows()
+
+    def reset_view(self, my_grid):
+        """
+        (Grid) -> Reset the grid view.   Call this to
+        update the grid if rows and columns have been added or deleted
+        """
+        my_grid.BeginBatch()
+
+        current, new = self._rows, self.GetNumberRows()
+
+        if new < current:
+            msg = grid.GridTableMessage(self, grid.GRIDTABLE_NOTIFY_ROWS_DELETED, new, current - new)
+            my_grid.ProcessTableMessage(msg)
+        elif new > current:
+            msg = grid.GridTableMessage(self, grid.GRIDTABLE_NOTIFY_ROWS_APPENDED, new - current)
+            my_grid.ProcessTableMessage(msg)
+
+        my_grid.EndBatch()
+
+        self._rows = self.GetNumberRows()
+
+        # update the scrollbars and the displayed part of the grid
+        my_grid.AdjustScrollbars()
+        my_grid.ForceRefresh()
 
     def GetNumberRows(self):
-        return len(self.data)
+        return len(self.data) + 1
 
     # --------------------------------------------------
     # Some optional methods
@@ -160,6 +186,7 @@ class DataGrid(grid.Grid):
         self.Bind(grid.EVT_GRID_CELL_LEFT_DCLICK, self.on_left_d_click)
         # self.GetGridWindow().Bind(wx.EVT_MOTION, self.on_mouse_over)
         self.Bind(grid.EVT_GRID_CELL_RIGHT_CLICK, self.on_right_click)
+        self.Bind(grid.EVT_GRID_CELL_CHANGED, self.reset)
         # ---------------------------------------------------
         # ids for context menu
         self.add_below_id = wx.NewIdRef()
@@ -169,6 +196,10 @@ class DataGrid(grid.Grid):
 
     # I do this because I don't like the default behaviour of not starting the
     # cell editor on double clicks, but only a second click.
+
+    def reset(self, event):
+        self.table.reset_view(self)
+
     def on_left_d_click(self, evt):
         if self.CanEnableCellControl():
             self.EnableCellEditControl()
@@ -218,7 +249,6 @@ class DataGrid(grid.Grid):
     def add_below(self, event):
         row = self.GetSelectedRows()[0]
         print('add-v')
-        print(GeneralEdit.get_min_size(self))
 
 
 class ActionsGrid(DataGrid):
