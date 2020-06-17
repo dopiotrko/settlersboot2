@@ -67,8 +67,19 @@ class Adventure:
 
     def add_general(self, index, **kwargs):
         """inserting general at index, or at the end when index==None"""
-        kwargs['id'] = index
         self.generals.insert(index, General(**kwargs))
+        self.fix_ids()
+
+    def remove_general(self, index):
+        self.generals.pop(index)
+        self.fix_ids()
+
+    def fix_ids(self):
+        for index, gen in enumerate(self.generals):
+            gen.id = index
+
+    def get_generals_names(self):
+        return [gen.name for gen in self.generals]
 
 
 class Action:

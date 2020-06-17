@@ -146,7 +146,7 @@ class GeneralsTable(DataTable):
         try:
             return getattr(self.data[row], self.colIds[col])
         except IndexError:
-            empty = ['Add', '', 0]
+            empty = ['Click right to add', '', 0]
             return empty[col]
 
     def SetValue(self, row, col, value):
@@ -191,16 +191,18 @@ class DataGrid(grid.Grid):
         # self.Bind(grid.EVT_GRID_CELL_CHANGED, self.reset)
         # ---------------------------------------------------
         # ids for context menu
+        self.del_id = wx.NewIdRef()
+        self.Bind(wx.EVT_MENU, self.del_record, id=self.del_id)
         self.add_below_id = wx.NewIdRef()
         self.add_above_id = wx.NewIdRef()
         self.Bind(wx.EVT_MENU, self.add_below, id=self.add_below_id)
         self.Bind(wx.EVT_MENU, self.add_above, id=self.add_above_id)
 
     def reset(self):
-        for row in range(self.GetNumberRows()):
-            self.SetCellSize(row, 0, 1, 1)
-        self.SetCellSize(self.GetNumberRows(), 0, 1, 3)
         self.table.reset_view(self)
+        for row in range(self.GetNumberRows()-1):
+            self.SetCellSize(row, 0, 1, 1)
+        self.SetCellSize(self.GetNumberRows()-1, 0, 1, 3)
 
     # I do this because I don't like the default behaviour of not starting the
     # cell editor on double clicks, but only a second click.
@@ -254,6 +256,9 @@ class DataGrid(grid.Grid):
         row = self.GetSelectedRows()[0]
         print('add-v')
 
+    def del_record(self, event):
+        pass
+
 
 class ActionsGrid(DataGrid):
     def __init__(self, parent, name, log):
@@ -286,6 +291,9 @@ class ActionsGrid(DataGrid):
             if gens:
                 event.GetEventObject().SetToolTip(gens.replace(', ', '\n'))
         event.Skip()
+
+    def del_record(self, event):
+        pass
 
     # def get_action(self, no):
     #     return self.table.data[no]
@@ -338,6 +346,13 @@ class GeneralsGrid(DataGrid):
                 self.parent.adventure.add_general(row, **gen)
         self.reset()
 
+    def del_record(self, event):
+        try:
+            self.parent.adventure.remove_general(self.GetSelectedRows()[0])
+        except IndexError:
+            return
+        self.reset()
+
     def on_right_click(self, event):
         row = event.GetRow()
         self.SelectRow(row)
@@ -347,7 +362,11 @@ class GeneralsGrid(DataGrid):
         # wx.PostEvent(self.GetEventHandler(), MY_EVT_GRID_SELECT_CELL)
         context_menu = wx.Menu()
         for gen in self.my_generals:
-            context_menu.Append(gen['id_ref'], gen['name'])
+            if gen['name'] not in self.adventure.get_generals_names():
+                context_menu.Append(gen['id_ref'], gen['name'])
+        if row < self.GetNumberRows()-1:
+            context_menu.AppendSeparator()
+            context_menu.Append(self.del_id, 'Delete')
         self.PopupMenu(context_menu)
         context_menu.Destroy()
 
