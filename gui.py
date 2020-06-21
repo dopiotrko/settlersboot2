@@ -3,16 +3,15 @@ import wx
 import wx.grid as grid
 import wx.aui as aui
 import wx.dataview as dv
-import sys
+import os
 import json
 import my_types
 MY_SIZE = (348, 788)
 
 
 class DataTable(grid.GridTableBase):
-    def __init__(self, data, log):
+    def __init__(self, data):
         grid.GridTableBase.__init__(self)
-        self.log = log
         self.data = data
         self.colLabels = []
         self.colIds = []
@@ -75,8 +74,8 @@ class DataTable(grid.GridTableBase):
 
 
 class ActionsTable(DataTable):
-    def __init__(self, data, log):
-        super().__init__(data, log)
+    def __init__(self, data):
+        super().__init__(data)
         self.colLabels = ['Type', 'Generals', 'Delay', 'Active']
         self.colIds = ['type', 'generals', 'delay', 'active']
         self.dataTypes = [
@@ -123,8 +122,8 @@ class ActionsTable(DataTable):
 
 
 class GeneralsTable(DataTable):
-    def __init__(self, data, log):
-        super().__init__(data, log)
+    def __init__(self, data):
+        super().__init__(data)
         self.colLabels = ['Type', 'Name', 'Capacity']
         self.colIds = ['type', 'name', 'capacity']
         self.dataTypes = [
@@ -170,7 +169,7 @@ class GeneralsTable(DataTable):
 
 
 class DataGrid(grid.Grid):
-    def __init__(self, parent, table, log):
+    def __init__(self, parent, table):
         grid.Grid.__init__(self, parent, -1)
         self.table = table
 
@@ -180,7 +179,7 @@ class DataGrid(grid.Grid):
         self.SetTable(self.table, True)
         self.SetSelectionMode(grid.Grid.GridSelectRows)
         self.SelectRow(0)
-        self.SetCellSize(self.GetNumberRows()-1, 0, 1, 3)
+        self.SetCellSize(self.GetNumberRows()-1, 0, 1, self.GetNumberCols())
         self.SetRowLabelSize(grid.GRID_AUTOSIZE)
         self.SetMargins(0, 0)
         self.AutoSizeColumns(True)
@@ -191,18 +190,14 @@ class DataGrid(grid.Grid):
         # self.Bind(grid.EVT_GRID_CELL_CHANGED, self.reset)
         # ---------------------------------------------------
         # ids for context menu
-        self.del_id = wx.NewIdRef()
-        self.Bind(wx.EVT_MENU, self.del_record, id=self.del_id)
-        self.add_below_id = wx.NewIdRef()
-        self.add_above_id = wx.NewIdRef()
-        self.Bind(wx.EVT_MENU, self.add_below, id=self.add_below_id)
-        self.Bind(wx.EVT_MENU, self.add_above, id=self.add_above_id)
+        self.context_menu_ids = dict()
+        self.make_context_menu_ids()
 
     def reset(self):
         self.table.reset_view(self)
         for row in range(self.GetNumberRows()-1):
             self.SetCellSize(row, 0, 1, 1)
-        self.SetCellSize(self.GetNumberRows()-1, 0, 1, 3)
+        self.SetCellSize(self.GetNumberRows()-1, 0, 1, self.GetNumberCols())
 
     # I do this because I don't like the default behaviour of not starting the
     # cell editor on double clicks, but only a second click.
@@ -210,9 +205,33 @@ class DataGrid(grid.Grid):
         if self.CanEnableCellControl():
             self.EnableCellEditControl()
 
+    def make_context_menu_ids(self):
+        self.context_menu_ids['del_id'] = wx.NewIdRef()
+        self.context_menu_ids['move_up'] = wx.NewIdRef()
+        self.context_menu_ids['move_down'] = wx.NewIdRef()
+        self.context_menu_ids['move_to'] = wx.NewIdRef()
+        self.Bind(wx.EVT_MENU, self.del_record, id=self.context_menu_ids['del_id'])
+        self.Bind(wx.EVT_MENU, self.move_up, id=self.context_menu_ids['move_up'])
+        self.Bind(wx.EVT_MENU, self.move_down, id=self.context_menu_ids['move_down'])
+
     def on_right_click(self, event):
-        if event.GetCol() == 1:
-            self.action_context_menu(event)
+        row = event.GetRow()
+        self.SelectRow(row)
+        # noinspection PyPep8Naming
+        MY_EVT_GRID_SELECT_CELL = wx.PyCommandEvent(grid.EVT_GRID_SELECT_CELL.typeId, self.GetId())
+        MY_EVT_GRID_SELECT_CELL.row = row
+        wx.PostEvent(self.GetEventHandler(), MY_EVT_GRID_SELECT_CELL)
+        context_menu = wx.Menu()
+        self.on_right_click_add(context_menu)
+        if row < self.GetNumberRows() - 1:
+            context_menu.AppendSeparator()
+            context_menu.Append(self.context_menu_ids['del_id'], 'Delete')
+            if row != 0:
+                context_menu.Append(self.context_menu_ids['move_up'], 'Move Up')
+        if row < self.GetNumberRows() - 2:
+            context_menu.Append(self.context_menu_ids['move_down'], 'Move Down')
+        self.PopupMenu(context_menu)
+        context_menu.Destroy()
 
     # def on_mouse_over(self, event):
     #     """
@@ -235,24 +254,14 @@ class DataGrid(grid.Grid):
     def get_action(self, no):
         return self.table.data[no]
 
-    def action_context_menu(self, event):
+    def on_right_click_add(self, context_menu):
+        pass
 
-        self.SelectRow(event.GetRow())
-        # noinspection PyPep8Naming
-        MY_EVT_GRID_SELECT_CELL = wx.PyCommandEvent(grid.EVT_GRID_SELECT_CELL.typeId, self.GetId())
-        MY_EVT_GRID_SELECT_CELL.row = event.GetRow()
-        wx.PostEvent(self.GetEventHandler(), MY_EVT_GRID_SELECT_CELL)
-        context_menu = wx.Menu()
-        context_menu.Append(self.add_above_id, 'Add action above')
-        context_menu.Append(self.add_below_id, 'Add action below')
-        self.PopupMenu(context_menu)
-        context_menu.Destroy()
-
-    def add_above(self, event):
+    def move_up(self, event):
         row = self.GetSelectedRows()[0]
         print('add-^')
 
-    def add_below(self, event):
+    def move_down(self, event):
         row = self.GetSelectedRows()[0]
         print('add-v')
 
@@ -261,12 +270,12 @@ class DataGrid(grid.Grid):
 
 
 class ActionsGrid(DataGrid):
-    def __init__(self, parent, name, log):
+    def __init__(self, parent, name):
         with open(my.get_last_filename(name)) as f:
             data = json.load(f)
             self.actions = [my_types.Action(self, **action) for action in data['actions']]
-        self.table = ActionsTable(self.actions, log)
-        super().__init__(parent, self.table, log)
+        self.table = ActionsTable(self.actions)
+        super().__init__(parent, self.table)
 
         self.GetGridWindow().Bind(wx.EVT_MOTION, self.on_mouse_over)
 
@@ -322,21 +331,22 @@ class ActionsGrid(DataGrid):
 
 
 class GeneralsGrid(DataGrid):
-    def __init__(self, parent, adventure, log):
+    def __init__(self, parent, adventure):
         self.parent = parent
         self.adventure = adventure
         self.data = adventure.generals
         self.my_generals = my.load_generals()
-        self.table = GeneralsTable(self.data, log)
-        super().__init__(parent, self.table, log)
-        self.context_menu_ids()
+        self.table = GeneralsTable(self.data)
+        super().__init__(parent, self.table)
+        self.make_context_menu_ids()
 
         # self.GetGridWindow().Bind(wx.EVT_MOTION, self.on_mouse_over)
 
-    def context_menu_ids(self):
+    def make_context_menu_ids(self):
         for gen in self.my_generals:
             gen['id_ref'] = wx.NewIdRef()
             self.Bind(wx.EVT_MENU, self.add_general, id=gen['id_ref'])
+        super().make_context_menu_ids()
 
     def add_general(self, event):
         evt_id = event.GetId()
@@ -353,22 +363,22 @@ class GeneralsGrid(DataGrid):
             return
         self.reset()
 
-    def on_right_click(self, event):
-        row = event.GetRow()
-        self.SelectRow(row)
-        # noinspection PyPep8Naming
-        # MY_EVT_GRID_SELECT_CELL = wx.PyCommandEvent(grid.EVT_GRID_SELECT_CELL.typeId, self.GetId())
-        # MY_EVT_GRID_SELECT_CELL.row = row
-        # wx.PostEvent(self.GetEventHandler(), MY_EVT_GRID_SELECT_CELL)
-        context_menu = wx.Menu()
+    def move_up(self, event):
+        row = self.GetSelectedRows()[0]
+        self.parent.adventure.move_general(row, row-1)
+        self.reset()
+        self.SelectRow(row-1)
+
+    def move_down(self, event):
+        row = self.GetSelectedRows()[0]
+        self.parent.adventure.move_general(row, row+1)
+        self.reset()
+        self.SelectRow(row+1)
+
+    def on_right_click_add(self, context_menu):
         for gen in self.my_generals:
             if gen['name'] not in self.adventure.get_generals_names():
                 context_menu.Append(gen['id_ref'], gen['name'])
-        if row < self.GetNumberRows()-1:
-            context_menu.AppendSeparator()
-            context_menu.Append(self.del_id, 'Delete')
-        self.PopupMenu(context_menu)
-        context_menu.Destroy()
 
     # def on_right_click(self, event):
     #     if event.GetCol() == 1:
@@ -573,13 +583,13 @@ class GeneralsEdit(aui.AuiNotebook):
 
 
 class AdventurePanel(wx.Panel):
-    def __init__(self, parent, log):
+    def __init__(self, parent):
         wx.Panel.__init__(self, parent, wx.ID_ANY,
                           style=wx.STAY_ON_TOP | wx.DEFAULT_FRAME_STYLE)
 
         self.last_row = 9999999
         self.sizer = wx.BoxSizer(wx.VERTICAL)
-        self.table = ActionsGrid(self, 'CR', log)
+        self.table = ActionsGrid(self, 'CR')
         self.sizer.Add(self.table, 1, wx.EXPAND)
         self.generals_edt = GeneralsEdit(self)
         self.sizer.Add(self.generals_edt, 0, wx.EXPAND)
@@ -601,23 +611,68 @@ class AdventurePanel(wx.Panel):
 
 
 class Frame(wx.Frame):
-    def __init__(self, parent, log):
+    def __init__(self, parent):
         wx.Frame.__init__(self, parent, -1, "Custom Table, data driven Grid  Demo",
                           style=wx.STAY_ON_TOP | wx.DEFAULT_FRAME_STYLE)
-        self.adventure = adventure = my_types.Adventure('CR')
+        self.menu_bar_ids = {}
         self._notebook_style = aui.AUI_NB_WINDOWLIST_BUTTON | aui.AUI_NB_SCROLL_BUTTONS
         self.main_notebook = aui.AuiNotebook(self, wx.ID_ANY, style=self._notebook_style)
-        self.action_adv_panel = AdventurePanel(self, log)
-        self.main_notebook.AddPage(self.action_adv_panel, 'Adventure Actions')
-        self.generals_adv_panel = GeneralsGrid(self, adventure, log)
-        self.main_notebook.AddPage(self.generals_adv_panel, 'Generals in adv')
+        self.adventure = my_types.Adventure('CR')
+        self.open_adventure_tab()
         # self.CreateStatusBar()
         self.Bind(wx.EVT_SIZE, self.on_size)
         self.Bind(grid.EVT_GRID_COL_SIZE, self.on_size)
 
+        self.make_menu_bar()
         self.main_notebook.Fit()
         self.SetMinSize(size=MY_SIZE)
         self.Fit()
+
+    def open_adventure_tab(self):
+        self.main_notebook.DeleteAllPages()
+        self.action_adv_panel = AdventurePanel(self)
+        self.main_notebook.AddPage(self.action_adv_panel, 'Adventure Actions')
+        self.generals_adv_panel = GeneralsGrid(self, self.adventure)
+        self.main_notebook.AddPage(self.generals_adv_panel, 'Generals in adv')
+
+    def open_adv(self, event):
+        dlg = wx.FileDialog(
+            self, message="Choose a file",
+            defaultDir=os.getcwd() + '/save',
+            defaultFile="",
+            wildcard="Adventure file (*.adv)|*.adv",
+            style=wx.FD_OPEN | wx.FD_FILE_MUST_EXIST | wx.FD_PREVIEW
+        )
+        if dlg.ShowModal() == wx.ID_OK:
+            path = dlg.GetPath()
+            self.adventure = self.adventure.open(path)
+            self.open_adventure_tab()
+        dlg.Destroy()
+
+    def save_adv(self, event):
+        dlg = wx.FileDialog(
+            self, message="Save file as ...",
+            defaultDir=os.getcwd() + '/save',
+            defaultFile="",
+            wildcard="Adventure file (*.adv)|*.adv",
+            style=wx.FD_SAVE | wx.FD_OVERWRITE_PROMPT
+        )
+        if dlg.ShowModal() == wx.ID_OK:
+            path = dlg.GetPath()
+            self.adventure.save(path)
+        dlg.Destroy()
+
+    def make_menu_bar(self):
+        menu_bar = wx.MenuBar()
+        self.menu_bar_ids['save'] = wx.NewIdRef()
+        menu_f = wx.Menu()
+        menu_f.Append(self.menu_bar_ids['save'], '&Save')
+        self.Bind(wx.EVT_MENU, self.save_adv, id=self.menu_bar_ids['save'])
+        self.menu_bar_ids['open'] = wx.NewIdRef()
+        menu_f.Append(self.menu_bar_ids['open'], '&Open')
+        self.Bind(wx.EVT_MENU, self.open_adv, id=self.menu_bar_ids['open'])
+        menu_bar.Append(menu_f, '&File')
+        self.SetMenuBar(menu_bar)
 
     def on_size(self, event):
         width, height = self.GetClientSize()
@@ -630,6 +685,6 @@ class Frame(wx.Frame):
 
 if __name__ == '__main__':
     app = wx.App()
-    frame = Frame(None, sys.stdout)
+    frame = Frame(None)
     frame.Show(True)
     app.MainLoop()

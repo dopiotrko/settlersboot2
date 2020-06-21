@@ -1,4 +1,5 @@
 from enum import Enum
+import pickle
 
 
 class Point:
@@ -71,7 +72,13 @@ class Adventure:
         self.fix_ids()
 
     def remove_general(self, index):
-        self.generals.pop(index)
+        popped = self.generals.pop(index)
+        self.fix_ids()
+        return popped
+
+    def move_general(self, from_, to):
+        moving = self.remove_general(from_)
+        self.generals.insert(to, moving)
         self.fix_ids()
 
     def fix_ids(self):
@@ -80,6 +87,16 @@ class Adventure:
 
     def get_generals_names(self):
         return [gen.name for gen in self.generals]
+
+    def save(self, path):
+        path += '.adv' if path[-4:] != '.adv' else ''
+        with open(path, 'wb') as f:
+            pickle.dump(self, f)
+
+    @classmethod
+    def open(cls, path):
+        with open(path, 'rb') as f:
+            return pickle.load(f)
 
 
 class Action:
