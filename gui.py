@@ -16,7 +16,7 @@ class DataTable(grid.GridTableBase):
         self.colLabels = []
         self.colIds = []
         self.dataTypes = []
-        # we need to store the row length and column length to see if the table has changed size
+        # we need to store the row length and column length to see if the tables has changed size
         self._rows = self.GetNumberRows()
 
     def reset_view(self, my_grid):
@@ -175,7 +175,7 @@ class DataGrid(grid.Grid):
         self.table = table
 
         # The second parameter means that the grid is to take ownership of the
-        # table and will destroy it when done.  Otherwise you would need to keep
+        # tables and will destroy it when done.  Otherwise you would need to keep
         # a reference to it and call it's Destroy method later.
         self.SetTable(self.table, True)
         self.SetSelectionMode(grid.Grid.GridSelectRows)
@@ -221,7 +221,7 @@ class DataGrid(grid.Grid):
         # noinspection PyPep8Naming
         MY_EVT_GRID_SELECT_CELL = wx.PyCommandEvent(grid.EVT_GRID_SELECT_CELL.typeId, self.GetId())
         MY_EVT_GRID_SELECT_CELL.row = row
-        # posting event to handle it in ActionsPanel
+        # posting event to handle it in AdventurePanel
         wx.PostEvent(self.GetEventHandler(), MY_EVT_GRID_SELECT_CELL)
         context_menu = wx.Menu()
         self.on_right_click_add(context_menu)
@@ -305,7 +305,7 @@ class ActionsGrid(DataGrid):
         pass
 
     # def get_action(self, no):
-    #     return self.table.data[no]
+    #     return self.tables.data[no]
 
     # def action_context_menu(self, event):
     #
@@ -353,25 +353,25 @@ class GeneralsGrid(DataGrid):
         row = self.GetSelectedRows()[0]
         for gen in self.my_generals:
             if gen['id_ref'] == evt_id:
-                self.parent.parent.adventure.add_general(row, **gen)
+                self.adventure.add_general(row, **gen)
         self.reset()
 
     def del_record(self, event):
         try:
-            self.parent.parent.adventure.remove_general(self.GetSelectedRows()[0])
+            self.adventure.remove_general(self.GetSelectedRows()[0])
         except IndexError:
             return
         self.reset()
 
     def move_up(self, event):
         row = self.GetSelectedRows()[0]
-        self.parent.parent.adventure.move_general(row, row-1)
+        self.adventure.move_general(row, row-1)
         self.reset()
         self.SelectRow(row-1)
 
     def move_down(self, event):
         row = self.GetSelectedRows()[0]
-        self.parent.parent.adventure.move_general(row, row+1)
+        self.adventure.move_general(row, row+1)
         self.reset()
         self.SelectRow(row+1)
 
@@ -561,9 +561,9 @@ class GeneralsEdit(aui.AuiNotebook):
             pass
 
     def show_generals(self, action_no):
-        if len(self.parent.table.actions) == 0:
+        if len(self.parent.tables.actions_grid.actions) == 0:
             return
-        generals = self.parent.table.get_action(action_no).get_generals()
+        generals = self.parent.tables.actions_grid.get_action(action_no).get_generals()
         generals_add_index = self.GetPageIndex(self.generals_add)
         # delete all pages, accept generals_add page
         for p in range(generals_add_index-1, -1, -1):
@@ -587,15 +587,15 @@ class GeneralsEdit(aui.AuiNotebook):
             event.Veto()
 
 
-class ActionsPanel(wx.Panel):
+class AdventurePanel(wx.Panel):
     def __init__(self, parent, adventure):
         wx.Panel.__init__(self, parent, wx.ID_ANY,
                           style=wx.STAY_ON_TOP | wx.DEFAULT_FRAME_STYLE)
 
         self.last_row = 9999999
         self.sizer = wx.BoxSizer(wx.VERTICAL)
-        self.table = ActionsGrid(self, adventure)
-        self.sizer.Add(self.table, 1, wx.EXPAND)
+        self.tables = Splitter(self, adventure)
+        self.sizer.Add(self.tables, 1, wx.EXPAND)
         self.generals_edt = GeneralsEdit(self)
         self.sizer.Add(self.generals_edt, 0, wx.EXPAND)
         self.Bind(grid.EVT_GRID_SELECT_CELL, self.on_select_cell)
@@ -619,10 +619,10 @@ class Splitter(wx.SplitterWindow):
     def __init__(self, parent, adventure):
         self.parent = parent
         wx.SplitterWindow.__init__(self, parent, wx.ID_ANY, style=wx.SP_LIVE_UPDATE)
-        self.action_adv_panel = ActionsPanel(self, adventure)
-        self.generals_adv_panel = GeneralsGrid(self, adventure)
+        self.actions_grid = ActionsGrid(self, adventure)
+        self.generals_grid = GeneralsGrid(self, adventure)
         self.SetMinimumPaneSize(20)
-        self.SplitHorizontally(self.generals_adv_panel, self.action_adv_panel, 100)
+        self.SplitHorizontally(self.generals_grid, self.actions_grid, 100)
 
 
 class Frame(wx.Frame):
@@ -648,7 +648,7 @@ class Frame(wx.Frame):
 
     def open_adventure_tab(self):
         self.main_notebook.DeleteAllPages()
-        self.adventure_panel = Splitter(self, self.adventure)
+        self.adventure_panel = AdventurePanel(self, self.adventure)
         self.main_notebook.AddPage(self.adventure_panel, self.adventure.name)
 
     def open_adv(self, event):
@@ -718,11 +718,11 @@ class Frame(wx.Frame):
 
     def on_size(self, event):
         width, height = self.GetClientSize()
-        action_panel = self.adventure_panel.action_adv_panel
+        action_panel = self.adventure_panel.tables.actions_grid
         action_panel.SetSize(width, height)
-        action_panel.table.SetColSize(1, width
-                                      - sum(action_panel.table.GetColSize(col) for col in (0, 2, 3))
-                                      - action_panel.table.GetRowLabelSize())
+        action_panel.SetColSize(1, width
+                                - sum(action_panel.GetColSize(col) for col in (0, 2, 3))
+                                - action_panel.GetRowLabelSize())
         self.main_notebook.SetSize(self.GetClientSize())
 
 
