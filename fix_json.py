@@ -129,7 +129,21 @@ class Fix:
         self.data['actions'].insert(to - 1, action_template)
         self.save()
 
+    def add_capacity(self):
+        capacity = {
+            "basic": 200,
+            "master": 235,
+            "veteran": 250,
+            "boris": 195,
+            "medic": 200,
+            "major": 285,
+            "grim": 200
+        }
+        for gen in self.data['generals']:
+            gen['capacity'] = capacity[gen['type']]
+        self.save()
 
+# Fix('CR').add_capacity()
 # Fix('wiktor').insert_action(33, 0)
 # Fix('CR').insert_action(7, 6, 'unload')
 

@@ -65,6 +65,10 @@ class Adventure:
         self.name = name
         self.description = description
         self.generals = list()
+        self.actions = list()
+        if name == 'Empty':
+            self.generals.append(General())
+            self.actions.append(Action())
 
     def add_general(self, index, **kwargs):
         """inserting general at index, or at the end when index==None"""
@@ -101,10 +105,10 @@ class Adventure:
 
 class Action:
     def __init__(self, *args, **kwargs):
-        self.no = kwargs['no']
-        self.type = kwargs['type']
-        self.delay = kwargs['delay']
-        self.generals = [General(self, **gen) for gen in kwargs['generals']]
+        self.no = kwargs.get('no', 0)
+        self.type = kwargs.get('type', '')
+        self.delay = kwargs.get('delay', 0)
+        self.generals = [General(self, **gen) for gen in kwargs.get('generals', [])]
 
     def get_data_for_table(self, attr):
         if attr == 'generals':
@@ -135,7 +139,7 @@ class General:
         self.relative_coordinates = kwargs.get('relative_coordinates', None)
         self.drag = kwargs.get('drag')
         self.parent = args[0] if args else None
-        self.capacity = kwargs.get('capacity', 0)
+        self.capacity = kwargs.get('capacity', 300)
 
     def get_units(self, key_or_index):
         key = self._key_to_index(key_or_index)

@@ -270,10 +270,8 @@ class DataGrid(grid.Grid):
 
 
 class ActionsGrid(DataGrid):
-    def __init__(self, parent, name):
-        with open(my.get_last_filename(name)) as f:
-            data = json.load(f)
-            self.actions = [my_types.Action(self, **action) for action in data['actions']]
+    def __init__(self, parent, adventure):
+        self.actions = adventure.actions
         self.table = ActionsTable(self.actions)
         super().__init__(parent, self.table)
 
@@ -582,14 +580,14 @@ class GeneralsEdit(aui.AuiNotebook):
             event.Veto()
 
 
-class AdventurePanel(wx.Panel):
-    def __init__(self, parent):
+class ActionsPanel(wx.Panel):
+    def __init__(self, parent, adventure):
         wx.Panel.__init__(self, parent, wx.ID_ANY,
                           style=wx.STAY_ON_TOP | wx.DEFAULT_FRAME_STYLE)
 
         self.last_row = 9999999
         self.sizer = wx.BoxSizer(wx.VERTICAL)
-        self.table = ActionsGrid(self, 'CR')
+        self.table = ActionsGrid(self, adventure)
         self.sizer.Add(self.table, 1, wx.EXPAND)
         self.generals_edt = GeneralsEdit(self)
         self.sizer.Add(self.generals_edt, 0, wx.EXPAND)
@@ -610,6 +608,15 @@ class AdventurePanel(wx.Panel):
             self.last_row = row
 
 
+class Splitter(wx.SplitterWindow):
+    def __init__(self, parent, adventure):
+        wx.SplitterWindow.__init__(self, parent, wx.ID_ANY, style=wx.SP_LIVE_UPDATE)
+        self.action_adv_panel = ActionsPanel(self, adventure)
+        self.generals_adv_panel = GeneralsGrid(self, adventure)
+        self.SetMinimumPaneSize(20)
+        self.SplitHorizontally(self.generals_adv_panel, self.action_adv_panel, 100)
+
+
 class Frame(wx.Frame):
     def __init__(self, parent):
         wx.Frame.__init__(self, parent, -1, "Custom Table, data driven Grid  Demo",
@@ -617,7 +624,11 @@ class Frame(wx.Frame):
         self.menu_bar_ids = {}
         self._notebook_style = aui.AUI_NB_WINDOWLIST_BUTTON | aui.AUI_NB_SCROLL_BUTTONS
         self.main_notebook = aui.AuiNotebook(self, wx.ID_ANY, style=self._notebook_style)
-        self.adventure = my_types.Adventure('CR')
+        # empty adventure
+        self.adventure = my_types.Adventure(name='Empty')
+        self.adventure.generals = [my_types.General()]
+        self.adventure.actions = [my_types.Action(self)]
+
         self.open_adventure_tab()
         # self.CreateStatusBar()
         self.Bind(wx.EVT_SIZE, self.on_size)
@@ -630,10 +641,8 @@ class Frame(wx.Frame):
 
     def open_adventure_tab(self):
         self.main_notebook.DeleteAllPages()
-        self.action_adv_panel = AdventurePanel(self)
-        self.main_notebook.AddPage(self.action_adv_panel, 'Adventure Actions')
-        self.generals_adv_panel = GeneralsGrid(self, self.adventure)
-        self.main_notebook.AddPage(self.generals_adv_panel, 'Generals in adv')
+        self.adventure_panel = Splitter(self, self.adventure)
+        self.main_notebook.AddPage(self.adventure_panel, self.adventure.name)
 
     def open_adv(self, event):
         dlg = wx.FileDialog(
@@ -645,7 +654,29 @@ class Frame(wx.Frame):
         )
         if dlg.ShowModal() == wx.ID_OK:
             path = dlg.GetPath()
-            self.adventure = self.adventure.open(path)
+            self.adventure = my_types.Adventure.open(path)
+            self.open_adventure_tab()
+        dlg.Destroy()
+
+    # TODO temp
+    def open_from_json(self, event):
+        dlg = wx.FileDialog(
+            self, message="Choose a file",
+            defaultDir=os.getcwd() + '/data',
+            defaultFile="",
+            wildcard="Adventure file (*.json)|*.json",
+            style=wx.FD_OPEN | wx.FD_FILE_MUST_EXIST | wx.FD_PREVIEW
+        )
+        if dlg.ShowModal() == wx.ID_OK:
+            path = dlg.GetPath()
+            with open(path) as f:
+                j_data = json.load(f)
+            generals = [my_types.General(**gen) for gen in j_data['generals']]
+            actions = [my_types.Action(self, **action) for action in j_data['actions']]
+            adv_from_json = my_types.Adventure(name=path.split('/')[-2])
+            adv_from_json.generals = generals
+            adv_from_json.actions = actions
+            self.adventure = adv_from_json
             self.open_adventure_tab()
         dlg.Destroy()
 
@@ -664,22 +695,27 @@ class Frame(wx.Frame):
 
     def make_menu_bar(self):
         menu_bar = wx.MenuBar()
-        self.menu_bar_ids['save'] = wx.NewIdRef()
         menu_f = wx.Menu()
+        self.menu_bar_ids['save'] = wx.NewIdRef()
         menu_f.Append(self.menu_bar_ids['save'], '&Save')
         self.Bind(wx.EVT_MENU, self.save_adv, id=self.menu_bar_ids['save'])
         self.menu_bar_ids['open'] = wx.NewIdRef()
         menu_f.Append(self.menu_bar_ids['open'], '&Open')
         self.Bind(wx.EVT_MENU, self.open_adv, id=self.menu_bar_ids['open'])
         menu_bar.Append(menu_f, '&File')
+        # TODO 3 lines temp
+        self.menu_bar_ids['fromJson'] = wx.NewIdRef()
+        menu_f.Append(self.menu_bar_ids['fromJson'], '&fromJson')
+        self.Bind(wx.EVT_MENU, self.open_from_json, id=self.menu_bar_ids['fromJson'])
         self.SetMenuBar(menu_bar)
 
     def on_size(self, event):
         width, height = self.GetClientSize()
-        self.action_adv_panel.SetSize(width, height)
-        self.action_adv_panel.table.SetColSize(1, width
-                                               - sum(self.action_adv_panel.table.GetColSize(col) for col in (0, 2, 3))
-                                               - self.action_adv_panel.table.GetRowLabelSize())
+        action_panel = self.adventure_panel.action_adv_panel
+        action_panel.SetSize(width, height)
+        action_panel.table.SetColSize(1, width
+                                      - sum(action_panel.table.GetColSize(col) for col in (0, 2, 3))
+                                      - action_panel.table.GetRowLabelSize())
         self.main_notebook.SetSize(self.GetClientSize())
 
 
