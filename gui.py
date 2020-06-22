@@ -171,6 +171,7 @@ class GeneralsTable(DataTable):
 class DataGrid(grid.Grid):
     def __init__(self, parent, table):
         grid.Grid.__init__(self, parent, -1)
+        self.EnableEditing(False)
         self.table = table
 
         # The second parameter means that the grid is to take ownership of the
@@ -220,6 +221,7 @@ class DataGrid(grid.Grid):
         # noinspection PyPep8Naming
         MY_EVT_GRID_SELECT_CELL = wx.PyCommandEvent(grid.EVT_GRID_SELECT_CELL.typeId, self.GetId())
         MY_EVT_GRID_SELECT_CELL.row = row
+        # posting event to handle it in ActionsPanel
         wx.PostEvent(self.GetEventHandler(), MY_EVT_GRID_SELECT_CELL)
         context_menu = wx.Menu()
         self.on_right_click_add(context_menu)
@@ -351,25 +353,25 @@ class GeneralsGrid(DataGrid):
         row = self.GetSelectedRows()[0]
         for gen in self.my_generals:
             if gen['id_ref'] == evt_id:
-                self.parent.adventure.add_general(row, **gen)
+                self.parent.parent.adventure.add_general(row, **gen)
         self.reset()
 
     def del_record(self, event):
         try:
-            self.parent.adventure.remove_general(self.GetSelectedRows()[0])
+            self.parent.parent.adventure.remove_general(self.GetSelectedRows()[0])
         except IndexError:
             return
         self.reset()
 
     def move_up(self, event):
         row = self.GetSelectedRows()[0]
-        self.parent.adventure.move_general(row, row-1)
+        self.parent.parent.adventure.move_general(row, row-1)
         self.reset()
         self.SelectRow(row-1)
 
     def move_down(self, event):
         row = self.GetSelectedRows()[0]
-        self.parent.adventure.move_general(row, row+1)
+        self.parent.parent.adventure.move_general(row, row+1)
         self.reset()
         self.SelectRow(row+1)
 
@@ -553,9 +555,14 @@ class GeneralsEdit(aui.AuiNotebook):
         self.Bind(wx.aui.EVT_AUINOTEBOOK_PAGE_CLOSE, self.on_close_page)
         self.generals_add = GeneralAdd(self)
         self.AddPage(self.generals_add, 'Add general')
-        self.show_generals(0)
+        try:
+            self.show_generals(0)
+        except IndexError:
+            pass
 
     def show_generals(self, action_no):
+        if len(self.parent.table.actions) == 0:
+            return
         generals = self.parent.table.get_action(action_no).get_generals()
         generals_add_index = self.GetPageIndex(self.generals_add)
         # delete all pages, accept generals_add page
@@ -610,6 +617,7 @@ class ActionsPanel(wx.Panel):
 
 class Splitter(wx.SplitterWindow):
     def __init__(self, parent, adventure):
+        self.parent = parent
         wx.SplitterWindow.__init__(self, parent, wx.ID_ANY, style=wx.SP_LIVE_UPDATE)
         self.action_adv_panel = ActionsPanel(self, adventure)
         self.generals_adv_panel = GeneralsGrid(self, adventure)
@@ -626,8 +634,7 @@ class Frame(wx.Frame):
         self.main_notebook = aui.AuiNotebook(self, wx.ID_ANY, style=self._notebook_style)
         # empty adventure
         self.adventure = my_types.Adventure(name='Empty')
-        self.adventure.generals = [my_types.General()]
-        self.adventure.actions = [my_types.Action(self)]
+        # self.adventure.actions = [my_types.Action(self)]
 
         self.open_adventure_tab()
         # self.CreateStatusBar()

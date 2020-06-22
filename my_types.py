@@ -66,9 +66,8 @@ class Adventure:
         self.description = description
         self.generals = list()
         self.actions = list()
-        if name == 'Empty':
-            self.generals.append(General())
-            self.actions.append(Action())
+        # if name == 'Empty':
+            # self.actions.append(Action())
 
     def add_general(self, index, **kwargs):
         """inserting general at index, or at the end when index==None"""
