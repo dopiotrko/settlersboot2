@@ -169,8 +169,8 @@ class GeneralsTable(DataTable):
 
 
 class DataGrid(grid.Grid):
-    def __init__(self, parent, table):
-        grid.Grid.__init__(self, parent, -1)
+    def __init__(self, parent, table, id_):
+        grid.Grid.__init__(self, parent, id_)
         self.EnableEditing(False)
         self.table = table
 
@@ -275,7 +275,8 @@ class ActionsGrid(DataGrid):
     def __init__(self, parent, adventure):
         self.actions = adventure.actions
         self.table = ActionsTable(self.actions)
-        super().__init__(parent, self.table)
+        self.id = wx.NewIdRef()
+        super().__init__(parent, self.table, self.id)
 
         self.GetGridWindow().Bind(wx.EVT_MOTION, self.on_mouse_over)
 
@@ -337,7 +338,8 @@ class GeneralsGrid(DataGrid):
         self.data = adventure.generals
         self.my_generals = my.load_generals()
         self.table = GeneralsTable(self.data)
-        super().__init__(parent, self.table)
+        self.id = wx.NewIdRef()
+        super().__init__(parent, self.table, self.id)
         self.make_context_menu_ids()
 
         # self.GetGridWindow().Bind(wx.EVT_MOTION, self.on_mouse_over)
@@ -543,8 +545,7 @@ class GeneralAdd(wx.Panel):
 
 class GeneralsEdit(aui.AuiNotebook):
     """
-    A simple window that is used as sizer items in the tests below to
-    show how the various sizers work.
+    Book with GeneralEdit pages, and GeneralAdd page
     """
 
     def __init__(self, parent):
@@ -555,15 +556,8 @@ class GeneralsEdit(aui.AuiNotebook):
         self.Bind(wx.aui.EVT_AUINOTEBOOK_PAGE_CLOSE, self.on_close_page)
         self.generals_add = GeneralAdd(self)
         self.AddPage(self.generals_add, 'Add general')
-        try:
-            self.show_generals(0)
-        except IndexError:
-            pass
 
-    def show_generals(self, action_no):
-        if len(self.parent.tables.actions_grid.actions) == 0:
-            return
-        generals = self.parent.tables.actions_grid.get_action(action_no).get_generals()
+    def show_generals(self, generals):
         generals_add_index = self.GetPageIndex(self.generals_add)
         # delete all pages, accept generals_add page
         for p in range(generals_add_index-1, -1, -1):
@@ -587,12 +581,24 @@ class GeneralsEdit(aui.AuiNotebook):
             event.Veto()
 
 
+class Splitter(wx.SplitterWindow):
+    """GeneralsGrid and Actions Grid with splitter"""
+    def __init__(self, parent, adventure):
+        self.parent = parent
+        wx.SplitterWindow.__init__(self, parent, wx.ID_ANY, style=wx.SP_LIVE_UPDATE)
+        self.actions_grid = ActionsGrid(self, adventure)
+        self.generals_grid = GeneralsGrid(self, adventure)
+        self.SetMinimumPaneSize(20)
+        self.SplitHorizontally(self.generals_grid, self.actions_grid, 100)
+
+
 class AdventurePanel(wx.Panel):
     def __init__(self, parent, adventure):
         wx.Panel.__init__(self, parent, wx.ID_ANY,
                           style=wx.STAY_ON_TOP | wx.DEFAULT_FRAME_STYLE)
 
         self.last_row = 9999999
+        self.last_grid_id = None
         self.sizer = wx.BoxSizer(wx.VERTICAL)
         self.tables = Splitter(self, adventure)
         self.sizer.Add(self.tables, 1, wx.EXPAND)
@@ -610,19 +616,25 @@ class AdventurePanel(wx.Panel):
             row = event.GetRow()
         else:
             row = event.row
-        if self.last_row != row:
-            self.generals_edt.show_generals(row)
-            self.last_row = row
-
-
-class Splitter(wx.SplitterWindow):
-    def __init__(self, parent, adventure):
-        self.parent = parent
-        wx.SplitterWindow.__init__(self, parent, wx.ID_ANY, style=wx.SP_LIVE_UPDATE)
-        self.actions_grid = ActionsGrid(self, adventure)
-        self.generals_grid = GeneralsGrid(self, adventure)
-        self.SetMinimumPaneSize(20)
-        self.SplitHorizontally(self.generals_grid, self.actions_grid, 100)
+        if self.last_grid_id != event.GetId() or self.last_row != row:
+            if event.GetId() == self.tables.actions_grid.id:
+                if len(self.tables.actions_grid.actions) == 0:
+                    return
+                generals = self.tables.actions_grid.get_action(row).get_generals()
+                self.generals_edt.show_generals(generals)
+                self.last_row = row
+                self.last_grid_id = event.GetId()
+                print('action')
+            elif event.GetId() == self.tables.generals_grid.id:
+                if len(self.tables.generals_grid.data) == 0:
+                    return
+                general = self.tables.generals_grid.data[row]
+                self.generals_edt.show_generals([general, ])
+                self.last_row = row
+                self.last_grid_id = event.GetId()
+                print('general')
+            else:
+                raise Exception
 
 
 class Frame(wx.Frame):
