@@ -225,7 +225,9 @@ class DataGrid(grid.Grid):
         # posting event to handle it in AdventurePanel
         wx.PostEvent(self.GetEventHandler(), MY_EVT_GRID_SELECT_CELL)
         context_menu = wx.Menu()
-        self.on_right_click_add(context_menu)
+        # adding menu in children classes
+        self.on_right_click_add(context_menu, event)
+
         if row < self.GetNumberRows() - 1:
             context_menu.AppendSeparator()
             context_menu.Append(self.context_menu_ids['del_id'], 'Delete')
@@ -257,7 +259,8 @@ class DataGrid(grid.Grid):
     def get_action(self, no):
         return self.table.data[no]
 
-    def on_right_click_add(self, context_menu):
+    def on_right_click_add(self, context_menu, event):
+        # must be overridden in derived class to add context menu ilems
         pass
 
     def move_up(self, event):
@@ -308,7 +311,14 @@ class ActionsGrid(DataGrid):
         for act in my_types.action_types:
             act['id_ref'] = wx.NewIdRef()
             self.Bind(wx.EVT_MENU, self.add_record, id=act['id_ref'])
+        print(self.adventure.generals)
+        for gen in self.adventure.generals:
+            gen.id_ref = wx.NewIdRef()
+            self.Bind(wx.EVT_MENU, self.add_general_to_record, id=gen.id_ref)
         super().make_context_menu_ids()
+
+    def add_general_to_record(self, event):
+        pass
 
     def add_record(self, event):
         evt_id = event.GetId()
@@ -338,9 +348,14 @@ class ActionsGrid(DataGrid):
         self.reset()
         self.SelectRow(row+1)
 
-    def on_right_click_add(self, context_menu):
-        for act in my_types.action_types:
-            context_menu.Append(act['id_ref'], act['type'])
+    def on_right_click_add(self, context_menu, event):
+        row, col = event.GetRow(), event.GetCol()
+        if col == 0:
+            for act in my_types.action_types:
+                context_menu.Append(act['id_ref'], act['type'])
+        if col == 1:
+            for gen in self.adventure.generals:
+                context_menu.Append(gen.id_ref, gen.type)
 
 
 class GeneralsGrid(DataGrid):
@@ -390,7 +405,7 @@ class GeneralsGrid(DataGrid):
         self.reset()
         self.SelectRow(row+1)
 
-    def on_right_click_add(self, context_menu):
+    def on_right_click_add(self, context_menu, event):
         for gen in self.my_generals:
             if gen['name'] not in self.adventure.get_generals_names():
                 context_menu.Append(gen['id_ref'], gen['name'])

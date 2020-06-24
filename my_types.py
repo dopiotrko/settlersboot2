@@ -161,6 +161,7 @@ class General:
         self.drag = kwargs.get('drag')
         self.parent = args[0] if args else None
         self.capacity = kwargs.get('capacity', 300)
+        self.id_ref = None
 
     def get_units(self, key_or_index):
         key = self._key_to_index(key_or_index)
