@@ -1,6 +1,7 @@
 from enum import Enum
 import pickle
 import logging
+import copy
 
 action_types = [{"type": 'move'},
                 {"type": 'attack'},
@@ -87,8 +88,6 @@ class Adventure:
         self.description = description
         self.generals = list()
         self.actions = list()
-        # if name == 'Empty':
-            # self.actions.append(Action())
 
     def add_general(self, index, **kwargs):
         logging.info('Adventure:add_general:')
@@ -170,6 +169,10 @@ class Action:
     def get_generals(self):
         logging.info('Action:get_generals:')
         return self.generals
+
+    def add_general(self, general):
+        logging.info('Action:add_general:')
+        self.generals.append(copy.deepcopy(general))
 
 
 class General:

@@ -315,6 +315,7 @@ class DataGrid(grid.Grid):
 class ActionsGrid(DataGrid):
     def __init__(self, parent, adventure):
         logging.info('ActionsGrid:__init__:')
+        self.parent = parent
         self.actions = adventure.actions
         self.adventure = adventure
         self.table = ActionsTable(self.actions)
@@ -352,17 +353,22 @@ class ActionsGrid(DataGrid):
             if 'id_ref' not in act:
                 act['id_ref'] = wx.NewIdRef()
                 self.Bind(wx.EVT_MENU, self.add_record, id=act['id_ref'])
-        print(self.adventure.generals)
         for gen in self.adventure.generals:
             if not gen.id_ref:
                 gen.id_ref = wx.NewIdRef()
-                print('making id_ref for', gen.name)
                 self.Bind(wx.EVT_MENU, self.add_general_to_record, id=gen.id_ref)
         super().make_context_menu_ids()
 
     def add_general_to_record(self, event):
         logging.info('ActionsGrid:add_general_to_record:')
-        pass
+        evt_id = event.GetId()
+        row = self.GetSelectedRows()[0]
+        for gen in self.adventure.generals:
+            if gen.id_ref == evt_id:
+                self.actions[row].add_general(gen)
+                print('adding', gen.name, 'to', self.actions[row].type)
+                break
+        self.reset()
 
     def add_record(self, event):
         logging.info('ActionsGrid:add_record:')
@@ -405,7 +411,7 @@ class ActionsGrid(DataGrid):
                 context_menu.Append(act['id_ref'], act['type'])
         elif col == 1:
             for gen in self.adventure.generals:
-                context_menu.Append(gen.id_ref, gen.type)
+                context_menu.Append(gen.id_ref, gen.name)
 
 
 class GeneralsGrid(DataGrid):
@@ -728,7 +734,6 @@ class AdventurePanel(wx.Panel):
                 self.generals_edt.show_generals(generals)
                 self.last_row = row
                 self.last_grid_id = event.GetId()
-                print('action')
             elif event.GetId() == self.tables.generals_grid.id:
                 number_of_records = len(self.tables.generals_grid.generals)
                 if number_of_records in (0, row):
@@ -737,7 +742,6 @@ class AdventurePanel(wx.Panel):
                 self.generals_edt.show_generals([general, ])
                 self.last_row = row
                 self.last_grid_id = event.GetId()
-                print('general')
             else:
                 raise Exception
 
