@@ -8,6 +8,7 @@ import json
 import my_types
 import logging
 MY_SIZE = (348, 788)
+logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
 
 
 class DataTable(grid.GridTableBase):
@@ -47,7 +48,7 @@ class DataTable(grid.GridTableBase):
         my_grid.ForceRefresh()
 
     def GetNumberRows(self):
-        logging.info('DataTable:GetNumberRows:')
+        # logging.info('DataTable:GetNumberRows:')
         return len(self.data) + 1
 
     # --------------------------------------------------
@@ -55,21 +56,21 @@ class DataTable(grid.GridTableBase):
 
     # Called when the grid needs to display labels
     def GetColLabelValue(self, col):
-        logging.info('DataTable:GetColLabelValue:')
+        # logging.info('DataTable:GetColLabelValue:')
         return self.colLabels[col]
 
     # Called to determine the kind of editor/renderer to use by
     # default, doesn't necessarily have to be the same type used
     # natively by the editor/renderer if they know how to convert.
     def GetTypeName(self, row, col):
-        logging.info('DataTable:GetTypeName:')
+        # logging.info('DataTable:GetTypeName:')
         return self.dataTypes[col]
 
     # Called to determine how the data can be fetched and stored by the
     # editor and renderer.  This allows you to enforce some type-safety
     # in the grid.
     def CanGetValueAs(self, row, col, type_name):
-        logging.info('DataTable:CanGetValueAs:')
+        # logging.info('DataTable:CanGetValueAs:')
         col_type = self.dataTypes[col].split(':')[0]
         if type_name == col_type:
             return True
@@ -77,7 +78,7 @@ class DataTable(grid.GridTableBase):
             return False
 
     def CanSetValueAs(self, row, col, type_name):
-        logging.info('DataTable:CanSetValueAs:')
+        # logging.info('DataTable:CanSetValueAs:')
         return self.CanGetValueAs(row, col, type_name)
 
 
@@ -97,16 +98,16 @@ class ActionsTable(DataTable):
     # required methods for the wxPyGridTableBase interface
 
     def GetNumberCols(self):
-        logging.info('ActionsTable:GetNumberCols:')
+        # logging.info('ActionsTable:GetNumberCols:')
         return 4
 
     def IsEmptyCell(self, row, col):
-        logging.info('ActionsTable:IsEmptyCell:')
+        # logging.info('ActionsTable:IsEmptyCell:')
         # pretending newer empty, so newer overflow
         return False
 
     def GetValue(self, row, col):
-        logging.info('ActionsTable:GetValue:')
+        # logging.info('ActionsTable:GetValue:')
         try:
             return self.data[row].get_data_for_table(self.colIds[col])
         except IndexError:
@@ -114,7 +115,7 @@ class ActionsTable(DataTable):
             return empty[col]
 
     def SetValue(self, row, col, value):
-        logging.info('ActionsTable:SetValue:')
+        # logging.info('ActionsTable:SetValue:')
         if col != 1:
             self.data[row].set_data_from_table(self.colIds[col], value)
 
@@ -123,15 +124,15 @@ class ActionsTable(DataTable):
 
     # Called when the grid needs to display labels
     def GetColLabelValue(self, col):
-        logging.info('ActionsTable:GetColLabelValue:')
+        # logging.info('ActionsTable:GetColLabelValue:')
         return super().GetColLabelValue(col)
 
     def GetTypeName(self, row, col):
-        logging.info('ActionsTable:GetTypeName:')
+        # logging.info('ActionsTable:GetTypeName:')
         return super().GetTypeName(row, col)
 
     def CanGetValueAs(self, row, col, type_name):
-        logging.info('ActionsTable:CanGetValueAs:')
+        # logging.info('ActionsTable:CanGetValueAs:')
         return super().CanGetValueAs(row, col, type_name)
 
     def CanSetValueAs(self, row, col, type_name):
@@ -154,16 +155,16 @@ class GeneralsTable(DataTable):
     # required methods for the wxPyGridTableBase interface
 
     def GetNumberCols(self):
-        logging.info('GeneralsTable:GetNumberCols:')
+        # logging.info('GeneralsTable:GetNumberCols:')
         return 3
 
     def IsEmptyCell(self, row, col):
-        logging.info('GeneralsTable:IsEmptyCell:')
+        # logging.info('GeneralsTable:IsEmptyCell:')
         # pretending newer empty, so newer overflow
         return False
 
     def GetValue(self, row, col):
-        logging.info('GeneralsTable:GetValue:')
+        # logging.info('GeneralsTable:GetValue:')
         try:
             return getattr(self.data[row], self.colIds[col])
         except IndexError:
@@ -171,7 +172,7 @@ class GeneralsTable(DataTable):
             return empty[col]
 
     def SetValue(self, row, col, value):
-        logging.info('GeneralsTable:SetValue:')
+        # logging.info('GeneralsTable:SetValue:')
         pass
 
     # --------------------------------------------------
@@ -179,19 +180,19 @@ class GeneralsTable(DataTable):
 
     # Called when the grid needs to display labels
     def GetColLabelValue(self, col):
-        logging.info('GeneralsTable:GetColLabelValue:')
+        # logging.info('GeneralsTable:GetColLabelValue:')
         return super().GetColLabelValue(col)
 
     def GetTypeName(self, row, col):
-        logging.info('GeneralsTable:GetTypeName:')
+        # logging.info('GeneralsTable:GetTypeName:')
         return super().GetTypeName(row, col)
 
     def CanGetValueAs(self, row, col, type_name):
-        logging.info('GeneralsTable:CanGetValueAs:')
+        # logging.info('GeneralsTable:CanGetValueAs:')
         return super().CanGetValueAs(row, col, type_name)
 
     def CanSetValueAs(self, row, col, type_name):
-        logging.info('GeneralsTable:CanSetValueAs:')
+        # logging.info('GeneralsTable:CanSetValueAs:')
         return super().CanSetValueAs(row, col, type_name)
 
 
@@ -220,7 +221,7 @@ class DataGrid(grid.Grid):
         # ---------------------------------------------------
         # ids for context menu
         self.context_menu_ids = dict()
-        self.make_context_menu_ids()
+        # self.make_context_menu_ids()
 
     def reset(self):
         logging.info('DataGrid:reset:')
@@ -327,7 +328,7 @@ class ActionsGrid(DataGrid):
     #         self.action_context_menu(event)
 
     def on_mouse_over(self, event):
-        logging.info('ActionsGrid:on_mouse_over:')
+        # logging.info('ActionsGrid:on_mouse_over:')
         """
         Method to calculate where the mouse is pointing and
         then set the tooltip dynamically.
@@ -348,12 +349,15 @@ class ActionsGrid(DataGrid):
     def make_context_menu_ids(self):
         logging.info('ActionsGrid:make_context_menu_ids:')
         for act in my_types.action_types:
-            act['id_ref'] = wx.NewIdRef()
-            self.Bind(wx.EVT_MENU, self.add_record, id=act['id_ref'])
+            if 'id_ref' not in act:
+                act['id_ref'] = wx.NewIdRef()
+                self.Bind(wx.EVT_MENU, self.add_record, id=act['id_ref'])
         print(self.adventure.generals)
         for gen in self.adventure.generals:
-            gen.id_ref = wx.NewIdRef()
-            self.Bind(wx.EVT_MENU, self.add_general_to_record, id=gen.id_ref)
+            if not gen.id_ref:
+                gen.id_ref = wx.NewIdRef()
+                print('making id_ref for', gen.name)
+                self.Bind(wx.EVT_MENU, self.add_general_to_record, id=gen.id_ref)
         super().make_context_menu_ids()
 
     def add_general_to_record(self, event):
@@ -394,11 +398,12 @@ class ActionsGrid(DataGrid):
 
     def on_right_click_add(self, context_menu, event):
         logging.info('ActionsGrid:on_right_click_add:')
+        self.make_context_menu_ids()
         row, col = event.GetRow(), event.GetCol()
         if col == 0:
             for act in my_types.action_types:
                 context_menu.Append(act['id_ref'], act['type'])
-        if col == 1:
+        elif col == 1:
             for gen in self.adventure.generals:
                 context_menu.Append(gen.id_ref, gen.type)
 
@@ -409,19 +414,20 @@ class GeneralsGrid(DataGrid):
         self.parent = parent
         self.adventure = adventure
         self.generals = adventure.generals
-        self.my_generals = my.load_generals()
+        self.my_generals = parent.parent.my_generals
         self.table = GeneralsTable(self.generals)
         self.id = wx.NewIdRef()
         super().__init__(parent, self.table, self.id)
-        self.make_context_menu_ids()
+        # self.make_context_menu_ids()
         # TODO zaznaczanie pozycji w grid a wyswietlanie jej w GeneralEedit
         # self.GetGridWindow().Bind(wx.EVT_MOTION, self.on_mouse_over)
 
     def make_context_menu_ids(self):
         logging.info('GeneralsGrid:make_context_menu_ids:')
         for gen in self.my_generals:
-            gen['id_ref'] = wx.NewIdRef()
-            self.Bind(wx.EVT_MENU, self.add_record, id=gen['id_ref'])
+            if 'id_ref' not in gen:
+                gen['id_ref'] = wx.NewIdRef()
+                self.Bind(wx.EVT_MENU, self.add_record, id=gen['id_ref'])
         super().make_context_menu_ids()
 
     def add_record(self, event):
@@ -458,8 +464,10 @@ class GeneralsGrid(DataGrid):
 
     def on_right_click_add(self, context_menu, event):
         logging.info('GeneralsGrid:on_right_click_add:')
+        self.make_context_menu_ids()
+        generals_names = self.adventure.get_generals_names()
         for gen in self.my_generals:
-            if gen['name'] not in self.adventure.get_generals_names():
+            if gen['name'] not in generals_names:
                 context_menu.Append(gen['id_ref'], gen['name'])
 
     # def on_right_click(self, event):
@@ -693,13 +701,13 @@ class AdventurePanel(wx.Panel):
 
         self.last_row = 9999999
         self.last_grid_id = None
+        self.my_generals = my.load_generals()
         self.sizer = wx.BoxSizer(wx.VERTICAL)
         self.tables = Splitter(self, adventure)
         self.sizer.Add(self.tables, 1, wx.EXPAND)
         self.generals_edt = GeneralsEdit(self)
         self.sizer.Add(self.generals_edt, 0, wx.EXPAND)
         self.Bind(grid.EVT_GRID_SELECT_CELL, self.on_select_cell)
-
         self.generals_edt.Show()
         self.SetSizer(self.sizer)
         self.sizer.Fit(self)

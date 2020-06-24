@@ -157,7 +157,7 @@ class Action:
         self.generals = [General(self, **gen) for gen in kwargs.get('generals', [])]
 
     def get_data_for_table(self, attr):
-        logging.info('Action:get_data_for_table:')
+        # logging.info('Action:get_data_for_table:')
         if attr == 'generals':
             return ', '.join('{} ({})'.format(gen.type, gen.id) for gen in self.generals)
         else:
@@ -207,3 +207,14 @@ class General:
         assert isinstance(key_or_index, int) or isinstance(key_or_index, str)
         key = key_or_index if isinstance(key_or_index, str) else self.keys[key_or_index]
         return key
+
+    def __getstate__(self):
+        """pickle without id_ref"""
+        state = self.__dict__.copy()
+        del state['id_ref']
+        return state
+
+    def __setstate__(self, state):
+        self.__dict__.update(state)
+        self.id_ref = None
+
