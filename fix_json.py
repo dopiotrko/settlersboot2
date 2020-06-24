@@ -102,24 +102,24 @@ class Fix:
         self.save()
 
     def copy_action(self, to, from_):
-        self.data['actions'].insert(to-1, copy.copy(self.data['actions'][from_-1]))
-        self.data['actions'][to-1]['no'] = to
+        self.data['actions'].insert(to - 1, copy.copy(self.data['actions'][from_ - 1]))
+        self.data['actions'][to - 1]['no'] = to
         for no in range(to, len(self.data['actions'])):
-            self.data['actions'][no]['no'] = no+1
+            self.data['actions'][no]['no'] = no + 1
         self.save()
 
     def move_action(self, to, from_):
-        moving = self.data['actions'].pop(from_-1)
-        self.data['actions'].insert(to-1, moving)
-        for no in range(to-1 if to < from_ else from_-1, len(self.data['actions'])):
-            self.data['actions'][no]['no'] = no+1
+        moving = self.data['actions'].pop(from_ - 1)
+        self.data['actions'].insert(to - 1, moving)
+        for no in range(to - 1 if to < from_ else from_ - 1, len(self.data['actions'])):
+            self.data['actions'][no]['no'] = no + 1
         self.save()
 
     def add_multi_attack(self, to, from_):
         action_template = {
             "no": to,
             "type": "attack",
-            "generals": [copy.copy(self.data['actions'][action_no-1]['generals'][0]) for action_no in from_],
+            "generals": [copy.copy(self.data['actions'][action_no - 1]['generals'][0]) for action_no in from_],
             "delay": 0
         }
 
@@ -143,6 +143,7 @@ class Fix:
             gen['capacity'] = capacity[gen['type']]
         self.save()
 
+
 # Fix('CR').add_capacity()
 # Fix('wiktor').insert_action(33, 0)
 # Fix('CR').insert_action(7, 6, 'unload')
@@ -151,7 +152,6 @@ class Fix:
 class AddMyPyGui:
     @classmethod
     def add(cls, name):
-
         text = "class {0}:\n" \
                "    def __call__(self, *args, **kwargs):\n" \
                "        print('{0}:', *args, **kwargs)\n" \
@@ -161,6 +161,31 @@ class AddMyPyGui:
         print(text)
         with open('my_pygui.py', 'a') as f:
             f.write(text)
+
+
+class LoggingAdd:
+    def __init__(self, filename):
+        def_line = False
+        class_name = None
+        with open(filename+'.bcp', 'a') as ff:
+            with open(filename, 'r') as f:
+                for line in f:
+                    if line.startswith('class'):
+                        import re
+                        class_name = re.split('\W+', line)[1]
+                    elif line.startswith('    def '):
+                        def_line = True
+                        import re
+                        def_name = re.split('\W+', line)[2]
+                    elif def_line:
+                        def_line = False
+                        if not line.startswith('        loogging'):
+                            ff.write("        logging.info('{}:{}:')\n".format(class_name, def_name))
+                            # print('\n', file=ff)
+                    ff.write(line)
+
+
+LoggingAdd('gui.py')
 
 """
 import pytesseract
