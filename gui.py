@@ -98,7 +98,8 @@ class ActionsTable(DataTable):
         try:
             return self.data[row].get_data_for_table(self.colIds[col])
         except IndexError:
-            return ''
+            empty = ['Click right to add', '', 0, False]
+            return empty[col]
 
     def SetValue(self, row, col, value):
         if col != 1:
@@ -274,6 +275,7 @@ class DataGrid(grid.Grid):
 class ActionsGrid(DataGrid):
     def __init__(self, parent, adventure):
         self.actions = adventure.actions
+        self.adventure = adventure
         self.table = ActionsTable(self.actions)
         self.id = wx.NewIdRef()
         super().__init__(parent, self.table, self.id)
@@ -302,60 +304,71 @@ class ActionsGrid(DataGrid):
                 event.GetEventObject().SetToolTip(gens.replace(', ', '\n'))
         event.Skip()
 
+    def make_context_menu_ids(self):
+        for act in my_types.action_types:
+            act['id_ref'] = wx.NewIdRef()
+            self.Bind(wx.EVT_MENU, self.add_record, id=act['id_ref'])
+        super().make_context_menu_ids()
+
+    def add_record(self, event):
+        evt_id = event.GetId()
+        row = self.GetSelectedRows()[0]
+        for act in my_types.action_types:
+            if act['id_ref'] == evt_id:
+                self.adventure.add_action(row, **act)
+                break
+        self.reset()
+
     def del_record(self, event):
-        pass
+        try:
+            self.adventure.remove_action(self.GetSelectedRows()[0])
+        except IndexError:
+            return
+        self.reset()
 
-    # def get_action(self, no):
-    #     return self.tables.data[no]
+    def move_up(self, event):
+        row = self.GetSelectedRows()[0]
+        self.adventure.move_action(row, row-1)
+        self.reset()
+        self.SelectRow(row-1)
 
-    # def action_context_menu(self, event):
-    #
-    #     self.SelectRow(event.GetRow())
-    #     # noinspection PyPep8Naming
-    #     MY_EVT_GRID_SELECT_CELL = wx.PyCommandEvent(grid.EVT_GRID_SELECT_CELL.typeId, self.GetId())
-    #     MY_EVT_GRID_SELECT_CELL.row = event.GetRow()
-    #     wx.PostEvent(self.GetEventHandler(), MY_EVT_GRID_SELECT_CELL)
-    #     context_menu = wx.Menu()
-    #     context_menu.Append(self.add_above_id, 'Add action above')
-    #     context_menu.Append(self.add_below_id, 'Add action below')
-    #     self.PopupMenu(context_menu)
-    #     context_menu.Destroy()
-    #
-    # def add_above(self, event):
-    #     row = self.GetSelectedRows()[0]
-    #     print('add-^')
-    #
-    # def add_below(self, event):
-    #     row = self.GetSelectedRows()[0]
-    #     print('add-v')
-    #     print(GeneralEdit.get_min_size(self))
+    def move_down(self, event):
+        row = self.GetSelectedRows()[0]
+        self.adventure.move_action(row, row+1)
+        self.reset()
+        self.SelectRow(row+1)
+
+    def on_right_click_add(self, context_menu):
+        for act in my_types.action_types:
+            context_menu.Append(act['id_ref'], act['type'])
 
 
 class GeneralsGrid(DataGrid):
     def __init__(self, parent, adventure):
         self.parent = parent
         self.adventure = adventure
-        self.data = adventure.generals
+        self.generals = adventure.generals
         self.my_generals = my.load_generals()
-        self.table = GeneralsTable(self.data)
+        self.table = GeneralsTable(self.generals)
         self.id = wx.NewIdRef()
         super().__init__(parent, self.table, self.id)
         self.make_context_menu_ids()
-
+        # TODO zaznaczanie pozycji w grid a wyswietlanie jej w GeneralEedit
         # self.GetGridWindow().Bind(wx.EVT_MOTION, self.on_mouse_over)
 
     def make_context_menu_ids(self):
         for gen in self.my_generals:
             gen['id_ref'] = wx.NewIdRef()
-            self.Bind(wx.EVT_MENU, self.add_general, id=gen['id_ref'])
+            self.Bind(wx.EVT_MENU, self.add_record, id=gen['id_ref'])
         super().make_context_menu_ids()
 
-    def add_general(self, event):
+    def add_record(self, event):
         evt_id = event.GetId()
         row = self.GetSelectedRows()[0]
         for gen in self.my_generals:
             if gen['id_ref'] == evt_id:
                 self.adventure.add_general(row, **gen)
+                break
         self.reset()
 
     def del_record(self, event):
@@ -430,7 +443,7 @@ class GeneralEdit(wx.Panel):
         gbs.Add(label("Delay"), (7, 1))
 
         self.army = army = {}
-        for count, key in enumerate(general.army.keys()):
+        for count, key in enumerate(general.keys):
             spin_ctrl = wx.SpinCtrl(self, id=wx.ID_ANY, style=wx.SP_ARROW_KEYS, min=0, name=key)
             gbs.Add(spin_ctrl, (int(count / 3) * 2 + 1, count % 3 + 1))
             self.army.setdefault(key, spin_ctrl)
@@ -474,7 +487,7 @@ class GeneralEdit(wx.Panel):
         # setting values
         for key, units in army.items():
             units.SetMax(general.capacity)
-            units.SetValue(general.army[key])
+            units.SetValue(general.army.get(key, 0))
         self.delay.SetValue(general.delay)
         self.preset.SetValue(general.preset)
         self.init.SetValue(general.init)
@@ -535,7 +548,7 @@ class GeneralAdd(wx.Panel):
         dvlc.AppendTextColumn('name')
         dvlc.AppendTextColumn('capacity')
 
-        # Load the data. Each item (row) is added as a sequence of values
+        # Load the generals. Each item (row) is added as a sequence of values
         # whose order matches the columns
         for gen in my.load_generals():
             dvlc.AppendItem((gen['type'], gen['name'], str(gen['capacity'])))
@@ -582,7 +595,7 @@ class GeneralsEdit(aui.AuiNotebook):
 
 
 class Splitter(wx.SplitterWindow):
-    """GeneralsGrid and Actions Grid with splitter"""
+    """GeneralsGrid and ActionsGrid with splitter"""
     def __init__(self, parent, adventure):
         self.parent = parent
         wx.SplitterWindow.__init__(self, parent, wx.ID_ANY, style=wx.SP_LIVE_UPDATE)
@@ -618,7 +631,8 @@ class AdventurePanel(wx.Panel):
             row = event.row
         if self.last_grid_id != event.GetId() or self.last_row != row:
             if event.GetId() == self.tables.actions_grid.id:
-                if len(self.tables.actions_grid.actions) == 0:
+                number_of_records = len(self.tables.actions_grid.actions)
+                if number_of_records in (0, row):
                     return
                 generals = self.tables.actions_grid.get_action(row).get_generals()
                 self.generals_edt.show_generals(generals)
@@ -626,9 +640,10 @@ class AdventurePanel(wx.Panel):
                 self.last_grid_id = event.GetId()
                 print('action')
             elif event.GetId() == self.tables.generals_grid.id:
-                if len(self.tables.generals_grid.data) == 0:
+                number_of_records = len(self.tables.generals_grid.generals)
+                if number_of_records in (0, row):
                     return
-                general = self.tables.generals_grid.data[row]
+                general = self.tables.generals_grid.generals[row]
                 self.generals_edt.show_generals([general, ])
                 self.last_row = row
                 self.last_grid_id = event.GetId()

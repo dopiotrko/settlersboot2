@@ -1,6 +1,13 @@
 from enum import Enum
 import pickle
 
+action_types = [{"type": 'move'},
+                {"type": 'attack'},
+                {"type": 'load'},
+                {"type": 'unload'},
+                {"type": 'retreat'}
+                ]
+
 
 class Point:
     def __init__(self, x=0, y=0):
@@ -74,15 +81,30 @@ class Adventure:
         self.generals.insert(index, General(**kwargs))
         self.fix_ids()
 
+    def add_action(self, index, **kwargs):
+        """inserting general at index, or at the end when index==None"""
+        self.actions.insert(index, Action(**kwargs))
+        # self.fix_ids()
+
     def remove_general(self, index):
         popped = self.generals.pop(index)
         self.fix_ids()
         return popped
 
+    def remove_action(self, index):
+        popped = self.actions.pop(index)
+        # self.fix_ids()
+        return popped
+
     def move_general(self, from_, to):
         moving = self.remove_general(from_)
         self.generals.insert(to, moving)
-        self.fix_ids()
+        # self.fix_ids()
+
+    def move_action(self, from_, to):
+        moving = self.remove_action(from_)
+        self.actions.insert(to, moving)
+        # self.fix_ids()
 
     def fix_ids(self):
         for index, gen in enumerate(self.generals):
