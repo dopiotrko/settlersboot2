@@ -6,11 +6,13 @@ import wx.dataview as dv
 import os
 import json
 import my_types
+import logging
 MY_SIZE = (348, 788)
 
 
 class DataTable(grid.GridTableBase):
     def __init__(self, data):
+        logging.info('DataTable:__init__:')
         grid.GridTableBase.__init__(self)
         self.data = data
         self.colLabels = []
@@ -20,6 +22,7 @@ class DataTable(grid.GridTableBase):
         self._rows = self.GetNumberRows()
 
     def reset_view(self, my_grid):
+        logging.info('DataTable:reset_view:')
         """
         (Grid) -> Reset the grid view.   Call this to
         update the grid if rows and columns have been added or deleted
@@ -44,6 +47,7 @@ class DataTable(grid.GridTableBase):
         my_grid.ForceRefresh()
 
     def GetNumberRows(self):
+        logging.info('DataTable:GetNumberRows:')
         return len(self.data) + 1
 
     # --------------------------------------------------
@@ -51,18 +55,21 @@ class DataTable(grid.GridTableBase):
 
     # Called when the grid needs to display labels
     def GetColLabelValue(self, col):
+        logging.info('DataTable:GetColLabelValue:')
         return self.colLabels[col]
 
     # Called to determine the kind of editor/renderer to use by
     # default, doesn't necessarily have to be the same type used
     # natively by the editor/renderer if they know how to convert.
     def GetTypeName(self, row, col):
+        logging.info('DataTable:GetTypeName:')
         return self.dataTypes[col]
 
     # Called to determine how the data can be fetched and stored by the
     # editor and renderer.  This allows you to enforce some type-safety
     # in the grid.
     def CanGetValueAs(self, row, col, type_name):
+        logging.info('DataTable:CanGetValueAs:')
         col_type = self.dataTypes[col].split(':')[0]
         if type_name == col_type:
             return True
@@ -70,11 +77,13 @@ class DataTable(grid.GridTableBase):
             return False
 
     def CanSetValueAs(self, row, col, type_name):
+        logging.info('DataTable:CanSetValueAs:')
         return self.CanGetValueAs(row, col, type_name)
 
 
 class ActionsTable(DataTable):
     def __init__(self, data):
+        logging.info('ActionsTable:__init__:')
         super().__init__(data)
         self.colLabels = ['Type', 'Generals', 'Delay', 'Active']
         self.colIds = ['type', 'generals', 'delay', 'active']
@@ -88,13 +97,16 @@ class ActionsTable(DataTable):
     # required methods for the wxPyGridTableBase interface
 
     def GetNumberCols(self):
+        logging.info('ActionsTable:GetNumberCols:')
         return 4
 
     def IsEmptyCell(self, row, col):
+        logging.info('ActionsTable:IsEmptyCell:')
         # pretending newer empty, so newer overflow
         return False
 
     def GetValue(self, row, col):
+        logging.info('ActionsTable:GetValue:')
         try:
             return self.data[row].get_data_for_table(self.colIds[col])
         except IndexError:
@@ -102,6 +114,7 @@ class ActionsTable(DataTable):
             return empty[col]
 
     def SetValue(self, row, col, value):
+        logging.info('ActionsTable:SetValue:')
         if col != 1:
             self.data[row].set_data_from_table(self.colIds[col], value)
 
@@ -110,20 +123,25 @@ class ActionsTable(DataTable):
 
     # Called when the grid needs to display labels
     def GetColLabelValue(self, col):
+        logging.info('ActionsTable:GetColLabelValue:')
         return super().GetColLabelValue(col)
 
     def GetTypeName(self, row, col):
+        logging.info('ActionsTable:GetTypeName:')
         return super().GetTypeName(row, col)
 
     def CanGetValueAs(self, row, col, type_name):
+        logging.info('ActionsTable:CanGetValueAs:')
         return super().CanGetValueAs(row, col, type_name)
 
     def CanSetValueAs(self, row, col, type_name):
+        logging.info('ActionsTable:CanSetValueAs:')
         return super().CanSetValueAs(row, col, type_name)
 
 
 class GeneralsTable(DataTable):
     def __init__(self, data):
+        logging.info('GeneralsTable:__init__:')
         super().__init__(data)
         self.colLabels = ['Type', 'Name', 'Capacity']
         self.colIds = ['type', 'name', 'capacity']
@@ -136,13 +154,16 @@ class GeneralsTable(DataTable):
     # required methods for the wxPyGridTableBase interface
 
     def GetNumberCols(self):
+        logging.info('GeneralsTable:GetNumberCols:')
         return 3
 
     def IsEmptyCell(self, row, col):
+        logging.info('GeneralsTable:IsEmptyCell:')
         # pretending newer empty, so newer overflow
         return False
 
     def GetValue(self, row, col):
+        logging.info('GeneralsTable:GetValue:')
         try:
             return getattr(self.data[row], self.colIds[col])
         except IndexError:
@@ -150,6 +171,7 @@ class GeneralsTable(DataTable):
             return empty[col]
 
     def SetValue(self, row, col, value):
+        logging.info('GeneralsTable:SetValue:')
         pass
 
     # --------------------------------------------------
@@ -157,20 +179,25 @@ class GeneralsTable(DataTable):
 
     # Called when the grid needs to display labels
     def GetColLabelValue(self, col):
+        logging.info('GeneralsTable:GetColLabelValue:')
         return super().GetColLabelValue(col)
 
     def GetTypeName(self, row, col):
+        logging.info('GeneralsTable:GetTypeName:')
         return super().GetTypeName(row, col)
 
     def CanGetValueAs(self, row, col, type_name):
+        logging.info('GeneralsTable:CanGetValueAs:')
         return super().CanGetValueAs(row, col, type_name)
 
     def CanSetValueAs(self, row, col, type_name):
+        logging.info('GeneralsTable:CanSetValueAs:')
         return super().CanSetValueAs(row, col, type_name)
 
 
 class DataGrid(grid.Grid):
     def __init__(self, parent, table, id_):
+        logging.info('DataGrid:__init__:')
         grid.Grid.__init__(self, parent, id_)
         self.EnableEditing(False)
         self.table = table
@@ -196,6 +223,7 @@ class DataGrid(grid.Grid):
         self.make_context_menu_ids()
 
     def reset(self):
+        logging.info('DataGrid:reset:')
         self.table.reset_view(self)
         for row in range(self.GetNumberRows()-1):
             self.SetCellSize(row, 0, 1, 1)
@@ -204,10 +232,12 @@ class DataGrid(grid.Grid):
     # I do this because I don't like the default behaviour of not starting the
     # cell editor on double clicks, but only a second click.
     def on_left_d_click(self, evt):
+        logging.info('DataGrid:on_left_d_click:')
         if self.CanEnableCellControl():
             self.EnableCellEditControl()
 
     def make_context_menu_ids(self):
+        logging.info('DataGrid:make_context_menu_ids:')
         self.context_menu_ids['del_id'] = wx.NewIdRef()
         self.context_menu_ids['move_up'] = wx.NewIdRef()
         self.context_menu_ids['move_down'] = wx.NewIdRef()
@@ -217,6 +247,7 @@ class DataGrid(grid.Grid):
         self.Bind(wx.EVT_MENU, self.move_down, id=self.context_menu_ids['move_down'])
 
     def on_right_click(self, event):
+        logging.info('DataGrid:on_right_click:')
         row = event.GetRow()
         self.SelectRow(row)
         # noinspection PyPep8Naming
@@ -257,26 +288,32 @@ class DataGrid(grid.Grid):
     #     event.Skip()
 
     def get_action(self, no):
+        logging.info('DataGrid:get_action:')
         return self.table.data[no]
 
     def on_right_click_add(self, context_menu, event):
+        logging.info('DataGrid:on_right_click_add:')
         # must be overridden in derived class to add context menu ilems
         pass
 
     def move_up(self, event):
+        logging.info('DataGrid:move_up:')
         row = self.GetSelectedRows()[0]
         print('add-^')
 
     def move_down(self, event):
+        logging.info('DataGrid:move_down:')
         row = self.GetSelectedRows()[0]
         print('add-v')
 
     def del_record(self, event):
+        logging.info('DataGrid:del_record:')
         pass
 
 
 class ActionsGrid(DataGrid):
     def __init__(self, parent, adventure):
+        logging.info('ActionsGrid:__init__:')
         self.actions = adventure.actions
         self.adventure = adventure
         self.table = ActionsTable(self.actions)
@@ -290,6 +327,7 @@ class ActionsGrid(DataGrid):
     #         self.action_context_menu(event)
 
     def on_mouse_over(self, event):
+        logging.info('ActionsGrid:on_mouse_over:')
         """
         Method to calculate where the mouse is pointing and
         then set the tooltip dynamically.
@@ -308,6 +346,7 @@ class ActionsGrid(DataGrid):
         event.Skip()
 
     def make_context_menu_ids(self):
+        logging.info('ActionsGrid:make_context_menu_ids:')
         for act in my_types.action_types:
             act['id_ref'] = wx.NewIdRef()
             self.Bind(wx.EVT_MENU, self.add_record, id=act['id_ref'])
@@ -318,9 +357,11 @@ class ActionsGrid(DataGrid):
         super().make_context_menu_ids()
 
     def add_general_to_record(self, event):
+        logging.info('ActionsGrid:add_general_to_record:')
         pass
 
     def add_record(self, event):
+        logging.info('ActionsGrid:add_record:')
         evt_id = event.GetId()
         row = self.GetSelectedRows()[0]
         for act in my_types.action_types:
@@ -330,6 +371,7 @@ class ActionsGrid(DataGrid):
         self.reset()
 
     def del_record(self, event):
+        logging.info('ActionsGrid:del_record:')
         try:
             self.adventure.remove_action(self.GetSelectedRows()[0])
         except IndexError:
@@ -337,18 +379,21 @@ class ActionsGrid(DataGrid):
         self.reset()
 
     def move_up(self, event):
+        logging.info('ActionsGrid:move_up:')
         row = self.GetSelectedRows()[0]
         self.adventure.move_action(row, row-1)
         self.reset()
         self.SelectRow(row-1)
 
     def move_down(self, event):
+        logging.info('ActionsGrid:move_down:')
         row = self.GetSelectedRows()[0]
         self.adventure.move_action(row, row+1)
         self.reset()
         self.SelectRow(row+1)
 
     def on_right_click_add(self, context_menu, event):
+        logging.info('ActionsGrid:on_right_click_add:')
         row, col = event.GetRow(), event.GetCol()
         if col == 0:
             for act in my_types.action_types:
@@ -360,6 +405,7 @@ class ActionsGrid(DataGrid):
 
 class GeneralsGrid(DataGrid):
     def __init__(self, parent, adventure):
+        logging.info('GeneralsGrid:__init__:')
         self.parent = parent
         self.adventure = adventure
         self.generals = adventure.generals
@@ -372,12 +418,14 @@ class GeneralsGrid(DataGrid):
         # self.GetGridWindow().Bind(wx.EVT_MOTION, self.on_mouse_over)
 
     def make_context_menu_ids(self):
+        logging.info('GeneralsGrid:make_context_menu_ids:')
         for gen in self.my_generals:
             gen['id_ref'] = wx.NewIdRef()
             self.Bind(wx.EVT_MENU, self.add_record, id=gen['id_ref'])
         super().make_context_menu_ids()
 
     def add_record(self, event):
+        logging.info('GeneralsGrid:add_record:')
         evt_id = event.GetId()
         row = self.GetSelectedRows()[0]
         for gen in self.my_generals:
@@ -387,6 +435,7 @@ class GeneralsGrid(DataGrid):
         self.reset()
 
     def del_record(self, event):
+        logging.info('GeneralsGrid:del_record:')
         try:
             self.adventure.remove_general(self.GetSelectedRows()[0])
         except IndexError:
@@ -394,18 +443,21 @@ class GeneralsGrid(DataGrid):
         self.reset()
 
     def move_up(self, event):
+        logging.info('GeneralsGrid:move_up:')
         row = self.GetSelectedRows()[0]
         self.adventure.move_general(row, row-1)
         self.reset()
         self.SelectRow(row-1)
 
     def move_down(self, event):
+        logging.info('GeneralsGrid:move_down:')
         row = self.GetSelectedRows()[0]
         self.adventure.move_general(row, row+1)
         self.reset()
         self.SelectRow(row+1)
 
     def on_right_click_add(self, context_menu, event):
+        logging.info('GeneralsGrid:on_right_click_add:')
         for gen in self.my_generals:
             if gen['name'] not in self.adventure.get_generals_names():
                 context_menu.Append(gen['id_ref'], gen['name'])
@@ -435,6 +487,7 @@ class GeneralsGrid(DataGrid):
 
 class GeneralEdit(wx.Panel):
     def __init__(self, parent, general=None):
+        logging.info('GeneralEdit:__init__:')
         if not general:
             general = my_types.General(parent)
         self.general = general
@@ -518,30 +571,38 @@ class GeneralEdit(wx.Panel):
 
     @classmethod
     def get_min_size(cls, parent):
+        logging.info('GeneralEdit:get_min_size:')
         return cls(parent).GetMinSize()
 
     @classmethod
     def get_size(cls, parent):
+        logging.info('GeneralEdit:get_size:')
         return cls(parent).GetSize()
 
     def on_army_change(self, event):
+        logging.info('GeneralEdit:on_army_change:')
         self.general.set_units(event.GetEventObject().GetName(), event.GetPosition())
 
     def on_delay_change(self, event):
+        logging.info('GeneralEdit:on_delay_change:')
         self.general.delay = event.GetPosition()
 
     def on_preset_change(self, event):
+        logging.info('GeneralEdit:on_preset_change:')
         self.general.preset = event.IsChecked()
 
     def on_init_change(self, event):
+        logging.info('GeneralEdit:on_init_change:')
         self.general.init = event.IsChecked()
 
     def on_retreat_change(self, event):
+        logging.info('GeneralEdit:on_retreat_change:')
         self.general.retreat = event.IsChecked()
 
 
 class GeneralAdd(wx.Panel):
     def __init__(self, parent):
+        logging.info('GeneralAdd:__init__:')
         wx.Panel.__init__(self, parent, -1,
                           style=wx.TAB_TRAVERSAL | wx.CLIP_CHILDREN | wx.FULL_REPAINT_ON_RESIZE)
         sizer = self.sizer = wx.BoxSizer(wx.VERTICAL)
@@ -577,6 +638,7 @@ class GeneralsEdit(aui.AuiNotebook):
     """
 
     def __init__(self, parent):
+        logging.info('GeneralsEdit:__init__:')
         self._notebook_style = aui.AUI_NB_WINDOWLIST_BUTTON | aui.AUI_NB_SCROLL_BUTTONS | aui.AUI_NB_CLOSE_ON_ALL_TABS
         self.parent = parent
         self.pages = list()
@@ -586,6 +648,7 @@ class GeneralsEdit(aui.AuiNotebook):
         self.AddPage(self.generals_add, 'Add general')
 
     def show_generals(self, generals):
+        logging.info('GeneralsEdit:show_generals:')
         generals_add_index = self.GetPageIndex(self.generals_add)
         # delete all pages, accept generals_add page
         for p in range(generals_add_index-1, -1, -1):
@@ -604,6 +667,7 @@ class GeneralsEdit(aui.AuiNotebook):
             self.SetSelection(g_no)
 
     def on_close_page(self, event):
+        logging.info('GeneralsEdit:on_close_page:')
         # prevent generals_add page from close
         if event.GetSelection() == self.GetPageIndex(self.generals_add):
             event.Veto()
@@ -612,6 +676,7 @@ class GeneralsEdit(aui.AuiNotebook):
 class Splitter(wx.SplitterWindow):
     """GeneralsGrid and ActionsGrid with splitter"""
     def __init__(self, parent, adventure):
+        logging.info('Splitter:__init__:')
         self.parent = parent
         wx.SplitterWindow.__init__(self, parent, wx.ID_ANY, style=wx.SP_LIVE_UPDATE)
         self.actions_grid = ActionsGrid(self, adventure)
@@ -622,6 +687,7 @@ class Splitter(wx.SplitterWindow):
 
 class AdventurePanel(wx.Panel):
     def __init__(self, parent, adventure):
+        logging.info('AdventurePanel:__init__:')
         wx.Panel.__init__(self, parent, wx.ID_ANY,
                           style=wx.STAY_ON_TOP | wx.DEFAULT_FRAME_STYLE)
 
@@ -640,6 +706,7 @@ class AdventurePanel(wx.Panel):
         self.Fit()
 
     def on_select_cell(self, event):
+        logging.info('AdventurePanel:on_select_cell:')
         if isinstance(event, grid.GridEvent):
             row = event.GetRow()
         else:
@@ -669,6 +736,7 @@ class AdventurePanel(wx.Panel):
 
 class Frame(wx.Frame):
     def __init__(self, parent):
+        logging.info('Frame:__init__:')
         wx.Frame.__init__(self, parent, -1, "Custom Table, data driven Grid  Demo",
                           style=wx.STAY_ON_TOP | wx.DEFAULT_FRAME_STYLE)
         self.menu_bar_ids = {}
@@ -689,11 +757,13 @@ class Frame(wx.Frame):
         self.Fit()
 
     def open_adventure_tab(self):
+        logging.info('Frame:open_adventure_tab:')
         self.main_notebook.DeleteAllPages()
         self.adventure_panel = AdventurePanel(self, self.adventure)
         self.main_notebook.AddPage(self.adventure_panel, self.adventure.name)
 
     def open_adv(self, event):
+        logging.info('Frame:open_adv:')
         dlg = wx.FileDialog(
             self, message="Choose a file",
             defaultDir=os.getcwd() + '/save',
@@ -709,6 +779,7 @@ class Frame(wx.Frame):
 
     # TODO temp
     def open_from_json(self, event):
+        logging.info('Frame:open_from_json:')
         dlg = wx.FileDialog(
             self, message="Choose a file",
             defaultDir=os.getcwd() + '/data',
@@ -730,6 +801,7 @@ class Frame(wx.Frame):
         dlg.Destroy()
 
     def save_adv(self, event):
+        logging.info('Frame:save_adv:')
         dlg = wx.FileDialog(
             self, message="Save file as ...",
             defaultDir=os.getcwd() + '/save',
@@ -743,6 +815,7 @@ class Frame(wx.Frame):
         dlg.Destroy()
 
     def make_menu_bar(self):
+        logging.info('Frame:make_menu_bar:')
         menu_bar = wx.MenuBar()
         menu_f = wx.Menu()
         self.menu_bar_ids['save'] = wx.NewIdRef()
@@ -759,6 +832,7 @@ class Frame(wx.Frame):
         self.SetMenuBar(menu_bar)
 
     def on_size(self, event):
+        logging.info('Frame:on_size:')
         width, height = self.GetClientSize()
         action_panel = self.adventure_panel.tables.actions_grid
         action_panel.SetSize(width, height)
