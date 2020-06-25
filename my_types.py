@@ -147,6 +147,20 @@ class Adventure:
         with open(path, 'rb') as f:
             return pickle.load(f)
 
+    def fix_actions_no(self):
+        for i, action in enumerate(self.actions):
+            action.no = i
+
+    def as_json(self):
+        self.fix_actions_no()
+        json = (
+            {
+                "generals": [gen.as_json() for gen in self.generals],
+                "actions": [act.as_json() for act in self.actions]
+            }
+        )
+        return json
+
 
 class Action:
     def __init__(self, *args, **kwargs):
@@ -178,6 +192,12 @@ class Action:
     def del_general(self, general):
         logging.info('Action:del_general:')
         self.generals.remove(general)
+
+    def as_json(self):
+        json = copy.deepcopy(self.__dict__)
+        generals = [gen.as_json() for gen in json['generals']]
+        json['generals'] = generals
+        return json
 
 
 class General:
@@ -215,6 +235,23 @@ class General:
         assert isinstance(key_or_index, int) or isinstance(key_or_index, str)
         key = key_or_index if isinstance(key_or_index, str) else self.keys[key_or_index]
         return key
+
+    def as_json(self):
+        # print(self.__dict__)
+        json = {}
+        army = {}
+        # json['army'].update()
+        for key, value in self.__dict__.items():
+            if key in ('army', 'preset', 'init', 'id') or value:
+                json[key] = value
+        for key in json['keys']:
+            army[key] = json['army'].setdefault(key, 0)
+        json['army'] = army
+        del json['keys']
+        if 'id_ref' in json:
+            del json['id_ref']
+        json['delay'] = 0
+        return json
 
     def __getstate__(self):
         """pickle without id_ref"""

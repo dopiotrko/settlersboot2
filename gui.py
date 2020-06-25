@@ -811,6 +811,22 @@ class Frame(wx.Frame):
             self.open_adventure_tab()
         dlg.Destroy()
 
+    # TODO temp
+    def save_as_json(self, event):
+        logging.info('Frame:save_as_json:')
+        dlg = wx.FileDialog(
+            self, message="Save file as ...",
+            defaultDir=os.getcwd() + '/data',
+            defaultFile="",
+            wildcard="Adventure file (*.json)|*.json",
+            style=wx.FD_SAVE | wx.FD_OVERWRITE_PROMPT
+        )
+        if dlg.ShowModal() == wx.ID_OK:
+            path = dlg.GetPath()
+            with open(path, 'w') as f:
+                json.dump(self.adventure.as_json(), f, indent=2)
+        dlg.Destroy()
+
     def save_adv(self, event):
         logging.info('Frame:save_adv:')
         dlg = wx.FileDialog(
@@ -836,10 +852,13 @@ class Frame(wx.Frame):
         menu_f.Append(self.menu_bar_ids['open'], '&Open')
         self.Bind(wx.EVT_MENU, self.open_adv, id=self.menu_bar_ids['open'])
         menu_bar.Append(menu_f, '&File')
-        # TODO 3 lines temp
+        # TODO 6 lines temp
         self.menu_bar_ids['fromJson'] = wx.NewIdRef()
         menu_f.Append(self.menu_bar_ids['fromJson'], '&fromJson')
         self.Bind(wx.EVT_MENU, self.open_from_json, id=self.menu_bar_ids['fromJson'])
+        self.menu_bar_ids['toJson'] = wx.NewIdRef()
+        menu_f.Append(self.menu_bar_ids['toJson'], '&toJson')
+        self.Bind(wx.EVT_MENU, self.save_as_json, id=self.menu_bar_ids['toJson'])
         self.SetMenuBar(menu_bar)
 
     def on_size(self, event):
