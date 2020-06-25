@@ -179,21 +179,6 @@
         "elite_soldier": 0,
         "cannoneer": 0
       }
-    },
-    {
-      "id": 12,
-      "type": "basic",
-      "army": {
-        "recruit": 200,
-        "bowmen": 0,
-        "militia": 0,
-        "cavalry": 0,
-        "longbowman": 0,
-        "soldier": 0,
-        "crossbowman": 0,
-        "elite_soldier": 0,
-        "cannoneer": 0
-      }
     }
   ],
   "actions": [
@@ -288,7 +273,7 @@
         {
           "id": 2,
           "type": "boris",
-          "preset": false,
+          "preset": true,
           "init": false,
           "army": {
             "recruit": 51,
@@ -446,7 +431,7 @@
           "id": 5,
           "type": "master",
           "preset": false,
-          "init": false,
+          "init": true,
           "army": {
             "recruit": 75,
             "bowmen": 0,
@@ -459,16 +444,16 @@
             "cannoneer": 44
           },
           "relative_coordinates": [
-            -364,
-            218
+            835,
+            -437
           ],
           "drag": [
-            -127.5,
-            115.0
+            -241.0,
+            118.5
           ]
         }
       ],
-      "delay": 0
+      "delay": 155
     },
     {
       "no": 10,
@@ -491,7 +476,7 @@
             "cannoneer": 0
           },
           "drag": [
-            -73.0,
+            -173.0,
             173.0
           ],
           "relative_coordinates": [

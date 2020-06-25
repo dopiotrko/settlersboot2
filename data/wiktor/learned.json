@@ -4,7 +4,7 @@
       "id": 0,
       "type": "boris",
       "army": {
-        "recruit": 52,
+        "recruit": 45,
         "bowmen": 0,
         "militia": 0,
         "cavalry": 0,
@@ -12,7 +12,7 @@
         "soldier": 0,
         "crossbowman": 0,
         "elite_soldier": 0,
-        "cannoneer": 128
+        "cannoneer": 150
       }
     },
     {
@@ -48,6 +48,7 @@
     {
       "id": 3,
       "type": "major",
+      "name": "GM2",
       "army": {
         "recruit": 127,
         "bowmen": 0,
@@ -64,14 +65,14 @@
       "id": 4,
       "type": "master",
       "army": {
-        "recruit": 81,
+        "recruit": 0,
         "bowmen": 0,
         "militia": 0,
-        "cavalry": 0,
+        "cavalry": 78,
         "longbowman": 0,
         "soldier": 139,
         "crossbowman": 0,
-        "elite_soldier": 0,
+        "elite_soldier": 3,
         "cannoneer": 0
       }
     },
@@ -79,7 +80,7 @@
       "id": 5,
       "type": "veteran",
       "army": {
-        "recruit": 94,
+        "recruit": 0,
         "bowmen": 0,
         "militia": 35,
         "cavalry": 0,
@@ -87,7 +88,7 @@
         "soldier": 0,
         "crossbowman": 0,
         "elite_soldier": 0,
-        "cannoneer": 121
+        "cannoneer": 215
       }
     },
     {
@@ -162,7 +163,7 @@
           "preset": true,
           "init": true,
           "army": {
-            "recruit": 52,
+            "recruit": 45,
             "bowmen": 0,
             "militia": 0,
             "cavalry": 0,
@@ -170,7 +171,7 @@
             "soldier": 0,
             "crossbowman": 0,
             "elite_soldier": 0,
-            "cannoneer": 128
+            "cannoneer": 150
           },
           "relative_coordinates": [
             2,
@@ -414,7 +415,7 @@
           "preset": true,
           "init": false,
           "army": {
-            "recruit": 52,
+            "recruit": 45,
             "bowmen": 0,
             "militia": 0,
             "cavalry": 0,
@@ -422,7 +423,7 @@
             "soldier": 0,
             "crossbowman": 0,
             "elite_soldier": 0,
-            "cannoneer": 128
+            "cannoneer": 150
           },
           "relative_coordinates": [
             -231,
@@ -442,10 +443,10 @@
           "preset": false,
           "init": false,
           "army": {
-            "recruit": 37,
+            "recruit": 15,
             "bowmen": 0,
             "militia": 0,
-            "cavalry": 142,
+            "cavalry": 179,
             "longbowman": 0,
             "soldier": 0,
             "crossbowman": 0,
@@ -470,15 +471,15 @@
           "preset": false,
           "init": false,
           "army": {
-            "recruit": 115,
+            "recruit": 106,
             "bowmen": 0,
             "militia": 0,
             "cavalry": 0,
             "longbowman": 0,
             "soldier": 0,
             "crossbowman": 0,
-            "elite_soldier": 0,
-            "cannoneer": 65
+            "elite_soldier": 1,
+            "cannoneer": 88
           }
         }
       ],
@@ -537,15 +538,15 @@
           "preset": true,
           "init": false,
           "army": {
-            "recruit": 115,
+            "recruit": 106,
             "bowmen": 0,
             "militia": 0,
             "cavalry": 0,
             "longbowman": 0,
             "soldier": 0,
             "crossbowman": 0,
-            "elite_soldier": 0,
-            "cannoneer": 65
+            "elite_soldier": 1,
+            "cannoneer": 88
           },
           "relative_coordinates": [
             -512,
@@ -621,7 +622,7 @@
           "preset": false,
           "init": false,
           "army": {
-            "recruit": 106,
+            "recruit": 93,
             "bowmen": 0,
             "militia": 0,
             "cavalry": 0,
@@ -629,7 +630,7 @@
             "soldier": 0,
             "crossbowman": 0,
             "elite_soldier": 1,
-            "cannoneer": 73
+            "cannoneer": 101
           },
           "relative_coordinates": [
             -514,
@@ -691,7 +692,7 @@
           "preset": true,
           "init": false,
           "army": {
-            "recruit": 106,
+            "recruit": 93,
             "bowmen": 0,
             "militia": 0,
             "cavalry": 0,
@@ -699,7 +700,7 @@
             "soldier": 0,
             "crossbowman": 0,
             "elite_soldier": 1,
-            "cannoneer": 73
+            "cannoneer": 101
           },
           "relative_coordinates": [
             22,
@@ -939,7 +940,7 @@
             "recruit": 150,
             "bowmen": 0,
             "militia": 0,
-            "cavalry": 70,
+            "cavalry": 50,
             "longbowman": 0,
             "soldier": 0,
             "crossbowman": 0,
@@ -1028,7 +1029,7 @@
           "preset": false,
           "init": false,
           "army": {
-            "recruit": 117,
+            "recruit": 104,
             "bowmen": 0,
             "militia": 0,
             "cavalry": 0,
@@ -1036,7 +1037,7 @@
             "soldier": 0,
             "crossbowman": 0,
             "elite_soldier": 1,
-            "cannoneer": 152
+            "cannoneer": 180
           },
           "relative_coordinates": [
             -22,
@@ -1126,7 +1127,7 @@
           "preset": true,
           "init": false,
           "army": {
-            "recruit": 117,
+            "recruit": 104,
             "bowmen": 0,
             "militia": 0,
             "cavalry": 0,
@@ -1134,7 +1135,7 @@
             "soldier": 0,
             "crossbowman": 0,
             "elite_soldier": 1,
-            "cannoneer": 152
+            "cannoneer": 180
           },
           "relative_coordinates": [
             -473,
@@ -1154,7 +1155,7 @@
           "preset": false,
           "init": false,
           "army": {
-            "recruit": 83,
+            "recruit": 75,
             "bowmen": 0,
             "militia": 0,
             "cavalry": 0,
@@ -1162,7 +1163,7 @@
             "soldier": 0,
             "crossbowman": 0,
             "elite_soldier": 0,
-            "cannoneer": 97
+            "cannoneer": 120
           },
           "relative_coordinates": [
             -389,
@@ -1210,7 +1211,7 @@
           "preset": false,
           "init": false,
           "army": {
-            "recruit": 135,
+            "recruit": 55,
             "bowmen": 0,
             "militia": 0,
             "cavalry": 0,
@@ -1218,7 +1219,7 @@
             "soldier": 0,
             "crossbowman": 0,
             "elite_soldier": 0,
-            "cannoneer": 135
+            "cannoneer": 230
           },
           "relative_coordinates": [
             21,
@@ -1290,7 +1291,7 @@
             "recruit": 150,
             "bowmen": 0,
             "militia": 0,
-            "cavalry": 70,
+            "cavalry": 50,
             "longbowman": 0,
             "soldier": 0,
             "crossbowman": 0,
@@ -1308,7 +1309,7 @@
           "preset": true,
           "init": false,
           "army": {
-            "recruit": 135,
+            "recruit": 55,
             "bowmen": 0,
             "militia": 0,
             "cavalry": 0,
@@ -1316,7 +1317,7 @@
             "soldier": 0,
             "crossbowman": 0,
             "elite_soldier": 0,
-            "cannoneer": 135
+            "cannoneer": 230
           },
           "relative_coordinates": [
             -596,
