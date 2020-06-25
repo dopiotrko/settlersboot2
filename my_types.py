@@ -2,6 +2,7 @@ from enum import Enum
 import pickle
 import logging
 import copy
+import my
 
 action_types = [{"type": 'move'},
                 {"type": 'attack'},
@@ -174,6 +175,10 @@ class Action:
         logging.info('Action:add_general:')
         self.generals.append(copy.deepcopy(general))
 
+    def del_general(self, general):
+        logging.info('Action:del_general:')
+        self.generals.remove(general)
+
 
 class General:
     def __init__(self, *args, **kwargs):
@@ -219,5 +224,10 @@ class General:
 
     def __setstate__(self, state):
         self.__dict__.update(state)
+        my_generals = my.load_generals()
+        for gen in my_generals:
+            if gen['name'] == self.name:
+                self.capacity = gen['capacity']
+                break
         self.id_ref = None
 

@@ -249,7 +249,7 @@ class DataGrid(grid.Grid):
 
     def on_right_click(self, event):
         logging.info('DataGrid:on_right_click:')
-        row = event.GetRow()
+        row, col = event.GetRow(), event.GetCol()
         self.SelectRow(row)
         # noinspection PyPep8Naming
         MY_EVT_GRID_SELECT_CELL = wx.PyCommandEvent(grid.EVT_GRID_SELECT_CELL.typeId, self.GetId())
@@ -260,13 +260,17 @@ class DataGrid(grid.Grid):
         # adding menu in children classes
         self.on_right_click_add(context_menu, event)
 
-        if row < self.GetNumberRows() - 1:
+        if col == 1:
             context_menu.AppendSeparator()
-            context_menu.Append(self.context_menu_ids['del_id'], 'Delete')
-            if row != 0:
-                context_menu.Append(self.context_menu_ids['move_up'], 'Move Up')
-        if row < self.GetNumberRows() - 2:
-            context_menu.Append(self.context_menu_ids['move_down'], 'Move Down')
+        else:
+            if row < self.GetNumberRows() - 1:
+                context_menu.AppendSeparator()
+                context_menu.Append(self.context_menu_ids['del_id'], 'Delete')
+                if row != 0:
+                    context_menu.Append(self.context_menu_ids['move_up'], 'Move Up')
+            if row < self.GetNumberRows() - 2:
+                context_menu.Append(self.context_menu_ids['move_down'], 'Move Down')
+
         self.PopupMenu(context_menu)
         context_menu.Destroy()
 
@@ -615,12 +619,12 @@ class GeneralEdit(wx.Panel):
         self.general.retreat = event.IsChecked()
 
 
-class GeneralAdd(wx.Panel):
+class HelpPage(wx.Panel):
     def __init__(self, parent):
-        logging.info('GeneralAdd:__init__:')
+        logging.info('HelpPage:__init__:')
         wx.Panel.__init__(self, parent, -1,
                           style=wx.TAB_TRAVERSAL | wx.CLIP_CHILDREN | wx.FULL_REPAINT_ON_RESIZE)
-        sizer = self.sizer = wx.BoxSizer(wx.VERTICAL)
+        sizer = self.sizer = wx.BoxSizer()
         self.SetMinSize(GeneralEdit.get_size(self))
         self.DestroyChildren()
 
@@ -629,27 +633,17 @@ class GeneralAdd(wx.Panel):
             # noinspection PyUnresolvedReferences
             txt.SetFont(wx.Font(8, wx.NORMAL, wx.NORMAL, wx.NORMAL))
             return txt
-        sizer.Add(label("Double click on general to add"), 0, wx.EXPAND)
-
-        self.dvlc = dvlc = dv.DataViewListCtrl(self)
-
-        # Give it some columns.
-        # The ID col we'll customize a bit:
-        dvlc.AppendTextColumn('type')
-        dvlc.AppendTextColumn('name')
-        dvlc.AppendTextColumn('capacity')
-
-        # Load the generals. Each item (row) is added as a sequence of values
-        # whose order matches the columns
-        for gen in my.load_generals():
-            dvlc.AppendItem((gen['type'], gen['name'], str(gen['capacity'])))
-        sizer.Add(dvlc, 1, wx.EXPAND)
+        # help_txt = "Move page tabs sideways, to change generals order.\n" \
+        #            "Close tab, to delete general from action.\n" \
+        #            "Can not remove generals from adventure this way"
+        help_txt = "Deleting, moving generals in action not implemented yet.\n"
+        sizer.Add(label(help_txt), 0, wx.EXPAND)
         self.SetSizer(sizer)
 
 
 class GeneralsEdit(aui.AuiNotebook):
     """
-    Book with GeneralEdit pages, and GeneralAdd page
+    Book with GeneralEdit pages, and HelpPage page
     """
 
     def __init__(self, parent):
@@ -659,23 +653,23 @@ class GeneralsEdit(aui.AuiNotebook):
         self.pages = list()
         aui.AuiNotebook.__init__(self, parent, -1, wx.Point(0, 0), style=self._notebook_style)
         self.Bind(wx.aui.EVT_AUINOTEBOOK_PAGE_CLOSE, self.on_close_page)
-        self.generals_add = GeneralAdd(self)
-        self.AddPage(self.generals_add, 'Add general')
+        self.help_page = HelpPage(self)
+        self.AddPage(self.help_page, 'Help')
 
     def show_generals(self, generals):
         logging.info('GeneralsEdit:show_generals:')
-        generals_add_index = self.GetPageIndex(self.generals_add)
-        # delete all pages, accept generals_add page
+        generals_add_index = self.GetPageIndex(self.help_page)
+        # delete all pages, accept help_page page
         for p in range(generals_add_index-1, -1, -1):
             self.DeletePage(p)
         self.pages = list()
-        # add pages from new action before generals_add page
+        # add pages from new action before help_page page
         for g_no, general in enumerate(generals):
             self.pages.append(GeneralEdit(self, general))
             self.InsertPage(g_no, self.pages[-1], '{} ({})'.format(general.name or general.type, general.id))
-        # set generals_add page size, to math others pages
+        # set help_page page size, to math others pages
         if self.pages:
-            self.generals_add.SetMinSize(self.pages[0].GetMinSize())
+            self.help_page.SetMinSize(self.pages[0].GetMinSize())
         # select last general
         if 'g_no' in locals():
             # noinspection PyUnboundLocalVariable
@@ -683,8 +677,8 @@ class GeneralsEdit(aui.AuiNotebook):
 
     def on_close_page(self, event):
         logging.info('GeneralsEdit:on_close_page:')
-        # prevent generals_add page from close
-        if event.GetSelection() == self.GetPageIndex(self.generals_add):
+        # prevent help_page page from close
+        if event.GetSelection() == self.GetPageIndex(self.help_page):
             event.Veto()
 
 
