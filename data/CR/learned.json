@@ -13,7 +13,8 @@
         "crossbowman": 0,
         "elite_soldier": 36,
         "cannoneer": 0
-      }
+      },
+      "capacity": 200
     },
     {
       "id": 1,
@@ -28,7 +29,8 @@
         "crossbowman": 0,
         "elite_soldier": 83,
         "cannoneer": 0
-      }
+      },
+      "capacity": 200
     },
     {
       "id": 2,
@@ -43,7 +45,8 @@
         "crossbowman": 0,
         "elite_soldier": 97,
         "cannoneer": 0
-      }
+      },
+      "capacity": 200
     },
     {
       "id": 3,
@@ -58,7 +61,8 @@
         "crossbowman": 0,
         "elite_soldier": 0,
         "cannoneer": 94
-      }
+      },
+      "capacity": 195
     },
     {
       "id": 4,
@@ -73,7 +77,8 @@
         "crossbowman": 0,
         "elite_soldier": 1,
         "cannoneer": 64
-      }
+      },
+      "capacity": 250
     },
     {
       "id": 5,
@@ -88,7 +93,8 @@
         "crossbowman": 0,
         "elite_soldier": 0,
         "cannoneer": 0
-      }
+      },
+      "capacity": 235
     },
     {
       "id": 6,
@@ -103,7 +109,8 @@
         "crossbowman": 0,
         "elite_soldier": 0,
         "cannoneer": 7
-      }
+      },
+      "capacity": 200
     }
   ],
   "actions": [

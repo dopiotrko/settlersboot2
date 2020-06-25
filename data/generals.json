@@ -1,0 +1,82 @@
+[
+  {
+    "type": "boris",
+    "name": "Boris 1",
+    "capacity": 195
+  },
+  {
+    "type": "major",
+    "name": "GM1",
+    "capacity": 285
+  },
+  {
+    "type": "major",
+    "name": "GM2",
+    "capacity": 285
+  },
+  {
+    "type": "grim",
+    "name": "Grim 1",
+    "capacity": 200
+  },
+  {
+    "type": "grim",
+    "name": "Grim 2",
+    "capacity": 200
+  },
+  {
+    "type": "grim",
+    "name": "Grim 3",
+    "capacity": 200
+  },
+  {
+    "type": "master",
+    "name": "Master 1",
+    "capacity": 235
+  },
+  {
+    "type": "medic",
+    "name": "Medic 1",
+    "capacity": 200
+  },
+  {
+    "type": "veteran",
+    "name": "Veteran 1",
+    "capacity": 250
+  },
+  {
+    "type": "veteran",
+    "name": "Veteran 2",
+    "capacity": 250
+  },
+  {
+    "type": "basic",
+    "name": "Basic 1",
+    "capacity": 200
+  },
+  {
+    "type": "basic",
+    "name": "Basic 2",
+    "capacity": 200
+  },
+  {
+    "type": "basic",
+    "name": "Basic 3",
+    "capacity": 200
+  },
+  {
+    "type": "basic",
+    "name": "Basic 4",
+    "capacity": 200
+  },
+  {
+    "type": "basic",
+    "name": "Basic 5",
+    "capacity": 200
+  },
+  {
+    "type": "basic",
+    "name": "Basic 6",
+    "capacity": 200
+  }
+]
