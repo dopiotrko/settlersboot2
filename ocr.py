@@ -9,7 +9,7 @@ import os
 localedir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'locale')
 lang_en = gettext.translation('settlersbot', localedir, fallback=True, languages=['en'])
 lang_pl = gettext.translation('settlersbot', localedir, fallback=True, languages=['pl'])
-_ = lang_en.gettext
+_ = lang_pl.gettext
 
 
 def image_adjusting(img):
@@ -48,15 +48,46 @@ def available_army(img):
 def available_unit(img):
     logging.info('available_unit')
     img = image_adjusting(img)
+    img = cut_img_to_available(img)
     custom_config = r'-c tessedit_char_whitelist="1234567890/ " --psm 7'
     d = pytesseract.image_to_data(img, output_type=pytesseract.Output.DICT, config=custom_config)
     (x, y, w, h) = (d['left'][-1], d['top'][-1], d['width'][-1], d['height'][-1])
-    roi = img[y-1:y + h+1, x + 20:x + w]
+    roi = img[y-1:y + h+1, x + 18:x + w]
     logging.info(d['text'])
-    custom_config = r'--oem 3 --psm 7 outputbase digits'
-    unit = int(pytesseract.image_to_string(roi, config=custom_config))
-    logging.info('Available units: {}'.format(unit))
-    return unit
+    unit_v1 = int(d['text'][-1].split('/')[-1])
+    logging.info('unit_v1: {}'.format(unit_v1))
+    # custom_config = r'--oem 3 --psm 7 outputbase digits'
+    # while True:
+    #     try:
+    #         unit_v2 = int(pytesseract.image_to_string(roi, config=custom_config))
+    #     except ValueError:
+    #         roi = roi[:, 1:]
+    #     else:
+    #         cv.imwrite('{} {} {}.png'.format(x, y, unit_v2), roi)
+    #         logging.info('unit_v2: {}'.format(unit_v2))
+    #         if unit_v1 == unit_v2:
+    #             break
+    #         else:
+    #             roi = roi[:, 1:]
+    logging.info('Available units: {}'.format(unit_v1))
+    return unit_v1
+
+
+def get_border(img):
+    """return pixel number of the border between assigned, and available units"""
+    height, width, _ = img.shape
+    white_line = np.full(((height - 10), 1, 3), 255)
+    for i in range(width - 1, 1, -1):
+        if np.array_equal(img[5:height - 5, i - 1:i], white_line):
+            return i
+
+
+def cut_img_to_assigned(img):
+    return img[:, 0:get_border(img)]
+
+
+def cut_img_to_available(img):
+    return img[:, get_border(img)+1:]
 
 
 def assigned_army(img):
