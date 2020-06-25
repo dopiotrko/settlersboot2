@@ -321,6 +321,7 @@ class ActionsGrid(DataGrid):
         self.table = ActionsTable(self.actions)
         self.id = wx.NewIdRef()
         super().__init__(parent, self.table, self.id)
+        self.AutoSizeRows()
 
         self.GetGridWindow().Bind(wx.EVT_MOTION, self.on_mouse_over)
 
@@ -344,7 +345,7 @@ class ActionsGrid(DataGrid):
         if col == 1:
             gens = self.GetCellValue(row, col)
             if gens:
-                event.GetEventObject().SetToolTip(gens.replace(', ', '\n'))
+                event.GetEventObject().SetToolTip(gens)
         event.Skip()
 
     def make_context_menu_ids(self):
@@ -367,8 +368,10 @@ class ActionsGrid(DataGrid):
             if gen.id_ref == evt_id:
                 self.actions[row].add_general(gen)
                 print('adding', gen.name, 'to', self.actions[row].type)
+                self.parent.parent.generals_edt.show_generals(self.actions[row].generals)
                 break
         self.reset()
+        self.AutoSizeRow(row)
 
     def add_record(self, event):
         logging.info('ActionsGrid:add_record:')
@@ -411,7 +414,7 @@ class ActionsGrid(DataGrid):
                 context_menu.Append(act['id_ref'], act['type'])
         elif col == 1:
             for gen in self.adventure.generals:
-                context_menu.Append(gen.id_ref, gen.name)
+                context_menu.Append(gen.id_ref, gen.name or gen.type)
 
 
 class GeneralsGrid(DataGrid):
@@ -424,9 +427,6 @@ class GeneralsGrid(DataGrid):
         self.table = GeneralsTable(self.generals)
         self.id = wx.NewIdRef()
         super().__init__(parent, self.table, self.id)
-        # self.make_context_menu_ids()
-        # TODO zaznaczanie pozycji w grid a wyswietlanie jej w GeneralEedit
-        # self.GetGridWindow().Bind(wx.EVT_MOTION, self.on_mouse_over)
 
     def make_context_menu_ids(self):
         logging.info('GeneralsGrid:make_context_menu_ids:')
@@ -443,6 +443,7 @@ class GeneralsGrid(DataGrid):
         for gen in self.my_generals:
             if gen['id_ref'] == evt_id:
                 self.adventure.add_general(row, **gen)
+                self.parent.parent.generals_edt.show_generals([self.adventure.generals[row], ])
                 break
         self.reset()
 
@@ -671,7 +672,7 @@ class GeneralsEdit(aui.AuiNotebook):
         # add pages from new action before generals_add page
         for g_no, general in enumerate(generals):
             self.pages.append(GeneralEdit(self, general))
-            self.InsertPage(g_no, self.pages[-1], '{} ({})'.format(general.type, general.id))
+            self.InsertPage(g_no, self.pages[-1], '{} ({})'.format(general.name or general.type, general.id))
         # set generals_add page size, to math others pages
         if self.pages:
             self.generals_add.SetMinSize(self.pages[0].GetMinSize())
@@ -725,6 +726,10 @@ class AdventurePanel(wx.Panel):
             row = event.GetRow()
         else:
             row = event.row
+        if event.GetId() == self.tables.actions_grid.id:
+            self.tables.generals_grid.ClearSelection()
+        elif event.GetId() == self.tables.generals_grid.id:
+            self.tables.actions_grid.ClearSelection()
         if self.last_grid_id != event.GetId() or self.last_row != row:
             if event.GetId() == self.tables.actions_grid.id:
                 number_of_records = len(self.tables.actions_grid.actions)

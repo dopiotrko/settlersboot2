@@ -158,7 +158,7 @@ class Action:
     def get_data_for_table(self, attr):
         # logging.info('Action:get_data_for_table:')
         if attr == 'generals':
-            return ', '.join('{} ({})'.format(gen.type, gen.id) for gen in self.generals)
+            return '\n'.join('{} ({}) [{}]'.format(gen.type, gen.name, gen.id) for gen in self.generals)
         else:
             return getattr(self, attr, False)
 
