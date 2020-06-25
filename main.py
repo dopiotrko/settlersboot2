@@ -466,6 +466,7 @@ class Adventure:
                         xd, yd = general['drag'][1]
                         general['drag'] = [(xd - xm) / 2, (yd - ym) / 2]
                 if general['init'] is True:
+                    my_pygui.moveTo((self.coordinations['book'] + Point(100, 0)).get())
                     finded = my_pygui.locateOnScreen('data/{}/loc_reference.png'.format(self.name), confidence=0.85)
                     if not finded:
                         raise Exception('data/{}/loc_reference.png not found on screen'.format(self.name))
