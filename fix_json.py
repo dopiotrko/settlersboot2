@@ -185,7 +185,7 @@ class LoggingAdd:
                     ff.write(line)
 
 
-LoggingAdd('gui.py')
+# LoggingAdd('gui.py')
 
 """
 import pytesseract
