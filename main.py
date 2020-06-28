@@ -57,7 +57,7 @@ class Adventure:
     def init_locate_generals(self, start):
         logging.info('init_locate_generals:')
         time.sleep(.5)
-        if start == 1 or not os.path.exists('data/{}/generals_loc.dat'.format(self.name)):
+        if start == 0 or not os.path.exists('data/{}/generals_loc.dat'.format(self.name)):
             generals = dict()
             my_pygui.click(self.coordinations['star'].get())
             my_pygui.click(self.coordinations['specialists'].get())
@@ -319,7 +319,7 @@ class Adventure:
             my_pygui.click(x, y)
             my_pygui.click(x, y + 15)
 
-    def make_adventure(self, delay=0, start=1, stop=1000, mode=Mode.play):
+    def make_adventure(self, delay=0, start=0, stop=1000, mode=Mode.play):
         logging.info('make_adventure')
         assert(isinstance(mode, Mode))
         my.wait(delay, 'Making adventure')
