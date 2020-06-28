@@ -4,6 +4,7 @@ import wx.grid as grid
 import wx.aui as aui
 import wx.dataview as dv
 import os
+import sys
 import json
 import my_types
 import logging
@@ -516,7 +517,7 @@ class GeneralEdit(wx.Panel):
         def label(text):
             txt = wx.StaticText(self, -1, text)
             # noinspection PyUnresolvedReferences
-            txt.SetFont(wx.Font(8, wx.NORMAL, wx.NORMAL, wx.NORMAL))
+            txt.SetFont(wx.Font(8, wx.DEFAULT, wx.NORMAL, wx.NORMAL))
             return txt
         gbs.Add(label("Recruit:"), (0, 1))
         gbs.Add(label("Bowmen:"), (0, 2))
@@ -544,7 +545,7 @@ class GeneralEdit(wx.Panel):
         def check_box(text):
             c_box = wx.CheckBox(self, id=wx.ID_ANY, label=text)
             # noinspection PyUnresolvedReferences
-            c_box.SetFont(wx.Font(8, wx.NORMAL, wx.NORMAL, wx.NORMAL))
+            c_box.SetFont(wx.Font(8, wx.DEFAULT, wx.NORMAL, wx.NORMAL))
             return c_box
         check_box_sizer = wx.BoxSizer(wx.VERTICAL)
         self.preset = check_box('Preset')
@@ -631,7 +632,7 @@ class HelpPage(wx.Panel):
         def label(text):
             txt = wx.StaticText(self, -1, text)
             # noinspection PyUnresolvedReferences
-            txt.SetFont(wx.Font(8, wx.NORMAL, wx.NORMAL, wx.NORMAL))
+            txt.SetFont(wx.Font(8, wx.DEFAULT, wx.NORMAL, wx.NORMAL))
             return txt
         # help_txt = "Move page tabs sideways, to change generals order.\n" \
         #            "Close tab, to delete general from action.\n" \
@@ -804,7 +805,7 @@ class Frame(wx.Frame):
                 j_data = json.load(f)
             generals = [my_types.General(**gen) for gen in j_data['generals']]
             actions = [my_types.Action(self, **action) for action in j_data['actions']]
-            adv_from_json = my_types.Adventure(name=path.split('/')[-2])
+            adv_from_json = my_types.Adventure(name=path.split('\\' if sys.platform == 'win32' else '/')[-2])
             adv_from_json.generals = generals
             adv_from_json.actions = actions
             self.adventure = adv_from_json
