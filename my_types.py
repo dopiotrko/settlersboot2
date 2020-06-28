@@ -2,7 +2,7 @@ from enum import Enum
 import pickle
 import logging
 import copy
-import my
+import json
 
 action_types = [{"type": 'move'},
                 {"type": 'attack'},
@@ -242,12 +242,13 @@ class General:
         army = {}
         # json['army'].update()
         for key, value in self.__dict__.items():
-            if key in ('army', 'preset', 'init', 'id') or value:
+            if key in ('army', 'preset', 'init', 'id', 'parent') or value:
                 json[key] = value
         for key in json['keys']:
             army[key] = json['army'].setdefault(key, 0)
         json['army'] = army
         del json['keys']
+        del json['parent']
         if 'id_ref' in json:
             del json['id_ref']
         json['delay'] = 0
@@ -261,7 +262,8 @@ class General:
 
     def __setstate__(self, state):
         self.__dict__.update(state)
-        my_generals = my.load_generals()
+        with open('data/generals.json') as f:
+            my_generals = json.load(f)
         for gen in my_generals:
             if gen['name'] == self.name:
                 self.capacity = gen['capacity']
