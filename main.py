@@ -37,6 +37,8 @@ import listener
 import ocr
 import os
 from my_types import Point, Mode
+for handler in logging.root.handlers[:]:
+    logging.root.removeHandler(handler)
 logging.basicConfig(level=logging.INFO)
 STAROPEN = False
 
@@ -55,7 +57,7 @@ class Adventure:
     def init_locate_generals(self, start):
         logging.info('init_locate_generals:')
         time.sleep(.5)
-        if start == 1 or not os.path.exists('data/{}/generals_loc.dat'.format(self.name)):
+        if start == 0 or not os.path.exists('data/{}/generals_loc.dat'.format(self.name)):
             generals = dict()
             my_pygui.click(self.coordinations['star'].get())
             my_pygui.click(self.coordinations['specialists'].get())
@@ -287,14 +289,16 @@ class Adventure:
         print(army)
         self.check_if_army_available(army)
         for g_type, generals_of_type in self.group_generals_by_types(first, last).items():
+            unnamed_generals_of_type = []
             for general in generals_of_type:
                 """sending named generals first"""
                 if 'name' in general:
-                    generals_of_type.remove(general)
                     self.send_generals_by_type(g_type, (general,), general['name'])
+                else:
+                    unnamed_generals_of_type.append(general)
             """sending rest of generals"""
-            if generals_of_type:
-                self.send_generals_by_type(g_type, generals_of_type)
+            if unnamed_generals_of_type:
+                self.send_generals_by_type(g_type, unnamed_generals_of_type)
         """reset star window to default"""
         my_pygui.click(self.coordinations['star'].get())
         my_pygui.click(self.coordinations['specialists'].get())
@@ -315,7 +319,7 @@ class Adventure:
             my_pygui.click(x, y)
             my_pygui.click(x, y + 15)
 
-    def make_adventure(self, delay=0, start=1, stop=1000, mode=Mode.play):
+    def make_adventure(self, delay=0, start=0, stop=1000, mode=Mode.play):
         logging.info('make_adventure')
         assert(isinstance(mode, Mode))
         my.wait(delay, 'Making adventure')
@@ -429,7 +433,7 @@ class Adventure:
                 with open(my.get_new_filename(self.name), 'w') as f:
                     json.dump(self.data, f, indent=2)
 
-    def end_adventure(self, delay=0):
+    def end_adventure_(self, delay=0):
         logging.info('end_adventure')
 
         my.wait(delay, 'Ending adventure')
@@ -450,6 +454,37 @@ class Adventure:
             raise Exception('Button not found.')
         else:
             my_pygui.click((loc + Point(160, 234)).get())
+
+    def end_adventure(self, delay=0, mode=Mode.teach_co):
+        logging.info('end_adventure')
+
+        my.wait(delay, 'Ending adventure')
+        my_pygui.click(self.coordinations['star'].get())
+        my_pygui.click(self.coordinations['first_general'].get())
+        my_pygui.click(self.coordinations['close_general'].get())
+        finded = my_pygui.locateOnScreen('data/{}/loc_reference.png'.format(self.name), confidence=0.85)
+        if not finded:
+            raise Exception('data/{}/loc_reference.png not found on screen'.format(self.name))
+        end_adventure_co = []
+        get_click = listener.GetClick()
+        if mode == Mode.teach_co:
+            while True:
+                t_0 = time.time()
+                coord = get_click.get('DOWN')
+                if coord == 'right':
+                    break
+                end_adventure_co.append({"co": (coord - finded).get(), "delay": time.time() - t_0})
+            with open('data/{}/end_adv_co.json'.format(self.name), 'w') as f:
+                json.dump(end_adventure_co, f, indent=2)
+        elif mode == Mode.play:
+            with open('data/{}/end_adv_co.json'.format(self.name), 'r') as f:
+                end_adventure_co = json.load(f)
+            for click in end_adventure_co:
+                target = Point.from_list(click['co']) + finded
+                if mode == Mode.play:
+                    my.wait(click['delay'], 'Next click')
+                my_pygui.moveTo(target.get())
+                my_pygui.click(target.get(), clicks=1, interval=0.25)
 
 
 # Configure().run()
