@@ -287,14 +287,16 @@ class Adventure:
         print(army)
         self.check_if_army_available(army)
         for g_type, generals_of_type in self.group_generals_by_types(first, last).items():
+            unnamed_generals_of_type = []
             for general in generals_of_type:
                 """sending named generals first"""
                 if 'name' in general:
-                    generals_of_type.remove(general)
                     self.send_generals_by_type(g_type, (general,), general['name'])
+                else:
+                    unnamed_generals_of_type.append(general)
             """sending rest of generals"""
-            if generals_of_type:
-                self.send_generals_by_type(g_type, generals_of_type)
+            if unnamed_generals_of_type:
+                self.send_generals_by_type(g_type, unnamed_generals_of_type)
         """reset star window to default"""
         my_pygui.click(self.coordinations['star'].get())
         my_pygui.click(self.coordinations['specialists'].get())
