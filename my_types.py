@@ -268,3 +268,17 @@ class General:
                 break
         self.id_ref = None
 
+
+class Tasks:
+    def __init__(self, type_, delay, task_object):
+        self.type = type_
+        self.delay = delay
+        self.task_object = task_object
+
+
+class Explorer:
+    def __init__(self,  *args, **kwargs):
+        self.name = kwargs.get('name', None)
+        self.treasure = kwargs.get('treasure', None)
+        self.adventure = kwargs.get('adventure', None)
+

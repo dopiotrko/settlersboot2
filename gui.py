@@ -504,6 +504,16 @@ class GeneralsGrid(DataGrid):
     #     event.Skip()
 
 
+class MainGrid(DataGrid):
+    def __init__(self, parent, tasks):
+        logging.info('GeneralsGrid:__init__:')
+        self.parent = parent
+        self.tasks = tasks
+        self.table = GeneralsTable(self.tasks)
+        self.id = wx.NewIdRef()
+        super().__init__(parent, self.tasks, self.id)
+
+
 class GeneralEdit(wx.Panel):
     def __init__(self, parent, general=None):
         logging.info('GeneralEdit:__init__:')
@@ -750,15 +760,19 @@ class Frame(wx.Frame):
         logging.info('Frame:__init__:')
         wx.Frame.__init__(self, parent, -1, "Custom Table, data driven Grid  Demo",
                           style=wx.STAY_ON_TOP | wx.DEFAULT_FRAME_STYLE)
+        self.parent = parent
         self.menu_bar_ids = {}
         self._notebook_style = aui.AUI_NB_WINDOWLIST_BUTTON | aui.AUI_NB_SCROLL_BUTTONS
         self.main_notebook = aui.AuiNotebook(self, wx.ID_ANY, style=self._notebook_style)
         # empty adventure
+        self.status_bar = self.CreateStatusBar(1)
         self.adventure = my_types.Adventure(name='Empty')
+        self.tasks = None
         # self.adventure.actions = [my_types.Action(self)]
-
+        self.adventure_panel = None
+        # self.main_page = MainGrid(self, self.tasks)
+        # self.main_notebook.AddPage(self.main_page, 'Tasks')
         self.open_adventure_tab()
-        # self.CreateStatusBar()
         self.Bind(wx.EVT_SIZE, self.on_size)
         self.Bind(grid.EVT_GRID_COL_SIZE, self.on_size)
 
@@ -769,7 +783,7 @@ class Frame(wx.Frame):
 
     def open_adventure_tab(self):
         logging.info('Frame:open_adventure_tab:')
-        self.main_notebook.DeleteAllPages()
+        self.main_notebook.DeletePage(1)
         self.adventure_panel = AdventurePanel(self, self.adventure)
         self.main_notebook.AddPage(self.adventure_panel, self.adventure.name)
 

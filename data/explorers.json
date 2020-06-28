@@ -1,0 +1,110 @@
+[
+  {
+    "name": "SS 1",
+    "treasure": {
+      "short": 153,
+      "medium": 260,
+      "long": 520,
+      "very long": 1101,
+      "prolonged": null,
+      "artifact search": null,
+      "rarity search": null
+    },
+    "adventure": {
+      "short": 720,
+      "medium": 960,
+      "long": 1440,
+      "very long": null
+    }
+  },
+  {
+    "name": "SS 2",
+    "treasure": {
+      "short": 153,
+      "medium": 260,
+      "long": 520,
+      "very long": 1101,
+      "prolonged": null,
+      "artifact search": null,
+      "rarity search": null
+    },
+    "adventure": {
+      "short": 720,
+      "medium": 960,
+      "long": 1440,
+      "very long": null
+    }
+  },
+  {
+    "name": "SS 3",
+    "treasure": {
+      "short": 153,
+      "medium": 260,
+      "long": 520,
+      "very long": 1101,
+      "prolonged": null,
+      "artifact search": null,
+      "rarity search": null
+    },
+    "adventure": {
+      "short": 720,
+      "medium": 960,
+      "long": 1440,
+      "very long": null
+    }
+  },
+  {
+    "name": "SS 4",
+    "treasure": {
+      "short": 153,
+      "medium": 260,
+      "long": 520,
+      "very long": 1101,
+      "prolonged": null,
+      "artifact search": null,
+      "rarity search": null
+    },
+    "adventure": {
+      "short": 720,
+      "medium": 960,
+      "long": 1440,
+      "very long": null
+    }
+  },
+  {
+    "name": "SS 5",
+    "treasure": {
+      "short": 153,
+      "medium": 260,
+      "long": 520,
+      "very long": 1101,
+      "prolonged": null,
+      "artifact search": null,
+      "rarity search": null
+    },
+    "adventure": {
+      "short": 720,
+      "medium": 960,
+      "long": 1440,
+      "very long": null
+    }
+  },
+  {
+    "name": "Exp 1",
+    "treasure": {
+      "short": 360,
+      "medium": 740,
+      "long": 1440,
+      "very long": 2880,
+      "prolonged": null,
+      "artifact search": null,
+      "rarity search": null
+    },
+    "adventure": {
+      "short": 1440,
+      "medium": 1920,
+      "long": 2280,
+      "very long": null
+    }
+  }
+]
