@@ -37,6 +37,8 @@ import listener
 import ocr
 import os
 from my_types import Point, Mode
+for handler in logging.root.handlers[:]:
+    logging.root.removeHandler(handler)
 logging.basicConfig(level=logging.INFO)
 STAROPEN = False
 
