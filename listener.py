@@ -14,7 +14,10 @@ class GetClick:
         return
 
     def on_down(self, x, y, button, pressed):
-        self.coord = Point(x, y)
+        if button == mouse.Button.left:
+            self.coord = Point(x, y)
+        elif button == mouse.Button.right:
+            self.coord = 'right'
         if pressed:
             # Stop listener
             return False
