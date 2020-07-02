@@ -3,6 +3,7 @@ import pickle
 import logging
 import copy
 import json
+import wx
 
 action_types = [{"type": 'move'},
                 {"type": 'attack'},
@@ -153,13 +154,13 @@ class Adventure:
 
     def as_json(self):
         self.fix_actions_no()
-        json = (
+        json_ = (
             {
                 "generals": [gen.as_json() for gen in self.generals],
                 "actions": [act.as_json() for act in self.actions]
             }
         )
-        return json
+        return json_
 
 
 class Action:
@@ -284,3 +285,21 @@ class Explorer:
         self.treasure = kwargs.get('treasure', None)
         self.adventure = kwargs.get('adventure', None)
 
+
+myCommunicationEVENT = wx.NewEventType()
+CommunicationEVENT = wx.PyEventBinder(myCommunicationEVENT, 1)
+
+
+class CountEvent(wx.PyCommandEvent):
+    """Event to signal that a count value is ready"""
+    def __init__(self, e_type, eid, value=None):
+        """Creates the event object"""
+        wx.PyCommandEvent.__init__(self, e_type, eid)
+        self._value = value
+
+    def get(self):
+        """Returns the value from the event.
+        @return: the value of this event
+
+        """
+        return self._value
