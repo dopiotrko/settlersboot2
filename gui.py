@@ -119,7 +119,10 @@ class ActionsTable(DataTable):
     def SetValue(self, row, col, value):
         # logging.info('ActionsTable:SetValue:')
         if col != 1:
-            self.data[row].set_data_from_table(self.colIds[col], value)
+            try:
+                self.data[row].set_data_from_table(self.colIds[col], value)
+            except IndexError:
+                pass
 
     # --------------------------------------------------
     # Some optional methods
@@ -817,7 +820,7 @@ class Frame(wx.Frame):
 
     def open_adventure_tab(self):
         logging.info('Frame:open_adventure_tab:')
-        self.main_notebook.DeletePage(1)
+        self.main_notebook.DeletePage(0)
         self.adventure_panel = AdventurePanel(self, self.adventure)
         self.main_notebook.AddPage(self.adventure_panel, self.adventure.name)
 
