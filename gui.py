@@ -8,8 +8,9 @@ import sys
 import json
 import my_types
 import logging
+import threads
 MY_SIZE = (348, 788)
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(levelname)s %(asctime)s %(message)s')
 
 
 class DataTable(grid.GridTableBase):
@@ -201,8 +202,10 @@ class DataGrid(grid.Grid):
     def __init__(self, parent, table, id_):
         logging.info('DataGrid:__init__:')
         grid.Grid.__init__(self, parent, id_)
-        self.EnableEditing(False)
+        # TODO editing of some column only
+        # self.EnableEditing(False)
         self.table = table
+        self.left_clicked = None
 
         # The second parameter means that the grid is to take ownership of the
         # tables and will destroy it when done.  Otherwise you would need to keep
@@ -238,30 +241,39 @@ class DataGrid(grid.Grid):
         if self.CanEnableCellControl():
             self.EnableCellEditControl()
 
+    def make_context_menu_id(self, id_name, fun):
+        if id_name not in self.context_menu_ids:
+            self.context_menu_ids[id_name] = wx.NewIdRef()
+            self.Bind(wx.EVT_MENU, fun, id=self.context_menu_ids[id_name])
+
     def make_context_menu_ids(self):
         logging.info('DataGrid:make_context_menu_ids:')
-        self.context_menu_ids['del_id'] = wx.NewIdRef()
-        self.context_menu_ids['move_up'] = wx.NewIdRef()
-        self.context_menu_ids['move_down'] = wx.NewIdRef()
-        self.context_menu_ids['move_to'] = wx.NewIdRef()
-        self.Bind(wx.EVT_MENU, self.del_record, id=self.context_menu_ids['del_id'])
-        self.Bind(wx.EVT_MENU, self.move_up, id=self.context_menu_ids['move_up'])
-        self.Bind(wx.EVT_MENU, self.move_down, id=self.context_menu_ids['move_down'])
+
+        self.make_context_menu_id('del_id', self.del_record)
+        self.make_context_menu_id('move_up', self.move_up)
+        self.make_context_menu_id('move_down', self.move_down)
+        # self.make_context_menu_id('move_to', self.move_to)
+        self.make_context_menu_id('activate', self.activate)
 
     def on_right_click(self, event):
         logging.info('DataGrid:on_right_click:')
         row, col = event.GetRow(), event.GetCol()
-        self.SelectRow(row)
-        # noinspection PyPep8Naming
-        MY_EVT_GRID_SELECT_CELL = wx.PyCommandEvent(grid.EVT_GRID_SELECT_CELL.typeId, self.GetId())
-        MY_EVT_GRID_SELECT_CELL.row = row
-        # posting event to handle it in AdventurePanel
-        wx.PostEvent(self.GetEventHandler(), MY_EVT_GRID_SELECT_CELL)
+        self.left_clicked = row
+
+        # sending EVT_GRID_SELECT_CELL like event
+        if col != 3:
+            self.SelectRow(row)
+            # noinspection PyPep8Naming
+            MY_EVT_GRID_SELECT_CELL = wx.PyCommandEvent(grid.EVT_GRID_SELECT_CELL.typeId, self.GetId())
+            MY_EVT_GRID_SELECT_CELL.row = row
+            # posting event to handle it in AdventurePanel
+            wx.PostEvent(self.GetEventHandler(), MY_EVT_GRID_SELECT_CELL)
+
         context_menu = wx.Menu()
         # adding menu in children classes
         self.on_right_click_add(context_menu, event)
 
-        if col == 1:
+        if col == 3:
             context_menu.AppendSeparator()
         else:
             if row < self.GetNumberRows() - 1:
@@ -299,7 +311,7 @@ class DataGrid(grid.Grid):
 
     def on_right_click_add(self, context_menu, event):
         logging.info('DataGrid:on_right_click_add:')
-        # must be overridden in derived class to add context menu ilems
+        # must be overridden in derived class to add context menu items
         pass
 
     def move_up(self, event):
@@ -314,6 +326,10 @@ class DataGrid(grid.Grid):
 
     def del_record(self, event):
         logging.info('DataGrid:del_record:')
+        pass
+
+    def activate(self, event):
+        logging.info('DataGrid:activate:')
         pass
 
 
@@ -420,6 +436,15 @@ class ActionsGrid(DataGrid):
         elif col == 1:
             for gen in self.adventure.generals:
                 context_menu.Append(gen.id_ref, gen.name or gen.type)
+        elif col == 3:
+            context_menu.Append(self.context_menu_ids['activate'], 'Set/Unset Active')
+
+    def activate(self, event):
+        logging.info('ActionsGrid:on_right_click_add:')
+        row = self.left_clicked
+        # self.adventure.move_action(row, row + 1)
+        print(row)
+        self.reset()
 
 
 class GeneralsGrid(DataGrid):
@@ -451,14 +476,17 @@ class GeneralsGrid(DataGrid):
                 self.parent.parent.generals_edt.show_generals([self.adventure.generals[row], ])
                 break
         self.reset()
+        self.SelectRow(row)
 
     def del_record(self, event):
         logging.info('GeneralsGrid:del_record:')
         try:
-            self.adventure.remove_general(self.GetSelectedRows()[0])
+            row = self.GetSelectedRows()[0]
+            self.adventure.remove_general(row)
         except IndexError:
             return
         self.reset()
+        self.SelectRow(row)
 
     def move_up(self, event):
         logging.info('GeneralsGrid:move_up:')
@@ -720,6 +748,7 @@ class AdventurePanel(wx.Panel):
         self.generals_edt = GeneralsEdit(self)
         self.sizer.Add(self.generals_edt, 0, wx.EXPAND)
         self.Bind(grid.EVT_GRID_SELECT_CELL, self.on_select_cell)
+        self.Bind(grid.EVT_GRID_RANGE_SELECT, self.on_select_cell)
         self.generals_edt.Show()
         self.SetSizer(self.sizer)
         self.sizer.Fit(self)
@@ -729,31 +758,35 @@ class AdventurePanel(wx.Panel):
         logging.info('AdventurePanel:on_select_cell:')
         if isinstance(event, grid.GridEvent):
             row = event.GetRow()
+        elif isinstance(event, grid.GridRangeSelectEvent):
+            row = 8888888
         else:
             row = event.row
-        if event.GetId() == self.tables.actions_grid.id:
-            self.tables.generals_grid.ClearSelection()
-        elif event.GetId() == self.tables.generals_grid.id:
-            self.tables.actions_grid.ClearSelection()
-        if self.last_grid_id != event.GetId() or self.last_row != row:
+        if event.GetId() == self.last_grid_id:
             if event.GetId() == self.tables.actions_grid.id:
-                number_of_records = len(self.tables.actions_grid.actions)
-                if number_of_records in (0, row):
-                    return
-                generals = self.tables.actions_grid.get_action(row).get_generals()
-                self.generals_edt.show_generals(generals)
-                self.last_row = row
-                self.last_grid_id = event.GetId()
+                self.tables.generals_grid.ClearSelection()
             elif event.GetId() == self.tables.generals_grid.id:
-                number_of_records = len(self.tables.generals_grid.generals)
-                if number_of_records in (0, row):
-                    return
-                general = self.tables.generals_grid.generals[row]
-                self.generals_edt.show_generals([general, ])
-                self.last_row = row
-                self.last_grid_id = event.GetId()
-            else:
-                raise Exception
+                self.tables.actions_grid.ClearSelection()
+        logging.error(row)
+        logging.error(self.tables.actions_grid.GetSelectedRows())
+        logging.error(self.tables.generals_grid.GetSelectedRows())
+        if self.last_grid_id != event.GetId() or self.last_row != row:
+            generals = []
+            if event.GetId() == self.tables.actions_grid.id:
+                if len(self.tables.actions_grid.GetSelectedRows()) == 1:
+                    try:
+                        generals = self.tables.actions_grid.get_action(row).get_generals()
+                    except IndexError:
+                        pass
+            elif event.GetId() == self.tables.generals_grid.id:
+                if len(self.tables.generals_grid.GetSelectedRows()) == 1:
+                    try:
+                        generals = [self.tables.generals_grid.generals[row]]
+                    except IndexError:
+                        pass
+            self.generals_edt.show_generals(generals)
+            self.last_row = row
+            self.last_grid_id = event.GetId()
 
 
 class Frame(wx.Frame):
