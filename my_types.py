@@ -290,7 +290,7 @@ myCommunicationEVENT = wx.NewEventType()
 CommunicationEVENT = wx.PyEventBinder(myCommunicationEVENT, 1)
 
 
-class CountEvent(wx.PyCommandEvent):
+class CommunicationEvent(wx.PyCommandEvent):
     """Event to signal that a count value is ready"""
     def __init__(self, e_type, eid, value=None):
         """Creates the event object"""

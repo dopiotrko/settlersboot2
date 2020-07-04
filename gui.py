@@ -911,7 +911,18 @@ class Frame(wx.Frame):
         self.menu_bar_ids['toJson'] = wx.NewIdRef()
         menu_f.Append(self.menu_bar_ids['toJson'], '&toJson')
         self.Bind(wx.EVT_MENU, self.save_as_json, id=self.menu_bar_ids['toJson'])
+        # TODO start adv action
+        menu_adv = wx.Menu()
+        self.menu_bar_ids['start'] = wx.NewIdRef()
+        menu_adv.Append(self.menu_bar_ids['start'], 'Play')
+        self.Bind(wx.EVT_MENU, self.on_start, id=self.menu_bar_ids['start'])
+        menu_bar.Append(menu_adv, 'Start')
+
         self.SetMenuBar(menu_bar)
+
+    def on_start(self, event):
+        worker = threads.StartAdventure(self, 60, self.adventure)
+        worker.start()
 
     def on_size(self, event):
         logging.info('Frame:on_size:')
