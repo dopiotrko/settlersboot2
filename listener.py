@@ -5,7 +5,6 @@ from my_types import Point
 
 class GetClick:
     coord = Point(0, 0)
-    dragged_coord = None
     # scroll = Point(0, 0)
     double_click = False
 
@@ -36,7 +35,7 @@ class GetClick:
         if pressed:
             self.coord = Point(x, y)
         else:
-            self.dragged_coord = Point(x, y)
+            self.coord = Point(x, y) - self.coord
             # Stop listener
             return False
 
@@ -72,4 +71,4 @@ class GetClick:
                 on_scroll=self.on_scroll) as listener:
             listener.join()
         time.sleep(.5)
-        return self.coord if action != 'DRAG' else (self.coord.get(), self.dragged_coord.get())
+        return self.coord
