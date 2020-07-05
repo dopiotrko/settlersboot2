@@ -50,6 +50,13 @@ class Point:
         y = self.y + other.y
         return Point(x, y)
 
+    def __truediv__(self, other):
+        logging.info('Point:__truediv__:')
+        # works only if self is point, and other is int
+        x = self.x // other
+        y = self.y // other
+        return Point(x, y)
+
     def get(self):
         logging.info('Point:get:')
         return self.x, self.y
