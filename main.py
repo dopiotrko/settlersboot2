@@ -396,36 +396,45 @@ class Adventure:
                 text = 'Move your army'
             else:
                 raise Exception('Unexpected action type ')
+            if general['init'] is True:
+                my_pygui.moveTo((self.coordinations['book'] + Point(100, 0)).get())
+                finded = my_pygui.locateOnScreen('data/{}/loc_reference.png'.format(self.name), confidence=0.85)
+                if not finded:
+                    raise Exception('data/{}/loc_reference.png not found on screen'.format(self.name))
+            else:
+                finded = Point(0, 0)
+            drag = Point(0, 0)
             if mode == Mode.play or mode == Mode.teach_delay:
                 if 'drag' in general:
-                    my_pygui.moveTo((self.coordinations['center_ref'] - Point.from_list(general['drag'])).get())
-                    my_pygui.dragTo((self.coordinations['center_ref'] + Point.from_list(general['drag'])).get())
+                    if general['init'] is True:
+                        drag = (self.coordinations['center_ref'] - finded
+                                - Point.from_list(general['relative_coordinates'])) / 3
+                        my_pygui.moveTo((self.coordinations['center_ref'] - drag).get())
+                        my_pygui.dragTo((self.coordinations['center_ref'] + drag).get())
+                    else:
+                        my_pygui.moveTo((self.coordinations['center_ref'] - Point.from_list(general['drag'])).get())
+                        my_pygui.dragTo((self.coordinations['center_ref'] + Point.from_list(general['drag'])).get())
             elif mode == Mode.teach_co:
                 answer = my_pygui.confirm(text='Do You see the target?\n'
                                                ' If not chose \'Drag first\' and drag island to see the target',
                                           title='Teaching Adventure {}'.format(self.name),
                                           buttons=['I see it. Proceed', 'Drag First'])
                 if answer == 'Drag First':
-                    general['drag'] = get_click.get('DRAG')
-                    xm, ym = general['drag'][0]
-                    xd, yd = general['drag'][1]
-                    general['drag'] = [(xd - xm) / 2, (yd - ym) / 2]
+                    drag = get_click.get('DRAG')
+                    general['drag'] = (drag / 2).get()
             if general['init'] is True:
-                my_pygui.moveTo((self.coordinations['book'] + Point(100, 0)).get())
-                finded = my_pygui.locateOnScreen('data/{}/loc_reference.png'.format(self.name), confidence=0.85)
-                if not finded:
-                    raise Exception('data/{}/loc_reference.png not found on screen'.format(self.name))
                 if mode == Mode.teach_co:
                     my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
-                    general['relative_coordinates'] = (get_click.get('DOUBLE') - finded).get()
+                    general['relative_coordinates'] = (get_click.get('DOUBLE') - finded - drag).get()
                 elif mode == Mode.play or mode == Mode.teach_delay:
-                    target = Point.from_list(general['relative_coordinates']) + finded
+                    target = self.coordinations['center_ref'] - drag
                     if 'delay' in general:
                         if mode == Mode.play:
                             my.wait(general['delay'], 'Next general attacks')
                         elif mode == Mode.teach_delay:
                             my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
                             general['delay'] = int(time.time() - t_0)
+                    my_pygui.moveTo(target.get())
                     my_pygui.click(target.get(), clicks=2, interval=0.25)
             else:
                 if mode == Mode.play or mode == Mode.teach_delay:
