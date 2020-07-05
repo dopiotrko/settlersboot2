@@ -6,3 +6,10 @@
 /data/the_nords/generals_loc.dat
 **/generals_loc.dat
 /data/*/generals_loc.dat
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/.gitignore
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/settlersbot.iml
+/.idea/vcs.xml
+/venv/
