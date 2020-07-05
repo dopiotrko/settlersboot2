@@ -37,6 +37,7 @@ import listener
 import ocr
 import os
 from my_types import Point, Mode
+
 for handler in logging.root.handlers[:]:
     logging.root.removeHandler(handler)
 logging.basicConfig(level=logging.INFO)
@@ -88,7 +89,7 @@ class Adventure:
                         loc.y = y_standardized
                     else:
                         y_standardized = loc.y
-                locations.sort(key=lambda i: i.y*10000+i.x)
+                locations.sort(key=lambda i: i.y * 10000 + i.x)
                 for id_ in ids:
                     generals_loc[id_] = locations.pop(0)
             while True:
@@ -110,7 +111,7 @@ class Adventure:
         # pygui.click(self.coordinations['star'].get())
         # pygui.click(self.coordinations['specialists'].get())
         for general in self.data['generals']:
-            if not(first <= general['id'] <= last):
+            if not (first <= general['id'] <= last):
                 continue
             if general['type'] in generals:
                 generals[general['type']].append(general)
@@ -150,14 +151,14 @@ class Adventure:
         count = 0
         army = general['army']
         while True:
-            logging.info('Setting army, try {}'.format(count+1))
+            logging.info('Setting army, try {}'.format(count + 1))
             my_pygui.click(self.coordinations['unload'].get())
             for units, quantity in army.items():
                 if quantity != 0:
                     init_x, y = self.coordinations[units].get()
-                    for x in range(init_x, init_x-50, -24):
+                    for x in range(init_x, init_x - 50, -24):
                         if not my_pygui.pixelMatchesColor(x, y, (131, 102, 65), tolerance=10):
-                            loc = x, y-7
+                            loc = x, y - 7
                             break
                     else:
                         raise Exception('text field not found')
@@ -171,7 +172,7 @@ class Adventure:
             while not finded:
                 for i in range(3):
                     finded = my_pygui.locateOnScreen('resource/transfer.png',
-                                                     region=(x_t-25, y_t-25, 50, 50),
+                                                     region=(x_t - 25, y_t - 25, 50, 50),
                                                      confidence=0.97)
                     if finded:
                         logging.info('General ready = transfer button active')
@@ -209,7 +210,7 @@ class Adventure:
         if wait_til_active:
             while True:
                 finded = my_pygui.locateOnScreen('resource/{}.png'.format(general_type),
-                                                 region=(loc.x-30, loc.y-30, 60, 60),
+                                                 region=(loc.x - 30, loc.y - 30, 60, 60),
                                                  confidence=0.97)
                 if finded:
                     break
@@ -247,7 +248,7 @@ class Adventure:
             my_pygui.click(self.coordinations['send'].get())
             my_pygui.click(self.coordinations['send_confirm'].get())
             time.sleep(2)
-            if item_no < len(generals_of_type)-1:
+            if item_no < len(generals_of_type) - 1:
                 my_pygui.click(self.coordinations['star'].get())
                 my_pygui.click(self.coordinations['specialists'].get())
 
@@ -255,7 +256,7 @@ class Adventure:
         logging.info('sum_generals_army')
         army = dict()
         for general in self.data['generals']:
-            if not(first <= general['id'] <= last):
+            if not (first <= general['id'] <= last):
                 continue
             army = {key: army.get(key, 0) + val for key, val in general['army'].items()}
         return army
@@ -275,7 +276,7 @@ class Adventure:
             if val:
                 logging.info('Checking available {}'.format(key))
                 x, y = self.coordinations[key].get()
-                screen = my_pygui.screenshot(region=(x-43, y-13, 82, 13))
+                screen = my_pygui.screenshot(region=(x - 43, y - 13, 82, 13))
                 if ocr.available_unit(screen) < val:
                     raise Exception('Not enough {}'.format(key))
         my_pygui.click(self.coordinations['star'].get())
@@ -325,10 +326,10 @@ class Adventure:
 
     def make_adventure(self, delay=0, start=0, stop=1000, mode=Mode.play):
         logging.info('make_adventure')
-        assert(isinstance(mode, Mode))
+        assert (isinstance(mode, Mode))
         my.wait(delay, 'Making adventure')
         for action in self.data['actions']:
-            if not(start <= action['no'] <= stop):
+            if not (start <= action['no'] <= stop):
                 continue
             self.make_action(action, mode, start)
 
@@ -517,11 +518,11 @@ TN = Adventure(adventure)
 #     Adventure('Home').make_adventure(delay=8*60)
 
 # TN.start_adventure(delay=3)
-# TN.send_to_adventure(first=0, last=11)
+# TN.send_to_adventure(first=3, last=11)
 # TN.send_to_adventure(first=4, last=4)
-# TN.go_to_adventure(7)
-# TN.make_adventure(delay=3, start=0, stop=23, mode=Mode.play)
-# TN.end_adventure(1, Mode.play)
+# TN.go_to_adventure(70)
+TN.make_adventure(delay=7, start=1, stop=111, mode=Mode.play)
+TN.end_adventure(1000, Mode.play)
 
 # Adventure('Home').make_adventure(delay=6*60)
 # TN.make_adventure(delay=30, start=0, stop=137, mode=Mode.play)
@@ -529,7 +530,7 @@ TN = Adventure(adventure)
 # Adventure('Home').make_adventure(delay=5*60)
 # Adventure('lg_9').send_to_adventure(3)
 # Adventure('lg_9').make_adventure(3, mode=Mode.teach_delay)
-Adventure('spj').make_adventure(3)
+# Adventure('spj').make_adventure(3)
 # Adventure('oblezenie').send_to_adventure(3)
 Adventure('oblezenie').make_adventure(3000)
 TN = Adventure('traitors')
@@ -540,20 +541,20 @@ TN = Adventure('traitors')
 # TN.go_to_adventure(7 * 60)
 TN.make_adventure(delay=3, start=1, stop=137, mode=Mode.play)
 TN.end_adventure(120, Mode.play)
-Adventure('a_WW').make_adventure(delay=8*60)
+Adventure('a_WW').make_adventure(delay=8 * 60)
 for i in range(20):
     TN = Adventure('WW')
     TN.start_adventure(delay=30)
     TN.send_to_adventure(first=0, last=111)
-    TN.go_to_adventure(7*60)
+    TN.go_to_adventure(7 * 60)
     TN.make_adventure(delay=30, start=0, stop=137, mode=Mode.play)
     TN.end_adventure(100, Mode.play)
     TN = Adventure('traitors')
     TN.start_adventure(delay=80)
     TN.send_to_adventure(20, first=0, last=1)
-    Adventure('a_WW').make_adventure(delay=6*60)
+    Adventure('a_WW').make_adventure(delay=6 * 60)
     TN.send_to_adventure(first=2, last=11)
     TN.go_to_adventure(7 * 60)
     TN.make_adventure(delay=30, start=0, stop=137, mode=Mode.play)
     TN.end_adventure(120, Mode.play)
-    Adventure('a_WW').make_adventure(delay=8*60)
+    Adventure('a_WW').make_adventure(delay=8 * 60)
