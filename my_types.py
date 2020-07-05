@@ -169,6 +169,7 @@ class Action:
         self.no = kwargs.get('no', 0)
         self.type = kwargs.get('type', '')
         self.delay = kwargs.get('delay', 0)
+        self.active = kwargs.get('active', True)
         self.generals = [General(self, **gen) for gen in kwargs.get('generals', [])]
 
     def get_data_for_table(self, attr):

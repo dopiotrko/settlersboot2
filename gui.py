@@ -770,9 +770,6 @@ class AdventurePanel(wx.Panel):
                 self.tables.generals_grid.ClearSelection()
             elif event.GetId() == self.tables.generals_grid.id:
                 self.tables.actions_grid.ClearSelection()
-        logging.error(row)
-        logging.error(self.tables.actions_grid.GetSelectedRows())
-        logging.error(self.tables.generals_grid.GetSelectedRows())
         if self.last_grid_id != event.GetId() or self.last_row != row:
             generals = []
             if event.GetId() == self.tables.actions_grid.id:
