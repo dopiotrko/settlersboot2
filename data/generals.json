@@ -5,6 +5,16 @@
     "capacity": 195
   },
   {
+    "type": "sylvana",
+    "name": "Sylvana 1",
+    "capacity": 195
+  },
+  {
+    "type": "sylvana",
+    "name": "Sylvana 2",
+    "capacity": 195
+  },
+  {
     "type": "major",
     "name": "GM1",
     "capacity": 285
@@ -13,6 +23,11 @@
     "type": "major",
     "name": "GM2",
     "capacity": 285
+  },
+  {
+    "type": "major",
+    "name": "GM3",
+    "capacity": 270
   },
   {
     "type": "grim",
@@ -78,5 +93,10 @@
     "type": "basic",
     "name": "Basic 6",
     "capacity": 200
+  },
+  {
+    "type": "kwatermistrz",
+    "name": "kwatermistrz",
+    "capacity": 1000
   }
 ]
