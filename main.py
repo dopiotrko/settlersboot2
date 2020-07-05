@@ -259,6 +259,8 @@ class Adventure:
         return army
 
     def check_if_army_available(self, army):
+        # TODO temporally disable this function
+        return
         logging.info('check_if_army_available')
         my_pygui.click(self.coordinations['star'].get())
         my_pygui.click(self.coordinations['specialists'].get())
@@ -488,20 +490,59 @@ class Adventure:
 
 
 # Configure().run()
-adventure = 'wild_mary'
+adventure = 'traitors'
+# adventure = 'WW'
 TN = Adventure(adventure)
+# Adventure('Home').make_adventure(delay=6*60)
+# TN.make_adventure(delay=3, start=2, stop=111, mode=Mode.play)
+# TN.end_adventure(100, Mode.play)
+# Adventure('Home').make_adventure(delay=8*60)
+# for i in range(20):
+#     TN.start_adventure(delay=3)
+#     TN.send_to_adventure(first=0, last=111)
+#     TN.go_to_adventure(7*60)
+#     TN.make_adventure(delay=30, start=0, stop=137, mode=Mode.play)
+#     TN.end_adventure(100, Mode.play)
+#     Adventure('Home').make_adventure(delay=8*60)
+
 # TN.start_adventure(delay=3)
-# TN.send_to_adventure(first=0, last=111)
-# TN.send_to_adventure(first=1, last=2)
-# TN.go_to_adventure(1)
-TN.make_adventure(delay=2, start=10, stop=137, mode=Mode.play)
-# TN.end_adventure(60)
+# TN.send_to_adventure(first=0, last=11)
+# TN.send_to_adventure(first=4, last=4)
+# TN.go_to_adventure(7)
+# TN.make_adventure(delay=3, start=0, stop=23, mode=Mode.play)
+# TN.end_adventure(1, Mode.play)
 
-
-# for i in range(4):
-#     start_adventure(adventure, delay=60*3)
-#     send_to_adventure(adventure, first=1, last=2)
-#     send_to_adventure(adventure, delay=16*60, first=3, last=5)
-#     go_to_adventure(adventure, 16*60)
-#     make_adventure(adventure, delay=60)
-#     end_adventure(adventure, 60)
+# Adventure('Home').make_adventure(delay=6*60)
+# TN.make_adventure(delay=30, start=0, stop=137, mode=Mode.play)
+# TN.end_adventure(100, Mode.play)
+# Adventure('Home').make_adventure(delay=5*60)
+# Adventure('lg_9').send_to_adventure(3)
+# Adventure('lg_9').make_adventure(3, mode=Mode.teach_delay)
+Adventure('spj').make_adventure(3)
+# Adventure('oblezenie').send_to_adventure(3)
+Adventure('oblezenie').make_adventure(3000)
+TN = Adventure('traitors')
+# TN.start_adventure(delay=3)
+# TN.send_to_adventure(20, first=0, last=1)
+# Adventure('a_WW').make_adventure(delay=8*60)
+# TN.send_to_adventure(2*60, first=2, last=11)
+# TN.go_to_adventure(7 * 60)
+TN.make_adventure(delay=3, start=1, stop=137, mode=Mode.play)
+TN.end_adventure(120, Mode.play)
+Adventure('a_WW').make_adventure(delay=8*60)
+for i in range(20):
+    TN = Adventure('WW')
+    TN.start_adventure(delay=30)
+    TN.send_to_adventure(first=0, last=111)
+    TN.go_to_adventure(7*60)
+    TN.make_adventure(delay=30, start=0, stop=137, mode=Mode.play)
+    TN.end_adventure(100, Mode.play)
+    TN = Adventure('traitors')
+    TN.start_adventure(delay=80)
+    TN.send_to_adventure(20, first=0, last=1)
+    Adventure('a_WW').make_adventure(delay=6*60)
+    TN.send_to_adventure(first=2, last=11)
+    TN.go_to_adventure(7 * 60)
+    TN.make_adventure(delay=30, start=0, stop=137, mode=Mode.play)
+    TN.end_adventure(120, Mode.play)
+    Adventure('a_WW').make_adventure(delay=8*60)
