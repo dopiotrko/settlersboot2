@@ -447,14 +447,17 @@ class Adventure:
                             my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
                             general['delay'] = int(time.time() - t_0)
                     my_pygui.click(target.get(), clicks=2, interval=0.25)
-                    # verifying if move succeed
                     x_t, y_t = target.get()
                     if action['type'] in 'move':
+                        logging.info('verifying if move succeed')
+                        time.sleep(.2)
                         loc = my_pygui.locateOnScreen('resource/confirm_move.png',
                                                       confidence=0.9,
                                                       region=(x_t - 30, y_t - 50, 30, 50))
-                        # verification false - trying again
                         if not loc:
+                            logging.info('move verification passed')
+                        else:
+                            logging.info('move verification false - trying again')
                             my_pygui.moveTo(target.get())
                             my_pygui.click(target.get(), clicks=2, interval=0.25)
                 elif mode == Mode.teach_co:
@@ -495,9 +498,9 @@ class Adventure:
         my_pygui.click(self.coordinations['star'].get())
         my_pygui.click(self.coordinations['first_general'].get())
         my_pygui.click(self.coordinations['close_general'].get())
-        finded = my_pygui.locateOnScreen('data/{}/loc_reference.png'.format(self.name), confidence=0.85)
-        if not finded:
-            raise Exception('data/{}/loc_reference.png not found on screen'.format(self.name))
+        # finded = my_pygui.locateOnScreen('data/{}/loc_reference.png'.format(self.name), confidence=0.85)
+        # if not finded:
+        #     raise Exception('data/{}/loc_reference.png not found on screen'.format(self.name))
         end_adventure_co = []
         get_click = listener.GetClick()
         if mode == Mode.teach_co:
@@ -506,14 +509,15 @@ class Adventure:
                 coord = get_click.get('DOWN')
                 if coord == 'right':
                     break
-                end_adventure_co.append({"co": (coord - finded).get(), "delay": time.time() - t_0})
+                end_adventure_co.append({"co": (coord - self.coordinations['center_ref']).get(),
+                                         "delay": time.time() - t_0})
             with open('data/{}/end_adv_co.json'.format(self.name), 'w') as f:
                 json.dump(end_adventure_co, f, indent=2)
         elif mode == Mode.play:
             with open('data/{}/end_adv_co.json'.format(self.name), 'r') as f:
                 end_adventure_co = json.load(f)
             for click in end_adventure_co:
-                target = Point.from_list(click['co']) + finded
+                target = Point.from_list(click['co']) + self.coordinations['center_ref']
                 if mode == Mode.play:
                     my.wait(click['delay'], 'Next click')
                 my_pygui.moveTo(target.get())
