@@ -36,6 +36,7 @@ pyautogui.PAUSE = 1
 class Click:
     def __call__(self, *args, **kwargs):
         logging.info('Click: {}, {}'.format(args, kwargs))
+        pyautogui.moveTo(*args)
         return pyautogui.click(*args, **kwargs)
 
 
