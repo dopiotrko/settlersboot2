@@ -447,6 +447,16 @@ class Adventure:
                             my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
                             general['delay'] = int(time.time() - t_0)
                     my_pygui.click(target.get(), clicks=2, interval=0.25)
+                    # verifying if move succeed
+                    x_t, y_t = target.get()
+                    if action['type'] in 'move':
+                        loc = my_pygui.locateOnScreen('resource/confirm_move.png',
+                                                      confidence=0.9,
+                                                      region=(x_t - 30, y_t - 50, 30, 50))
+                        # verification false - trying again
+                        if not loc:
+                            my_pygui.moveTo(target.get())
+                            my_pygui.click(target.get(), clicks=2, interval=0.25)
                 elif mode == Mode.teach_co:
                     my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
                     xcr, ycr = self.coordinations['center_ref'].get()
