@@ -257,6 +257,7 @@ class DataGrid(grid.Grid):
         self.make_context_menu_id('move_down', self.move_down)
         # self.make_context_menu_id('move_to', self.move_to)
         self.make_context_menu_id('activate', self.activate)
+        self.make_context_menu_id('deactivate', self.deactivate)
 
     def on_right_click(self, event):
         logging.info('DataGrid:on_right_click:')
@@ -333,6 +334,10 @@ class DataGrid(grid.Grid):
 
     def activate(self, event):
         logging.info('DataGrid:activate:')
+        pass
+
+    def deactivate(self, event):
+        logging.info('DataGrid:deactivate:')
         pass
 
 
@@ -440,13 +445,17 @@ class ActionsGrid(DataGrid):
             for gen in self.adventure.generals:
                 context_menu.Append(gen.id_ref, gen.name or gen.type)
         elif col == 3:
-            context_menu.Append(self.context_menu_ids['activate'], 'Set/Unset Active')
+            context_menu.Append(self.context_menu_ids['activate'], 'Activate selected')
+            context_menu.Append(self.context_menu_ids['deactivate'], 'Deactivate selected')
 
     def activate(self, event):
         logging.info('ActionsGrid:on_right_click_add:')
-        row = self.left_clicked
-        # self.adventure.move_action(row, row + 1)
-        print(row)
+        self.adventure.set_actions_active(self.GetSelectedRows(), True)
+        self.reset()
+
+    def deactivate(self, event):
+        logging.info('ActionsGrid:on_right_click_add:')
+        self.adventure.set_actions_active(self.GetSelectedRows(), False)
         self.reset()
 
 

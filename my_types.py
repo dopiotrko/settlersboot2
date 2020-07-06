@@ -134,6 +134,11 @@ class Adventure:
         self.actions.insert(to, moving)
         # self.fix_ids()
 
+    def set_actions_active(self, rows, value):
+        logging.info('Action:set_active:')
+        for row in rows:
+            self.actions[row].set_active(value)
+
     def fix_ids(self):
         logging.info('Adventure:fix_ids:')
         for index, gen in enumerate(self.generals):
@@ -189,6 +194,10 @@ class Action:
     def set_data_from_table(self, attr, value):
         logging.info('Action:set_data_from_table:')
         setattr(self, attr, value)
+
+    def set_active(self, value):
+        logging.info('Action:set_active:')
+        self.active = value
 
     def get_generals(self):
         logging.info('Action:get_generals:')
