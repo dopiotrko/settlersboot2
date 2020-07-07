@@ -427,7 +427,10 @@ class Adventure:
                     my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
                     general['relative_coordinates'] = (get_click.get('DOUBLE') - finded - drag).get()
                 elif mode == Mode.play or mode == Mode.teach_delay:
-                    target = self.coordinations['center_ref'] - drag
+                    if 'drag' in general:
+                        target = self.coordinations['center_ref'] - drag
+                    else:
+                        target = Point.from_list(general['relative_coordinates']) + finded
                     if 'delay' in general:
                         if mode == Mode.play:
                             my.wait(general['delay'], 'Next general attacks')
