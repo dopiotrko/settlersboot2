@@ -467,17 +467,19 @@ class Adventure:
                     my_pygui.click(target.get(), clicks=2, interval=0.25)
                     x_t, y_t = target.get()
                     if action['type'] in 'move':
-                        logging.info('verifying if move succeed')
-                        time.sleep(.2)
-                        loc = my_pygui.locateOnScreen('resource/confirm_move.png',
-                                                      confidence=0.9,
-                                                      region=(x_t - 30, y_t - 50, 30, 50))
-                        if not loc:
-                            logging.info('move verification passed')
-                        else:
-                            logging.info('move verification false - trying again')
-                            my_pygui.moveTo(target.get())
-                            my_pygui.click(target.get(), clicks=2, interval=0.25)
+                        log.info('verifying if move succeed')
+                        while True:
+                            time.sleep(.7)
+                            loc = my_pygui.locateOnScreen('resource/confirm_move.png',
+                                                          confidence=0.9,
+                                                          region=(x_t - 30, y_t - 50, 30, 50))
+                            if not loc:
+                                log.info('move verification passed')
+                                break
+                            else:
+                                log.info('move verification false - trying again')
+                                my_pygui.moveTo(target.get())
+                                my_pygui.click(target.get(), clicks=2, interval=0.25)
                 elif mode == Mode.teach_co:
                     my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
                     xcr, ycr = self.coordinations['center_ref'].get()
