@@ -90,6 +90,10 @@ class Mode(Enum):
     teach_delay = 3
 
 
+with open('data/conf.dat', 'rb') as config_dictionary_file:
+    conf_coord = pickle.load(config_dictionary_file)
+
+
 class Adventure:
     def __init__(self, name, description=''):
         logging.info('Adventure:__init__:')
