@@ -880,7 +880,7 @@ class Frame(wx.Frame):
         )
         if dlg.ShowModal() == wx.ID_OK:
             path = dlg.GetPath()
-            path += '.json' if path[-4:] != '.json' else ''
+            path += '.json' if path[-5:] != '.json' else ''
             with open(path, 'w') as f:
                 json.dump(self.adventure.as_json(), f, indent=2)
         dlg.Destroy()
