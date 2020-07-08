@@ -47,15 +47,15 @@
       "preset": false,
       "init": false,
       "army": {
-        "recruit": 156,
-        "bowmen": 27,
+        "recruit": 52,
+        "bowmen": 0,
         "militia": 0,
-        "cavalry": 0,
+        "cavalry": 20,
         "longbowman": 0,
-        "soldier": 33,
-        "crossbowman": 0,
+        "soldier": 0,
+        "crossbowman": 213,
         "elite_soldier": 0,
-        "cannoneer": 69
+        "cannoneer": 0
       },
       "capacity": 285,
       "delay": 0
@@ -67,15 +67,15 @@
       "preset": false,
       "init": false,
       "army": {
-        "recruit": 0,
-        "bowmen": 0,
+        "recruit": 121,
+        "bowmen": 27,
         "militia": 0,
         "cavalry": 0,
         "longbowman": 0,
-        "soldier": 0,
-        "crossbowman": 244,
+        "soldier": 33,
+        "crossbowman": 0,
         "elite_soldier": 0,
-        "cannoneer": 0
+        "cannoneer": 69
       },
       "capacity": 250,
       "delay": 0
@@ -87,7 +87,7 @@
       "preset": false,
       "init": false,
       "army": {
-        "recruit": 182,
+        "recruit": 130,
         "bowmen": 0,
         "militia": 0,
         "cavalry": 0,
@@ -99,6 +99,26 @@
       },
       "capacity": 270,
       "delay": 0
+    },
+    {
+      "id": 5,
+      "type": "master",
+      "name": "Master 1",
+      "preset": false,
+      "init": false,
+      "army": {
+        "recruit": 0,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 171,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      },
+      "capacity": 235,
+      "delay": 0
     }
   ],
   "actions": [
@@ -106,6 +126,7 @@
       "no": 0,
       "type": "load",
       "delay": 0,
+      "active": true,
       "generals": [
         {
           "id": 0,
@@ -133,6 +154,7 @@
       "no": 1,
       "type": "load",
       "delay": 0,
+      "active": true,
       "generals": [
         {
           "id": 1,
@@ -160,15 +182,16 @@
       "no": 2,
       "type": "load",
       "delay": 0,
+      "active": true,
       "generals": [
         {
-          "id": 2,
-          "type": "major",
-          "name": "GM1",
+          "id": 3,
+          "type": "veteran",
+          "name": "Veteran 1",
           "preset": false,
           "init": false,
           "army": {
-            "recruit": 156,
+            "recruit": 121,
             "bowmen": 27,
             "militia": 0,
             "cavalry": 0,
@@ -178,7 +201,7 @@
             "elite_soldier": 0,
             "cannoneer": 69
           },
-          "capacity": 285,
+          "capacity": 250,
           "delay": 0
         }
       ]
@@ -187,11 +210,12 @@
       "no": 3,
       "type": "load",
       "delay": 0,
+      "active": true,
       "generals": [
         {
-          "id": 3,
-          "type": "veteran",
-          "name": "Veteran 1",
+          "id": 5,
+          "type": "master",
+          "name": "Master 1",
           "preset": false,
           "init": false,
           "army": {
@@ -201,11 +225,11 @@
             "cavalry": 0,
             "longbowman": 0,
             "soldier": 0,
-            "crossbowman": 244,
+            "crossbowman": 171,
             "elite_soldier": 0,
             "cannoneer": 0
           },
-          "capacity": 250,
+          "capacity": 235,
           "delay": 0
         }
       ]
@@ -214,6 +238,35 @@
       "no": 4,
       "type": "load",
       "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 2,
+          "type": "major",
+          "name": "GM1",
+          "preset": false,
+          "init": false,
+          "army": {
+            "recruit": 52,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 20,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 213,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          },
+          "capacity": 285,
+          "delay": 0
+        }
+      ]
+    },
+    {
+      "no": 5,
+      "type": "load",
+      "delay": 0,
+      "active": true,
       "generals": [
         {
           "id": 4,
@@ -222,7 +275,7 @@
           "preset": false,
           "init": false,
           "army": {
-            "recruit": 182,
+            "recruit": 130,
             "bowmen": 0,
             "militia": 0,
             "cavalry": 0,

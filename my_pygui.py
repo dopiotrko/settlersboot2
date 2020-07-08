@@ -30,14 +30,17 @@ if sys.platform == 'win32':
 
     pyautogui.pixelMatchesColor = _pixelMatchesColor
 
-pyautogui.PAUSE = 1
+pyautogui.PAUSE = .7
 
 
 class Click:
     def __call__(self, *args, **kwargs):
         logging.info('Click: {}, {}'.format(args, kwargs))
+        pyautogui.PAUSE = .3
         pyautogui.moveTo(*args)
-        return pyautogui.click(*args, **kwargs)
+        result = pyautogui.click(*args, **kwargs)
+        pyautogui.PAUSE = .7
+        return result
 
 
 class Write:
