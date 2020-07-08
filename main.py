@@ -37,7 +37,7 @@ import listener
 import ocr
 import os
 from my_types import Point, Mode
-
+log = logging.getLogger(__name__)
 for handler in logging.root.handlers[:]:
     logging.root.removeHandler(handler)
 logging.basicConfig(level=logging.INFO)
@@ -46,7 +46,7 @@ STAROPEN = False
 
 class Adventure:
     def __init__(self, name):
-        logging.info('Init Adventure:')
+        log.info('Init Adventure:')
         self.name = name
         with open(my.get_last_filename(name)) as f:
             self.data = json.load(f)
@@ -58,11 +58,11 @@ class Adventure:
         self.focused = None
 
     def init_locate_generals(self, start):
-        logging.info('init_locate_generals:')
+        log.info('init_locate_generals:')
         time.sleep(.5)
         if start == 0 or not os.path.exists('data/{}/generals_loc.dat'.format(self.name)):
             generals = dict()
-            my_pygui.click(self.coordinations['star'].get())
+            self.open_star()
             my_pygui.click(self.coordinations['specialists'].get())
             for general in self.data['generals']:
                 print(general)
@@ -97,7 +97,7 @@ class Adventure:
                     generals_loc.remove(None)
                 except ValueError:
                     break
-            my_pygui.click(self.coordinations['star'].get())
+            my_pygui.click(self.coordinations['star_close'].get())
             with open('data/{}/generals_loc.dat'.format(self.name), 'wb') as generals_loc_file:
                 pickle.dump(generals_loc, generals_loc_file)
         else:
@@ -106,7 +106,7 @@ class Adventure:
         return generals_loc
 
     def group_generals_by_types(self, first, last):
-        logging.info('group_generals_by_types')
+        log.info('group_generals_by_types')
         generals = dict()
         # pygui.click(self.coordinations['star'].get())
         # pygui.click(self.coordinations['specialists'].get())
@@ -120,11 +120,11 @@ class Adventure:
         return generals
 
     def start_adventure(self, delay=0):
-        logging.info('start_adventure')
+        log.info('start_adventure')
 
         my.wait(delay, 'Starting adventure')
 
-        my_pygui.click(self.coordinations['star'].get())
+        self.open_star()
         my_pygui.click(self.coordinations['adventures'].get())
 
         star_window_corner = self.coordinations['adventures'] - Point(454, 371)
@@ -147,11 +147,11 @@ class Adventure:
             my_pygui.click(loc.get())
 
     def set_army(self, general_loc, general):
-        logging.info('set_army')
+        log.info('set_army')
         count = 0
         army = general['army']
         while True:
-            logging.info('Setting army, try {}'.format(count + 1))
+            log.info('Setting army, try {}'.format(count + 1))
             my_pygui.click(self.coordinations['unload'].get())
             for units, quantity in army.items():
                 if quantity != 0:
@@ -175,19 +175,19 @@ class Adventure:
                                                      region=(x_t - 25, y_t - 25, 50, 50),
                                                      confidence=0.97)
                     if finded:
-                        logging.info('General ready = transfer button active')
+                        log.info('General ready = transfer button active')
                         break
                     else:
-                        logging.warning('General not ready yet. Trying again after 3 sec')
+                        log.warning('General not ready yet. Trying again after 3 sec')
                         my.wait(3, 'Trying again')
                 else:
                     """re selecting only once"""
                     if not re_selected:
-                        logging.warning('General not ready after 3 tryes. Re selecting')
-                        self.select_general_by_loc(general_loc, general['type'], wait_til_active=False)
+                        log.warning('General not ready after 3 tryes. Re selecting')
+                        self.select_general_by_loc(general_loc, general['type'], verify=False)
                         re_selected = True
                     else:
-                        logging.error('General not ready after re select. Abort')
+                        log.error('General not ready after re select. Abort')
                         raise Exception('General not ready after re select.')
             x, y = self.coordinations['army_sum'].get()
             army_sum_screen = my_pygui.screenshot(region=(x, y, 314, 14))
@@ -195,19 +195,20 @@ class Adventure:
                 break
             else:
                 """try again"""
-                logging.warning('Try {} failed'.format(count + 1))
+                log.warning('Try {} failed'.format(count + 1))
                 count += 1
                 if count >= 3:
                     raise Exception('Could not set army in 3 tryes')
 
-    def select_general_by_loc(self, loc, general_type, wait_til_active=True):
-        logging.info('select_general_by_loc')
+    def select_general_by_loc(self, loc, general_type, verify=True):
+        log.info('select_general_by_loc')
 
         x, y = self.coordinations['star'].get()
         my_pygui.moveTo(x, y, .2)
-        my_pygui.click(self.coordinations['star'].get())
+        self.open_star(verify)
         my_pygui.click(self.coordinations['specialists'].get())
-        if wait_til_active:
+        if verify:
+            log.info('verify if general is active')
             while True:
                 finded = my_pygui.locateOnScreen('resource/{}.png'.format(general_type),
                                                  region=(loc.x - 30, loc.y - 30, 60, 60),
@@ -215,16 +216,16 @@ class Adventure:
                 if finded:
                     break
                 else:
-                    logging.warning('no active general of type {} found in this location. Trying again after 3 sec')
+                    log.warning('no active general of type {} found in this location. Trying again after 3 sec')
                     my.wait(3, 'Trying again')
         my_pygui.click(loc.get())
 
     def get_generals_by_type(self, general_type, general_name=None):
-        logging.info('get_generals_by_type')
+        log.info('get_generals_by_type')
 
         x, y = self.coordinations['star'].get()
         my_pygui.moveTo(x, y, .2)
-        my_pygui.click(self.coordinations['star'].get())
+        self.open_star()
         my_pygui.click(self.coordinations['specialists'].get())
         my_pygui.click(self.coordinations['star_txt'].get())
         my_pygui.hotkey('ctrl', 'a')
@@ -237,7 +238,7 @@ class Adventure:
         return locations
 
     def send_generals_by_type(self, general_type, list_of_dicts_with_generals_of_that_type, general_name=None):
-        logging.info('send_generals_by_type')
+        log.info('send_generals_by_type')
 
         locations_of_gens_of_that_type = self.get_generals_by_type(general_type, general_name)
         generals_of_type = list(zip(list_of_dicts_with_generals_of_that_type, locations_of_gens_of_that_type))
@@ -249,11 +250,11 @@ class Adventure:
             my_pygui.click(self.coordinations['send_confirm'].get())
             time.sleep(2)
             if item_no < len(generals_of_type) - 1:
-                my_pygui.click(self.coordinations['star'].get())
+                self.open_star()
                 my_pygui.click(self.coordinations['specialists'].get())
 
     def sum_armies(self, first, last):
-        logging.info('sum_generals_army')
+        log.info('sum_generals_army')
         army = dict()
         for general in self.data['generals']:
             if not (first <= general['id'] <= last):
@@ -264,8 +265,8 @@ class Adventure:
     def check_if_army_available(self, army):
         # TODO temporally disable this function
         return
-        logging.info('check_if_army_available')
-        my_pygui.click(self.coordinations['star'].get())
+        log.info('check_if_army_available')
+        self.open_star()
         my_pygui.click(self.coordinations['specialists'].get())
         my_pygui.click(self.coordinations['star_txt'].get())
         my_pygui.hotkey('ctrl', 'a')
@@ -274,20 +275,20 @@ class Adventure:
         time.sleep(.5)
         for key, val in army.items():
             if val:
-                logging.info('Checking available {}'.format(key))
+                log.info('Checking available {}'.format(key))
                 x, y = self.coordinations[key].get()
                 screen = my_pygui.screenshot(region=(x - 43, y - 13, 82, 13))
                 if ocr.available_unit(screen) < val:
                     raise Exception('Not enough {}'.format(key))
-        my_pygui.click(self.coordinations['star'].get())
+        self.open_star()
         my_pygui.click(self.coordinations['specialists'].get())
         my_pygui.click(self.coordinations['star_txt'].get())
         my_pygui.hotkey('ctrl', 'a')
         my_pygui.press('del')
-        my_pygui.click(self.coordinations['star'].get())
+        my_pygui.click(self.coordinations['star_close'].get())
 
     def send_to_adventure(self, delay=0, first=0, last=100):
-        logging.info('send_to_adventure')
+        log.info('send_to_adventure')
 
         my.wait(delay, 'Sending to adventure')
         army = self.sum_armies(first, last)
@@ -305,15 +306,15 @@ class Adventure:
             if unnamed_generals_of_type:
                 self.send_generals_by_type(g_type, unnamed_generals_of_type)
         """reset star window to default"""
-        my_pygui.click(self.coordinations['star'].get())
+        self.open_star()
         my_pygui.click(self.coordinations['specialists'].get())
         my_pygui.click(self.coordinations['star_txt'].get())
         my_pygui.hotkey('ctrl', 'a')
         my_pygui.press('del')
-        my_pygui.click(self.coordinations['star'].get())
+        my_pygui.click(self.coordinations['star_close'].get())
 
     def go_to_adventure(self, delay=0):
-        logging.info('go_to_adventure')
+        log.info('go_to_adventure')
 
         my.wait(delay, 'Going to adventure')
         loc = my_pygui.locateOnScreen('data/{}/goto_adv.png'.format(self.name), confidence=0.85)
@@ -325,7 +326,7 @@ class Adventure:
             my_pygui.click(x, y + 15)
 
     def make_adventure(self, delay=0, start=0, stop=1000, mode=Mode.play):
-        logging.info('make_adventure')
+        log.info('make_adventure')
         assert (isinstance(mode, Mode))
         my.wait(delay, 'Making adventure')
         for action in self.data['actions']:
@@ -334,7 +335,7 @@ class Adventure:
             self.make_action(action, mode, start)
 
     def focus(self):
-        logging.info('focus')
+        log.info('focus')
         # TODO temporary way to focus window/to be changed
         focus_temp_loc = (self.coordinations['star'] - Point(0, 40))
         my_pygui.click(focus_temp_loc.get())
@@ -343,7 +344,7 @@ class Adventure:
         self.focused = True
 
     def make_action(self, action, mode, start):
-        logging.info('make_action')
+        log.info('make_action')
         if not self.generals_loc:
             self.generals_loc = self.init_locate_generals(start)
         if not self.focused:
@@ -370,7 +371,7 @@ class Adventure:
             t_0 = time.time()
             if 'retreat' in general:
                 my.wait(5, 'Re selecting general')
-                self.select_general_by_loc(general_loc, general['type'], wait_til_active=False)
+                self.select_general_by_loc(general_loc, general['type'], verify=False)
                 if mode == Mode.play or mode == Mode.teach_co:
                     my.wait(general['delay'], 'General retreat')
                     my_pygui.click(self.coordinations['retreat'].get())
@@ -381,9 +382,10 @@ class Adventure:
                     general['delay'] = int(time.time() - t_0)
                 continue
             else:
-                """only first general is verified if is active (assume rest is - to save time)"""
-                wait_til_active = i == 0
-                self.select_general_by_loc(general_loc, general['type'], wait_til_active=wait_til_active)
+                """only for first general - verify if star is open, and general is active 
+                (assume rest is - to save time)"""
+                verify = i == 0
+                self.select_general_by_loc(general_loc, general['type'], verify=verify)
             if not general['preset']:
                 self.set_army(general_loc, general)
                 if action['type'] in ('unload', 'load'):
@@ -470,7 +472,7 @@ class Adventure:
                 json.dump(self.data, f, indent=2)
 
     def end_adventure_(self, delay=0):
-        logging.info('end_adventure')
+        log.info('end_adventure')
 
         my.wait(delay, 'Ending adventure')
         my_pygui.click(self.coordinations['book'].get())
@@ -492,10 +494,10 @@ class Adventure:
             my_pygui.click((loc + Point(160, 234)).get())
 
     def end_adventure(self, delay=0, mode=Mode.teach_co):
-        logging.info('end_adventure')
+        log.info('end_adventure')
 
         my.wait(delay, 'Ending adventure')
-        my_pygui.click(self.coordinations['star'].get())
+        self.open_star()
         my_pygui.click(self.coordinations['first_general'].get())
         my_pygui.click(self.coordinations['close_general'].get())
         # finded = my_pygui.locateOnScreen('data/{}/loc_reference.png'.format(self.name), confidence=0.85)

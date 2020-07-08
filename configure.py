@@ -16,6 +16,13 @@ class Configure:
         my_pygui.alert(text=text, title='Configuration', button='OK')
         coordinations['star'] = get_click.get()
 
+        text = 'Close Star Menu'
+        my_pygui.alert(text=text, title='Configuration', button='OK')
+        coordinations['star_close'] = get_click.get()
+
+        my_pygui.alert(text='Open Star Menu again', title='Configuration', button='OK')
+        get_click.get()
+
         text = 'Adventures'
         my_pygui.alert(text=text, title='Configuration', button='OK')
         coordinations['adventures'] = get_click.get()
