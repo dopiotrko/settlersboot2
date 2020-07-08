@@ -119,6 +119,22 @@ class Adventure:
                 generals[general['type']] = [general]
         return generals
 
+    def open_star(self, verify=True):
+        log.info('open_star')
+        my_pygui.click(self.coordinations['star'].get())
+        while verify:
+            log.info('verify if star is open')
+            star_close = self.coordinations['star_close']
+            loc = my_pygui.locateOnScreen('data/{}/start_verify.png'.format(self.name),
+                                          region=(star_close.x - 20, star_close.y, 40, 45),
+                                          confidence=0.85)
+            if loc:
+                log.info('star open verification succeed')
+                break
+            else:
+                log.info('star open verification false - trying again')
+                my_pygui.click(self.coordinations['star'].get())
+
     def start_adventure(self, delay=0):
         log.info('start_adventure')
 
