@@ -83,7 +83,7 @@
     {
       "id": 4,
       "type": "major",
-      "name": "GM3",
+      "name": "GM2",
       "preset": false,
       "init": false,
       "army": {
@@ -271,7 +271,7 @@
         {
           "id": 4,
           "type": "major",
-          "name": "GM3",
+          "name": "GM2",
           "preset": false,
           "init": false,
           "army": {

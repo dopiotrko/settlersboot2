@@ -63,7 +63,7 @@
     {
       "id": 3,
       "type": "major",
-      "name": "GM1",
+      "name": "GM3",
       "preset": false,
       "init": false,
       "army": {
@@ -167,7 +167,7 @@
         {
           "id": 3,
           "type": "major",
-          "name": "GM1",
+          "name": "GM3",
           "preset": true,
           "init": true,
           "army": {
@@ -371,7 +371,7 @@
         {
           "id": 3,
           "type": "major",
-          "name": "GM1",
+          "name": "GM3",
           "preset": true,
           "init": false,
           "army": {
@@ -431,7 +431,7 @@
         {
           "id": 3,
           "type": "major",
-          "name": "GM1",
+          "name": "GM3",
           "preset": false,
           "init": false,
           "army": {
@@ -611,7 +611,7 @@
         {
           "id": 3,
           "type": "major",
-          "name": "GM1",
+          "name": "GM3",
           "preset": true,
           "init": false,
           "army": {
@@ -787,7 +787,7 @@
         {
           "id": 3,
           "type": "major",
-          "name": "GM1",
+          "name": "GM3",
           "preset": true,
           "init": false,
           "army": {
