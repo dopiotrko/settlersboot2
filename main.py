@@ -231,15 +231,20 @@ class Adventure:
         if verify:
             log.info('verify if general is active')
             while True:
-                finded = my_pygui.locateOnScreen('resource/{}.png'.format(general_type),
-                                                 region=(loc.x - 30, loc.y - 30, 60, 60),
-                                                 confidence=0.97)
-                if finded:
+                if self.verify_if_general_active(loc, general_type):
                     break
-                else:
-                    log.warning('no active general of type {} found in this location. Trying again after 3 sec')
-                    my.wait(3, 'Trying again')
         my_pygui.click(loc.get())
+
+    @staticmethod
+    def verify_if_general_active(loc, general_type):
+        finded = my_pygui.locateOnScreen('resource/{}.png'.format(general_type),
+                                         region=(loc.x - 30, loc.y - 30, 60, 60),
+                                         confidence=0.97)
+        if finded:
+            return True
+        else:
+            log.warning('no active general of type {} found in this location. Trying again after 3 sec')
+            return False
 
     def get_generals_by_type(self, general_type, general_name=None):
         log.info('get_generals_by_type')
@@ -390,6 +395,18 @@ class Adventure:
                     .format(action['type'], action['no'])
                 my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
         print(action['no'], time.asctime(time.localtime(time.time())))
+
+        while True:
+            result = True
+            for general in action['generals']:
+                general_loc = self.generals_loc[general['id']]
+                result = result and self.verify_if_general_active(general_loc, general['type'])
+            if result:
+                log.info('all generals from this action active')
+                break
+            else:
+                log.info('not all generals from this action active - trying again')
+
         for i, general in enumerate(action['generals']):
             general_loc = self.generals_loc[general['id']]
             t_0 = time.time()
