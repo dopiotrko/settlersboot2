@@ -122,10 +122,11 @@ class Adventure:
     def open_star(self, verify=True):
         log.info('open_star')
         my_pygui.click(self.coordinations['star'].get())
+        try_count = 0
         while verify:
             log.info('verify if star is open')
             star_close = self.coordinations['star_close']
-            loc = my_pygui.locateOnScreen('data/{}/start_verify.png'.format(self.name),
+            loc = my_pygui.locateOnScreen('resource/star_verify.png'.format(self.name),
                                           region=(star_close.x - 20, star_close.y, 40, 45),
                                           confidence=0.85)
             if loc:
@@ -134,6 +135,10 @@ class Adventure:
             else:
                 log.info('star open verification false - trying again')
                 my_pygui.click(self.coordinations['star'].get())
+                if try_count < 5:
+                    try_count += 1
+                else:
+                    raise Exception('star open verification failed in 5 tryes')
 
     def start_adventure(self, delay=0):
         log.info('start_adventure')
@@ -551,12 +556,12 @@ class Adventure:
 
 
 # Configure().run()
-adventure = 'traitors'
-# adventure = 'WW'
+# adventure = 'traitors'
+adventure = 'WW'
 TN = Adventure(adventure)
 # Adventure('Home').make_adventure(delay=6*60)
 # TN.make_adventure(delay=3, start=13, stop=111, mode=Mode.play)
-# TN.end_adventure(1, Mode.play)
+# TN.end_adventure(1, Mode.teach_co)
 # Adventure('Home').make_adventure(delay=8*60)
 # for i in range(20):
 #     TN.start_adventure(delay=3)
@@ -570,8 +575,8 @@ TN = Adventure(adventure)
 # TN.send_to_adventure(first=2, last=11)
 # TN.send_to_adventure(first=3, last=14)
 # TN.go_to_adventure(70)
-TN.make_adventure(delay=7, start=16, stop=111, mode=Mode.play)
-TN.end_adventure(1000, Mode.play)
+# TN.make_adventure(delay=7, start=16, stop=16, mode=Mode.play)
+# TN.end_adventure(1000, Mode.play)
 
 # Adventure('Home').make_adventure(delay=6*60)
 # TN.make_adventure(delay=30, start=0, stop=137, mode=Mode.play)
@@ -580,19 +585,19 @@ TN.end_adventure(1000, Mode.play)
 # Adventure('Home').make_adventure(delay=5*60)
 # Adventure('lg_9').send_to_adventure(3)
 # Adventure('lg_9').make_adventure(3, mode=Mode.teach_delay)
-# Adventure('spj').make_adventure(3)
+Adventure('spj').make_adventure(3)
 # Adventure('spj').send_to_adventure(3)
 # Adventure('oblezenie').send_to_adventure(3)
 # Adventure('oblezenie').make_adventure(3000)
+TN.end_adventure(1000000, Mode.play)
 TN = Adventure('traitors')
 TN.start_adventure(delay=3)
 TN.send_to_adventure(20, first=0, last=1)
-Adventure('a_WW').make_adventure(delay=8*60)
+# Adventure('a_WW').make_adventure(delay=8*60)
 TN.send_to_adventure(20, first=2, last=11)
 TN.go_to_adventure(7 * 60)
 TN.make_adventure(delay=30, start=0, stop=137, mode=Mode.play)
 TN.end_adventure(120, Mode.play)
-Adventure('a_WW').make_adventure(delay=8 * 60)
 for i in range(20):
     TN = Adventure('WW')
     TN.start_adventure(delay=30)
@@ -608,4 +613,4 @@ for i in range(20):
     TN.go_to_adventure(7 * 60)
     TN.make_adventure(delay=30, start=0, stop=137, mode=Mode.play)
     TN.end_adventure(120, Mode.play)
-    Adventure('a_WW').make_adventure(delay=8 * 60)
+    Adventure('a_traitors').make_adventure(delay=8 * 60)
