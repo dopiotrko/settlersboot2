@@ -2,8 +2,8 @@
   "generals": [
     {
       "id": 0,
-      "type": "grim",
-      "name": "Grim 3",
+      "type": "major",
+      "name": "GM1",
       "preset": false,
       "init": false,
       "army": {
@@ -17,7 +17,47 @@
         "elite_soldier": 0,
         "cannoneer": 0
       },
-      "capacity": 200,
+      "capacity": 285,
+      "delay": 0
+    },
+    {
+      "id": 1,
+      "type": "major",
+      "name": "GM2",
+      "preset": false,
+      "init": false,
+      "army": {
+        "recruit": 0,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      },
+      "capacity": 285,
+      "delay": 0
+    },
+    {
+      "id": 2,
+      "type": "major",
+      "name": "GM3",
+      "preset": false,
+      "init": false,
+      "army": {
+        "recruit": 0,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      },
+      "capacity": 285,
       "delay": 0
     }
   ],
@@ -29,9 +69,9 @@
       "active": true,
       "generals": [
         {
-          "id": 0,
-          "type": "grim",
-          "name": "Grim 3",
+          "id": 2,
+          "type": "major",
+          "name": "GM3",
           "preset": false,
           "init": false,
           "army": {
@@ -45,7 +85,7 @@
             "elite_soldier": 0,
             "cannoneer": 0
           },
-          "capacity": 200,
+          "capacity": 285,
           "delay": 0
         }
       ]
