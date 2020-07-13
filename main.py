@@ -493,8 +493,8 @@ class Adventure:
                             time.sleep(.7)
                             loc = my_pygui.locateOnScreen('resource/confirm_move.png',
                                                           confidence=0.9,
-                                                          region=(x_t - 30, y_t - 50, 30, 50))
-                            if not loc:
+                                                          region=(x_t - 15, y_t - 55, 30, 50))
+                            if loc:
                                 log.info('move verification passed')
                                 break
                             else:
