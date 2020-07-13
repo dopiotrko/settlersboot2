@@ -134,11 +134,12 @@ class Adventure:
                 break
             else:
                 log.info('star open verification false - trying again')
+                my.wait(try_count, 'star open verification false - trying again')
                 my_pygui.click(self.coordinations['star'].get())
-                if try_count < 5:
+                if try_count < 10:
                     try_count += 1
                 else:
-                    raise Exception('star open verification failed in 5 tryes')
+                    raise Exception('star open verification failed in 10 tryes')
 
     def start_adventure(self, delay=0):
         log.info('start_adventure')
@@ -147,7 +148,7 @@ class Adventure:
 
         self.open_star()
         my_pygui.click(self.coordinations['adventures'].get())
-
+        my.wait(2, 'Adv search')
         star_window_corner = self.coordinations['adventures'] - Point(454, 371)
         loc = my_pygui.locateOnScreen('data/{}/start_adv.png'.format(self.name),
                                       region=(star_window_corner.x, star_window_corner.y, 600, 400),
@@ -396,16 +397,8 @@ class Adventure:
                 my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
         print(action['no'], time.asctime(time.localtime(time.time())))
 
-        while True:
-            result = True
-            for general in action['generals']:
-                general_loc = self.generals_loc[general['id']]
-                result = result and self.verify_if_general_active(general_loc, general['type'])
-            if result:
-                log.info('all generals from this action active')
-                break
-            else:
-                log.info('not all generals from this action active - trying again')
+        if len(action['generals']) > 1:
+            self.verify_if_generals_active(action)
 
         for i, general in enumerate(action['generals']):
             general_loc = self.generals_loc[general['id']]
@@ -516,6 +509,20 @@ class Adventure:
         if mode == Mode.teach_delay or mode == Mode.teach_co:
             with open(my.get_new_filename(self.name), 'w') as f:
                 json.dump(self.data, f, indent=2)
+
+    def verify_if_generals_active(self, action):
+        self.open_star()
+        while True:
+            result = True
+            for general in action['generals']:
+                general_loc = self.generals_loc[general['id']]
+                result = result and self.verify_if_general_active(general_loc, general['type'])
+            if result:
+                log.info('all generals from this action active')
+                break
+            else:
+                log.info('not all generals from this action active - trying again')
+                my.wait(1, 'Trying again')
 
     def end_adventure_(self, delay=0):
         log.info('end_adventure')
