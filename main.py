@@ -126,6 +126,7 @@ class Adventure:
         while verify:
             log.info('verify if star is open')
             star_close = self.coordinations['star_close']
+            time.sleep(.5)
             loc = my_pygui.locateOnScreen('resource/star_verify.png'.format(self.name),
                                           region=(star_close.x - 20, star_close.y, 40, 45),
                                           confidence=0.85)
@@ -194,7 +195,7 @@ class Adventure:
             while not finded:
                 for i in range(3):
                     finded = my_pygui.locateOnScreen('resource/transfer.png',
-                                                     region=(x_t - 25, y_t - 25, 50, 50),
+                                                     region=(x_t - 30, y_t - 165, 60, 200),
                                                      confidence=0.97)
                     if finded:
                         log.info('General ready = transfer button active')
@@ -222,9 +223,12 @@ class Adventure:
                 if count >= 3:
                     raise Exception('Could not set army in 3 tryes')
 
-    def select_general_by_loc(self, loc, general_type, verify=True):
+    def select_general_by_loc(self, loc, general_type, verify=True, recursion=0):
         log.info('select_general_by_loc')
-
+        """selecting general by loc from star, 
+        return True if selected and on map, 
+        return False if selected but retreated,
+        raise Exception if selection failed"""
         x, y = self.coordinations['star'].get()
         my_pygui.moveTo(x, y, .2)
         self.open_star(verify)
@@ -235,6 +239,31 @@ class Adventure:
                 if self.verify_if_general_active(loc, general_type):
                     break
         my_pygui.click(loc.get())
+        # verify if general opened
+        x_t, y_t = self.coordinations['move'].get()
+        finded = my_pygui.locateOnScreen('resource/transfer.png',
+                                         region=(x_t - 30, y_t - 165, 60, 200),
+                                         confidence=0.97)
+        if finded:
+            return True
+        else:
+            x_t, y_t = self.coordinations['star'].get()
+            finded = my_pygui.locateOnScreen('resource/star_cancel.png',
+                                             region=(x_t - 95, y_t - 80, 190, 120),
+                                             confidence=0.97)
+            if finded:
+                return False
+            else:
+                recursion += 1
+                if recursion < 5:
+                    msg = 'general selection failed in try {}, trying again'.format(recursion)
+                    log.warning(msg)
+                    my.wait(recursion, msg)
+                else:
+                    msg = 'general selection failed in 5 tryes '
+                    log.error(msg)
+                    raise Exception(msg)
+                return self.select_general_by_loc(loc, general_type, verify, recursion=recursion)
 
     @staticmethod
     def verify_if_general_active(loc, general_type):
@@ -276,7 +305,11 @@ class Adventure:
         for item_no, (gen_to_send, available_gen_loc) in enumerate(generals_of_type):
             my_pygui.click(available_gen_loc.get())
             self.set_army(available_gen_loc, gen_to_send)
-            my_pygui.click(self.coordinations['send'].get())
+            if general_type == 'kwatermistrz':
+                send_co = self.coordinations['send'] - Point(0, 127)
+            else:
+                send_co = self.coordinations['send']
+            my_pygui.click(send_co.get())
             my_pygui.click(self.coordinations['send_confirm'].get())
             time.sleep(2)
             if item_no < len(generals_of_type) - 1:
@@ -405,7 +438,9 @@ class Adventure:
             t_0 = time.time()
             if 'retreat' in general:
                 my.wait(5, 'Re selecting general')
-                self.select_general_by_loc(general_loc, general['type'], verify=False)
+                on_map = self.select_general_by_loc(general_loc, general['type'], verify=False)
+                if not on_map:
+                    raise Exception('general must be on map to retreat')
                 if mode == Mode.play or mode == Mode.teach_co:
                     my.wait(general['delay'], 'General retreat')
                     my_pygui.click(self.coordinations['retreat'].get())
@@ -419,24 +454,29 @@ class Adventure:
                 """only for first general - verify if star is open, and general is active 
                 (assume rest is - to save time)"""
                 verify = i == 0
-                self.select_general_by_loc(general_loc, general['type'], verify=verify)
-            if not general['preset']:
-                self.set_army(general_loc, general)
-                if action['type'] in ('unload', 'load'):
-                    continue
-            if action['type'] in 'attack':
-                my_pygui.click(self.coordinations['attack'].get())
-                text = 'Make Your attack no {}'.format(action['no'])
-            elif action['type'] in 'move':
-                my_pygui.click(self.coordinations['move'].get())
-                text = 'Move your army'
+                on_map = self.select_general_by_loc(general_loc, general['type'], verify=verify)
+            if on_map:
+                if not general['preset']:
+                    self.set_army(general_loc, general)
+                    if action['type'] in ('unload', 'load'):
+                        continue
+                if action['type'] in 'attack':
+                    my_pygui.click(self.coordinations['attack'].get())
+                    text = 'Make Your attack no {}'.format(action['no'])
+                elif action['type'] in 'move':
+                    my_pygui.click(self.coordinations['move'].get())
+                    text = 'Move your army'
+                else:
+                    raise Exception('Unexpected action type ')
             else:
-                raise Exception('Unexpected action type ')
+                if action['type'] not in 'move':
+                    raise Exception("for generals not in map, action type has to be 'move'")
+                else:
+                    general['init'] = True
+                    text = 'Move your army'
             if general['init'] is True:
                 my_pygui.moveTo((self.coordinations['book'] + Point(100, 0)).get())
-                finded = my_pygui.locateOnScreen('data/{}/loc_reference.png'.format(self.name), confidence=0.85)
-                if not finded:
-                    raise Exception('data/{}/loc_reference.png not found on screen'.format(self.name))
+                finded = self.locate_reference_img()
             else:
                 finded = Point(0, 0)
             drag = Point(0, 0)
@@ -509,6 +549,13 @@ class Adventure:
         if mode == Mode.teach_delay or mode == Mode.teach_co:
             with open(my.get_new_filename(self.name), 'w') as f:
                 json.dump(self.data, f, indent=2)
+
+    def locate_reference_img(self):
+        finded = my_pygui.locateOnScreen('data/{}/loc_reference.png'.format(self.name), confidence=0.85)
+        if not finded:
+            # my_pygui.write('0-----')
+            raise Exception('data/{}/loc_reference.png not found on screen'.format(self.name))
+        return finded
 
     def verify_if_generals_active(self, action):
         self.open_star()
@@ -607,7 +654,7 @@ TN = Adventure(adventure)
 # TN.end_adventure(1, Mode.play)
 # TN.end_adventure(1000000, Mode.play)
 # Adventure('Home').make_adventure(delay=5*60)
-Adventure('lg_9').send_to_adventure(3)
+Adventure('DMK').make_adventure(3, start=15, mode=Mode.teach_co)
 # Adventure('lg_9').make_adventure(3, mode=Mode.play)
 # Adventure('spj_gosc').make_adventure(3)
 # Adventure('spj_gosp').send_to_adventure(3)
