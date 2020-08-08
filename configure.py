@@ -51,14 +51,22 @@ class Configure:
         my_pygui.alert(text=text, title='Configuration', button='OK')
         coordinations['r_up'] = get_click.get()
         region = (coordinations['r_up'] - Point(116, 46)).get() + (44, 44)
+        coordinations['firs_army_region'] = region
         loc = my_pygui.locateOnScreen('resource/army.png', region=region, confidence=.95, center=False)
         coordinations['recruit'] = Point.from_point(loc) + Point(74, 26)
+        coordinations['Swordsman'] = coordinations['recruit']
         coordinations['bowmen'] = Point.from_point(loc) + Point(199, 26)
+        coordinations['Mounted Swordsman'] = coordinations['bowmen']
         coordinations['militia'] = Point.from_point(loc) + Point(324, 26)
+        coordinations['Knight'] = coordinations['militia']
         coordinations['cavalry'] = Point.from_point(loc) + Point(74, 81)
+        coordinations['Marksman'] = coordinations['cavalry']
         coordinations['longbowman'] = Point.from_point(loc) + Point(199, 81)
+        coordinations['Amored Marksman'] = coordinations['longbowman']
         coordinations['soldier'] = Point.from_point(loc) + Point(324, 81)
+        coordinations['Mounted Marksman'] = coordinations['soldier']
         coordinations['crossbowman'] = Point.from_point(loc) + Point(74, 135)
+        coordinations['Besieger'] = coordinations['crossbowman']
         coordinations['elite_soldier'] = Point.from_point(loc) + Point(199, 135)
         coordinations['cannoneer'] = Point.from_point(loc) + Point(324, 135)
         coordinations['army_sum'] = Point.from_point(loc) + Point(0, -24)
@@ -70,6 +78,7 @@ class Configure:
         text = 'OK'
         my_pygui.alert(text=text, title='Configuration', button='OK')
         coordinations['confirm_army'] = get_click.get()
+        coordinations['elite'] = coordinations['confirm_army'] - Point(100, 0)
 
         text = 'Send'
         my_pygui.alert(text=text, title='Configuration', button='OK')
