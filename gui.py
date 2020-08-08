@@ -558,6 +558,7 @@ class MainGrid(DataGrid):
 class GeneralEdit(wx.Panel):
     def __init__(self, parent, general=None):
         logging.info('GeneralEdit:__init__:')
+        self.parent = parent
         if not general:
             general = my_types.General(parent)
         self.general = general
@@ -672,6 +673,7 @@ class GeneralEdit(wx.Panel):
         keys_to_remove = self.general.keys if self.general.elite else self.general.elite_keys
         for key in keys_to_remove:
             self.general.army.pop(key, 0)
+        self.parent.reopen_general(self)
 
 
 class HelpPage(wx.Panel):
@@ -713,9 +715,9 @@ class GeneralsEdit(aui.AuiNotebook):
 
     def show_generals(self, generals):
         logging.info('GeneralsEdit:show_generals:')
-        generals_add_index = self.GetPageIndex(self.help_page)
+        help_index = self.GetPageIndex(self.help_page)
         # delete all pages, accept help_page page
-        for p in range(generals_add_index-1, -1, -1):
+        for p in range(help_index-1, -1, -1):
             self.DeletePage(p)
         self.pages = list()
         # add pages from new action before help_page page
@@ -729,6 +731,15 @@ class GeneralsEdit(aui.AuiNotebook):
         if 'g_no' in locals():
             # noinspection PyUnboundLocalVariable
             self.SetSelection(g_no)
+
+    def reopen_general(self, general_page):
+        logging.info('GeneralsEdit:reopen_general:')
+        general_index = self.GetPageIndex(general_page)
+        general = general_page.general
+        new_general_page = GeneralEdit(self, general)
+        self.DeletePage(general_index)
+        self.InsertPage(general_index, new_general_page, '{} ({})'.format(general.name or general.type, general.id))
+        self.SetSelection(general_index)
 
     def on_close_page(self, event):
         logging.info('GeneralsEdit:on_close_page:')
