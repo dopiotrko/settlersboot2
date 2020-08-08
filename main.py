@@ -241,6 +241,7 @@ class Adventure:
         my_pygui.click(loc.get())
         # verify if general opened
         x_t, y_t = self.coordinations['move'].get()
+        time.sleep(.5)
         finded = my_pygui.locateOnScreen('resource/transfer.png',
                                          region=(x_t - 30, y_t - 165, 60, 200),
                                          confidence=0.97)
@@ -475,8 +476,7 @@ class Adventure:
                     general['init'] = True
                     text = 'Move your army'
             if general['init'] is True:
-                my_pygui.moveTo((self.coordinations['book'] + Point(100, 0)).get())
-                finded = self.locate_reference_img()
+                finded = self.locate_reference_img(on_map)
             else:
                 finded = Point(0, 0)
             drag = Point(0, 0)
@@ -550,11 +550,29 @@ class Adventure:
             with open(my.get_new_filename(self.name), 'w') as f:
                 json.dump(self.data, f, indent=2)
 
-    def locate_reference_img(self):
+    def locate_reference_img(self, on_map):
+        my_pygui.moveTo((self.coordinations['book'] + Point(100, 0)).get())
         finded = my_pygui.locateOnScreen('data/{}/loc_reference.png'.format(self.name), confidence=0.85)
-        if not finded:
-            # my_pygui.write('0-----')
-            raise Exception('data/{}/loc_reference.png not found on screen'.format(self.name))
+        if finded:
+            if not on_map:
+                my_pygui.moveTo(Point.from_point(finded).get())
+                my_pygui.dragTo(self.coordinations['center_ref'].get())
+                finded = self.coordinations['center_ref']
+        else:
+            my_pygui.write('0-----')
+            import cv2
+            img = cv2.imread('data/{}/loc_reference.png'.format(self.name))
+            factor = 142/246
+            r_img = cv2.resize(img, (int(img.shape[1] * factor), int(img.shape[0] * factor)))
+            r_finded = my_pygui.locateOnScreen(r_img, confidence=0.65)
+            if r_finded:
+                my_pygui.moveTo(Point.from_point(r_finded).get())
+                my_pygui.dragTo(self.coordinations['center_ref'].get())
+                my_pygui.write('+++')
+                my_pygui.moveTo((self.coordinations['book'] + Point(100, 0)).get())
+                finded = my_pygui.locateOnScreen('data/{}/loc_reference.png'.format(self.name), confidence=0.85)
+            else:
+                raise Exception('data/{}/loc_reference.png not found on screen'.format(self.name))
         return finded
 
     def verify_if_generals_active(self, action):
@@ -654,7 +672,10 @@ TN = Adventure(adventure)
 # TN.end_adventure(1, Mode.play)
 # TN.end_adventure(1000000, Mode.play)
 # Adventure('Home').make_adventure(delay=5*60)
-Adventure('DMK').make_adventure(3, start=15, mode=Mode.teach_co)
+# Adventure('DMK').send_to_adventure(3)
+Adventure('DMK').make_adventure(3, start=0, stop=146, mode=Mode.play)
+# Adventure('DMK').end_adven200ture(60*60*3+35, Mode.play)
+# Adventure('DMK').end_adventure(60*60*24, Mode.play)
 # Adventure('lg_9').make_adventure(3, mode=Mode.play)
 # Adventure('spj_gosc').make_adventure(3)
 # Adventure('spj_gosp').send_to_adventure(3)
