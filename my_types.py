@@ -11,6 +11,22 @@ action_types = [{"type": 'move'},
                 {"type": 'unload'},
                 {"type": 'retreat'}
                 ]
+elite = ["Swordsman",
+         "Mounted Swordsman",
+         "Knight",
+         "Marksman",
+         "Amored Marksman",
+         "Mounted Marksman",
+         "Besieger"]
+not_elite = ["Recruit",
+             "Bowmen",
+             "Militia",
+             "Cavalry",
+             "Longbowman",
+             "Soldier",
+             "Crossbowman",
+             "Elite soldier",
+             "Cannoneer"]
 
 
 class Point:
@@ -228,6 +244,13 @@ class General:
         self.keys = ["recruit", "bowmen", "militia",
                      "cavalry", "longbowman", "soldier",
                      "crossbowman", "elite_soldier", "cannoneer"]
+        self.elite_keys = ["Swordsman",
+                           "Mounted Swordsman",
+                           "Knight",
+                           "Marksman",
+                           "Amored Marksman",
+                           "Mounted Marksman",
+                           "Besieger"]
         self.id = kwargs.get('id', 0)
         self.type = kwargs.get('type', 'empty')
         self.name = kwargs.get('name', None)
@@ -240,6 +263,7 @@ class General:
         self.drag = kwargs.get('drag')
         self.parent = args[0] if args else None
         self.capacity = kwargs.get('capacity', 300)
+        self.elite = kwargs.get('elite', False)
         self.id_ref = None
 
     def get_units(self, key_or_index):
@@ -259,17 +283,20 @@ class General:
         return key
 
     def as_json(self):
+        logging.info('General:as_json:')
         # print(self.__dict__)
         json = {}
         army = {}
         # json['army'].update()
         for key, value in self.__dict__.items():
-            if key in ('army', 'preset', 'init', 'id', 'parent') or value:
+            if key in ('army', 'preset', 'init', 'id', 'parent', 'elite') or value:
                 json[key] = value
-        for key in json['keys']:
+        keys = self.elite_keys if self.elite else self.keys
+        for key in keys:
             army[key] = json['army'].setdefault(key, 0)
         json['army'] = army
         del json['keys']
+        del json['elite_keys']
         del json['parent']
         if 'id_ref' in json:
             del json['id_ref']

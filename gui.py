@@ -567,21 +567,18 @@ class GeneralEdit(wx.Panel):
         def label(text):
             txt = wx.StaticText(self, -1, text)
             # noinspection PyUnresolvedReferences
-            txt.SetFont(wx.Font(8, wx.DEFAULT, wx.NORMAL, wx.NORMAL))
+            txt.SetFont(wx.Font(6, wx.DEFAULT, wx.NORMAL, wx.NORMAL))
             return txt
-        gbs.Add(label("Recruit:"), (0, 1))
-        gbs.Add(label("Bowmen:"), (0, 2))
-        gbs.Add(label("Militia:"), (0, 3))
-        gbs.Add(label("Cavalry:"), (2, 1))
-        gbs.Add(label("Longbowman:"), (2, 2))
-        gbs.Add(label("Soldier:"), (2, 3))
-        gbs.Add(label("Crossbowman:"), (4, 1))
-        gbs.Add(label("Elite soldier:"), (4, 2))
-        gbs.Add(label("Cannoneer:"), (4, 3))
+
+        units_ = my_types.elite if general.elite else my_types.not_elite
+        for i, key in enumerate(units_):
+            gbs.Add(label(key + ':'), (int(i / 3) * 2, i % 3 + 1))
+
         gbs.Add(label("Delay"), (7, 1))
 
         self.army = army = {}
-        for count, key in enumerate(general.keys):
+        keys = general.elite_keys if general.elite else general.keys
+        for count, key in enumerate(keys):
             spin_ctrl = wx.SpinCtrl(self, id=wx.ID_ANY, style=wx.SP_ARROW_KEYS, min=0, name=key)
             gbs.Add(spin_ctrl, (int(count / 3) * 2 + 1, count % 3 + 1))
             self.army.setdefault(key, spin_ctrl)
@@ -607,10 +604,9 @@ class GeneralEdit(wx.Panel):
         # -----------------------------------------------------
         check_box2_sizer = wx.BoxSizer(wx.VERTICAL)
         self.retreat = check_box('Retreat')
-        self.learned = check_box('Coord setted')
-        self.learned.Disable()
+        self.elite = check_box('Elite Army')
         check_box2_sizer.Add(self.retreat, 0, wx.EXPAND | wx.ALL, 0)
-        check_box2_sizer.Add(self.learned, 0, wx.EXPAND | wx.ALL, 0)
+        check_box2_sizer.Add(self.elite, 0, wx.EXPAND | wx.ALL, 0)
         gbs.Add(check_box2_sizer, (7, 3), (2, 1), flag=wx.ALIGN_CENTER)
         # -----------------------------------------------------
         # For layout
@@ -630,7 +626,7 @@ class GeneralEdit(wx.Panel):
         self.preset.SetValue(general.preset)
         self.init.SetValue(general.init)
         self.retreat.SetValue(general.retreat)
-        self.learned.SetValue(general.relative_coordinates is not None)
+        self.elite.SetValue(general.elite)
         # -----------------------------------------------------
         # binding events to set values
         self.Bind(wx.EVT_SPINCTRL, self.on_army_change)
@@ -638,6 +634,7 @@ class GeneralEdit(wx.Panel):
         self.preset.Bind(wx.EVT_CHECKBOX, self.on_preset_change)
         self.init.Bind(wx.EVT_CHECKBOX, self.on_init_change)
         self.retreat.Bind(wx.EVT_CHECKBOX, self.on_retreat_change)
+        self.elite.Bind(wx.EVT_CHECKBOX, self.on_elite_change)
 
     @classmethod
     def get_min_size(cls, parent):
@@ -668,6 +665,13 @@ class GeneralEdit(wx.Panel):
     def on_retreat_change(self, event):
         logging.info('GeneralEdit:on_retreat_change:')
         self.general.retreat = event.IsChecked()
+
+    def on_elite_change(self, event):
+        logging.info('GeneralEdit:on_elite_change:')
+        self.general.elite = event.IsChecked()
+        keys_to_remove = self.general.keys if self.general.elite else self.general.elite_keys
+        for key in keys_to_remove:
+            self.general.army.pop(key, 0)
 
 
 class HelpPage(wx.Panel):
