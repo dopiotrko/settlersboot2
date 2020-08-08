@@ -115,6 +115,9 @@ def assigned_unit_sum(img):
         if word.isdigit():
             logging.info('Units sum: {}'.format(word))
             return int(word)
+        elif word in ('o', 'O'):
+            logging.info('Units sum: 0')
+            return 0
     else:
         logging.error('OCR recognition error: No digit in {}'.format(text))
         raise Exception
