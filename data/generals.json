@@ -96,7 +96,12 @@
   },
   {
     "type": "kwatermistrz",
-    "name": "kwatermistrz",
+    "name": "Q 1",
+    "capacity": 1000
+  },
+  {
+    "type": "kwatermistrz",
+    "name": "Q 2",
     "capacity": 1000
   }
 ]

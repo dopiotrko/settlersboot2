@@ -9,7 +9,7 @@ import os
 localedir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'locale')
 lang_en = gettext.translation('settlersbot', localedir, fallback=True, languages=['en'])
 lang_pl = gettext.translation('settlersbot', localedir, fallback=True, languages=['pl'])
-_ = lang_en.gettext
+_ = lang_pl.gettext
 
 
 def image_adjusting(img):

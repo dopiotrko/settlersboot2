@@ -27,6 +27,17 @@ class Fix:
                         general['relative_coordinates'] = [xcr - xrc, ycr - yrc]
         self.save()
 
+    def reverse_fix_co(self):
+
+        for action in self.data['actions']:
+            for general in action['generals']:
+                if not general['init']:
+                    if 'relative_coordinates' in general:
+                        xcr, ycr = self.coordinations['center_ref'].get()
+                        xrc, yrc = general['relative_coordinates']
+                        general['relative_coordinates'] = [xcr - xrc, ycr - yrc]
+        self.save()
+
     def fix_drag(self):
 
         for action in self.data['actions']:
@@ -144,7 +155,7 @@ class Fix:
         self.save()
 
 
-# Fix('CR').add_capacity()
+# Fix('DMK').fix_co()
 # Fix('wiktor').insert_action(33, 0)
 # Fix('CR').insert_action(7, 6, 'unload')
 
