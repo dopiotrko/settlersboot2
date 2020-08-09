@@ -383,12 +383,32 @@
     {
       "id": 19,
       "type": "kwatermistrz",
-      "name": "kwatermistrz",
+      "name": "Q 1",
       "preset": false,
       "init": false,
       "army": {
         "recruit": 229,
         "bowmen": 771,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      },
+      "capacity": 1000,
+      "delay": 0
+    },
+    {
+      "id": 20,
+      "type": "kwatermistrz",
+      "name": "Q 2",
+      "preset": false,
+      "init": false,
+      "army": {
+        "recruit": 1000,
+        "bowmen": 0,
         "militia": 0,
         "cavalry": 0,
         "longbowman": 0,
@@ -586,8 +606,8 @@
             "cannoneer": 85
           },
           "relative_coordinates": [
-            653,
-            531
+            309,
+            88
           ],
           "capacity": 195,
           "delay": 0
@@ -618,8 +638,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            244,
-            403
+            718,
+            216
           ],
           "capacity": 195,
           "delay": 0
@@ -650,8 +670,8 @@
             "cannoneer": 130
           },
           "relative_coordinates": [
-            487,
-            488
+            475,
+            131
           ],
           "drag": [
             244,
@@ -686,8 +706,8 @@
             "cannoneer": 104
           },
           "relative_coordinates": [
-            488,
-            472
+            474,
+            147
           ],
           "drag": [
             378,
@@ -722,8 +742,8 @@
             "cannoneer": 140
           },
           "relative_coordinates": [
-            471,
-            617
+            491,
+            2
           ],
           "drag": [
             328,
@@ -786,8 +806,8 @@
             "cannoneer": 138
           },
           "relative_coordinates": [
-            461,
-            744
+            501,
+            -125
           ],
           "drag": [
             467,
@@ -822,8 +842,8 @@
             "cannoneer": 105
           },
           "relative_coordinates": [
-            816,
-            474
+            146,
+            145
           ],
           "drag": [
             449,
@@ -858,8 +878,8 @@
             "cannoneer": 137
           },
           "relative_coordinates": [
-            492,
-            704
+            470,
+            -85
           ],
           "drag": [
             442,
@@ -894,8 +914,8 @@
             "cannoneer": 52
           },
           "relative_coordinates": [
-            242,
-            664
+            720,
+            -45
           ],
           "drag": [
             399,
@@ -994,8 +1014,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            431,
-            687
+            531,
+            -68
           ],
           "drag": [
             431,
@@ -1030,8 +1050,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            746,
-            508
+            216,
+            111
           ],
           "drag": [
             433,
@@ -1098,8 +1118,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            407,
-            741
+            555,
+            -122
           ],
           "drag": [
             489,
@@ -1134,8 +1154,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            310,
-            774
+            652,
+            -155
           ],
           "drag": [
             340,
@@ -1170,8 +1190,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            455,
-            689
+            507,
+            -70
           ],
           "drag": [
             422,
@@ -1238,8 +1258,8 @@
             "cannoneer": 105
           },
           "relative_coordinates": [
-            511,
-            818
+            451,
+            -199
           ],
           "capacity": 285,
           "delay": 0
@@ -1270,8 +1290,8 @@
             "cannoneer": 137
           },
           "relative_coordinates": [
-            674,
-            239
+            288,
+            380
           ],
           "capacity": 285,
           "delay": 0
@@ -1302,8 +1322,8 @@
             "cannoneer": 52
           },
           "relative_coordinates": [
-            706,
-            312
+            256,
+            307
           ],
           "drag": [
             98,
@@ -1366,8 +1386,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            809,
-            337
+            153,
+            282
           ],
           "drag": [
             180,
@@ -1394,8 +1414,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            549,
-            238
+            413,
+            381
           ],
           "drag": [
             122,
@@ -1422,8 +1442,8 @@
             "cannoneer": 141
           },
           "relative_coordinates": [
-            633,
-            258
+            329,
+            361
           ],
           "drag": [
             183,
@@ -1486,8 +1506,8 @@
             "cannoneer": 77
           },
           "relative_coordinates": [
-            705,
-            296
+            257,
+            323
           ],
           "drag": [
             75,
@@ -1522,8 +1542,8 @@
             "cannoneer": 70
           },
           "relative_coordinates": [
-            663,
-            326
+            299,
+            293
           ],
           "drag": [
             117,
@@ -1558,8 +1578,8 @@
             "cannoneer": 40
           },
           "relative_coordinates": [
-            677,
-            305
+            285,
+            314
           ],
           "drag": [
             73,
@@ -1594,8 +1614,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            705,
-            372
+            257,
+            247
           ],
           "drag": [
             148,
@@ -1630,8 +1650,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            650,
-            180
+            312,
+            439
           ],
           "drag": [
             100,
@@ -1666,8 +1686,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            669,
-            348
+            293,
+            271
           ],
           "drag": [
             129,
@@ -1702,8 +1722,8 @@
             "cannoneer": 135
           },
           "relative_coordinates": [
-            678,
-            365
+            284,
+            254
           ],
           "drag": [
             186,
@@ -1738,8 +1758,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            1106,
-            479
+            -144,
+            140
           ],
           "capacity": 195,
           "delay": 0
@@ -1770,8 +1790,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            1310,
-            153
+            -348,
+            466
           ],
           "capacity": 195,
           "delay": 0
@@ -1802,8 +1822,8 @@
             "cannoneer": 130
           },
           "relative_coordinates": [
-            1492,
-            289
+            -530,
+            330
           ],
           "capacity": 285,
           "delay": 0
@@ -1834,8 +1854,8 @@
             "cannoneer": 85
           },
           "relative_coordinates": [
-            1576,
-            482
+            -614,
+            137
           ],
           "drag": [
             -81,
@@ -1870,8 +1890,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            1329,
-            468
+            -367,
+            151
           ],
           "drag": [
             -185,
@@ -1898,8 +1918,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            1533,
-            263
+            -571,
+            356
           ],
           "capacity": 235,
           "delay": 0
@@ -1922,8 +1942,8 @@
             "cannoneer": 104
           },
           "relative_coordinates": [
-            1595,
-            252
+            -633,
+            367
           ],
           "capacity": 285,
           "delay": 0
@@ -1954,8 +1974,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            716,
-            292
+            246,
+            327
           ],
           "drag": [
             102,
@@ -1990,8 +2010,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            702,
-            154
+            260,
+            465
           ],
           "drag": [
             507,
@@ -2026,8 +2046,8 @@
             "cannoneer": 147
           },
           "relative_coordinates": [
-            1397,
-            325
+            -435,
+            294
           ],
           "drag": [
             -244,
@@ -2062,8 +2082,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            1380,
-            431
+            -418,
+            188
           ],
           "drag": [
             -241,
@@ -2098,8 +2118,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            1397,
-            396
+            -435,
+            223
           ],
           "drag": [
             -151,
@@ -2134,8 +2154,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            1354,
-            415
+            -392,
+            204
           ],
           "drag": [
             -202,
@@ -2170,8 +2190,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            1323,
-            455
+            -361,
+            164
           ],
           "drag": [
             -168,
@@ -2206,8 +2226,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            1468,
-            394
+            -506,
+            225
           ],
           "drag": [
             -146,
@@ -2242,8 +2262,8 @@
             "cannoneer": 90
           },
           "relative_coordinates": [
-            1492,
-            462
+            -530,
+            157
           ],
           "drag": [
             -154,
@@ -2278,8 +2298,8 @@
             "cannoneer": 130
           },
           "relative_coordinates": [
-            1065,
-            654
+            -103,
+            -35
           ],
           "capacity": 285,
           "delay": 0
@@ -2310,8 +2330,8 @@
             "cannoneer": 85
           },
           "relative_coordinates": [
-            1206,
-            867
+            -244,
+            -248
           ],
           "capacity": 195,
           "delay": 0
@@ -2342,8 +2362,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            1392,
-            958
+            -430,
+            -339
           ],
           "capacity": 195,
           "delay": 0
@@ -2374,8 +2394,8 @@
             "cannoneer": 104
           },
           "relative_coordinates": [
-            1411,
-            769
+            -449,
+            -150
           ],
           "capacity": 285,
           "delay": 0
@@ -2406,8 +2426,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            1635,
-            805
+            -673,
+            -186
           ],
           "capacity": 200,
           "delay": 0
@@ -2438,8 +2458,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            1512,
-            833
+            -550,
+            -214
           ],
           "capacity": 195,
           "delay": 0
@@ -2470,12 +2490,12 @@
             "cannoneer": 140
           },
           "relative_coordinates": [
-            1431,
-            583
+            -448,
+            6
           ],
           "drag": [
-            -214,
-            -3
+            -227,
+            8
           ],
           "capacity": 285,
           "delay": 0
@@ -2506,8 +2526,8 @@
             "cannoneer": 101
           },
           "relative_coordinates": [
-            1477,
-            629
+            -515,
+            -10
           ],
           "drag": [
             -192,
@@ -2542,8 +2562,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            1296,
-            752
+            -334,
+            -133
           ],
           "drag": [
             -252,
@@ -2578,8 +2598,8 @@
             "cannoneer": 20
           },
           "relative_coordinates": [
-            1402,
-            727
+            -440,
+            -108
           ],
           "drag": [
             -220,
@@ -2614,8 +2634,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            1342,
-            717
+            -380,
+            -98
           ],
           "drag": [
             -240,
@@ -2650,8 +2670,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            1458,
-            779
+            -496,
+            -160
           ],
           "drag": [
             -131,
@@ -2686,8 +2706,8 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            1355,
-            743
+            -393,
+            -124
           ],
           "drag": [
             -284,

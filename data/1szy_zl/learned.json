@@ -185,7 +185,7 @@
           ],
           "capacity": 200,
           "elite": true,
-          "delay": 0
+          "delay": 8
         }
       ]
     },
@@ -247,14 +247,14 @@
           ],
           "capacity": 195,
           "elite": true,
-          "delay": 0
+          "delay": 7
         }
       ]
     },
     {
       "no": 3,
       "type": "attack",
-      "delay": 0,
+      "delay": 24,
       "active": true,
       "generals": [
         {
@@ -278,7 +278,7 @@
           ],
           "capacity": 200,
           "elite": true,
-          "delay": 0
+          "delay": 7
         },
         {
           "id": 1,
@@ -301,7 +301,7 @@
           ],
           "capacity": 200,
           "elite": true,
-          "delay": 0
+          "delay": 19
         },
         {
           "id": 3,
@@ -324,14 +324,14 @@
           ],
           "capacity": 195,
           "elite": true,
-          "delay": 0
+          "delay": 22
         }
       ]
     },
     {
       "no": 4,
       "type": "move",
-      "delay": 0,
+      "delay": 152,
       "active": true,
       "generals": [
         {
@@ -355,7 +355,7 @@
           ],
           "capacity": 200,
           "elite": true,
-          "delay": 0
+          "delay": 6
         }
       ]
     },
@@ -390,14 +390,14 @@
           ],
           "capacity": 195,
           "elite": true,
-          "delay": 0
+          "delay": 7
         }
       ]
     },
     {
       "no": 6,
       "type": "attack",
-      "delay": 0,
+      "delay": 91,
       "active": true,
       "generals": [
         {
@@ -451,7 +451,7 @@
     {
       "no": 7,
       "type": "move",
-      "delay": 0,
+      "delay": 130,
       "active": true,
       "generals": [
         {
@@ -707,7 +707,7 @@
     {
       "no": 15,
       "type": "attack",
-      "delay": 0,
+      "delay": 147,
       "active": true,
       "generals": [
         {
@@ -731,14 +731,14 @@
           ],
           "capacity": 235,
           "elite": true,
-          "delay": 0
+          "delay": 7
         }
       ]
     },
     {
       "no": 16,
       "type": "attack",
-      "delay": 0,
+      "delay": 24,
       "active": true,
       "generals": [
         {
@@ -792,14 +792,14 @@
     {
       "no": 17,
       "type": "move",
-      "delay": 0,
+      "delay": 60,
       "active": true,
       "generals": [
         {
           "id": 3,
           "type": "sylvana",
           "name": "Sylvana 1",
-          "preset": false,
+          "preset": true,
           "init": false,
           "army": {
             "Swordsman": 0,
@@ -935,7 +935,7 @@
     {
       "no": 22,
       "type": "attack",
-      "delay": 0,
+      "delay": 1,
       "active": true,
       "generals": [
         {
@@ -1041,7 +1041,7 @@
     {
       "no": 23,
       "type": "move",
-      "delay": 0,
+      "delay": 170,
       "active": true,
       "generals": [
         {
@@ -1069,14 +1069,14 @@
           ],
           "capacity": 195,
           "elite": true,
-          "delay": 0
+          "delay": 7
         }
       ]
     },
     {
       "no": 24,
       "type": "move",
-      "delay": 0,
+      "delay": 1,
       "active": true,
       "generals": [
         {
@@ -1100,14 +1100,14 @@
           ],
           "capacity": 195,
           "elite": true,
-          "delay": 0
+          "delay": 6
         }
       ]
     },
     {
       "no": 25,
       "type": "move",
-      "delay": 0,
+      "delay": 1,
       "active": true,
       "generals": [
         {
@@ -1131,14 +1131,14 @@
           ],
           "capacity": 200,
           "elite": true,
-          "delay": 0
+          "delay": 16
         }
       ]
     },
     {
       "no": 26,
       "type": "unload",
-      "delay": 0,
+      "delay": 27,
       "active": true,
       "generals": [
         {
@@ -1167,7 +1167,7 @@
     {
       "no": 27,
       "type": "attack",
-      "delay": 0,
+      "delay": 33,
       "active": true,
       "generals": [
         {
@@ -1191,14 +1191,14 @@
           ],
           "capacity": 195,
           "elite": true,
-          "delay": 0
+          "delay": 20
         }
       ]
     },
     {
       "no": 28,
       "type": "attack",
-      "delay": 0,
+      "delay": 17,
       "active": true,
       "generals": [
         {
@@ -1222,14 +1222,14 @@
           ],
           "capacity": 195,
           "elite": true,
-          "delay": 0
+          "delay": 5
         }
       ]
     },
     {
       "no": 29,
       "type": "attack",
-      "delay": 0,
+      "delay": 95,
       "active": true,
       "generals": [
         {
@@ -1253,14 +1253,14 @@
           ],
           "capacity": 195,
           "elite": true,
-          "delay": 0
+          "delay": 15
         }
       ]
     },
     {
       "no": 30,
       "type": "attack",
-      "delay": 0,
+      "delay": 50,
       "active": true,
       "generals": [
         {
@@ -1284,14 +1284,14 @@
           ],
           "capacity": 195,
           "elite": true,
-          "delay": 0
+          "delay": 16
         }
       ]
     },
     {
       "no": 31,
       "type": "load",
-      "delay": 0,
+      "delay": 112,
       "active": true,
       "generals": [
         {
@@ -1318,7 +1318,7 @@
     {
       "no": 32,
       "type": "load",
-      "delay": 0,
+      "delay": 71,
       "active": true,
       "generals": [
         {
@@ -1345,7 +1345,7 @@
     {
       "no": 33,
       "type": "attack",
-      "delay": 0,
+      "delay": 1,
       "active": true,
       "generals": [
         {
@@ -1373,7 +1373,7 @@
           ],
           "capacity": 200,
           "elite": true,
-          "delay": 0
+          "delay": 8
         },
         {
           "id": 4,
@@ -1400,7 +1400,7 @@
           ],
           "capacity": 195,
           "elite": true,
-          "delay": 0
+          "delay": 6
         },
         {
           "id": 3,
@@ -1427,14 +1427,14 @@
           ],
           "capacity": 195,
           "elite": true,
-          "delay": 0
+          "delay": 6
         }
       ]
     },
     {
       "no": 34,
       "type": "unload",
-      "delay": 0,
+      "delay": 4,
       "active": true,
       "generals": [
         {
@@ -1461,7 +1461,7 @@
     {
       "no": 35,
       "type": "load",
-      "delay": 0,
+      "delay": 1,
       "active": true,
       "generals": [
         {

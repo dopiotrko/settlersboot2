@@ -175,13 +175,13 @@ class Adventure:
         army = general['army']
         time.sleep(2)
         loc = my_pygui.locateOnScreen('resource/army.png',
-                                      region=self.coordinations['firs_army_region'],
+                                      region=self.coordinations['first_army_region'],
                                       confidence=.95,
                                       center=False)
         elite = general.get('elite', False)
         if (loc and elite) or (not loc and not elite):
             my_pygui.click(self.coordinations['elite'].get())
-            time.sleep(2)
+            time.sleep(3)
         while True:
             log.info('Setting army, try {}'.format(count + 1))
             my_pygui.click(self.coordinations['unload'].get())
@@ -250,7 +250,7 @@ class Adventure:
         my_pygui.click(loc.get())
         # verify if general opened
         x_t, y_t = self.coordinations['move'].get()
-        time.sleep(1)
+        time.sleep(.5)
         finded = my_pygui.locateOnScreen('resource/transfer.png',
                                          region=(x_t - 30, y_t - 165, 60, 200),
                                          confidence=0.97)
