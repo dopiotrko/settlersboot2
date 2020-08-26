@@ -1,0 +1,433 @@
+{
+  "generals": [
+    {
+      "id": 0,
+      "type": "basic",
+      "name": "Basic 1",
+      "preset": false,
+      "init": false,
+      "army": {
+        "recruit": 0,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 120,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 23,
+        "cannoneer": 0
+      },
+      "capacity": 200,
+      "elite": false,
+      "delay": 0
+    },
+    {
+      "id": 1,
+      "type": "basic",
+      "name": "Basic 2",
+      "preset": false,
+      "init": false,
+      "army": {
+        "recruit": 0,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 62,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 50,
+        "cannoneer": 0
+      },
+      "capacity": 200,
+      "elite": false,
+      "delay": 0
+    },
+    {
+      "id": 2,
+      "type": "sylvana",
+      "name": "Sylvana 1",
+      "preset": true,
+      "init": false,
+      "army": {
+        "recruit": 110,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 85
+      },
+      "capacity": 195,
+      "elite": false,
+      "delay": 0
+    },
+    {
+      "id": 3,
+      "type": "sylvana",
+      "name": "Sylvana 2",
+      "preset": true,
+      "init": false,
+      "army": {
+        "recruit": 195,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      },
+      "capacity": 195,
+      "elite": false,
+      "delay": 0
+    },
+    {
+      "id": 4,
+      "type": "boris",
+      "name": "Boris 1",
+      "preset": true,
+      "init": false,
+      "army": {
+        "recruit": 195,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      },
+      "capacity": 195,
+      "elite": false,
+      "delay": 0
+    }
+  ],
+  "actions": [
+    {
+      "no": 0,
+      "type": "move",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 2,
+          "type": "sylvana",
+          "name": "Sylvana 1",
+          "preset": true,
+          "init": true,
+          "army": {
+            "recruit": 110,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 195
+          },
+          "relative_coordinates": [
+            186,
+            -35
+          ],
+          "capacity": 195,
+          "elite": false,
+          "delay": 0
+        }
+      ]
+    },
+    {
+      "no": 1,
+      "type": "move",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 3,
+          "type": "sylvana",
+          "name": "Sylvana 2",
+          "preset": true,
+          "init": true,
+          "army": {
+            "recruit": 195,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          },
+          "relative_coordinates": [
+            145,
+            -58
+          ],
+          "capacity": 195,
+          "elite": false,
+          "delay": 0
+        }
+      ]
+    },
+    {
+      "no": 2,
+      "type": "attack",
+      "delay": 46,
+      "active": true,
+      "generals": [
+        {
+          "id": 2,
+          "type": "sylvana",
+          "name": "Sylvana 1",
+          "preset": true,
+          "init": false,
+          "army": {
+            "recruit": 110,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 195
+          },
+          "relative_coordinates": [
+            -228,
+            184
+          ],
+          "capacity": 195,
+          "elite": false,
+          "delay": 0
+        }
+      ]
+    },
+    {
+      "no": 3,
+      "type": "attack",
+      "delay": 50,
+      "active": true,
+      "generals": [
+        {
+          "id": 4,
+          "type": "boris",
+          "name": "Boris 1",
+          "preset": true,
+          "init": true,
+          "army": {
+            "recruit": 195,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          },
+          "relative_coordinates": [
+            533,
+            -300
+          ],
+          "capacity": 195,
+          "elite": false,
+          "delay": 0
+        }
+      ]
+    },
+    {
+      "no": 4,
+      "type": "move",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 0,
+          "type": "basic",
+          "name": "Basic 1",
+          "preset": true,
+          "init": true,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 120,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 23,
+            "cannoneer": 0
+          },
+          "relative_coordinates": [
+            289,
+            -176
+          ],
+          "capacity": 200,
+          "elite": false,
+          "delay": 0
+        }
+      ]
+    },
+    {
+      "no": 5,
+      "type": "move",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 1,
+          "type": "basic",
+          "name": "Basic 2",
+          "preset": true,
+          "init": true,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 62,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 50,
+            "cannoneer": 0
+          },
+          "relative_coordinates": [
+            330,
+            -120
+          ],
+          "capacity": 200,
+          "elite": false,
+          "delay": 0
+        }
+      ]
+    },
+    {
+      "no": 6,
+      "type": "attack",
+      "delay": 49,
+      "active": true,
+      "generals": [
+        {
+          "id": 0,
+          "type": "basic",
+          "name": "Basic 1",
+          "preset": true,
+          "init": false,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 120,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 23,
+            "cannoneer": 0
+          },
+          "relative_coordinates": [
+            -40,
+            243
+          ],
+          "capacity": 200,
+          "elite": false,
+          "delay": 0
+        },
+        {
+          "id": 3,
+          "type": "sylvana",
+          "name": "Sylvana 2",
+          "preset": true,
+          "init": false,
+          "army": {
+            "recruit": 195,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          },
+          "relative_coordinates": [
+            -143,
+            411
+          ],
+          "capacity": 195,
+          "elite": false,
+          "delay": 0
+        }
+      ]
+    },
+    {
+      "no": 7,
+      "type": "attack",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 1,
+          "type": "basic",
+          "name": "Basic 2",
+          "preset": true,
+          "init": false,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 62,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 50,
+            "cannoneer": 0
+          },
+          "relative_coordinates": [
+            -117,
+            303
+          ],
+          "drag": [
+            -56,
+            90
+          ],
+          "capacity": 200,
+          "elite": false,
+          "delay": 0
+        },
+        {
+          "id": 2,
+          "type": "sylvana",
+          "name": "Sylvana 1",
+          "preset": true,
+          "init": false,
+          "army": {
+            "recruit": 110,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 195
+          },
+          "relative_coordinates": [
+            -249,
+            252
+          ],
+          "drag": [
+            -92,
+            168
+          ],
+          "capacity": 195,
+          "elite": false,
+          "delay": 0
+        }
+      ]
+    }
+  ]
+}

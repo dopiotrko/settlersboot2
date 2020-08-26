@@ -4,6 +4,7 @@
       "id": 0,
       "type": "basic",
       "name": "Basic 1",
+      "delay": 0,
       "preset": false,
       "init": false,
       "army": {
@@ -16,13 +17,13 @@
         "Besieger": 0
       },
       "capacity": 200,
-      "elite": true,
-      "delay": 0
+      "elite": true
     },
     {
       "id": 1,
       "type": "basic",
       "name": "Basic 2",
+      "delay": 0,
       "preset": false,
       "init": false,
       "army": {
@@ -35,13 +36,13 @@
         "Besieger": 0
       },
       "capacity": 200,
-      "elite": true,
-      "delay": 0
+      "elite": true
     },
     {
       "id": 2,
       "type": "basic",
       "name": "Basic 3",
+      "delay": 0,
       "preset": false,
       "init": false,
       "army": {
@@ -54,13 +55,13 @@
         "Besieger": 0
       },
       "capacity": 200,
-      "elite": true,
-      "delay": 0
+      "elite": true
     },
     {
       "id": 3,
       "type": "sylvana",
       "name": "Sylvana 1",
+      "delay": 0,
       "preset": false,
       "init": false,
       "army": {
@@ -73,13 +74,13 @@
         "Besieger": 0
       },
       "capacity": 195,
-      "elite": true,
-      "delay": 0
+      "elite": true
     },
     {
       "id": 4,
       "type": "boris",
       "name": "Boris 1",
+      "delay": 0,
       "preset": false,
       "init": false,
       "army": {
@@ -92,13 +93,13 @@
         "Besieger": 0
       },
       "capacity": 195,
-      "elite": true,
-      "delay": 0
+      "elite": true
     },
     {
       "id": 5,
       "type": "master",
       "name": "Master 1",
+      "delay": 0,
       "preset": false,
       "init": false,
       "army": {
@@ -111,13 +112,13 @@
         "Besieger": 154
       },
       "capacity": 235,
-      "elite": true,
-      "delay": 0
+      "elite": true
     },
     {
       "id": 6,
       "type": "major",
       "name": "GM1",
+      "delay": 0,
       "preset": false,
       "init": false,
       "army": {
@@ -132,13 +133,13 @@
         "cannoneer": 0
       },
       "capacity": 285,
-      "elite": false,
-      "delay": 0
+      "elite": false
     },
     {
       "id": 7,
       "type": "kwatermistrz",
       "name": "Q 1",
+      "delay": 0,
       "preset": false,
       "init": false,
       "army": {
@@ -153,8 +154,7 @@
         "cannoneer": 0
       },
       "capacity": 1000,
-      "elite": false,
-      "delay": 0
+      "elite": false
     }
   ],
   "actions": [
@@ -168,6 +168,7 @@
           "id": 0,
           "type": "basic",
           "name": "Basic 1",
+          "delay": 0,
           "preset": true,
           "init": true,
           "army": {
@@ -184,8 +185,7 @@
             -166
           ],
           "capacity": 200,
-          "elite": true,
-          "delay": 8
+          "elite": true
         }
       ]
     },
@@ -199,6 +199,7 @@
           "id": 1,
           "type": "basic",
           "name": "Basic 2",
+          "delay": 0,
           "preset": true,
           "init": true,
           "army": {
@@ -215,8 +216,7 @@
             -125
           ],
           "capacity": 200,
-          "elite": true,
-          "delay": 0
+          "elite": true
         }
       ]
     },
@@ -230,6 +230,7 @@
           "id": 3,
           "type": "sylvana",
           "name": "Sylvana 1",
+          "delay": 0,
           "preset": true,
           "init": true,
           "army": {
@@ -246,8 +247,7 @@
             -192
           ],
           "capacity": 195,
-          "elite": true,
-          "delay": 7
+          "elite": true
         }
       ]
     },
@@ -261,6 +261,7 @@
           "id": 0,
           "type": "basic",
           "name": "Basic 1",
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -277,13 +278,13 @@
             -128
           ],
           "capacity": 200,
-          "elite": true,
-          "delay": 7
+          "elite": true
         },
         {
           "id": 1,
           "type": "basic",
           "name": "Basic 2",
+          "delay": 20,
           "preset": true,
           "init": false,
           "army": {
@@ -300,13 +301,13 @@
             -385
           ],
           "capacity": 200,
-          "elite": true,
-          "delay": 19
+          "elite": true
         },
         {
           "id": 3,
           "type": "sylvana",
           "name": "Sylvana 1",
+          "delay": 20,
           "preset": true,
           "init": false,
           "army": {
@@ -323,8 +324,7 @@
             -371
           ],
           "capacity": 195,
-          "elite": true,
-          "delay": 22
+          "elite": true
         }
       ]
     },
@@ -338,6 +338,7 @@
           "id": 2,
           "type": "basic",
           "name": "Basic 3",
+          "delay": 0,
           "preset": true,
           "init": true,
           "army": {
@@ -354,8 +355,7 @@
             351
           ],
           "capacity": 200,
-          "elite": true,
-          "delay": 6
+          "elite": true
         }
       ]
     },
@@ -369,6 +369,7 @@
           "id": 4,
           "type": "boris",
           "name": "Boris 1",
+          "delay": 0,
           "preset": true,
           "init": true,
           "army": {
@@ -389,8 +390,7 @@
             -111
           ],
           "capacity": 195,
-          "elite": true,
-          "delay": 7
+          "elite": true
         }
       ]
     },
@@ -404,6 +404,7 @@
           "id": 2,
           "type": "basic",
           "name": "Basic 3",
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -420,13 +421,13 @@
             -152
           ],
           "capacity": 200,
-          "elite": true,
-          "delay": 0
+          "elite": true
         },
         {
           "id": 4,
           "type": "boris",
           "name": "Boris 1",
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -443,8 +444,7 @@
             -122
           ],
           "capacity": 195,
-          "elite": true,
-          "delay": 0
+          "elite": true
         }
       ]
     },
@@ -458,6 +458,7 @@
           "id": 5,
           "type": "master",
           "name": "Master 1",
+          "delay": 0,
           "preset": false,
           "init": true,
           "army": {
@@ -478,8 +479,7 @@
             -26
           ],
           "capacity": 235,
-          "elite": true,
-          "delay": 0
+          "elite": true
         }
       ]
     },
@@ -493,6 +493,7 @@
           "id": 0,
           "type": "basic",
           "name": "Basic 1",
+          "delay": 0,
           "preset": false,
           "init": false,
           "army": {
@@ -505,8 +506,7 @@
             "Besieger": 0
           },
           "capacity": 200,
-          "elite": true,
-          "delay": 0
+          "elite": true
         }
       ]
     },
@@ -520,6 +520,7 @@
           "id": 1,
           "type": "basic",
           "name": "Basic 2",
+          "delay": 0,
           "preset": false,
           "init": false,
           "army": {
@@ -536,8 +537,7 @@
             -318
           ],
           "capacity": 200,
-          "elite": true,
-          "delay": 0
+          "elite": true
         }
       ]
     },
@@ -551,6 +551,7 @@
           "id": 4,
           "type": "boris",
           "name": "Boris 1",
+          "delay": 0,
           "preset": false,
           "init": false,
           "army": {
@@ -571,8 +572,7 @@
             100
           ],
           "capacity": 195,
-          "elite": true,
-          "delay": 0
+          "elite": true
         }
       ]
     },
@@ -586,6 +586,7 @@
           "id": 2,
           "type": "basic",
           "name": "Basic 3",
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -602,8 +603,7 @@
             119
           ],
           "capacity": 200,
-          "elite": true,
-          "delay": 0
+          "elite": true
         }
       ]
     },
@@ -617,6 +617,7 @@
           "id": 3,
           "type": "sylvana",
           "name": "Sylvana 1",
+          "delay": 0,
           "preset": false,
           "init": false,
           "army": {
@@ -637,8 +638,7 @@
             -91
           ],
           "capacity": 195,
-          "elite": true,
-          "delay": 0
+          "elite": true
         }
       ]
     },
@@ -652,6 +652,7 @@
           "id": 6,
           "type": "major",
           "name": "GM1",
+          "delay": 0,
           "preset": false,
           "init": true,
           "army": {
@@ -668,8 +669,7 @@
             339
           ],
           "capacity": 285,
-          "elite": true,
-          "delay": 0
+          "elite": true
         }
       ]
     },
@@ -683,6 +683,7 @@
           "id": 5,
           "type": "master",
           "name": "Master 1",
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -699,8 +700,7 @@
             -223
           ],
           "capacity": 235,
-          "elite": true,
-          "delay": 0
+          "elite": true
         }
       ]
     },
@@ -714,6 +714,7 @@
           "id": 5,
           "type": "master",
           "name": "Master 1",
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -730,8 +731,7 @@
             -222
           ],
           "capacity": 235,
-          "elite": true,
-          "delay": 7
+          "elite": true
         }
       ]
     },
@@ -745,6 +745,7 @@
           "id": 1,
           "type": "basic",
           "name": "Basic 2",
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -761,13 +762,13 @@
             -196
           ],
           "capacity": 200,
-          "elite": true,
-          "delay": 0
+          "elite": true
         },
         {
           "id": 4,
           "type": "boris",
           "name": "Boris 1",
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -784,8 +785,7 @@
             -270
           ],
           "capacity": 195,
-          "elite": true,
-          "delay": 0
+          "elite": true
         }
       ]
     },
@@ -799,6 +799,7 @@
           "id": 3,
           "type": "sylvana",
           "name": "Sylvana 1",
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -815,8 +816,7 @@
             32
           ],
           "capacity": 195,
-          "elite": true,
-          "delay": 0
+          "elite": true
         }
       ]
     },
@@ -830,6 +830,7 @@
           "id": 1,
           "type": "basic",
           "name": "Basic 2",
+          "delay": 0,
           "preset": false,
           "init": false,
           "army": {
@@ -846,8 +847,7 @@
             197
           ],
           "capacity": 200,
-          "elite": true,
-          "delay": 0
+          "elite": true
         }
       ]
     },
@@ -861,6 +861,7 @@
           "id": 2,
           "type": "basic",
           "name": "Basic 3",
+          "delay": 0,
           "preset": false,
           "init": false,
           "army": {
@@ -873,8 +874,7 @@
             "Besieger": 0
           },
           "capacity": 200,
-          "elite": true,
-          "delay": 0
+          "elite": true
         }
       ]
     },
@@ -888,6 +888,7 @@
           "id": 4,
           "type": "boris",
           "name": "Boris 1",
+          "delay": 0,
           "preset": false,
           "init": false,
           "army": {
@@ -900,8 +901,7 @@
             "Besieger": 0
           },
           "capacity": 195,
-          "elite": true,
-          "delay": 0
+          "elite": true
         }
       ]
     },
@@ -915,6 +915,7 @@
           "id": 3,
           "type": "sylvana",
           "name": "Sylvana 1",
+          "delay": 0,
           "preset": false,
           "init": false,
           "army": {
@@ -927,8 +928,7 @@
             "Besieger": 0
           },
           "capacity": 195,
-          "elite": true,
-          "delay": 0
+          "elite": true
         }
       ]
     },
@@ -942,6 +942,7 @@
           "id": 1,
           "type": "basic",
           "name": "Basic 2",
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -958,13 +959,13 @@
             31
           ],
           "capacity": 200,
-          "elite": true,
-          "delay": 0
+          "elite": true
         },
         {
           "id": 3,
           "type": "sylvana",
           "name": "Sylvana 1",
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -981,13 +982,13 @@
             94
           ],
           "capacity": 195,
-          "elite": true,
-          "delay": 0
+          "elite": true
         },
         {
           "id": 2,
           "type": "basic",
           "name": "Basic 3",
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -1004,13 +1005,13 @@
             102
           ],
           "capacity": 200,
-          "elite": true,
-          "delay": 0
+          "elite": true
         },
         {
           "id": 6,
           "type": "major",
           "name": "GM1",
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -1033,8 +1034,7 @@
             61
           ],
           "capacity": 285,
-          "elite": false,
-          "delay": 0
+          "elite": false
         }
       ]
     },
@@ -1048,6 +1048,7 @@
           "id": 4,
           "type": "boris",
           "name": "Boris 1",
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -1068,8 +1069,7 @@
             25
           ],
           "capacity": 195,
-          "elite": true,
-          "delay": 7
+          "elite": true
         }
       ]
     },
@@ -1083,6 +1083,7 @@
           "id": 3,
           "type": "sylvana",
           "name": "Sylvana 1",
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -1099,8 +1100,7 @@
             -43
           ],
           "capacity": 195,
-          "elite": true,
-          "delay": 6
+          "elite": true
         }
       ]
     },
@@ -1114,6 +1114,7 @@
           "id": 1,
           "type": "basic",
           "name": "Basic 2",
+          "delay": 0,
           "preset": false,
           "init": false,
           "army": {
@@ -1130,8 +1131,7 @@
             -34
           ],
           "capacity": 200,
-          "elite": true,
-          "delay": 16
+          "elite": true
         }
       ]
     },
@@ -1145,6 +1145,7 @@
           "id": 6,
           "type": "major",
           "name": "GM1",
+          "delay": 0,
           "preset": false,
           "init": false,
           "army": {
@@ -1159,8 +1160,7 @@
             "cannoneer": 0
           },
           "capacity": 285,
-          "elite": false,
-          "delay": 0
+          "elite": false
         }
       ]
     },
@@ -1174,6 +1174,7 @@
           "id": 4,
           "type": "boris",
           "name": "Boris 1",
+          "delay": 0,
           "preset": false,
           "init": false,
           "army": {
@@ -1190,8 +1191,7 @@
             201
           ],
           "capacity": 195,
-          "elite": true,
-          "delay": 20
+          "elite": true
         }
       ]
     },
@@ -1205,6 +1205,7 @@
           "id": 3,
           "type": "sylvana",
           "name": "Sylvana 1",
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -1221,8 +1222,7 @@
             317
           ],
           "capacity": 195,
-          "elite": true,
-          "delay": 5
+          "elite": true
         }
       ]
     },
@@ -1236,6 +1236,7 @@
           "id": 4,
           "type": "boris",
           "name": "Boris 1",
+          "delay": 0,
           "preset": false,
           "init": false,
           "army": {
@@ -1252,8 +1253,7 @@
             283
           ],
           "capacity": 195,
-          "elite": true,
-          "delay": 15
+          "elite": true
         }
       ]
     },
@@ -1267,6 +1267,7 @@
           "id": 3,
           "type": "sylvana",
           "name": "Sylvana 1",
+          "delay": 0,
           "preset": false,
           "init": false,
           "army": {
@@ -1283,8 +1284,7 @@
             303
           ],
           "capacity": 195,
-          "elite": true,
-          "delay": 16
+          "elite": true
         }
       ]
     },
@@ -1298,6 +1298,7 @@
           "id": 4,
           "type": "boris",
           "name": "Boris 1",
+          "delay": 0,
           "preset": false,
           "init": false,
           "army": {
@@ -1310,8 +1311,7 @@
             "Besieger": 0
           },
           "capacity": 195,
-          "elite": true,
-          "delay": 0
+          "elite": true
         }
       ]
     },
@@ -1325,6 +1325,7 @@
           "id": 3,
           "type": "sylvana",
           "name": "Sylvana 1",
+          "delay": 0,
           "preset": false,
           "init": false,
           "army": {
@@ -1337,8 +1338,7 @@
             "Besieger": 131
           },
           "capacity": 195,
-          "elite": true,
-          "delay": 0
+          "elite": true
         }
       ]
     },
@@ -1352,6 +1352,7 @@
           "id": 1,
           "type": "basic",
           "name": "Basic 2",
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -1372,13 +1373,13 @@
             60
           ],
           "capacity": 200,
-          "elite": true,
-          "delay": 8
+          "elite": true
         },
         {
           "id": 4,
           "type": "boris",
           "name": "Boris 1",
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -1399,13 +1400,13 @@
             70
           ],
           "capacity": 195,
-          "elite": true,
-          "delay": 6
+          "elite": true
         },
         {
           "id": 3,
           "type": "sylvana",
           "name": "Sylvana 1",
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -1426,8 +1427,7 @@
             86
           ],
           "capacity": 195,
-          "elite": true,
-          "delay": 6
+          "elite": true
         }
       ]
     },
@@ -1441,6 +1441,7 @@
           "id": 2,
           "type": "basic",
           "name": "Basic 3",
+          "delay": 0,
           "preset": false,
           "init": false,
           "army": {
@@ -1453,8 +1454,7 @@
             "Besieger": 0
           },
           "capacity": 200,
-          "elite": true,
-          "delay": 0
+          "elite": true
         }
       ]
     },
@@ -1468,6 +1468,7 @@
           "id": 7,
           "type": "kwatermistrz",
           "name": "Q 1",
+          "delay": 0,
           "preset": false,
           "init": false,
           "army": {
@@ -1480,8 +1481,7 @@
             "Besieger": 23
           },
           "capacity": 1000,
-          "elite": true,
-          "delay": 0
+          "elite": true
         }
       ]
     }
