@@ -532,6 +532,8 @@ class Adventure:
                             general['delay'] = int(time.time() - t_0)
                     my_pygui.moveTo(target.get())
                     my_pygui.click(target.get(), clicks=2, interval=0.25)
+                    if action['type'] in 'move':
+                        self.move_veryfication(target)
             else:
                 if mode == Mode.play or mode == Mode.teach_delay:
                     target = self.coordinations['center_ref'] - Point.from_list(general['relative_coordinates'])
@@ -543,21 +545,8 @@ class Adventure:
                             my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
                             general['delay'] = int(time.time() - t_0)
                     my_pygui.click(target.get(), clicks=2, interval=0.25)
-                    x_t, y_t = target.get()
                     if action['type'] in 'move':
-                        log.info('verifying if move succeed')
-                        while True:
-                            time.sleep(.7)
-                            loc = my_pygui.locateOnScreen('resource/confirm_move.png',
-                                                          confidence=0.9,
-                                                          region=(x_t - 15, y_t - 55, 30, 50))
-                            if loc:
-                                log.info('move verification passed')
-                                break
-                            else:
-                                log.info('move verification false - trying again')
-                                my_pygui.moveTo(target.get())
-                                my_pygui.click(target.get(), clicks=2, interval=0.25)
+                        self.move_veryfication(target)
                 elif mode == Mode.teach_co:
                     my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
                     xcr, ycr = self.coordinations['center_ref'].get()
@@ -566,6 +555,22 @@ class Adventure:
         if mode == Mode.teach_delay or mode == Mode.teach_co:
             with open(my.get_new_filename(self.name), 'w') as f:
                 json.dump(self.data, f, indent=2)
+
+    def move_veryfication(self, target):
+        x_t, y_t = target.get()
+        log.info('verifying if move succeed')
+        while True:
+            time.sleep(.7)
+            loc = my_pygui.locateOnScreen('resource/confirm_move.png',
+                                          confidence=0.8,
+                                          region=(x_t - 15, y_t - 55, 30, 50))
+            if loc:
+                log.info('move verification passed')
+                break
+            else:
+                log.info('move verification false - trying again')
+                my_pygui.moveTo(target.get())
+                my_pygui.click(target.get(), clicks=2, interval=0.25)
 
     def locate_reference_img(self, on_map):
         my_pygui.moveTo((self.coordinations['book'] + Point(100, 0)).get())
