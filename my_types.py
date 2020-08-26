@@ -289,7 +289,7 @@ class General:
         army = {}
         # json['army'].update()
         for key, value in self.__dict__.items():
-            if key in ('army', 'preset', 'init', 'id', 'parent', 'elite') or value:
+            if key in ('army', 'preset', 'init', 'id', 'parent', 'elite', 'delay') or value:
                 json[key] = value
         keys = self.elite_keys if self.elite else self.keys
         for key in keys:
@@ -300,7 +300,6 @@ class General:
         del json['parent']
         if 'id_ref' in json:
             del json['id_ref']
-        json['delay'] = 0
         return json
 
     def __getstate__(self):
