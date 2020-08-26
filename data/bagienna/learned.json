@@ -132,7 +132,15 @@
           },
           "capacity": 235,
           "elite": false,
-          "delay": 0
+          "delay": 0,
+          "drag": [
+            40,
+            -70
+          ],
+          "relative_coordinates": [
+            36,
+            200
+          ]
         }
       ]
     },
