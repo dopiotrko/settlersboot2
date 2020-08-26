@@ -142,22 +142,25 @@ class Adventure:
                 else:
                     raise Exception('star open verification failed in 10 tryes')
 
-    def start_adventure(self, delay=0):
-        log.info('start_adventure')
+    def start_adventure(self, adv_name, delay=0):
+        log.info('start_adventure {}'.format(adv_name))
 
         my.wait(delay, 'Starting adventure')
 
         self.open_star()
         my_pygui.click(self.coordinations['adventures'].get())
+        my_pygui.click(self.coordinations['star_txt'].get())
+        my_pygui.hotkey('ctrl', 'a')
+        my_pygui.write(adv_name)
         my.wait(2, 'Adv search')
         star_window_corner = self.coordinations['adventures'] - Point(454, 371)
-        loc = my_pygui.locateOnScreen('data/{}/start_adv.png'.format(self.name),
-                                      region=(star_window_corner.x, star_window_corner.y, 600, 400),
+        loc = my_pygui.locateOnScreen('resource/is_adv.png'.format(self.name),
+                                      region=(star_window_corner.x, star_window_corner.y, 95, 73),
                                       confidence=0.85)
         if loc is None:
             raise Exception('No adventures {} found.'.format(self.name))
         else:
-            my_pygui.click(loc.get())
+            my_pygui.click(self.coordinations['first_general'].get())
         loc = my_pygui.locateOnScreen('resource/start_adventure.png', confidence=0.9)
         if loc is None:
             raise Exception('Button not found.')
@@ -168,6 +171,10 @@ class Adventure:
             raise Exception('Button not found.')
         else:
             my_pygui.click(loc.get())
+        self.open_star()
+        my_pygui.click(self.coordinations['star_txt'].get())
+        my_pygui.hotkey('ctrl', 'a')
+        my_pygui.hotkey('del')
 
     def set_army(self, general_loc, general):
         log.info('set_army')
@@ -284,6 +291,7 @@ class Adventure:
             return True
         else:
             log.warning('no active general of type {} found in this location. Trying again after 3 sec')
+            time.sleep(3)
             return False
 
     def get_generals_by_type(self, general_type, general_name=None):
