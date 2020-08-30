@@ -251,8 +251,10 @@ class Adventure:
         my_pygui.click(self.coordinations['specialists'].get())
         if verify:
             log.info('verify if general is active')
+            t0 = time.time()
             while True:
                 if self.verify_if_general_active(loc, general_type):
+                    log.info('active general selected after {} s.'.format(time.time()-t0))
                     break
         my_pygui.click(loc.get())
         # verify if general opened
@@ -559,13 +561,14 @@ class Adventure:
     def move_veryfication(self, target):
         x_t, y_t = target.get()
         log.info('verifying if move succeed')
+        t0 = time.time()
         while True:
             time.sleep(.7)
             loc = my_pygui.locateOnScreen('resource/confirm_move.png',
                                           confidence=0.8,
                                           region=(x_t - 15, y_t - 55, 30, 50))
             if loc:
-                log.info('move verification passed')
+                log.info('move verification passed in {} s'.format(time.time()-t0))
                 break
             else:
                 log.info('move verification false - trying again')
@@ -675,10 +678,10 @@ def run(adv, adv_name, delay, gap):
 
 
 # Configure().run()
-adventure = 'ali baba drwal'
+adventure = 'Ali Baba Drwal'
 # adventure = 'WW'
 TN = Adventure(adventure)
-run(TN, 'drwal', 2, 6*60)
+# run(TN, 'drwal', 2, 6*60)
 
 # Adventure('Home').make_adventure(delay=6*60)
 # TN.make_adventure(delay=3, start=8, stop=137, mode=Mode.play)
@@ -692,15 +695,26 @@ run(TN, 'drwal', 2, 6*60)
 # Adventure('DMK').end_adventure(60*60*24, Mode.play)
 # Adventure('DMK').send_to_adventure(3)
 # Adventure('DMK').make_adventure(3, 0, 110, mode=Mode.play)
-# Adventure('m w lecie 2').send_to_adventure(3, 0)
-# Adventure('Ali Baba Drwal').make_adventure(3, 31, 134, mode=Mode.play)
+
+# while True:
+#     Adventure('banici').start_adventure('outlaws')
+#     Adventure('banici').send_to_adventure(3, 0)
+#     Adventure('banici').go_to_adventure(7*60)
+#     Adventure('banici').make_adventure(1, 8, 140, mode=Mode.play)
+#     Adventure('banici').end_adventure(170, mode=Mode.play)
+#     Adventure('banici_').make_adventure(12*60, 0, 14, mode=Mode.play)
+
+# Adventure('azyl').start_adventure('nest')
+# Adventure('azyl').send_to_adventure(3, 0)
+Adventure('azyl').go_to_adventure(7)
+
 # Adventure('spj_gosc').make_adventure(3)
 # Adventure('spj_gosp').send_to_adventure(3)
 # Adventure('oblezenie').send_to_adventure(3)
 # Adventure('oblezenie').make_adventure(3000)
 TN.end_adventure(1000000, Mode.play)
 TN = Adventure('traitors')
-TN.make_adventure(delay=30, start=0, stop=137, mode=Mode.play)
+TN.make_adventure(delay=30, start=0, stop=0, mode=Mode.play)
 TN.end_adventure(120, Mode.play)
 
 TN = Adventure('traitors2')
