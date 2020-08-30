@@ -1,0 +1,215 @@
+{
+  "generals": [
+    {
+      "id": 0,
+      "type": "basic",
+      "name": "Basic 1",
+      "delay": 0,
+      "preset": false,
+      "init": false,
+      "army": {
+        "recruit": 0,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      },
+      "capacity": 200,
+      "elite": false
+    },
+    {
+      "id": 1,
+      "type": "basic",
+      "name": "Basic 2",
+      "delay": 0,
+      "preset": true,
+      "init": false,
+      "army": {
+        "recruit": 0,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 60,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 120,
+        "cannoneer": 0
+      },
+      "capacity": 200,
+      "elite": false
+    },
+    {
+      "id": 2,
+      "type": "basic",
+      "name": "Basic 3",
+      "delay": 0,
+      "preset": false,
+      "init": false,
+      "army": {
+        "recruit": 0,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 1,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 103,
+        "cannoneer": 0
+      },
+      "capacity": 200,
+      "elite": false
+    },
+    {
+      "id": 3,
+      "type": "basic",
+      "name": "Basic 4",
+      "delay": 0,
+      "preset": false,
+      "init": false,
+      "army": {
+        "recruit": 0,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      },
+      "capacity": 200,
+      "elite": false
+    },
+    {
+      "id": 4,
+      "type": "sylvana",
+      "name": "Sylvana 1",
+      "delay": 0,
+      "preset": true,
+      "init": false,
+      "army": {
+        "recruit": 18,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 176,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 1,
+        "cannoneer": 0
+      },
+      "capacity": 195,
+      "elite": false
+    },
+    {
+      "id": 5,
+      "type": "sylvana",
+      "name": "Sylvana 2",
+      "delay": 0,
+      "preset": true,
+      "init": false,
+      "army": {
+        "recruit": 1,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 193,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 1,
+        "cannoneer": 0
+      },
+      "capacity": 195,
+      "elite": false
+    },
+    {
+      "id": 6,
+      "type": "boris",
+      "name": "Boris 1",
+      "delay": 0,
+      "preset": true,
+      "init": false,
+      "army": {
+        "recruit": 1,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      },
+      "capacity": 195,
+      "elite": false
+    },
+    {
+      "id": 7,
+      "type": "major",
+      "name": "GM1",
+      "delay": 0,
+      "preset": true,
+      "init": false,
+      "army": {
+        "recruit": 82,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 172,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 30,
+        "elite_soldier": 1,
+        "cannoneer": 0
+      },
+      "capacity": 285,
+      "elite": false
+    },
+    {
+      "id": 8,
+      "type": "major",
+      "name": "GM2",
+      "delay": 0,
+      "preset": false,
+      "init": false,
+      "army": {
+        "recruit": 0,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      },
+      "capacity": 285,
+      "elite": false
+    },
+    {
+      "id": 9,
+      "type": "kwatermistrz",
+      "name": "Q 1",
+      "delay": 0,
+      "preset": false,
+      "init": false,
+      "army": {
+        "recruit": 130,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 127,
+        "elite_soldier": 127,
+        "cannoneer": 0
+      },
+      "capacity": 1000,
+      "elite": false
+    }
+  ],
+  "actions": []
+}
