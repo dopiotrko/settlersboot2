@@ -211,5 +211,122 @@
       "elite": false
     }
   ],
-  "actions": []
+  "actions": [
+    {
+      "no": 0,
+      "type": "move",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 4,
+          "type": "sylvana",
+          "name": "Sylvana 1",
+          "delay": 0,
+          "preset": true,
+          "init": true,
+          "army": {
+            "recruit": 18,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 176,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 1,
+            "cannoneer": 0
+          },
+          "capacity": 195,
+          "elite": false
+        }
+      ]
+    },
+    {
+      "no": 1,
+      "type": "move",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 6,
+          "type": "boris",
+          "name": "Boris 1",
+          "delay": 0,
+          "preset": true,
+          "init": true,
+          "army": {
+            "recruit": 1,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          },
+          "capacity": 195,
+          "elite": false
+        }
+      ]
+    },
+    {
+      "no": 2,
+      "type": "move",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 5,
+          "type": "sylvana",
+          "name": "Sylvana 2",
+          "delay": 0,
+          "preset": true,
+          "init": true,
+          "army": {
+            "recruit": 1,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 193,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 1,
+            "cannoneer": 0
+          },
+          "capacity": 195,
+          "elite": false
+        }
+      ]
+    },
+    {
+      "no": 3,
+      "type": "move",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 7,
+          "type": "major",
+          "name": "GM1",
+          "delay": 0,
+          "preset": true,
+          "init": true,
+          "army": {
+            "recruit": 82,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 172,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 30,
+            "elite_soldier": 1,
+            "cannoneer": 0
+          },
+          "capacity": 285,
+          "elite": false
+        }
+      ]
+    }
+  ]
 }
