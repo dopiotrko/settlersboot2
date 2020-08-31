@@ -57,7 +57,7 @@ class Adventure:
         self.generals_loc = None
         self.focused = None
 
-    def init_locate_generals(self, start):
+    def init_locate_generals(self, start=0):
         log.info('init_locate_generals:')
         time.sleep(.5)
         if start == 0 or not os.path.exists('data/{}/generals_loc.dat'.format(self.name)):
@@ -336,12 +336,30 @@ class Adventure:
 
     def sum_armies(self, first, last):
         log.info('sum_generals_army')
-        army = dict()
+        army_basic, army_elite = dict(), dict()
         for general in self.data['generals']:
             if not (first <= general['id'] <= last):
                 continue
-            army = {key: army.get(key, 0) + val for key, val in general['army'].items()}
-        return army
+            if 'elite' in general and general['elite']:
+                army_elite = {key: army_elite.get(key, 0) + val for key, val in general['army'].items()}
+            else:
+                army_basic = {key: army_basic.get(key, 0) + val for key, val in general['army'].items()}
+        return dict(army_basic, **army_elite)
+
+    def retrench_all(self, delay):
+        log.info('retrench_all')
+        my.wait(delay, "delay")
+        if not self.generals_loc:
+            self.generals_loc = self.init_locate_generals()
+        for general in self.data['generals']:
+            general_loc = self.generals_loc[general['id']]
+            # my.wait(5, 'Re selecting general')
+            on_map = self.select_general_by_loc(general_loc, general['type'], verify=False)
+            if on_map:
+                loc = my_pygui.locateOnScreen('resource/retrench.png'.format(self.name), confidence=0.85)
+                my_pygui.click(loc.get())
+                loc = my_pygui.locateOnScreen('resource/confirm.png'.format(self.name), confidence=0.9)
+                my_pygui.click(loc.get())
 
     def check_if_army_available(self, army):
         # TODO temporally disable this function
@@ -410,6 +428,8 @@ class Adventure:
         log.info('make_adventure')
         assert (isinstance(mode, Mode))
         my.wait(delay, 'Making adventure')
+        if not self.generals_loc:
+            self.generals_loc = self.init_locate_generals(start)
         for action in self.data['actions']:
             if not (start <= action['no'] <= stop):
                 continue
@@ -426,8 +446,6 @@ class Adventure:
 
     def make_action(self, action, mode, start):
         log.info('make_action')
-        if not self.generals_loc:
-            self.generals_loc = self.init_locate_generals(start)
         if not self.focused:
             self.focus()
         get_click = listener.GetClick()
