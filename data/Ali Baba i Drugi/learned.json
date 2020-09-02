@@ -1307,7 +1307,7 @@
           "id": 4,
           "type": "basic",
           "name": "Basic 5",
-          "delay": 0,
+          "delay": 7,
           "preset": true,
           "init": false,
           "army": {
@@ -1332,7 +1332,7 @@
           "id": 3,
           "type": "basic",
           "name": "Basic 4",
-          "delay": 0,
+          "delay": 8,
           "preset": true,
           "init": false,
           "army": {
@@ -1355,7 +1355,7 @@
           "id": 5,
           "type": "basic",
           "name": "Basic 6",
-          "delay": 0,
+          "delay": 6,
           "preset": true,
           "init": false,
           "army": {
@@ -1378,7 +1378,7 @@
           "id": 7,
           "type": "major",
           "name": "GM1",
-          "delay": 0,
+          "delay": 31,
           "preset": true,
           "init": false,
           "army": {
@@ -1401,7 +1401,7 @@
           "id": 11,
           "type": "sylvana",
           "name": "Sylvana 2",
-          "delay": 0,
+          "delay": 5,
           "preset": true,
           "init": false,
           "army": {

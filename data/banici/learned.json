@@ -735,7 +735,7 @@
           "name": "Basic 1",
           "delay": 0,
           "preset": false,
-          "init": false,
+          "init": true,
           "army": {
             "recruit": 0,
             "bowmen": 0,
@@ -748,12 +748,12 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            144,
-            106
+            -424,
+            -26
           ],
           "drag": [
-            29,
-            20
+            131,
+            39
           ],
           "capacity": 200,
           "elite": false
