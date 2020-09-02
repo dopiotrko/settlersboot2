@@ -691,15 +691,16 @@ def run(adv, adv_name, delay, gap):
     adv.start_adventure(adv_name, delay=delay)
     adv.send_to_adventure(20, first=0, last=100)
     adv.go_to_adventure(gap)
+    # adv.retrench_all(30)
     adv.make_adventure(delay=30, start=0, stop=137, mode=Mode.play)
     adv.end_adventure(20, Mode.play)
 
 
 # Configure().run()
-adventure = 'Ali Baba Drwal'
+adventure = 'byk'
 # adventure = 'WW'
 TN = Adventure(adventure)
-# run(TN, 'drwal', 2, 6*60)
+# run(TN, 'byk', 4*60, 6*60)
 
 # Adventure('Home').make_adventure(delay=6*60)
 # TN.make_adventure(delay=3, start=8, stop=137, mode=Mode.play)
@@ -711,21 +712,32 @@ TN = Adventure(adventure)
 # Adventure('Ali Baba i Pierwszy').make_adventure(2, start=6, stop=115, mode=Mode.play)
 # Adventure('DMK').end_adventure(60*60*3+35, Mode.play)
 # Adventure('DMK').end_adventure(60*60*24, Mode.play)
-# Adventure('DMK').send_to_adventure(3)
-# Adventure('DMK').make_adventure(3, 0, 110, mode=Mode.play)
+# Adventure('DMK').send_to_adventure(3, 13)
+# Adventure('DMK').make_adventure(3, 43, 110, mode=Mode.play)
 
 # while True:
-#     Adventure('banici').start_adventure('outlaws')
+#     Adventure('banici').start_adventure('banici')
 #     Adventure('banici').send_to_adventure(3, 0)
 #     Adventure('banici').go_to_adventure(7*60)
-#     Adventure('banici').make_adventure(1, 0, 140, mode=Mode.play)
+#     Adventure('banici').make_adventure(30, 0, 114, mode=Mode.play)
 #     Adventure('banici').end_adventure(170, mode=Mode.play)
-#     Adventure('banici_').make_adventure(12*60, 0, 14, mode=Mode.play)
+#     Adventure('banici_').make_adventure(12*60, 0, 114, mode=Mode.play)
+#     break
+
+# Adventure('banici_').make_adventure(2, 0, 114, mode=Mode.play)
+# while True:
+#     Adventure('WW').start_adventure('wyspa w')
+#     Adventure('WW').send_to_adventure(3, 0)
+#     Adventure('WW').go_to_adventure(6*60)
+#     Adventure('WW').make_adventure(30, 0, 114, mode=Mode.play)
+#     Adventure('WW').end_adventure(120, mode=Mode.play)
+#     Adventure('WW_').make_adventure(6*60, 0, 114, mode=Mode.play)
+#     break
 
 # Adventure('azyl').start_adventure('nest')
-# Adventure('azyl').send_to_adventure(3, 0)
+# Adventure('byk').send_to_adventure(3, 0)
 # Adventure('azyl').go_to_adventure(7*60)
-Adventure('azyl').make_adventure(3, 16, 140, mode=Mode.teach_co)
+Adventure('byk').make_adventure(3, 19, 140, mode=Mode.play)
 
 # Adventure('spj_gosc').make_adventure(3)
 # Adventure('spj_gosp').send_to_adventure(3)
@@ -733,7 +745,7 @@ Adventure('azyl').make_adventure(3, 16, 140, mode=Mode.teach_co)
 # Adventure('oblezenie').make_adventure(3000)
 TN.end_adventure(1000000, Mode.play)
 TN = Adventure('traitors')
-TN.make_adventure(delay=30, start=0, stop=0, mode=Mode.play)
+TN.make_adventure(delay=30, start=0, stop=137, mode=Mode.play)
 TN.end_adventure(120, Mode.play)
 
 TN = Adventure('traitors2')
