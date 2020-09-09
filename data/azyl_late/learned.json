@@ -223,7 +223,7 @@
           "type": "sylvana",
           "name": "Sylvana 1",
           "delay": 0,
-          "preset": true,
+          "preset": false,
           "init": true,
           "army": {
             "recruit": 18,
@@ -256,7 +256,7 @@
           "type": "boris",
           "name": "Boris 1",
           "delay": 0,
-          "preset": true,
+          "preset": false,
           "init": true,
           "army": {
             "recruit": 1,
@@ -289,7 +289,7 @@
           "type": "sylvana",
           "name": "Sylvana 2",
           "delay": 0,
-          "preset": true,
+          "preset": false,
           "init": true,
           "army": {
             "recruit": 1,
@@ -322,7 +322,7 @@
           "type": "major",
           "name": "GM1",
           "delay": 0,
-          "preset": true,
+          "preset": false,
           "init": true,
           "army": {
             "recruit": 82,
@@ -545,7 +545,7 @@
           "type": "basic",
           "name": "Basic 2",
           "delay": 0,
-          "preset": true,
+          "preset": false,
           "init": true,
           "army": {
             "recruit": 0,
@@ -578,7 +578,7 @@
           "type": "basic",
           "name": "Basic 3",
           "delay": 0,
-          "preset": true,
+          "preset": false,
           "init": true,
           "army": {
             "recruit": 0,

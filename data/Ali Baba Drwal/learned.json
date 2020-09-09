@@ -2102,12 +2102,12 @@
           "init": false,
           "army": {
             "Swordsman": 0,
-            "Mounted Swordsman": 50,
-            "Knight": 300,
+            "Mounted Swordsman": 0,
+            "Knight": 90,
             "Marksman": 0,
             "Amored Marksman": 0,
-            "Mounted Marksman": 100,
-            "Besieger": 49
+            "Mounted Marksman": 271,
+            "Besieger": 0
           },
           "capacity": 1000,
           "elite": true,

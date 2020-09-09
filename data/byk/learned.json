@@ -1294,7 +1294,7 @@
             "cavalry": 236,
             "longbowman": 0,
             "soldier": 65,
-            "crossbowman": 60,
+            "crossbowman": 0,
             "elite_soldier": 119,
             "cannoneer": 247
           },
