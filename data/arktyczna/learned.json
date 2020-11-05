@@ -99,7 +99,7 @@
         "longbowman": 0,
         "soldier": 0,
         "crossbowman": 72,
-        "elite_soldier": 0,
+        "elite_soldier": 3,
         "cannoneer": 0
       },
       "capacity": 1000,
@@ -286,7 +286,7 @@
           "id": 0,
           "type": "major",
           "name": "GM1",
-          "delay": 6,
+          "delay": 0,
           "preset": true,
           "init": true,
           "army": {
@@ -319,7 +319,7 @@
           "id": 3,
           "type": "sylvana",
           "name": "Sylvana 1",
-          "delay": 7,
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -356,7 +356,7 @@
           "id": 1,
           "type": "major",
           "name": "GM2",
-          "delay": 6,
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -389,7 +389,7 @@
           "id": 2,
           "type": "major",
           "name": "GM3",
-          "delay": 6,
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -422,7 +422,7 @@
           "id": 0,
           "type": "major",
           "name": "GM1",
-          "delay": 18,
+          "delay": 0,
           "preset": false,
           "init": true,
           "army": {
@@ -455,7 +455,7 @@
           "id": 1,
           "type": "major",
           "name": "GM2",
-          "delay": 17,
+          "delay": 0,
           "preset": false,
           "init": false,
           "army": {
@@ -488,7 +488,7 @@
           "id": 2,
           "type": "major",
           "name": "GM3",
-          "delay": 17,
+          "delay": 0,
           "preset": false,
           "init": false,
           "army": {

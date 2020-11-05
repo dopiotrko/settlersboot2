@@ -103,5 +103,15 @@
     "type": "kwatermistrz",
     "name": "Q 2",
     "capacity": 1000
+  },
+  {
+    "type": "Starszy",
+    "name": "Starszy",
+    "capacity": 295
+  },
+  {
+    "type": "Mlodszy",
+    "name": "Mlodszy",
+    "capacity": 155
   }
 ]
