@@ -365,7 +365,7 @@ class Adventure:
 
     def check_if_army_available(self, army):
         # TODO temporally disable this function
-        return
+        #return
         log.info('check_if_army_available')
         self.open_star()
         my_pygui.click(self.coordinations['specialists'].get())
