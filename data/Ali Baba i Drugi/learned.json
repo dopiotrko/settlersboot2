@@ -120,14 +120,14 @@
     },
     {
       "id": 6,
-      "type": "medic",
-      "name": "Medic 1",
+      "type": "Mlodszy",
+      "name": "Mlodszy 1",
       "delay": 0,
       "preset": true,
       "init": false,
       "army": {
-        "recruit": 0,
-        "bowmen": 130,
+        "recruit": 1,
+        "bowmen": 0,
         "militia": 0,
         "cavalry": 0,
         "longbowman": 0,
@@ -136,7 +136,7 @@
         "elite_soldier": 0,
         "cannoneer": 0
       },
-      "capacity": 200,
+      "capacity": 155,
       "elite": false
     },
     {
@@ -160,8 +160,8 @@
     },
     {
       "id": 8,
-      "type": "major",
-      "name": "GM2",
+      "type": "Duch",
+      "name": "Duch 1",
       "delay": 0,
       "preset": true,
       "init": false,
@@ -176,7 +176,7 @@
         "elite_soldier": 0,
         "cannoneer": 0
       },
-      "capacity": 285,
+      "capacity": 230,
       "elite": false
     },
     {
@@ -294,48 +294,6 @@
       },
       "capacity": 1000,
       "elite": true
-    },
-    {
-      "id": 15,
-      "type": "grim",
-      "name": "Grim 1",
-      "delay": 0,
-      "preset": true,
-      "init": false,
-      "army": {
-        "recruit": 1,
-        "bowmen": 0,
-        "militia": 0,
-        "cavalry": 0,
-        "longbowman": 0,
-        "soldier": 0,
-        "crossbowman": 0,
-        "elite_soldier": 0,
-        "cannoneer": 0
-      },
-      "capacity": 200,
-      "elite": false
-    },
-    {
-      "id": 16,
-      "type": "grim",
-      "name": "Grim 2",
-      "delay": 0,
-      "preset": true,
-      "init": false,
-      "army": {
-        "recruit": 1,
-        "bowmen": 0,
-        "militia": 0,
-        "cavalry": 0,
-        "longbowman": 0,
-        "soldier": 0,
-        "crossbowman": 0,
-        "elite_soldier": 0,
-        "cannoneer": 0
-      },
-      "capacity": 200,
-      "elite": false
     }
   ],
   "actions": [
@@ -347,14 +305,14 @@
       "generals": [
         {
           "id": 6,
-          "type": "medic",
-          "name": "Medic 1",
+          "type": "Mlodszy",
+          "name": "Mlodszy 1",
           "delay": 0,
           "preset": true,
           "init": true,
           "army": {
-            "recruit": 0,
-            "bowmen": 130,
+            "recruit": 1,
+            "bowmen": 0,
             "militia": 0,
             "cavalry": 0,
             "longbowman": 0,
@@ -371,7 +329,7 @@
             -49,
             -260
           ],
-          "capacity": 200,
+          "capacity": 155,
           "elite": false
         }
       ]
@@ -524,14 +482,14 @@
       "generals": [
         {
           "id": 6,
-          "type": "medic",
-          "name": "Medic 1",
+          "type": "Mlodszy",
+          "name": "Mlodszy 1",
           "delay": 0,
           "preset": true,
           "init": false,
           "army": {
-            "recruit": 0,
-            "bowmen": 130,
+            "recruit": 1,
+            "bowmen": 0,
             "militia": 0,
             "cavalry": 0,
             "longbowman": 0,
@@ -548,7 +506,7 @@
             -259,
             174
           ],
-          "capacity": 200,
+          "capacity": 155,
           "elite": false
         }
       ]
@@ -1507,15 +1465,15 @@
       "generals": [
         {
           "id": 8,
-          "type": "major",
-          "name": "GM2",
+          "type": "Duch",
+          "name": "Duch 1",
           "delay": 0,
           "preset": false,
           "init": true,
           "army": {
             "Swordsman": 0,
-            "Mounted Swordsman": 0,
-            "Knight": 133,
+            "Mounted Swordsman": 230,
+            "Knight": 0,
             "Marksman": 0,
             "Amored Marksman": 0,
             "Mounted Marksman": 0,
@@ -1525,7 +1483,7 @@
             -187,
             22
           ],
-          "capacity": 285,
+          "capacity": 230,
           "elite": true
         }
       ]

@@ -1,0 +1,1026 @@
+{
+  "generals": [
+    {
+      "id": 0,
+      "type": "basic",
+      "name": "Basic 1",
+      "delay": 0,
+      "preset": false,
+      "init": false,
+      "army": {
+        "recruit": 0,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      },
+      "capacity": 200,
+      "elite": false
+    },
+    {
+      "id": 1,
+      "type": "basic",
+      "name": "Basic 2",
+      "delay": 0,
+      "preset": false,
+      "init": false,
+      "army": {
+        "recruit": 0,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      },
+      "capacity": 200,
+      "elite": false
+    },
+    {
+      "id": 2,
+      "type": "basic",
+      "name": "Basic 3",
+      "delay": 0,
+      "preset": false,
+      "init": false,
+      "army": {
+        "recruit": 0,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      },
+      "capacity": 200,
+      "elite": false
+    },
+    {
+      "id": 3,
+      "type": "basic",
+      "name": "Basic 4",
+      "delay": 0,
+      "preset": false,
+      "init": false,
+      "army": {
+        "recruit": 0,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      },
+      "capacity": 200,
+      "elite": false
+    },
+    {
+      "id": 4,
+      "type": "major",
+      "name": "GM1",
+      "delay": 0,
+      "preset": false,
+      "init": false,
+      "army": {
+        "recruit": 0,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      },
+      "capacity": 285,
+      "elite": false
+    },
+    {
+      "id": 5,
+      "type": "Mlodszy",
+      "name": "Mlodszy 1",
+      "delay": 0,
+      "preset": false,
+      "init": false,
+      "army": {
+        "recruit": 10,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      },
+      "capacity": 155,
+      "elite": false
+    },
+    {
+      "id": 6,
+      "type": "sylvana",
+      "name": "Sylvana 1",
+      "delay": 0,
+      "preset": false,
+      "init": false,
+      "army": {
+        "recruit": 0,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      },
+      "capacity": 195,
+      "elite": false
+    },
+    {
+      "id": 7,
+      "type": "sylvana",
+      "name": "Sylvana 2",
+      "delay": 0,
+      "preset": false,
+      "init": false,
+      "army": {
+        "recruit": 0,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      },
+      "capacity": 195,
+      "elite": false
+    },
+    {
+      "id": 8,
+      "type": "boris",
+      "name": "Boris 1",
+      "delay": 0,
+      "preset": false,
+      "init": false,
+      "army": {
+        "recruit": 0,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      },
+      "capacity": 195,
+      "elite": false
+    },
+    {
+      "id": 9,
+      "type": "Duch",
+      "name": "Duch 1",
+      "delay": 0,
+      "preset": false,
+      "init": false,
+      "army": {
+        "recruit": 0,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      },
+      "capacity": 230,
+      "elite": false
+    },
+    {
+      "id": 10,
+      "type": "Starszy",
+      "name": "Starszy",
+      "delay": 0,
+      "preset": false,
+      "init": false,
+      "army": {
+        "recruit": 0,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      },
+      "capacity": 295,
+      "elite": false
+    },
+    {
+      "id": 11,
+      "type": "kwatermistrz",
+      "name": "Q 1",
+      "delay": 0,
+      "preset": false,
+      "init": false,
+      "army": {
+        "Swordsman": 0,
+        "Mounted Swordsman": 571,
+        "Knight": 0,
+        "Marksman": 0,
+        "Amored Marksman": 279,
+        "Mounted Marksman": 0,
+        "Besieger": 137
+      },
+      "capacity": 1000,
+      "elite": true
+    },
+    {
+      "id": 12,
+      "type": "kwatermistrz",
+      "name": "Q 2",
+      "delay": 0,
+      "preset": false,
+      "init": false,
+      "army": {
+        "Swordsman": 0,
+        "Mounted Swordsman": 0,
+        "Knight": 323,
+        "Marksman": 6,
+        "Amored Marksman": 0,
+        "Mounted Marksman": 625,
+        "Besieger": 0
+      },
+      "capacity": 1000,
+      "elite": true
+    },
+    {
+      "id": 11,
+      "type": "master",
+      "name": "Master 1",
+      "delay": 0,
+      "preset": false,
+      "init": false,
+      "army": {
+        "recruit": 0,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      },
+      "capacity": 235,
+      "elite": false
+    }
+  ],
+  "actions": [
+    {
+      "no": 0,
+      "type": "move",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 4,
+          "type": "major",
+          "name": "GM1",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          },
+          "capacity": 285,
+          "elite": false
+        }
+      ]
+    },
+    {
+      "no": 1,
+      "type": "move",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 8,
+          "type": "boris",
+          "name": "Boris 1",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          },
+          "capacity": 195,
+          "elite": false
+        }
+      ]
+    },
+    {
+      "no": 2,
+      "type": "move",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 6,
+          "type": "sylvana",
+          "name": "Sylvana 1",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          },
+          "capacity": 195,
+          "elite": false
+        }
+      ]
+    },
+    {
+      "no": 3,
+      "type": "move",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 9,
+          "type": "Duch",
+          "name": "Duch 1",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          },
+          "capacity": 230,
+          "elite": false
+        }
+      ]
+    },
+    {
+      "no": 4,
+      "type": "move",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 5,
+          "type": "Mlodszy",
+          "name": "Mlodszy 1",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "recruit": 10,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          },
+          "capacity": 155,
+          "elite": false
+        }
+      ]
+    },
+    {
+      "no": 5,
+      "type": "move",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 7,
+          "type": "sylvana",
+          "name": "Sylvana 2",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          },
+          "capacity": 195,
+          "elite": false
+        }
+      ]
+    },
+    {
+      "no": 6,
+      "type": "move",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 10,
+          "type": "Starszy",
+          "name": "Starszy",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          },
+          "capacity": 295,
+          "elite": false
+        }
+      ]
+    },
+    {
+      "no": 7,
+      "type": "move",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 0,
+          "type": "basic",
+          "name": "Basic 1",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          },
+          "capacity": 200,
+          "elite": false
+        }
+      ]
+    },
+    {
+      "no": 8,
+      "type": "attack",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 4,
+          "type": "major",
+          "name": "GM1",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "Swordsman": 0,
+            "Mounted Swordsman": 0,
+            "Knight": 0,
+            "Marksman": 0,
+            "Amored Marksman": 0,
+            "Mounted Marksman": 285,
+            "Besieger": 0
+          },
+          "capacity": 285,
+          "elite": true
+        }
+      ]
+    },
+    {
+      "no": 9,
+      "type": "attack",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 8,
+          "type": "boris",
+          "name": "Boris 1",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "Swordsman": 0,
+            "Mounted Swordsman": 0,
+            "Knight": 195,
+            "Marksman": 0,
+            "Amored Marksman": 0,
+            "Mounted Marksman": 0,
+            "Besieger": 0
+          },
+          "capacity": 195,
+          "elite": true
+        }
+      ]
+    },
+    {
+      "no": 10,
+      "type": "attack",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 5,
+          "type": "Mlodszy",
+          "name": "Mlodszy 1",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "recruit": 1,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          },
+          "capacity": 155,
+          "elite": false
+        }
+      ]
+    },
+    {
+      "no": 11,
+      "type": "attack",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 6,
+          "type": "sylvana",
+          "name": "Sylvana 1",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "Swordsman": 0,
+            "Mounted Swordsman": 16,
+            "Knight": 0,
+            "Marksman": 0,
+            "Amored Marksman": 0,
+            "Mounted Marksman": 179,
+            "Besieger": 0
+          },
+          "capacity": 195,
+          "elite": true
+        }
+      ]
+    },
+    {
+      "no": 12,
+      "type": "attack",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 7,
+          "type": "sylvana",
+          "name": "Sylvana 2",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "Swordsman": 0,
+            "Mounted Swordsman": 34,
+            "Knight": 0,
+            "Marksman": 0,
+            "Amored Marksman": 0,
+            "Mounted Marksman": 161,
+            "Besieger": 0
+          },
+          "capacity": 195,
+          "elite": true
+        }
+      ]
+    },
+    {
+      "no": 13,
+      "type": "attack",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 9,
+          "type": "Duch",
+          "name": "Duch 1",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "Swordsman": 0,
+            "Mounted Swordsman": 56,
+            "Knight": 37,
+            "Marksman": 0,
+            "Amored Marksman": 0,
+            "Mounted Marksman": 0,
+            "Besieger": 137
+          },
+          "capacity": 230,
+          "elite": true
+        }
+      ]
+    },
+    {
+      "no": 14,
+      "type": "unload",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 4,
+          "type": "major",
+          "name": "GM1",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          },
+          "capacity": 285,
+          "elite": false
+        }
+      ]
+    },
+    {
+      "no": 15,
+      "type": "attack",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 8,
+          "type": "boris",
+          "name": "Boris 1",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "Swordsman": 0,
+            "Mounted Swordsman": 23,
+            "Knight": 0,
+            "Marksman": 0,
+            "Amored Marksman": 0,
+            "Mounted Marksman": 172,
+            "Besieger": 0
+          },
+          "capacity": 195,
+          "elite": true
+        }
+      ]
+    },
+    {
+      "no": 16,
+      "type": "attack",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 10,
+          "type": "Starszy",
+          "name": "Starszy",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "Swordsman": 0,
+            "Mounted Swordsman": 16,
+            "Knight": 0,
+            "Marksman": 0,
+            "Amored Marksman": 254,
+            "Mounted Marksman": 0,
+            "Besieger": 0
+          },
+          "capacity": 295,
+          "elite": true
+        }
+      ]
+    },
+    {
+      "no": 17,
+      "type": "load",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 6,
+          "type": "sylvana",
+          "name": "Sylvana 1",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "Swordsman": 0,
+            "Mounted Swordsman": 16,
+            "Knight": 0,
+            "Marksman": 0,
+            "Amored Marksman": 0,
+            "Mounted Marksman": 179,
+            "Besieger": 0
+          },
+          "capacity": 195,
+          "elite": true
+        }
+      ]
+    },
+    {
+      "no": 18,
+      "type": "load",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 0,
+          "type": "basic",
+          "name": "Basic 1",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "Swordsman": 0,
+            "Mounted Swordsman": 200,
+            "Knight": 0,
+            "Marksman": 0,
+            "Amored Marksman": 0,
+            "Mounted Marksman": 0,
+            "Besieger": 0
+          },
+          "capacity": 200,
+          "elite": true
+        }
+      ]
+    },
+    {
+      "no": 19,
+      "type": "attack",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 0,
+          "type": "basic",
+          "name": "Basic 1",
+          "delay": 0,
+          "preset": true,
+          "init": false,
+          "army": {
+            "Swordsman": 0,
+            "Mounted Swordsman": 200,
+            "Knight": 0,
+            "Marksman": 0,
+            "Amored Marksman": 0,
+            "Mounted Marksman": 0,
+            "Besieger": 0
+          },
+          "capacity": 200,
+          "elite": true
+        },
+        {
+          "id": 6,
+          "type": "sylvana",
+          "name": "Sylvana 1",
+          "delay": 0,
+          "preset": true,
+          "init": false,
+          "army": {
+            "Swordsman": 0,
+            "Mounted Swordsman": 16,
+            "Knight": 0,
+            "Marksman": 0,
+            "Amored Marksman": 0,
+            "Mounted Marksman": 179,
+            "Besieger": 0
+          },
+          "capacity": 195,
+          "elite": true
+        }
+      ]
+    },
+    {
+      "no": 20,
+      "type": "move",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 11,
+          "type": "master",
+          "name": "Master 1",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          },
+          "capacity": 235,
+          "elite": false
+        }
+      ]
+    },
+    {
+      "no": 21,
+      "type": "move",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 1,
+          "type": "basic",
+          "name": "Basic 2",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          },
+          "capacity": 200,
+          "elite": false
+        }
+      ]
+    },
+    {
+      "no": 22,
+      "type": "move",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 2,
+          "type": "basic",
+          "name": "Basic 3",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          },
+          "capacity": 200,
+          "elite": false
+        }
+      ]
+    },
+    {
+      "no": 23,
+      "type": "move",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 3,
+          "type": "basic",
+          "name": "Basic 4",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          },
+          "capacity": 200,
+          "elite": false
+        }
+      ]
+    },
+    {
+      "no": 24,
+      "type": "move",
+      "delay": 0,
+      "active": true,
+      "generals": []
+    },
+    {
+      "no": 25,
+      "type": "move",
+      "delay": 0,
+      "active": true,
+      "generals": []
+    },
+    {
+      "no": 26,
+      "type": "move",
+      "delay": 0,
+      "active": true,
+      "generals": []
+    },
+    {
+      "no": 27,
+      "type": "move",
+      "delay": 0,
+      "active": true,
+      "generals": []
+    },
+    {
+      "no": 28,
+      "type": "move",
+      "delay": 0,
+      "active": true,
+      "generals": []
+    }
+  ]
+}
