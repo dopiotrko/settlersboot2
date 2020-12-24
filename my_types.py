@@ -66,6 +66,12 @@ class Point:
         y = self.y + other.y
         return Point(x, y)
 
+    def __eq__(self, other):
+        logging.info('Point:__eq__:')
+        if other is None:
+            return not self
+        return self.x == other.x and self.y == other.y
+
     def __truediv__(self, other):
         logging.info('Point:__truediv__:')
         # works only if self is point, and other is int

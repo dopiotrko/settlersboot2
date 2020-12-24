@@ -16,7 +16,7 @@ class GetClick:
         if button == mouse.Button.left:
             self.coord = Point(x, y)
         elif button == mouse.Button.right:
-            self.coord = 'right'
+            self.coord = None
         if pressed:
             # Stop listener
             return False

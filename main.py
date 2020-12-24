@@ -365,7 +365,7 @@ class Adventure:
 
     def check_if_army_available(self, army):
         # TODO temporally disable this function
-        #return
+        return
         log.info('check_if_army_available')
         self.open_star()
         my_pygui.click(self.coordinations['specialists'].get())
@@ -654,6 +654,37 @@ class Adventure:
         else:
             my_pygui.click((loc + Point(160, 234)).get())
 
+    def send_explorer(self, delay=0, available_explorers=29):
+        log.info('send_explorer')
+        my.wait(delay, 'Sending explorers')
+        self.open_star()
+        my_pygui.click(self.coordinations['specialists'].get())
+        star_window_cor = self.coordinations['specialists'] - Point(137, 400)
+        my_pygui.click(self.coordinations['star_txt'].get())
+        my_pygui.hotkey('ctrl', 'a')
+        my_pygui.write('odkryw')
+        locations = list(my_pygui.locateAllOnScreen('resource/gem.png',
+                                                    region=(star_window_cor.x, star_window_cor.y, 600, 400),
+                                                    confidence=0.97))
+        all_locations = [Point(719 + (co % 9) * 56, 721 + int(co / 9) * 70) for co in range(available_explorers)]
+        log.info('loactions:{}'.format(locations))
+        log.info('all_loactions:{}'.format(all_locations))
+        # left_locations = list(set(all_locations).difference(locations))
+        left_locations = [x for x in all_locations if x not in locations]
+        left_locations.sort(key=lambda i: i.y)
+        left_locations.sort(key=lambda i: i.y * 10000 + i.x)
+        log.info('left_loactions:{}'.format(left_locations))
+        for location in left_locations:
+            self.open_star()
+            my_pygui.click(location.get())
+            my_pygui.click(self.coordinations['treasure'].get())
+            my_pygui.click(self.coordinations['medium_treasure'].get())
+            my_pygui.click(self.coordinations['confirm_treasure'].get())
+        self.open_star()
+        my_pygui.click(self.coordinations['star_txt'].get())
+        my_pygui.hotkey('ctrl', 'a')
+        my_pygui.hotkey('del')
+
     def end_adventure(self, delay=0, mode=Mode.teach_co):
         log.info('end_adventure')
 
@@ -670,7 +701,7 @@ class Adventure:
             while True:
                 t_0 = time.time()
                 coord = get_click.get('DOWN')
-                if coord == 'right':
+                if not coord: # left mouse button pressed
                     break
                 end_adventure_co.append({"co": (coord - self.coordinations['center_ref']).get(),
                                          "delay": time.time() - t_0})
@@ -689,22 +720,32 @@ class Adventure:
 
 def run(adv, adv_name, delay, gap):
     adv.start_adventure(adv_name, delay=delay)
-    adv.send_to_adventure(20, first=0, last=100)
+    adv.send_to_adventure(20, first=0, last=200)
     adv.go_to_adventure(gap)
     # adv.retrench_all(30)
     adv.make_adventure(delay=30, start=0, stop=137, mode=Mode.play)
-    adv.end_adventure(20, Mode.play)
+    adv.end_adventure(120, Mode.play)
 
 
-# Configure().run()
-adventure = 'byk'
+# adventure = 'DMK'
+adventure = 'Ali Baba Drwal'
+# adventure = 'Ali Baba i Drugi'
+# adventure = 'Ali Baba i SM'
+# adventure = 'wyspa tikki'
 # adventure = 'WW'
+# adventure = 'banici'
 TN = Adventure(adventure)
-# run(TN, 'byk', 4*60, 6*60)
+TN.send_explorer(0)
+#
+run(TN, 'drwal', 6, 6*60)
+# run(TN, 'dzielny', 3*62, 13*60)
 
 # Adventure('Home').make_adventure(delay=6*60)
-# TN.make_adventure(delay=3, start=8, stop=137, mode=Mode.play)
-# TN.end_adventure(1, Mode.play)
+# TN.make_adventure(delay=3, start=0, stop=137, mode=Mode.play)
+# TN.end_adventure(120, Mode.play)
+TN.send_explorer(0)
+while True:
+    TN.send_explorer(60*30)
 # TN.end_adventure(1000000, Mode.play)
 # Adventure('Home').make_adventure(delay=5*60)
 # Adventure('Ali Baba i Pierwszy').send_to_adventure(3, 0)
@@ -734,10 +775,27 @@ TN = Adventure(adventure)
 #     Adventure('WW_').make_adventure(6*60, 0, 114, mode=Mode.play)
 #     break
 
+# TN = Adventure('wir')
+# TN.send_to_adventure(3, 0)
+# TN.go_to_adventure(6*60)
+# TN.make_adventure(3, 0, 114, mode=Mode.play)
+# TN.end_adventure(120, mode=Mode.play)
+# TN = Adventure('arktyczna_')
+# TN.make_adventure(6*60, 0, 114, mode=Mode.play)
+for i in range(0):
+    TN.start_adventure('arktyczna')
+    TN.send_to_adventure(3, 0)
+    TN.go_to_adventure(6*60)
+    TN.make_adventure(30, 0, 114, mode=Mode.play)
+    TN.end_adventure(120, mode=Mode.play)
+    TN = Adventure('arktyczna_')
+    TN.make_adventure(6*60, 0, 114, mode=Mode.play)
+#     break
+
 # Adventure('azyl').start_adventure('nest')
-# Adventure('byk').send_to_adventure(3, 0)
+# Adventure('wir').send_to_adventure(3, 0, 100)
 # Adventure('azyl').go_to_adventure(7*60)
-Adventure('byk').make_adventure(3, 19, 140, mode=Mode.play)
+# Adventure('byk').make_adventure(3, 19, 140, mode=Mode.play)
 
 # Adventure('spj_gosc').make_adventure(3)
 # Adventure('spj_gosp').send_to_adventure(3)

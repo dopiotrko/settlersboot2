@@ -23,13 +23,32 @@ class Configure:
         my_pygui.alert(text='Open Star Menu again', title='Configuration', button='OK')
         get_click.get()
 
-        text = 'Adventures'
-        my_pygui.alert(text=text, title='Configuration', button='OK')
-        coordinations['adventures'] = get_click.get()
-
         text = 'Specialists'
         my_pygui.alert(text=text, title='Configuration', button='OK')
         coordinations['specialists'] = get_click.get()
+
+        my_pygui.alert(text='Open any explorer', title='Configuration', button='OK')
+        get_click.get()
+
+        text = 'Treasure'
+        my_pygui.alert(text=text, title='Configuration', button='OK')
+        coordinations['treasure'] = get_click.get()
+
+        text = 'Short treasure'
+        my_pygui.alert(text=text, title='Configuration', button='OK')
+        coordinations['short_treasure'] = get_click.get()
+        coordinations['medium_treasure'] = coordinations['short_treasure'] + Point(171, 0)
+        coordinations['long_treasure'] = coordinations['short_treasure'] + Point(0, 44)
+        coordinations['very_long_treasure'] = coordinations['short_treasure'] + Point(171, 44)
+        coordinations['longest_treasure'] = coordinations['short_treasure'] + Point(0, 88)
+        coordinations['confirm_treasure'] = coordinations['short_treasure'] + Point(-7, 240)
+
+        my_pygui.alert(text='Open Star Menu again', title='Configuration', button='OK')
+        get_click.get()
+
+        text = 'Adventures'
+        my_pygui.alert(text=text, title='Configuration', button='OK')
+        coordinations['adventures'] = get_click.get()
 
         text = 'Search tex field'
         my_pygui.alert(text=text, title='Configuration', button='OK')
