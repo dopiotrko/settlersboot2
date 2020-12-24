@@ -111,7 +111,32 @@
   },
   {
     "type": "Mlodszy",
-    "name": "Mlodszy",
+    "name": "Mlodszy 1",
     "capacity": 155
+  },
+  {
+    "type": "Mlodszy",
+    "name": "Mlodszy 2",
+    "capacity": 155
+  },
+  {
+    "type": "Duch",
+    "name": "Duch 1",
+    "capacity": 230
+  },
+  {
+    "type": "Duch",
+    "name": "Duch 2",
+    "capacity": 230
+  },
+  {
+    "type": "Duch",
+    "name": "Duch 3",
+    "capacity": 230
+  },
+  {
+    "type": "Duch",
+    "name": "Duch 4",
+    "capacity": 230
   }
 ]
