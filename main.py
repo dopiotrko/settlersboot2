@@ -36,6 +36,7 @@ import my
 import listener
 import ocr
 import os
+import pyperclip
 from my_types import Point, Mode
 log = logging.getLogger(__name__)
 for handler in logging.root.handlers[:]:
@@ -575,6 +576,28 @@ class Adventure:
         if mode == Mode.teach_delay or mode == Mode.teach_co:
             with open(my.get_new_filename(self.name), 'w') as f:
                 json.dump(self.data, f, indent=2)
+
+    def write_star_text(self, text, verify=True):
+        while True:
+            my_pygui.click(self.coordinations['star_txt'].get())
+            my_pygui.hotkey('ctrl', 'a')
+            my_pygui.write(text)
+            if not verify:
+                break
+            pyperclip.copy('')
+            my_pygui.hotkey('ctrl', 'a')
+            my_pygui.hotkey('ctrl', 'c')
+            try_count = 0
+            time.sleep(1)
+            if text == pyperclip.paste():
+                break
+            else:
+                log.info('text not written - trying again')
+                my.wait(try_count, 'text not written - trying again')
+                if try_count < 10:
+                    try_count += 1
+                else:
+                    raise Exception('text not written in 10 tyes')
 
     def move_veryfication(self, target):
         x_t, y_t = target.get()
