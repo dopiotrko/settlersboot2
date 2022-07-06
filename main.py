@@ -205,16 +205,16 @@ class Adventure:
         count = 0
         army = general['army']
         time.sleep(2)
-        loc = my_pygui.locateOnScreen('resource/army.png',
-                                      region=self.coordinations['first_army_region'],
-                                      confidence=.95,
-                                      center=False)
-        elite = general.get('elite', False)
-        if (loc and elite) or (not loc and not elite):
-            my_pygui.click(self.coordinations['elite'].get())
-            time.sleep(3)
         while True:
             log.info('Setting army, try {}'.format(count + 1))
+            loc = my_pygui.locateOnScreen('resource/army.png',
+                                          region=self.coordinations['first_army_region'],
+                                          confidence=.95,
+                                          center=False)
+            elite = general.get('elite', False)
+            if (loc and elite) or (not loc and not elite):
+                my_pygui.click(self.coordinations['elite'].get())
+                time.sleep(3)
             my_pygui.click(self.coordinations['unload'].get())
             for units, quantity in army.items():
                 if quantity != 0:
