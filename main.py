@@ -81,8 +81,8 @@ class Adventure:
                                                             region=(star_window_cor.x, star_window_cor.y, 600, 400),
                                                             confidence=0.97))
                 # TODO necessary if part of army sent back. Temporary solution.
-                if not locations:
-                    continue
+                # if not locations:
+                #     continue
                 locations.sort(key=lambda i: i.y)
                 y_standardized = locations[0].y
                 for loc in locations:
