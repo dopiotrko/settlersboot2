@@ -120,6 +120,29 @@ class Adventure:
                 generals[general['type']] = [general]
         return generals
 
+    def open_star_tab(self, name, verify=True):
+        log.info('open_{}'.format(name))
+        my_pygui.click(self.coordinations[name].get())
+        try_count = 0
+        while verify:
+            log.info('verify if {} is open'.format(name))
+            verify_area = self.coordinations[name]
+            time.sleep(.5)
+            loc = my_pygui.locateOnScreen('resource/{}.png'.format(name),
+                                          region=(verify_area.x - 20, verify_area.y - 20, 40, 45),
+                                          confidence=0.95)
+            if loc:
+                log.info('{} open verification succeed'.format(name))
+                break
+            else:
+                log.info('{} open verification false - trying again'.format(name))
+                my.wait(try_count, '{} open verification false - trying again'.format(name))
+                my_pygui.click(self.coordinations[name].get())
+                if try_count < 10:
+                    try_count += 1
+                else:
+                    raise Exception('{} open verification failed in 10 tryes'.format(name))
+
     def open_star(self, verify=True):
         log.info('open_star')
         my_pygui.click(self.coordinations['star'].get())
@@ -681,7 +704,8 @@ class Adventure:
         log.info('send_explorer')
         my.wait(delay, 'Sending explorers')
         self.open_star()
-        my_pygui.click(self.coordinations['specialists'].get())
+        self.open_star_tab('adventures')
+        self.open_star_tab('specialists')
         star_window_cor = self.coordinations['specialists'] - Point(137, 400)
         my_pygui.click(self.coordinations['star_txt'].get())
         my_pygui.hotkey('ctrl', 'a')
