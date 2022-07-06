@@ -278,9 +278,12 @@ class Adventure:
             log.info('verify if general is active')
             t0 = time.time()
             while True:
-                if self.verify_if_general_active(loc, general_type):
-                    log.info('active general selected after {} s.'.format(time.time()-t0))
-                    break
+                if time.time() - t0 < 5 * 60:
+                    if self.verify_if_general_active(loc, general_type):
+                        log.info('active general selected after {} s.'.format(time.time()-t0))
+                        break
+                else:
+                    raise Exception('no active general in 5 min found')
         my_pygui.click(loc.get())
         # verify if general opened
         x_t, y_t = self.coordinations['move'].get()
