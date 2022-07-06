@@ -151,7 +151,7 @@ class Adventure:
             log.info('verify if star is open')
             star_close = self.coordinations['star_close']
             time.sleep(.5)
-            loc = my_pygui.locateOnScreen('resource/star_verify.png'.format(self.name),
+            loc = my_pygui.locateOnScreen('resource/star_verify.png',
                                           region=(star_close.x - 20, star_close.y, 40, 45),
                                           confidence=0.85)
             if loc:
@@ -316,7 +316,8 @@ class Adventure:
         if finded:
             return True
         else:
-            log.warning('no active general of type {} found in this location. Trying again after 3 sec')
+            log.warning('no active general of type {} found in this location. Trying again after 3 sec'
+                        .format(general_type))
             time.sleep(3)
             return False
 
@@ -332,6 +333,7 @@ class Adventure:
         general = general_name or general_type
         my_pygui.write(general)
         star_window_corner = self.coordinations['specialists'] - Point(137, 400)
+        time.sleep(2)
         locations = my_pygui.locateAllOnScreen('resource/{}.png'.format(general_type),
                                                region=(star_window_corner.x, star_window_corner.y, 600, 400),
                                                confidence=0.97)
@@ -577,7 +579,7 @@ class Adventure:
                     my_pygui.moveTo(target.get())
                     my_pygui.click(target.get(), clicks=2, interval=0.25)
                     if action['type'] in 'move':
-                        self.move_veryfication(target)
+                        self.move_verification(target)
             else:
                 if mode == Mode.play or mode == Mode.teach_delay:
                     target = self.coordinations['center_ref'] - Point.from_list(general['relative_coordinates'])
@@ -590,7 +592,7 @@ class Adventure:
                             general['delay'] = int(time.time() - t_0)
                     my_pygui.click(target.get(), clicks=2, interval=0.25)
                     if action['type'] in 'move':
-                        self.move_veryfication(target)
+                        self.move_verification(target)
                 elif mode == Mode.teach_co:
                     my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
                     xcr, ycr = self.coordinations['center_ref'].get()
@@ -622,7 +624,7 @@ class Adventure:
                 else:
                     raise Exception('text not written in 10 tyes')
 
-    def move_veryfication(self, target):
+    def move_verification(self, target):
         x_t, y_t = target.get()
         log.info('verifying if move succeed')
         t0 = time.time()
