@@ -507,7 +507,6 @@ class Adventure:
 
         for i, general in enumerate(action['generals']):
             general_loc = self.generals_loc[general['id']]
-            t_0 = time.time()
             if 'retreat' in general:
                 my.wait(5, 'Re selecting general')
                 on_map = self.select_general_by_loc(general_loc, general['type'], verify=False)
@@ -517,6 +516,7 @@ class Adventure:
                     my.wait(general['delay'], 'General retreat')
                     my_pygui.click(self.coordinations['retreat'].get())
                 elif mode == Mode.teach_delay:
+                    t_0 = time.time()
                     text = 'Click when You want to retreat general'
                     my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
                     my_pygui.click(self.coordinations['retreat'].get())
@@ -582,6 +582,7 @@ class Adventure:
                         if mode == Mode.play:
                             my.wait(general['delay'], 'Next general attacks')
                         elif mode == Mode.teach_delay:
+                            t_0 = time.time()
                             my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
                             general['delay'] = int(time.time() - t_0)
                     my_pygui.moveTo(target.get())
@@ -596,6 +597,7 @@ class Adventure:
                         if mode == Mode.play:
                             my.wait(general['delay'], 'Next general attacks')
                         elif mode == Mode.teach_delay:
+                            t_0 = time.time()
                             my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
                             general['delay'] = int(time.time() - t_0)
                     my_pygui.click(target.get(), clicks=2, interval=0.25)
