@@ -475,6 +475,7 @@ class Adventure:
         # TODO temporary way to focus window/to be changed
         focus_temp_loc = (self.coordinations['star'] - Point(0, 40))
         my_pygui.click(focus_temp_loc.get())
+        my_pygui.press('ESC')
         my_pygui.write('0')
         my_pygui.press('-', presses=2)
         self.focused = True
