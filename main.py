@@ -637,9 +637,12 @@ class Adventure:
                 log.info('move verification passed in {} s'.format(time.time()-t0))
                 break
             else:
-                log.info('move verification false - trying again')
-                my_pygui.moveTo(target.get())
-                my_pygui.click(target.get(), clicks=2, interval=0.25)
+                if time.time()-t0 < 5*60:
+                    log.info('move verification false - trying again')
+                    my_pygui.moveTo(target.get())
+                    my_pygui.click(target.get(), clicks=2, interval=0.25)
+                else:
+                    raise Exception('verification failed')
 
     def locate_reference_img(self, on_map):
         my_pygui.moveTo((self.coordinations['book'] + Point(100, 0)).get())
