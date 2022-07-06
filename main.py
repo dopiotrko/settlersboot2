@@ -166,6 +166,7 @@ class Adventure:
                 else:
                     raise Exception('star open verification failed in 10 tryes')
 
+    @my.send_explorer_while_error
     def start_adventure(self, adv_name, delay=0):
         log.info('start_adventure {}'.format(adv_name))
 
@@ -414,6 +415,7 @@ class Adventure:
         my_pygui.press('del')
         my_pygui.click(self.coordinations['star_close'].get())
 
+    @my.send_explorer_while_error
     def send_to_adventure(self, delay=0, first=0, last=100):
         log.info('send_to_adventure')
 
@@ -440,6 +442,7 @@ class Adventure:
         my_pygui.press('del')
         my_pygui.click(self.coordinations['star_close'].get())
 
+    @my.send_explorer_while_error
     def go_to_adventure(self, delay=0):
         log.info('go_to_adventure')
 
@@ -452,6 +455,7 @@ class Adventure:
             my_pygui.click(x, y)
             my_pygui.click(x, y + 15)
 
+    @my.send_explorer_while_error
     def make_adventure(self, delay=0, start=0, stop=1000, mode=Mode.play):
         log.info('make_adventure')
         assert (isinstance(mode, Mode))
@@ -683,6 +687,7 @@ class Adventure:
                 log.info('not all generals from this action active - trying again')
                 my.wait(1, 'Trying again')
 
+    @my.send_explorer_while_error
     def end_adventure_(self, delay=0):
         log.info('end_adventure')
 
@@ -705,7 +710,8 @@ class Adventure:
         else:
             my_pygui.click((loc + Point(160, 234)).get())
 
-    def send_explorer(self, delay=0, available_explorers=29):
+    @my.send_explorer_while_error
+    def send_explorer(self, delay=0, available_explorers=88, name='odkrywc', search='short'):
         log.info('send_explorer')
         my.wait(delay, 'Sending explorers')
         self.open_star()

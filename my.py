@@ -1,6 +1,7 @@
 import os
 import time
 import json
+import my_pygui
 from my_types import Action
 
 
@@ -41,3 +42,19 @@ def load_generals():
     with open('data/generals.json') as f:
         data = json.load(f)
     return data
+
+
+def send_explorer_while_error(func):
+    def wrapper_send_explorer_while_error(*args, **kwargs):
+        try:
+            func(*args, **kwargs)
+        except Exception as e:
+            print("ERROR: {}".format(e))
+            my_pygui.press('esc')
+            adv = args[0]
+            if adv.check_if_in_island() is False:
+                adv.go_to_adventure()
+            while True:
+                adv.send_explorer()
+                wait(15*60, 'sending after error in ')
+    return wrapper_send_explorer_while_error
