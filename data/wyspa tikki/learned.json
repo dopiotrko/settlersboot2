@@ -4,6 +4,7 @@
       "id": 0,
       "type": "basic",
       "name": "Basic 1",
+      "delay": 0,
       "preset": false,
       "init": false,
       "army": {
@@ -18,13 +19,13 @@
         "cannoneer": 0
       },
       "capacity": 200,
-      "elite": false,
-      "delay": 0
+      "elite": false
     },
     {
       "id": 1,
       "type": "basic",
       "name": "Basic 2",
+      "delay": 0,
       "preset": false,
       "init": false,
       "army": {
@@ -39,13 +40,13 @@
         "cannoneer": 0
       },
       "capacity": 200,
-      "elite": false,
-      "delay": 0
+      "elite": false
     },
     {
       "id": 2,
       "type": "sylvana",
       "name": "Sylvana 1",
+      "delay": 0,
       "preset": true,
       "init": false,
       "army": {
@@ -60,13 +61,13 @@
         "cannoneer": 85
       },
       "capacity": 195,
-      "elite": false,
-      "delay": 0
+      "elite": false
     },
     {
       "id": 3,
       "type": "sylvana",
       "name": "Sylvana 2",
+      "delay": 0,
       "preset": true,
       "init": false,
       "army": {
@@ -81,13 +82,13 @@
         "cannoneer": 0
       },
       "capacity": 195,
-      "elite": false,
-      "delay": 0
+      "elite": false
     },
     {
       "id": 4,
       "type": "boris",
       "name": "Boris 1",
+      "delay": 0,
       "preset": true,
       "init": false,
       "army": {
@@ -102,8 +103,28 @@
         "cannoneer": 0
       },
       "capacity": 195,
-      "elite": false,
-      "delay": 0
+      "elite": false
+    },
+    {
+      "id": 5,
+      "type": "kwatermistrz",
+      "name": "Q 1",
+      "delay": 0,
+      "preset": false,
+      "init": false,
+      "army": {
+        "recruit": 0,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 0,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 32
+      },
+      "capacity": 1000,
+      "elite": false
     }
   ],
   "actions": [
@@ -117,6 +138,7 @@
           "id": 2,
           "type": "sylvana",
           "name": "Sylvana 1",
+          "delay": 0,
           "preset": true,
           "init": true,
           "army": {
@@ -135,8 +157,7 @@
             -35
           ],
           "capacity": 195,
-          "elite": false,
-          "delay": 0
+          "elite": false
         }
       ]
     },
@@ -150,6 +171,7 @@
           "id": 3,
           "type": "sylvana",
           "name": "Sylvana 2",
+          "delay": 0,
           "preset": true,
           "init": true,
           "army": {
@@ -168,13 +190,41 @@
             -58
           ],
           "capacity": 195,
-          "elite": false,
-          "delay": 0
+          "elite": false
         }
       ]
     },
     {
       "no": 2,
+      "type": "unload",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 5,
+          "type": "kwatermistrz",
+          "name": "Q 1",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          },
+          "capacity": 1000,
+          "elite": false
+        }
+      ]
+    },
+    {
+      "no": 3,
       "type": "attack",
       "delay": 46,
       "active": true,
@@ -183,6 +233,7 @@
           "id": 2,
           "type": "sylvana",
           "name": "Sylvana 1",
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -201,13 +252,12 @@
             184
           ],
           "capacity": 195,
-          "elite": false,
-          "delay": 0
+          "elite": false
         }
       ]
     },
     {
-      "no": 3,
+      "no": 4,
       "type": "attack",
       "delay": 50,
       "active": true,
@@ -216,6 +266,7 @@
           "id": 4,
           "type": "boris",
           "name": "Boris 1",
+          "delay": 0,
           "preset": true,
           "init": true,
           "army": {
@@ -234,13 +285,12 @@
             -300
           ],
           "capacity": 195,
-          "elite": false,
-          "delay": 0
+          "elite": false
         }
       ]
     },
     {
-      "no": 4,
+      "no": 5,
       "type": "move",
       "delay": 0,
       "active": true,
@@ -249,6 +299,7 @@
           "id": 0,
           "type": "basic",
           "name": "Basic 1",
+          "delay": 0,
           "preset": true,
           "init": true,
           "army": {
@@ -267,13 +318,12 @@
             -176
           ],
           "capacity": 200,
-          "elite": false,
-          "delay": 0
+          "elite": false
         }
       ]
     },
     {
-      "no": 5,
+      "no": 6,
       "type": "move",
       "delay": 0,
       "active": true,
@@ -282,6 +332,7 @@
           "id": 1,
           "type": "basic",
           "name": "Basic 2",
+          "delay": 0,
           "preset": true,
           "init": true,
           "army": {
@@ -300,13 +351,12 @@
             -120
           ],
           "capacity": 200,
-          "elite": false,
-          "delay": 0
+          "elite": false
         }
       ]
     },
     {
-      "no": 6,
+      "no": 7,
       "type": "attack",
       "delay": 49,
       "active": true,
@@ -315,6 +365,7 @@
           "id": 0,
           "type": "basic",
           "name": "Basic 1",
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -333,13 +384,13 @@
             243
           ],
           "capacity": 200,
-          "elite": false,
-          "delay": 0
+          "elite": false
         },
         {
           "id": 3,
           "type": "sylvana",
           "name": "Sylvana 2",
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -358,13 +409,41 @@
             411
           ],
           "capacity": 195,
-          "elite": false,
-          "delay": 0
+          "elite": false
         }
       ]
     },
     {
-      "no": 7,
+      "no": 8,
+      "type": "load",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 2,
+          "type": "sylvana",
+          "name": "Sylvana 1",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "recruit": 63,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 117
+          },
+          "capacity": 195,
+          "elite": false
+        }
+      ]
+    },
+    {
+      "no": 9,
       "type": "attack",
       "delay": 0,
       "active": true,
@@ -373,6 +452,7 @@
           "id": 1,
           "type": "basic",
           "name": "Basic 2",
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -395,13 +475,13 @@
             90
           ],
           "capacity": 200,
-          "elite": false,
-          "delay": 0
+          "elite": false
         },
         {
           "id": 2,
           "type": "sylvana",
           "name": "Sylvana 1",
+          "delay": 0,
           "preset": true,
           "init": false,
           "army": {
@@ -424,8 +504,7 @@
             168
           ],
           "capacity": 195,
-          "elite": false,
-          "delay": 0
+          "elite": false
         }
       ]
     }

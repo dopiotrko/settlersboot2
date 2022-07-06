@@ -577,6 +577,33 @@
           "delay": 0
         }
       ]
+    },
+    {
+      "no": 16,
+      "type": "load",
+      "delay": 80,
+      "generals": [
+        {
+          "id": 3,
+          "type": "major",
+          "name": "GM2",
+          "preset": false,
+          "init": false,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 0,
+            "crossbowman": 270,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          },
+          "capacity": 285,
+          "delay": 0
+        }
+      ]
     }
   ]
 }

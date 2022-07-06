@@ -87,7 +87,7 @@
     {
       "id": 4,
       "type": "kwatermistrz",
-      "name": "Q 1",
+      "name": "Q 2",
       "delay": 0,
       "preset": false,
       "init": false,
@@ -256,7 +256,7 @@
         {
           "id": 4,
           "type": "kwatermistrz",
-          "name": "Q 1",
+          "name": "Q 2",
           "delay": 0,
           "preset": false,
           "init": false,
@@ -514,13 +514,13 @@
     {
       "no": 12,
       "type": "load",
-      "delay": 3,
+      "delay": 130,
       "active": true,
       "generals": [
         {
           "id": 4,
           "type": "kwatermistrz",
-          "name": "Q 1",
+          "name": "Q 2",
           "delay": 0,
           "preset": false,
           "init": false,
