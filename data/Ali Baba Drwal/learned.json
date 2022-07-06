@@ -167,14 +167,33 @@
       "init": false,
       "army": {
         "Swordsman": 0,
-        "Mounted Swordsman": 50,
+        "Mounted Swordsman": 80,
         "Knight": 300,
         "Marksman": 0,
         "Amored Marksman": 0,
         "Mounted Marksman": 100,
-        "Besieger": 49
+        "Besieger": 55
       },
       "capacity": 1000,
+      "elite": true
+    },
+    {
+      "id": 9,
+      "type": "Vargus",
+      "name": "Vargus",
+      "delay": 0,
+      "preset": false,
+      "init": false,
+      "army": {
+        "Swordsman": 0,
+        "Mounted Swordsman": 32,
+        "Knight": 0,
+        "Marksman": 0,
+        "Amored Marksman": 80,
+        "Mounted Marksman": 83,
+        "Besieger": 0
+      },
+      "capacity": 195,
       "elite": true
     }
   ],
@@ -329,9 +348,9 @@
       "active": true,
       "generals": [
         {
-          "id": 5,
-          "type": "boris",
-          "name": "Boris 1",
+          "id": 9,
+          "type": "Vargus",
+          "name": "Vargus",
           "delay": 0,
           "preset": true,
           "init": true,
@@ -457,13 +476,13 @@
     {
       "no": 8,
       "type": "attack",
-      "delay": 0,
+      "delay": 48,
       "active": true,
       "generals": [
         {
-          "id": 5,
-          "type": "boris",
-          "name": "Boris 1",
+          "id": 9,
+          "type": "Vargus",
+          "name": "Vargus",
           "delay": 0,
           "preset": true,
           "init": false,
@@ -655,19 +674,19 @@
       "active": true,
       "generals": [
         {
-          "id": 5,
-          "type": "boris",
-          "name": "Boris 1",
+          "id": 9,
+          "type": "Vargus",
+          "name": "Vargus",
           "delay": 0,
           "preset": false,
           "init": false,
           "army": {
             "Swordsman": 0,
-            "Mounted Swordsman": 0,
-            "Knight": 195,
+            "Mounted Swordsman": 21,
+            "Knight": 0,
             "Marksman": 0,
             "Amored Marksman": 0,
-            "Mounted Marksman": 0,
+            "Mounted Marksman": 174,
             "Besieger": 0
           },
           "relative_coordinates": [
@@ -832,6 +851,41 @@
     {
       "no": 17,
       "type": "move",
+      "delay": 2,
+      "active": true,
+      "generals": [
+        {
+          "id": 5,
+          "type": "boris",
+          "name": "Boris 1",
+          "delay": 0,
+          "preset": true,
+          "init": false,
+          "army": {
+            "Swordsman": 0,
+            "Mounted Swordsman": 12,
+            "Knight": 37,
+            "Marksman": 0,
+            "Amored Marksman": 0,
+            "Mounted Marksman": 0,
+            "Besieger": 146
+          },
+          "relative_coordinates": [
+            -644,
+            58
+          ],
+          "drag": [
+            -599,
+            84
+          ],
+          "capacity": 195,
+          "elite": true
+        }
+      ]
+    },
+    {
+      "no": 18,
+      "type": "move",
       "delay": 28,
       "active": true,
       "generals": [
@@ -865,7 +919,7 @@
       ]
     },
     {
-      "no": 18,
+      "no": 19,
       "type": "move",
       "delay": 36,
       "active": true,
@@ -900,7 +954,34 @@
       ]
     },
     {
-      "no": 19,
+      "no": 20,
+      "type": "load",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 9,
+          "type": "Vargus",
+          "name": "Vargus",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "Swordsman": 0,
+            "Mounted Swordsman": 0,
+            "Knight": 0,
+            "Marksman": 0,
+            "Amored Marksman": 0,
+            "Mounted Marksman": 0,
+            "Besieger": 0
+          },
+          "capacity": 195,
+          "elite": true
+        }
+      ]
+    },
+    {
+      "no": 21,
       "type": "move",
       "delay": 1,
       "active": true,
@@ -935,42 +1016,7 @@
       ]
     },
     {
-      "no": 20,
-      "type": "move",
-      "delay": 2,
-      "active": true,
-      "generals": [
-        {
-          "id": 5,
-          "type": "boris",
-          "name": "Boris 1",
-          "delay": 0,
-          "preset": true,
-          "init": false,
-          "army": {
-            "Swordsman": 0,
-            "Mounted Swordsman": 12,
-            "Knight": 37,
-            "Marksman": 0,
-            "Amored Marksman": 0,
-            "Mounted Marksman": 0,
-            "Besieger": 146
-          },
-          "relative_coordinates": [
-            -354,
-            210
-          ],
-          "drag": [
-            -284,
-            75
-          ],
-          "capacity": 195,
-          "elite": true
-        }
-      ]
-    },
-    {
-      "no": 21,
+      "no": 22,
       "type": "load",
       "delay": 1,
       "active": true,
@@ -997,7 +1043,7 @@
       ]
     },
     {
-      "no": 22,
+      "no": 23,
       "type": "attack",
       "delay": 1,
       "active": true,
@@ -1059,7 +1105,7 @@
       ]
     },
     {
-      "no": 23,
+      "no": 24,
       "type": "move",
       "delay": 318,
       "active": true,
@@ -1094,7 +1140,7 @@
       ]
     },
     {
-      "no": 24,
+      "no": 25,
       "type": "move",
       "delay": 0,
       "active": true,
@@ -1125,7 +1171,7 @@
       ]
     },
     {
-      "no": 25,
+      "no": 26,
       "type": "move",
       "delay": 1,
       "active": true,
@@ -1160,7 +1206,7 @@
       ]
     },
     {
-      "no": 26,
+      "no": 27,
       "type": "move",
       "delay": 0,
       "active": true,
@@ -1197,7 +1243,7 @@
       ]
     },
     {
-      "no": 27,
+      "no": 28,
       "type": "move",
       "delay": 0,
       "active": true,
@@ -1232,7 +1278,7 @@
       ]
     },
     {
-      "no": 28,
+      "no": 29,
       "type": "move",
       "delay": 0,
       "active": true,
@@ -1267,7 +1313,7 @@
       ]
     },
     {
-      "no": 29,
+      "no": 30,
       "type": "move",
       "delay": 1,
       "active": true,
@@ -1302,7 +1348,7 @@
       ]
     },
     {
-      "no": 30,
+      "no": 31,
       "type": "load",
       "delay": 4,
       "active": true,
@@ -1329,7 +1375,7 @@
       ]
     },
     {
-      "no": 31,
+      "no": 32,
       "type": "load",
       "delay": 1,
       "active": true,
@@ -1356,7 +1402,7 @@
       ]
     },
     {
-      "no": 32,
+      "no": 33,
       "type": "unload",
       "delay": 1,
       "active": true,
@@ -1383,7 +1429,7 @@
       ]
     },
     {
-      "no": 33,
+      "no": 34,
       "type": "load",
       "delay": 0,
       "active": true,
@@ -1410,7 +1456,7 @@
       ]
     },
     {
-      "no": 34,
+      "no": 35,
       "type": "load",
       "delay": 0,
       "active": true,
@@ -1437,7 +1483,7 @@
       ]
     },
     {
-      "no": 35,
+      "no": 36,
       "type": "attack",
       "delay": 1,
       "active": true,
@@ -1543,7 +1589,7 @@
       ]
     },
     {
-      "no": 36,
+      "no": 37,
       "type": "move",
       "delay": 238,
       "active": true,
@@ -1578,7 +1624,7 @@
       ]
     },
     {
-      "no": 37,
+      "no": 38,
       "type": "move",
       "delay": 0,
       "active": true,
@@ -1613,7 +1659,7 @@
       ]
     },
     {
-      "no": 38,
+      "no": 39,
       "type": "attack",
       "delay": 0,
       "active": true,
@@ -1648,7 +1694,7 @@
       ]
     },
     {
-      "no": 39,
+      "no": 40,
       "type": "attack",
       "delay": 2,
       "active": true,
@@ -1679,7 +1725,7 @@
       ]
     },
     {
-      "no": 40,
+      "no": 41,
       "type": "move",
       "delay": 1,
       "active": true,
@@ -1714,7 +1760,7 @@
       ]
     },
     {
-      "no": 41,
+      "no": 42,
       "type": "move",
       "delay": 0,
       "active": true,
@@ -1749,7 +1795,7 @@
       ]
     },
     {
-      "no": 42,
+      "no": 43,
       "type": "move",
       "delay": 0,
       "active": true,
@@ -1784,7 +1830,7 @@
       ]
     },
     {
-      "no": 43,
+      "no": 44,
       "type": "attack",
       "delay": 2,
       "active": true,
@@ -1815,7 +1861,7 @@
       ]
     },
     {
-      "no": 44,
+      "no": 45,
       "type": "attack",
       "delay": 0,
       "active": true,
@@ -1846,7 +1892,7 @@
       ]
     },
     {
-      "no": 45,
+      "no": 46,
       "type": "attack",
       "delay": 60,
       "active": true,
@@ -1877,7 +1923,7 @@
       ]
     },
     {
-      "no": 46,
+      "no": 47,
       "type": "attack",
       "delay": 48,
       "active": true,
@@ -1908,7 +1954,7 @@
       ]
     },
     {
-      "no": 47,
+      "no": 48,
       "type": "load",
       "delay": 10,
       "active": true,
@@ -1935,7 +1981,7 @@
       ]
     },
     {
-      "no": 48,
+      "no": 49,
       "type": "load",
       "delay": 2,
       "active": true,
@@ -1962,7 +2008,7 @@
       ]
     },
     {
-      "no": 49,
+      "no": 50,
       "type": "load",
       "delay": 59,
       "active": true,
@@ -1989,7 +2035,7 @@
       ]
     },
     {
-      "no": 50,
+      "no": 51,
       "type": "attack",
       "delay": 0,
       "active": true,
@@ -2021,7 +2067,7 @@
           "id": 5,
           "type": "boris",
           "name": "Boris 1",
-          "delay": 0,
+          "delay": 6,
           "preset": true,
           "init": false,
           "army": {
@@ -2089,7 +2135,7 @@
       ]
     },
     {
-      "no": 51,
+      "no": 52,
       "type": "load",
       "delay": 0,
       "active": true,
@@ -2116,63 +2162,9 @@
       ]
     },
     {
-      "no": 52,
-      "type": "load",
-      "delay": 180,
-      "active": true,
-      "generals": [
-        {
-          "id": 0,
-          "type": "basic",
-          "name": "Basic 1",
-          "delay": 0,
-          "preset": false,
-          "init": false,
-          "army": {
-            "Swordsman": 0,
-            "Mounted Swordsman": 0,
-            "Knight": 0,
-            "Marksman": 0,
-            "Amored Marksman": 0,
-            "Mounted Marksman": 0,
-            "Besieger": 0
-          },
-          "capacity": 200,
-          "elite": true
-        }
-      ]
-    },
-    {
       "no": 53,
       "type": "load",
-      "delay": 0,
-      "active": true,
-      "generals": [
-        {
-          "id": 7,
-          "type": "major",
-          "name": "GM1",
-          "delay": 0,
-          "preset": false,
-          "init": false,
-          "army": {
-            "Swordsman": 0,
-            "Mounted Swordsman": 0,
-            "Knight": 0,
-            "Marksman": 0,
-            "Amored Marksman": 0,
-            "Mounted Marksman": 0,
-            "Besieger": 0
-          },
-          "capacity": 285,
-          "elite": true
-        }
-      ]
-    },
-    {
-      "no": 54,
-      "type": "load",
-      "delay": 0,
+      "delay": 200,
       "active": true,
       "generals": [
         {
@@ -2184,12 +2176,12 @@
           "init": false,
           "army": {
             "Swordsman": 0,
-            "Mounted Swordsman": 200,
-            "Knight": 90,
+            "Mounted Swordsman": 150,
+            "Knight": 150,
             "Marksman": 0,
-            "Amored Marksman": 40,
-            "Mounted Marksman": 271,
-            "Besieger": 194
+            "Amored Marksman": 80,
+            "Mounted Marksman": 354,
+            "Besieger": 0
           },
           "capacity": 1000,
           "elite": true
