@@ -716,6 +716,15 @@ class Adventure:
         else:
             my_pygui.click((loc + Point(160, 234)).get())
 
+    def check_if_in_island(self):
+        log.info('check_if_in_island')
+
+        loc = my_pygui.locateOnScreen('resource/in_island_PL.png'.format(self.name), confidence=0.99)
+        if loc is None:
+            return False
+        else:
+            return True
+
     @staticmethod
     def open_specialist_by_loc(spec_loc, verify=True):
         log.info('open_specialist_by_loc')
@@ -814,16 +823,121 @@ class Adventure:
         my_pygui.hotkey('ctrl', 'a')
         my_pygui.hotkey('del')
 
+    @my.send_explorer_while_error
+    def send_explorer(self, delay=0, available_explorers=88, name='odkrywc', search='short'):
+        log.info('send_explorer')
+        my.wait(delay, 'Sending explorers')
+        self.open_star()
+        self.open_star_tab('adventures')
+        self.open_star_tab('specialists')
+        star_window_cor = self.coordinations['specialists'] - Point(137, 400)
+        self.write_star_text(name)
+
+        first_gem = Point(719, 721)
+
+        while True:
+            import math
+            rows = math.ceil(available_explorers / 9)
+            # works only up to 10 rows
+            if rows > 5:
+                explorers = 45 - (rows * 9) + available_explorers
+                available_explorers = 45
+                # co fixed - TODO
+                my_pygui.moveTo(self.coordinations['star_close'].x, self.coordinations['star_close'].y+200)
+                for _ in range(rows-5):
+                    my_pygui.scroll(-600)
+            else:
+                explorers = available_explorers
+                available_explorers = 0
+                my_pygui.click(self.coordinations['specialists'].get())
+            # my_pygui.moveTo(self.coordinations['star'].x, self.coordinations['star'].y, 0.3)
+
+            my.wait(3, "searching in")
+            locations = list(my_pygui.locateAllOnScreen('resource/gem.png',
+                                                        region=(star_window_cor.x, star_window_cor.y, 600, 400),
+                                                        confidence=0.97))
+
+            all_locations = [Point(first_gem.x + (co % 9) * 56,
+                                   first_gem.y + int(co / 9) * 70)
+                             for co in range(explorers)]
+            log.info('loactions:{}'.format(locations))
+            log.info('all_loactions:{}'.format(all_locations))
+            # fix staranny and pirat gem loc
+            locations.extend([x - Point(0, 4) for x in locations] + [x - Point(4, 0) for x in locations])
+            # fix puszysty gem loc
+            locations.extend([x - Point(7, 5) for x in locations])
+            log.info('loactions:{}'.format(locations))
+            log.info('all_loactions:{}'.format(all_locations))
+
+            left_locations = [x for x in all_locations if x not in locations]
+            left_locations.sort(key=lambda i: i.y)
+            left_locations.sort(key=lambda i: i.y * 10000 + i.x)
+            log.info('left_loactions:{}'.format(left_locations))
+            for location in left_locations:
+                self.open_star()
+                self.open_specialist_by_loc(location)
+
+                treasure = True
+                if treasure:
+                    my_pygui.click(self.coordinations['treasure']['open'].get())
+                    my_pygui.click(self.coordinations['treasure'][search].get())
+                    my_pygui.click(self.coordinations['treasure']['confirm'].get())
+                else:
+                    # if adv
+                    my_pygui.click(self.coordinations['adventure']['open'].get())
+                    my_pygui.click(self.coordinations['adventure'][search].get())
+                    my_pygui.click(self.coordinations['adventure']['confirm'].get())
+
+            self.open_star()
+            if available_explorers < 1:
+                break
+
+        my_pygui.click(self.coordinations['star_txt'].get())
+        my_pygui.hotkey('ctrl', 'a')
+        my_pygui.hotkey('del')
+
+    @my.send_explorer_while_error
     def end_adventure(self, delay=0, mode=Mode.teach_co):
         log.info('end_adventure')
 
         my.wait(delay, 'Ending adventure')
+        self.focus()
         self.open_star()
+        my_pygui.click(self.coordinations['specialists'].get())
         my_pygui.click(self.coordinations['first_general'].get())
         my_pygui.click(self.coordinations['close_general'].get())
         # finded = my_pygui.locateOnScreen('data/{}/loc_reference.png'.format(self.name), confidence=0.85)
         # if not finded:
         #     raise Exception('data/{}/loc_reference.png not found on screen'.format(self.name))
+        end_adventure_co = []
+        get_click = listener.GetClick()
+        if mode == Mode.teach_co:
+            while True:
+                t_0 = time.time()
+                coord = get_click.get('DOWN')
+                if not coord: # left mouse button pressed
+                    break
+                end_adventure_co.append({"co": (coord - self.coordinations['center_ref']).get(),
+                                         "delay": time.time() - t_0})
+            with open('data/{}/end_adv_co.json'.format(self.name), 'w') as f:
+                json.dump(end_adventure_co, f, indent=2)
+        elif mode == Mode.play:
+            with open('data/{}/end_adv_co.json'.format(self.name), 'r') as f:
+                end_adventure_co = json.load(f)
+            for idx, click in enumerate(end_adventure_co):
+                target = Point.from_list(click['co']) + self.coordinations['center_ref']
+                if mode == Mode.play:
+                    my.wait(click['delay'], 'Click no ' + str(idx))
+                my_pygui.moveTo(target.get())
+                my_pygui.click(target.get(), clicks=1, interval=0.25)
+
+    def make_bonus(self, delay=0, mode=Mode.teach_co, area='0'):
+        log.info('make_bonus')
+
+        my.wait(delay, 'Making bonus')
+        self.focus()
+        my_pygui.press('0')
+        my_pygui.hotkey('ctrl', '3')
         end_adventure_co = []
         get_click = listener.GetClick()
         if mode == Mode.teach_co:
