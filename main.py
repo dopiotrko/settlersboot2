@@ -716,6 +716,31 @@ class Adventure:
         else:
             my_pygui.click((loc + Point(160, 234)).get())
 
+    @staticmethod
+    def open_specialist_by_loc(spec_loc, verify=True):
+        log.info('open_specialist_by_loc')
+        my_pygui.click(spec_loc.get())
+        try_count = 0
+        while verify:
+            log.info('verify if specialist is open')
+            # coc fixed - TODO
+            region = (943, 380, 160, 125)
+            time.sleep(.5)
+            loc = my_pygui.locateOnScreen('resource/codex.png',
+                                          region=region,
+                                          confidence=0.85)
+            if loc:
+                log.info('specialist open verification succeed')
+                break
+            else:
+                log.info('specialist open verification false - trying again')
+                my.wait(try_count, 'specialist open verification false - trying again')
+                # my_pygui.click(spec_loc.get())
+                if try_count < 10:
+                    try_count += 1
+                else:
+                    raise Exception('specialist open verification failed in 10 tryes')
+
     @my.send_explorer_while_error
     def send_explorer(self, delay=0, available_explorers=88, name='odkrywc', search='short'):
         log.info('send_explorer')
