@@ -724,27 +724,67 @@ class Adventure:
         self.open_star_tab('adventures')
         self.open_star_tab('specialists')
         star_window_cor = self.coordinations['specialists'] - Point(137, 400)
-        my_pygui.click(self.coordinations['star_txt'].get())
-        my_pygui.hotkey('ctrl', 'a')
-        my_pygui.write('odkryw')
-        locations = list(my_pygui.locateAllOnScreen('resource/gem.png',
-                                                    region=(star_window_cor.x, star_window_cor.y, 600, 400),
-                                                    confidence=0.97))
-        all_locations = [Point(719 + (co % 9) * 56, 721 + int(co / 9) * 70) for co in range(available_explorers)]
-        log.info('loactions:{}'.format(locations))
-        log.info('all_loactions:{}'.format(all_locations))
-        # left_locations = list(set(all_locations).difference(locations))
-        left_locations = [x for x in all_locations if x not in locations]
-        left_locations.sort(key=lambda i: i.y)
-        left_locations.sort(key=lambda i: i.y * 10000 + i.x)
-        log.info('left_loactions:{}'.format(left_locations))
-        for location in left_locations:
+        self.write_star_text(name)
+
+        first_gem = Point(719, 721)
+
+        while True:
+            import math
+            rows = math.ceil(available_explorers / 9)
+            # works only up to 10 rows
+            if rows > 5:
+                explorers = 45 - (rows * 9) + available_explorers
+                available_explorers = 45
+                # co fixed - TODO
+                my_pygui.moveTo(self.coordinations['star_close'].x, self.coordinations['star_close'].y+200)
+                for _ in range(rows-5):
+                    my_pygui.scroll(-600)
+            else:
+                explorers = available_explorers
+                available_explorers = 0
+                my_pygui.click(self.coordinations['specialists'].get())
+            # my_pygui.moveTo(self.coordinations['star'].x, self.coordinations['star'].y, 0.3)
+
+            my.wait(3, "searching in")
+            locations = list(my_pygui.locateAllOnScreen('resource/gem.png',
+                                                        region=(star_window_cor.x, star_window_cor.y, 600, 400),
+                                                        confidence=0.97))
+
+            all_locations = [Point(first_gem.x + (co % 9) * 56,
+                                   first_gem.y + int(co / 9) * 70)
+                             for co in range(explorers)]
+            log.info('loactions:{}'.format(locations))
+            log.info('all_loactions:{}'.format(all_locations))
+            # fix staranny and pirat gem loc
+            locations.extend([x - Point(0, 4) for x in locations] + [x - Point(4, 0) for x in locations])
+            # fix puszysty gem loc
+            locations.extend([x - Point(7, 5) for x in locations])
+            log.info('loactions:{}'.format(locations))
+            log.info('all_loactions:{}'.format(all_locations))
+
+            left_locations = [x for x in all_locations if x not in locations]
+            left_locations.sort(key=lambda i: i.y)
+            left_locations.sort(key=lambda i: i.y * 10000 + i.x)
+            log.info('left_loactions:{}'.format(left_locations))
+            for location in left_locations:
+                self.open_star()
+                self.open_specialist_by_loc(location)
+
+                treasure = True
+                if treasure:
+                    my_pygui.click(self.coordinations['treasure']['open'].get())
+                    my_pygui.click(self.coordinations['treasure'][search].get())
+                    my_pygui.click(self.coordinations['treasure']['confirm'].get())
+                else:
+                    # if adv
+                    my_pygui.click(self.coordinations['adventure']['open'].get())
+                    my_pygui.click(self.coordinations['adventure'][search].get())
+                    my_pygui.click(self.coordinations['adventure']['confirm'].get())
+
             self.open_star()
-            my_pygui.click(location.get())
-            my_pygui.click(self.coordinations['treasure'].get())
-            my_pygui.click(self.coordinations['medium_treasure'].get())
-            my_pygui.click(self.coordinations['confirm_treasure'].get())
-        self.open_star()
+            if available_explorers < 1:
+                break
+
         my_pygui.click(self.coordinations['star_txt'].get())
         my_pygui.hotkey('ctrl', 'a')
         my_pygui.hotkey('del')
