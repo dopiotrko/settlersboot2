@@ -31,7 +31,7 @@ not_elite = ["Recruit",
 
 class Point:
     def __init__(self, x=0, y=0):
-        logging.info('Point:__init__:')
+        # logging.info('Point:__init__:')
         self.x = int(x)
         self.y = int(y)
 
@@ -47,7 +47,7 @@ class Point:
 
     @classmethod
     def from_box_center(cls, list_):
-        logging.info('Point:from_box_center:')
+        # logging.info('Point:from_box_center:')
         return cls(list_[0] + list_[2] / 2, list_[1] + list_[3] / 2)
 
     def __str__(self):
@@ -55,19 +55,19 @@ class Point:
         return "({0},{1})".format(self.x, self.y)
 
     def __sub__(self, other):
-        logging.info('Point:__sub__:')
+        # logging.info('Point:__sub__:')
         x = self.x - other.x
         y = self.y - other.y
         return Point(x, y)
 
     def __add__(self, other):
-        logging.info('Point:__add__:')
+        # logging.info('Point:__add__:')
         x = self.x + other.x
         y = self.y + other.y
         return Point(x, y)
 
     def __eq__(self, other):
-        logging.info('Point:__eq__:')
+        # logging.info('Point:__eq__:')
         if other is None:
             return not self
         return self.x == other.x and self.y == other.y
@@ -84,7 +84,7 @@ class Point:
         return self.x, self.y
 
     def __repr__(self):
-        logging.info('Point:__repr__:')
+        # logging.info('Point:__repr__:')
         return 'Point(x={}, y={})'.format(self.x, self.y)
 
 
