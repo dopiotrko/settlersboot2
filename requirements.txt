@@ -1,6 +1,8 @@
 PyAutoGUI~=0.9.50
 pytesseract~=0.3.4
-numpy~=1.18.2
+numpy~=1.19.4
 Babel~=2.8.0
 pynput~=1.6.8
-opencv-contrib-python~=4.2.0.34
+opencv-contrib-python~=4.4.0.46
+wxPython~=4.1.1
+pyperclip~=1.8.1
