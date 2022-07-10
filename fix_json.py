@@ -15,6 +15,8 @@ class Fix:
             self.coordinations = pickle.load(config_dictionary_file)
         # with open('data/{}/learned_backup.json'.format(self.name), 'w') as f:
         #     json.dump(self.data, f, indent=2)
+        with open('data/generals.json') as f:
+            self.generals = json.load(f)
 
     def fix_co(self):
 
@@ -70,6 +72,22 @@ class Fix:
             action['no'] += 1
             # for general in action['generals']:
             #     general['id'] -= 1
+        self.save()
+
+    def quarter_to_begin(self):
+        for gen in self.data['generals']:
+            if gen['type'] == "kwatermistrz":
+                gen['id'] = gen['id'] - 1000
+        self.data['generals'].sort(key=lambda g : g['id'])
+
+        old_ids = list()
+        for pos, gen in enumerate(self.data['generals']):
+            old_ids.append(gen['id'] if gen['id'] >= 0 else gen['id']+1000)
+            gen['id'] = pos
+        for action in self.data['actions']:
+            for gen in action["generals"]:
+                gen['id'] = old_ids.index(gen['id'])
+        print('done')
         self.save()
 
     def rel_cord_del(self):
@@ -154,10 +172,33 @@ class Fix:
             gen['capacity'] = capacity[gen['type']]
         self.save()
 
+    def delay_remove(self, start=0, stop=9999999):
+        for action in self.data['actions']:
+            if not (start <= action['no'] <= stop):
+                continue
+            # action["delay"] = 0
+            for general in action["generals"]:
+                general["delay"] = 0
+        self.save()
 
-# Fix('DMK').fix_co()
-# Fix('wiktor').insert_action(33, 0)
-# Fix('CR').insert_action(7, 6, 'unload')
+    def cut_generals(self):
+        import cv2 as cv
+        type_ = ''
+        for general in self.generals:
+            if type_ == general['type']:
+                continue
+            type_ = general['type']+'_'
+            img = cv.imread('resource/{}.png'.format(type_), 1)
+            width = int(img.shape[1])
+            height = int(img.shape[0])
+            dim = (width, height)
+            crop_img = img[0:height, 0:28]
+            cv.imwrite('resource/{}.png'.format(type_), crop_img)
+
+
+# Fix('Ali Baba i SM').insert_action(46, 13,"load")
+# Fix('Ali Baba i Drugi').quarter_to_begin()
+Fix('banici').delay_remove()
 import requests
 burl = 'https://ubistatic-a.akamaihd.net/0018/live/GFX_HASHED/building_lib/'
 collectibles = [
