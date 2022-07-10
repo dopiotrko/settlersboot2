@@ -71,6 +71,24 @@ class Locateallonscreen:
             return None
 
 
+class Locateall:
+    def __call__(self, *args, **kwargs):
+        center_ = True
+        if 'center' in kwargs:
+            center_ = kwargs.pop('center')
+        logging.info('Locateall: {}, {}'.format(args, kwargs))
+        boxes = pyautogui.locateAll(*args, **kwargs)
+        if boxes:
+            if center_:
+                result = [Point.from_box_center(box) for box in boxes]
+            else:
+                result = [Box.from_box(box) for box in boxes]
+        else:
+            result = None
+        logging.info('_Locateall: {}'.format(result))
+        return result
+
+
 class Locateonscreen:
     def __call__(self, *args, **kwargs):
         center_ = True
@@ -80,11 +98,31 @@ class Locateonscreen:
         box = pyautogui.locateOnScreen(*args, **kwargs)
         if box:
             if center_:
-                return Point.from_box_center(box)
+                result = Point.from_box_center(box)
             else:
-                return Box.from_box(box)
+                result = Box.from_box(box)
         else:
-            return None
+            result = None
+        logging.info('_Locateonscreen: {}'.format(result))
+        return result
+
+
+class Locate:
+    def __call__(self, *args, **kwargs):
+        center_ = True
+        if 'center' in kwargs:
+            center_ = kwargs.pop('center')
+        logging.info('Locate: {}, {}'.format(args, kwargs))
+        box = pyautogui.locate(*args, **kwargs)
+        if box:
+            if center_:
+                result = Point.from_box_center(box)
+            else:
+                result = Box.from_box(box)
+        else:
+            result = None
+        logging.info('_Locate: {}'.format(result))
+        return result
 
 
 class Pixelmatchescolor:
@@ -145,7 +183,9 @@ click = Click()
 write = Write()
 center = Center()
 locateAllOnScreen = Locateallonscreen()
+locateAll = Locateall()
 locateOnScreen = Locateonscreen()
+locate = Locate()
 pixelMatchesColor = Pixelmatchescolor()
 moveTo = Moveto()
 hotkey = Hotkey()
