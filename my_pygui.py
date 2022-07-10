@@ -170,6 +170,8 @@ class Confirm:
 class Dragto:
     def __call__(self, *args, **kwargs):
         logging.info('Dragto: {}, {}'.format(args, kwargs))
+        if len(args) == 1 and len(args[0]) == 2:
+            args = args[0] + (1/6,)
         return pyautogui.dragTo(*args, **kwargs)
 
 
