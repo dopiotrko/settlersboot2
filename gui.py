@@ -91,7 +91,8 @@ class ActionsTable(DataTable):
         self.colLabels = ['Type', 'Generals', 'Delay', 'Active']
         self.colIds = ['type', 'generals', 'delay', 'active']
         self.dataTypes = [
-                              grid.GRID_VALUE_CHOICE + ':load,unload,move,attack',
+                              grid.GRID_VALUE_CHOICE + ':'+','.join([action_type["type"]
+                                                                     for action_type in my_types.action_types]),
                               grid.GRID_VALUE_STRING,
                               grid.GRID_VALUE_NUMBER + ':0,99999999',
                               grid.GRID_VALUE_BOOL,

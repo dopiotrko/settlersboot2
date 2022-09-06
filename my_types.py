@@ -9,7 +9,14 @@ action_types = [{"type": 'move'},
                 {"type": 'attack'},
                 {"type": 'load'},
                 {"type": 'unload'},
-                {"type": 'retreat'}
+                {"type": 'retreat'},
+                {"type": 'retrench'},
+                {"type": 'start'},
+                {"type": 'send'},
+                {"type": 'switch'},
+                {"type": 'click'},
+                {"type": 'end'},
+                {"type": 'buff'}
                 ]
 elite = ["Swordsman",
          "Mounted Swordsman",
@@ -110,6 +117,27 @@ class Mode(Enum):
     play = 1
     teach_co = 2
     teach_delay = 3
+
+
+class TreasureSearch(Enum):
+    open = "open"
+    short = "short"
+    medium = "medium"
+    long = "long"
+    very_long = "very_long"
+    longest = "longest"
+    artefact = "artefact"
+    rare = "rare"
+    confirm = "confirm"
+
+
+class AdventureSearch(Enum):
+    open = "open"
+    short = "short"
+    medium = "medium"
+    long = "long"
+    very_long = "very_long"
+    confirm = "confirm"
 
 
 with open('data/conf.dat', 'rb') as config_dictionary_file:
