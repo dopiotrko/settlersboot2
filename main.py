@@ -37,7 +37,7 @@ import listener
 import ocr
 import os
 import pyperclip
-from my_types import Point, Mode
+from my_types import Point, Mode, AdventureSearch, TreasureSearch
 log = logging.getLogger(__name__)
 for handler in logging.root.handlers[:]:
     logging.root.removeHandler(handler)
@@ -186,6 +186,7 @@ class Adventure:
             raise Exception('No adventures {} found.'.format(self.name))
         else:
             my_pygui.click(self.coordinations['first_general'].get())
+        my.wait(2)
         loc = my_pygui.locateOnScreen('resource/start_adventure.png', confidence=0.9)
         if loc is None:
             raise Exception('Button not found.')
@@ -699,6 +700,7 @@ class Adventure:
 
         my.wait(delay, 'Ending adventure')
         my_pygui.click(self.coordinations['book'].get())
+        my.wait(2)
         loc = my_pygui.locateOnScreen('resource/start_adventure.png', confidence=0.9)
         if loc is None:
             raise Exception('Button not found.')
@@ -751,14 +753,15 @@ class Adventure:
                     raise Exception('specialist open verification failed in 10 tryes')
 
     @my.send_explorer_while_error
-    def send_explorer(self, delay=0, available_explorers=88, name='odkrywc', search='short'):
+    def send_explorer(self, delay=0, available_explorers=88, search=TreasureSearch.short):
+        assert (isinstance(search, AdventureSearch) or isinstance(search, TreasureSearch))
         log.info('send_explorer')
         my.wait(delay, 'Sending explorers')
         self.open_star()
         self.open_star_tab('adventures')
         self.open_star_tab('specialists')
         star_window_cor = self.coordinations['specialists'] - Point(137, 400)
-        self.write_star_text(name)
+        self.write_star_text("odkrywc")
 
         first_gem = Point(719, 721)
 
@@ -805,14 +808,14 @@ class Adventure:
                 self.open_specialist_by_loc(location)
 
                 treasure = True
-                if treasure:
+                if isinstance(search, TreasureSearch):
                     my_pygui.click(self.coordinations['treasure']['open'].get())
-                    my_pygui.click(self.coordinations['treasure'][search].get())
+                    my_pygui.click(self.coordinations['treasure'][search.value].get())
                     my_pygui.click(self.coordinations['treasure']['confirm'].get())
                 else:
                     # if adv
                     my_pygui.click(self.coordinations['adventure']['open'].get())
-                    my_pygui.click(self.coordinations['adventure'][search].get())
+                    my_pygui.click(self.coordinations['adventure'][search.value].get())
                     my_pygui.click(self.coordinations['adventure']['confirm'].get())
 
             self.open_star()
