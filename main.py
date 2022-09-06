@@ -379,21 +379,6 @@ class Adventure:
                 army_basic = {key: army_basic.get(key, 0) + val for key, val in general['army'].items()}
         return dict(army_basic, **army_elite)
 
-    def retrench_all(self, delay):
-        log.info('retrench_all')
-        my.wait(delay, "delay")
-        if not self.generals_loc:
-            self.generals_loc = self.init_locate_generals()
-        for general in self.data['generals']:
-            general_loc = self.generals_loc[general['id']]
-            # my.wait(5, 'Re selecting general')
-            on_map = self.select_general_by_loc(general_loc, general['type'], verify=False)
-            if on_map:
-                loc = my_pygui.locateOnScreen('resource/retrench.png'.format(self.name), confidence=0.85)
-                my_pygui.click(loc.get())
-                loc = my_pygui.locateOnScreen('resource/confirm.png'.format(self.name), confidence=0.9)
-                my_pygui.click(loc.get())
-
     def check_if_army_available(self, army):
         # TODO temporally disable this function
         return
@@ -503,115 +488,138 @@ class Adventure:
                 my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
         print(action['no'], time.asctime(time.localtime(time.time())))
 
-        if len(action['generals']) > 1:
-            self.verify_if_generals_active(action)
-
-        for i, general in enumerate(action['generals']):
-            general_loc = self.generals_loc[general['id']]
-            if 'retreat' in general:
-                my.wait(5, 'Re selecting general')
-                on_map = self.select_general_by_loc(general_loc, general['type'], verify=False)
-                if not on_map:
-                    raise Exception('general must be on map to retreat')
-                if mode == Mode.play or mode == Mode.teach_co:
-                    my.wait(general['delay'], 'General retreat')
-                    my_pygui.click(self.coordinations['retreat'].get())
-                elif mode == Mode.teach_delay:
-                    t_0 = time.time()
-                    text = 'Click when You want to retreat general'
-                    my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
-                    my_pygui.click(self.coordinations['retreat'].get())
-                    general['delay'] = int(time.time() - t_0)
-                continue
-            else:
-                """only for first general - verify if star is open, and general is active 
-                (assume rest is - to save time)"""
-                verify = i == 0
-                on_map = self.select_general_by_loc(general_loc, general['type'], verify=verify)
-            if on_map:
-                if not general['preset']:
-                    self.set_army(general_loc, general)
-                    if action['type'] in ('unload', 'load'):
-                        continue
-                if action['type'] in 'attack':
-                    my_pygui.click(self.coordinations['attack'].get())
-                    text = 'Make Your attack no {}'.format(action['no'])
-                elif action['type'] in 'move':
-                    my_pygui.click(self.coordinations['move'].get())
-                    text = 'Move your army'
+        if action['type'] in 'buff':
+            pass
+            # TODO
+        else:
+            if len(action['generals']) > 1:
+                self.verify_if_generals_active(action)
+            for i, general in enumerate(action['generals']):
+                general_loc = self.generals_loc[general['id']]
+                if action['type'] in 'retrench':
+                    self.retrench(general, general_loc, mode)
+                    continue
+                if 'retreat' in general:
+                    my.wait(5, 'Re selecting general')
+                    on_map = self.select_general_by_loc(general_loc, general['type'], verify=False)
+                    if not on_map:
+                        raise Exception('general must be on map to retreat')
+                    if mode == Mode.play or mode == Mode.teach_co:
+                        my.wait(general['delay'], 'General retreat')
+                        my_pygui.click(self.coordinations['retreat'].get())
+                    elif mode == Mode.teach_delay:
+                        t_0 = time.time()
+                        text = 'Click when You want to retreat general'
+                        my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
+                        my_pygui.click(self.coordinations['retreat'].get())
+                        general['delay'] = int(time.time() - t_0)
+                    continue
                 else:
-                    raise Exception('Unexpected action type ')
-            else:
-                if action['type'] not in 'move':
-                    raise Exception("for generals not in map, action type has to be 'move'")
+                    """only for first general - verify if star is open, and general is active 
+                    (assume rest is - to save time)"""
+                    verify = i == 0
+                    on_map = self.select_general_by_loc(general_loc, general['type'], verify=verify)
+                if on_map:
+                    if not general['preset']:
+                        self.set_army(general_loc, general)
+                        if action['type'] in ('unload', 'load'):
+                            continue
+                    if action['type'] in 'attack':
+                        my_pygui.click(self.coordinations['attack'].get())
+                        text = 'Make Your attack no {}'.format(action['no'])
+                    elif action['type'] in 'move':
+                        my_pygui.click(self.coordinations['move'].get())
+                        text = 'Move your army'
+                    else:
+                        raise Exception('Unexpected action type ')
                 else:
-                    general['init'] = True
-                    text = 'Move your army'
-            if general['init'] is True:
-                finded = self.locate_reference_img(on_map)
-            else:
-                finded = Point(0, 0)
-            drag = Point(0, 0)
-            if mode == Mode.play or mode == Mode.teach_delay:
-                if 'drag' in general:
-                    if general['init'] is True:
-                        drag = (self.coordinations['center_ref'] - finded
-                                - Point.from_list(general['relative_coordinates'])) / 3
-                        my_pygui.moveTo((self.coordinations['center_ref'] - drag).get())
-                        my_pygui.dragTo((self.coordinations['center_ref'] + drag).get())
+                    if action['type'] not in 'move':
+                        raise Exception("for generals not in map, action type has to be 'move'")
                     else:
-                        my_pygui.moveTo((self.coordinations['center_ref'] - Point.from_list(general['drag'])).get())
-                        my_pygui.dragTo((self.coordinations['center_ref'] + Point.from_list(general['drag'])).get())
-            elif mode == Mode.teach_co:
-                answer = my_pygui.confirm(text='Do You see the target?\n'
-                                               ' If not chose \'Drag first\' and drag island to see the target',
-                                          title='Teaching Adventure {}'.format(self.name),
-                                          buttons=['I see it. Proceed', 'Drag First'])
-                if answer == 'Drag First':
-                    drag = get_click.get('DRAG')
-                    general['drag'] = (drag / 2).get()
-            if general['init'] is True:
-                if mode == Mode.teach_co:
-                    my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
-                    general['relative_coordinates'] = (get_click.get('DOUBLE') - finded - drag).get()
-                elif mode == Mode.play or mode == Mode.teach_delay:
-                    if 'drag' in general:
-                        target = self.coordinations['center_ref'] - drag
-                    else:
-                        target = Point.from_list(general['relative_coordinates']) + finded
-                    if 'delay' in general:
-                        if mode == Mode.play:
-                            my.wait(general['delay'], 'Next general attacks')
-                        elif mode == Mode.teach_delay:
-                            t_0 = time.time()
-                            my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
-                            general['delay'] = int(time.time() - t_0)
-                    my_pygui.moveTo(target.get())
-                    my_pygui.click(target.get(), clicks=2, interval=0.25)
-                    if action['type'] in 'move':
-                        self.move_verification(target)
-            else:
+                        general['init'] = True
+                        text = 'Move your army'
+                if general['init'] is True:
+                    finded = self.locate_reference_img(on_map)
+                else:
+                    finded = Point(0, 0)
+                drag = Point(0, 0)
                 if mode == Mode.play or mode == Mode.teach_delay:
-                    target = self.coordinations['center_ref'] - Point.from_list(general['relative_coordinates'])
-                    my_pygui.moveTo(target.get())
-                    if 'delay' in general:
-                        if mode == Mode.play:
-                            my.wait(general['delay'], 'Next general attacks')
-                        elif mode == Mode.teach_delay:
-                            t_0 = time.time()
-                            my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
-                            general['delay'] = int(time.time() - t_0)
-                    my_pygui.click(target.get(), clicks=2, interval=0.25)
-                    if action['type'] in 'move':
-                        self.move_verification(target)
+                    if 'drag' in general:
+                        if general['init'] is True:
+                            drag = (self.coordinations['center_ref'] - finded
+                                    - Point.from_list(general['relative_coordinates'])) / 3
+                            my_pygui.moveTo((self.coordinations['center_ref'] - drag).get())
+                            my_pygui.dragTo((self.coordinations['center_ref'] + drag).get())
+                        else:
+                            my_pygui.moveTo((self.coordinations['center_ref'] - Point.from_list(general['drag'])).get())
+                            my_pygui.dragTo((self.coordinations['center_ref'] + Point.from_list(general['drag'])).get())
                 elif mode == Mode.teach_co:
-                    my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
-                    xcr, ycr = self.coordinations['center_ref'].get()
-                    xrc, yrc = get_click.get('DOUBLE').get()
-                    general['relative_coordinates'] = [xcr - xrc, ycr - yrc]
+                    answer = my_pygui.confirm(text='Do You see the target?\n'
+                                                   ' If not chose \'Drag first\' and drag island to see the target',
+                                              title='Teaching Adventure {}'.format(self.name),
+                                              buttons=['I see it. Proceed', 'Drag First'])
+                    if answer == 'Drag First':
+                        drag = get_click.get('DRAG')
+                        general['drag'] = (drag / 2).get()
+                if general['init'] is True:
+                    if mode == Mode.teach_co:
+                        my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
+                        general['relative_coordinates'] = (get_click.get('DOUBLE') - finded - drag).get()
+                    elif mode == Mode.play or mode == Mode.teach_delay:
+                        if 'drag' in general:
+                            target = self.coordinations['center_ref'] - drag
+                        else:
+                            target = Point.from_list(general['relative_coordinates']) + finded
+                        if 'delay' in general:
+                            if mode == Mode.play:
+                                my.wait(general['delay'], 'Next general attacks')
+                            elif mode == Mode.teach_delay:
+                                t_0 = time.time()
+                                my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
+                                general['delay'] = int(time.time() - t_0)
+                        my_pygui.moveTo(target.get())
+                        my_pygui.click(target.get(), clicks=2, interval=0.25)
+                        if action['type'] in 'move':
+                            self.move_verification(target)
+                else:
+                    if mode == Mode.play or mode == Mode.teach_delay:
+                        target = self.coordinations['center_ref'] - Point.from_list(general['relative_coordinates'])
+                        my_pygui.moveTo(target.get())
+                        if 'delay' in general:
+                            if mode == Mode.play:
+                                my.wait(general['delay'], 'Next general attacks')
+                            elif mode == Mode.teach_delay:
+                                t_0 = time.time()
+                                my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
+                                general['delay'] = int(time.time() - t_0)
+                        my_pygui.click(target.get(), clicks=2, interval=0.25)
+                        if action['type'] in 'move':
+                            self.move_verification(target)
+                    elif mode == Mode.teach_co:
+                        my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
+                        xcr, ycr = self.coordinations['center_ref'].get()
+                        xrc, yrc = get_click.get('DOUBLE').get()
+                        general['relative_coordinates'] = [xcr - xrc, ycr - yrc]
         if mode == Mode.teach_delay or mode == Mode.teach_co:
             with open(my.get_new_filename(self.name), 'w') as f:
                 json.dump(self.data, f, indent=2)
+
+    def retrench(self, general, general_loc, mode):
+        on_map = self.select_general_by_loc(general_loc, general['type'], verify=False)
+        if not on_map:
+            raise Exception('general must be on map to retreat')
+        t_0 = time.time()
+        if mode == Mode.teach_delay:
+            text = 'Click when You want to retrench general'
+            my_pygui.alert(text=text, title='Teaching Adventure {}'.format(self.name), button='OK')
+        else:
+            my.wait(general['delay'], 'General retrench')
+        loc = my_pygui.locateOnScreen('resource/retrench.png'.format(self.name), confidence=0.85)
+        my_pygui.click(loc.get())
+        loc = my_pygui.locateOnScreen('resource/confirm.png'.format(self.name), confidence=0.9)
+        my_pygui.click(loc.get())
+        if mode == Mode.teach_delay:
+            general['delay'] = int(time.time() - t_0)
 
     def write_star_text(self, text, verify=True):
         while True:
