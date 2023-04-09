@@ -839,14 +839,7 @@ class Adventure:
         log.info('end_adventure')
 
         my.wait(delay, 'Ending adventure')
-        self.focus()
-        self.open_star()
-        my_pygui.click(self.coordinations['specialists'].get())
-        my_pygui.click(self.coordinations['first_general'].get())
-        my_pygui.click(self.coordinations['close_general'].get())
-        # finded = my_pygui.locateOnScreen('data/{}/loc_reference.png'.format(self.name), confidence=0.85)
-        # if not finded:
-        #     raise Exception('data/{}/loc_reference.png not found on screen'.format(self.name))
+        self.focus_on_first_general()
         end_adventure_co = []
         get_click = listener.GetClick()
         if mode == Mode.teach_co:
@@ -868,6 +861,13 @@ class Adventure:
                     my.wait(click['delay'], 'Click no ' + str(idx))
                 my_pygui.moveTo(target.get())
                 my_pygui.click(target.get(), clicks=1, interval=0.25)
+
+    def focus_on_first_general(self):
+        self.focus()
+        self.open_star()
+        my_pygui.click(self.coordinations['specialists'].get())
+        my_pygui.click(self.coordinations['first_general'].get())
+        my_pygui.click(self.coordinations['close_general'].get())
 
     def make_bonus(self, delay=0, mode=Mode.teach_co, area='0'):
         log.info('make_bonus')
