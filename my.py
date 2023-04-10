@@ -55,6 +55,7 @@ def send_explorer_while_error(func):
             if adv.check_if_in_island() is False:
                 adv.go_to_adventure()
             while True:
-                adv.send_explorer()
+                adv.send_explorer_by_client(10)
+                adv.buff_by_client(3)
                 wait(15*60, 'sending after error in ')
     return wrapper_send_explorer_while_error
