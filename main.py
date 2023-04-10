@@ -647,6 +647,7 @@ class Adventure:
                     raise Exception('text not written in 10 tyes')
 
     def move_verification(self, target):
+        log.info('move_verification')
         x_t, y_t = target.get()
         log.info('verifying if move succeed')
         t0 = time.time()
@@ -664,6 +665,7 @@ class Adventure:
                     my_pygui.moveTo(target.get())
                     my_pygui.click(target.get(), clicks=2, interval=0.25)
                 else:
+                    log.error('move_verification failed')
                     raise Exception('verification failed')
 
     def locate_reference_img(self, on_map):
@@ -734,8 +736,10 @@ class Adventure:
 
         loc = my_pygui.locateOnScreen('resource/in_island_PL.png'.format(self.name), confidence=0.99)
         if loc is None:
+            log.info('not_in_island')
             return False
         else:
+            log.info('in_island')
             return True
 
     @staticmethod
