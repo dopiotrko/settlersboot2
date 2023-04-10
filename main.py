@@ -466,6 +466,10 @@ class Adventure:
         my_pygui.press('-', presses=2)
         self.focused = True
 
+    def buff(self, action, mode):
+        self.focus_on_first_general()
+        # TODO function still useless
+
     def make_action(self, action, mode, start):
         log.info('make_action')
         if not self.focused:
@@ -489,8 +493,7 @@ class Adventure:
         print(action['no'], time.asctime(time.localtime(time.time())))
 
         if action['type'] in 'buff':
-            pass
-            # TODO
+            self.buff(action, mode)
         else:
             if len(action['generals']) > 1:
                 self.verify_if_generals_active(action)
