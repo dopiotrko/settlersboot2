@@ -970,13 +970,21 @@ class Adventure:
                 my_pygui.click(target.get(), clicks=1, interval=0.25)
 
 
-def run(adv, adv_name, delay, gap):
-    adv.start_adventure(adv_name, delay=delay)
-    adv.send_to_adventure(20, first=0, last=200)
-    adv.go_to_adventure(gap)
-    # adv.retrench_all(30)
-    adv.make_adventure(delay=30, start=0, stop=137, mode=Mode.play)
-    adv.end_adventure(120, Mode.play)
+def run(adv, adv_name, delay, gap, start=0, stop=999):
+    if start == 0:
+        adv.start_adventure(adv_name, delay=delay)
+        adv.send_to_adventure(20, first=0, last=200)
+        adv.send_explorer_by_client(delay=gap)
+        adv.go_to_adventure(10)
+        # adv.retrench_all(30)
+        my.wait(30, 'making adventure in')
+        delay = delay
+    else:
+        delay = 3
+    adv.make_adventure(delay=delay, start=start, stop=stop, mode=Mode.play)
+    adv.end_adventure(30, Mode.play)
+    # adv.go_to_adventure(20)
+    my.wait(30, 'waiting')
 
 
 # adventure = 'DMK'
