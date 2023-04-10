@@ -677,6 +677,7 @@ class Adventure:
                 else:
                     log.error('move_verification failed')
                     raise Exception('verification failed')
+                # TODO niech powtarza action gdy failed - dopisać tu lub bam gdzie wywołyje
 
     def locate_reference_img(self, on_map):
         my_pygui.moveTo((self.coordinations['book'] + Point(100, 0)).get())
