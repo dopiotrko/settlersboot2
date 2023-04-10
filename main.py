@@ -610,7 +610,7 @@ class Adventure:
     def retrench(self, general, general_loc, mode):
         on_map = self.select_general_by_loc(general_loc, general['type'], verify=False)
         if not on_map:
-            raise Exception('general must be on map to retreat')
+            return
         t_0 = time.time()
         if mode == Mode.teach_delay:
             text = 'Click when You want to retrench general'
