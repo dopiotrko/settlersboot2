@@ -976,7 +976,6 @@ def run(adv, adv_name, delay, gap, start=0, stop=999):
         adv.send_to_adventure(20, first=0, last=200)
         adv.send_explorer_by_client(delay=gap)
         adv.go_to_adventure(10)
-        # adv.retrench_all(30)
         my.wait(30, 'making adventure in')
         delay = delay
     else:
@@ -995,17 +994,17 @@ def run(adv, adv_name, delay, gap, start=0, stop=999):
 # Adventure('bon2').make_bonus(60*35, Mode.play)
 
 # adventure = 'DMK'
-# adventure = 'Ali Baba Drwal'
+adventure = 'Ali Baba Drwal'
 # adventure = 'Ali Baba i Drugi'
 # adventure = 'Ali Baba i Pierwszy'
 # adventure = 'Ali Baba i SM'
-# adventure = 'WW'
+# adventure = 'aaa'
 # adventure = 'proch'
 # adventure = 'piesni i klatwy'
 # adventure = 'banici'
 # adventure = 'smocza czat'
 # adventure = 'proch'
-adventure = 'arktyczna'
+# adventure = 'arktyczna'
 # adventure = 'cenne dane'
 # adventure = 'wyspa tikki'
 # adventure = 'uspiony wulkan'
@@ -1020,12 +1019,11 @@ TN = Adventure(adventure)
 # TN.send_to_adventure(5, first=3, last=33)
 # run(TN, 'banici', 2, 18*60, stop=447)
 # TN.go_to_adventure(6)
-# TN.retrench_all(1)
-# TN.make_adventure(delay=6, start=35, stop=447, mode=Mode.play)
+# TN.make_adventure(delay=6, start=0, stop=447, mode=Mode.play)
 # TN.end_adventure(10, Mode.play)
-run(TN, 'arktyczna', 1, 10*60)
+# run(TN, 'arktyczna', 1, 10*60)
 # TN.make_adventure(delay=1, start=0, stop=117, mode=Mode.play)
-# run(TN, 'drwal', 60, 16*60, 35)
+run(TN, 'drwal', 60, 16*60, 4)
 TN.send_explorer_by_client(30)
 TN.buff_by_client(3)
 my.wait(17 * 60)
