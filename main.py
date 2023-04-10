@@ -987,112 +987,54 @@ def run(adv, adv_name, delay, gap, start=0, stop=999):
     my.wait(30, 'waiting')
 
 
+# Adventure('bon').make_bonus(6, Mode.play)
+# Adventure('bon').make_bonus(60*105, Mode.play)
+# Adventure('bon2').make_bonus(20, Mode.play)
+# Adventure('bon').make_bonus(60*70, Mode.play)
+# Adventure('bon').make_bonus(105*60, Mode.play)
+# Adventure('bon2').make_bonus(60*35, Mode.play)
+
 # adventure = 'DMK'
-adventure = 'Ali Baba Drwal'
+# adventure = 'Ali Baba Drwal'
 # adventure = 'Ali Baba i Drugi'
+# adventure = 'Ali Baba i Pierwszy'
 # adventure = 'Ali Baba i SM'
-# adventure = 'wyspa tikki'
 # adventure = 'WW'
+# adventure = 'proch'
+# adventure = 'piesni i klatwy'
 # adventure = 'banici'
+# adventure = 'smocza czat'
+# adventure = 'proch'
+adventure = 'arktyczna'
+# adventure = 'cenne dane'
+# adventure = 'wyspa tikki'
+# adventure = 'uspiony wulkan'
+# adventure = 'wild_mary'
 TN = Adventure(adventure)
-TN.send_explorer(0)
-#
-run(TN, 'drwal', 6, 6*60)
-# run(TN, 'dzielny', 3*62, 13*60)
+# TN.start_adventure('lg_9')
+# TN.send_explorer_by_client(delay=3)
+# run(TN, 'banici', 3, 13*60)
 
 # Adventure('Home').make_adventure(delay=6*60)
-# TN.make_adventure(delay=3, start=0, stop=137, mode=Mode.play)
-# TN.end_adventure(120, Mode.play)
-TN.send_explorer(0)
+# TN.go_to_adventure(12*60)
+# TN.send_to_adventure(5, first=3, last=33)
+# run(TN, 'banici', 2, 18*60, stop=447)
+# TN.go_to_adventure(6)
+# TN.retrench_all(1)
+# TN.make_adventure(delay=6, start=35, stop=447, mode=Mode.play)
+# TN.end_adventure(10, Mode.play)
+run(TN, 'arktyczna', 1, 10*60)
+# TN.make_adventure(delay=1, start=0, stop=117, mode=Mode.play)
+# run(TN, 'drwal', 60, 16*60, 35)
+TN.send_explorer_by_client(30)
+TN.buff_by_client(3)
+my.wait(17 * 60)
 while True:
-    TN.send_explorer(60*30)
-# TN.end_adventure(1000000, Mode.play)
-# Adventure('Home').make_adventure(delay=5*60)
-# Adventure('Ali Baba i Pierwszy').send_to_adventure(3, 0)
-# Adventure('Ali Baba i Pierwszy').go_to_adventure(3)
-# Adventure('Ali Baba i Pierwszy').make_adventure(2, start=6, stop=115, mode=Mode.play)
-# Adventure('DMK').end_adventure(60*60*3+35, Mode.play)
-# Adventure('DMK').end_adventure(60*60*24, Mode.play)
-# Adventure('DMK').send_to_adventure(3, 13)
-# Adventure('DMK').make_adventure(3, 43, 110, mode=Mode.play)
-
-# while True:
-#     Adventure('banici').start_adventure('banici')
-#     Adventure('banici').send_to_adventure(3, 0)
-#     Adventure('banici').go_to_adventure(7*60)
-#     Adventure('banici').make_adventure(30, 0, 114, mode=Mode.play)
-#     Adventure('banici').end_adventure(170, mode=Mode.play)
-#     Adventure('banici_').make_adventure(12*60, 0, 114, mode=Mode.play)
-#     break
-
-# Adventure('banici_').make_adventure(2, 0, 114, mode=Mode.play)
-# while True:
-#     Adventure('WW').start_adventure('wyspa w')
-#     Adventure('WW').send_to_adventure(3, 0)
-#     Adventure('WW').go_to_adventure(6*60)
-#     Adventure('WW').make_adventure(30, 0, 114, mode=Mode.play)
-#     Adventure('WW').end_adventure(120, mode=Mode.play)
-#     Adventure('WW_').make_adventure(6*60, 0, 114, mode=Mode.play)
-#     break
-
-# TN = Adventure('wir')
-# TN.send_to_adventure(3, 0)
-# TN.go_to_adventure(6*60)
-# TN.make_adventure(3, 0, 114, mode=Mode.play)
-# TN.end_adventure(120, mode=Mode.play)
-# TN = Adventure('arktyczna_')
-# TN.make_adventure(6*60, 0, 114, mode=Mode.play)
-for i in range(0):
-    TN.start_adventure('arktyczna')
-    TN.send_to_adventure(3, 0)
-    TN.go_to_adventure(6*60)
-    TN.make_adventure(30, 0, 114, mode=Mode.play)
-    TN.end_adventure(120, mode=Mode.play)
-    TN = Adventure('arktyczna_')
-    TN.make_adventure(6*60, 0, 114, mode=Mode.play)
-#     break
-
-# Adventure('azyl').start_adventure('nest')
-# Adventure('wir').send_to_adventure(3, 0, 100)
-# Adventure('azyl').go_to_adventure(7*60)
-# Adventure('byk').make_adventure(3, 19, 140, mode=Mode.play)
-
-# Adventure('spj_gosc').make_adventure(3)
-# Adventure('spj_gosp').send_to_adventure(3)
-# Adventure('oblezenie').send_to_adventure(3)
-# Adventure('oblezenie').make_adventure(3000)
-TN.end_adventure(1000000, Mode.play)
-TN = Adventure('traitors')
-TN.make_adventure(delay=30, start=0, stop=137, mode=Mode.play)
-TN.end_adventure(120, Mode.play)
-
-TN = Adventure('traitors2')
-TN.start_adventure('zdrajcy', delay=80)
-TN.send_to_adventure(20, first=0, last=1)
-Adventure('a_traitors').make_adventure(delay=8 * 60)
-TN.send_to_adventure(first=2, last=11)
-TN.go_to_adventure(7 * 60)
-TN.make_adventure(delay=30, start=0, stop=137, mode=Mode.play)
-TN.end_adventure(120, Mode.play)
-my.wait(80, '')
-for i in range(20):
-
-    TN = Adventure('traitors')
-    TN.start_adventure('zdrajcy', delay=0)
-    TN.send_to_adventure(20, first=0, last=1)
-    Adventure('a_traitors').make_adventure(delay=8 * 60)
-    TN.send_to_adventure(first=2, last=11)
-    TN.go_to_adventure(7 * 60)
-    TN.make_adventure(delay=30, start=0, stop=137, mode=Mode.play)
-    TN.end_adventure(120, Mode.play)
-
-    TN = Adventure('traitors2')
-    TN.start_adventure('zdrajcy', delay=80)
-    TN.send_to_adventure(20, first=0, last=1)
-    Adventure('a_traitors').make_adventure(delay=8 * 60)
-    TN.send_to_adventure(first=2, last=11)
-    TN.go_to_adventure(7 * 60)
-    TN.make_adventure(delay=30, start=0, stop=137, mode=Mode.play)
-    TN.end_adventure(120, Mode.play)
-    my.wait(80, '')
-
+    TN.send_explorer_by_client(3)
+    TN.buff_by_client(3)
+    run(TN, 'drwal', 10, 16*60, stop=118)
+    TN.send_explorer_by_client(30)
+    my.wait(16*60)
+    # adventure = 'Ali Baba Drwal'
+    # TN = Adventure(adventure)
+    # Adventure('WW_').make_adventure(delay=15*60)
