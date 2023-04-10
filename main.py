@@ -451,9 +451,19 @@ class Adventure:
         my.wait(delay, 'Making adventure')
         if not self.generals_loc:
             self.generals_loc = self.init_locate_generals(start)
+        t0 = time.time()
+        interval = 15 * 60
         for action in self.data['actions']:
             if not (start <= action['no'] <= stop):
                 continue
+            print("------------------->>",time.time() - t0)
+            if time.time() - t0 > interval:
+                log.warning('servicing island and resetting interval')
+                self.go_to_adventure()
+                self.send_explorer_by_client(30)
+                self.go_to_adventure(30)
+                my.wait(30, 'Continuing adventure')
+                t0 = time.time()
             self.make_action(action, mode, start)
 
     def focus(self):
