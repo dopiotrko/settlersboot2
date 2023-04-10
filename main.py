@@ -731,6 +731,59 @@ class Adventure:
         else:
             my_pygui.click((loc + Point(160, 234)).get())
 
+    @my.send_explorer_while_error
+    def send_explorer_by_client(self, delay=0, template='explor'):
+        log.info('send_explorer_by_client')
+        my.wait(delay, 'Sending explorers')
+        self.focus()
+        my_pygui.hotkey('F3')
+        time.sleep(5)
+        loc = my_pygui.locateOnScreen('resource/read_template.png',
+                                      confidence=0.85)
+        if not loc:
+            return
+        my_pygui.click(loc.get())
+        time.sleep(3)
+        my_pygui.write('{}.json'.format(template))
+        my_pygui.hotkey('ENTER')
+        time.sleep(5)
+        loc = my_pygui.locateOnScreen('resource/send_by_client.png',
+                                      confidence=0.85)
+        my_pygui.click(loc.get())
+        my_pygui.moveTo(100, 100)
+        time.sleep(5)
+        loc = my_pygui.locateOnScreen('resource/send_by_client.png',
+                                      confidence=0.85)
+        if loc:
+            my_pygui.click((loc + Point(60, 0)).get())
+
+    @my.send_explorer_while_error
+    def buff_by_client(self, delay=0, template='budTemplate'):
+        log.info('buff_by_client')
+        my.wait(delay, 'Bufing')
+        self.focus()
+        my_pygui.hotkey('F5')
+        time.sleep(5)
+        loc = my_pygui.locateOnScreen('resource/read_template.png',
+                                      confidence=0.85)
+        if loc:
+            my_pygui.click(loc.get())
+            time.sleep(3)
+            my_pygui.write('{}.json'.format(template))
+            my_pygui.hotkey('ENTER')
+            time.sleep(5)
+        loc = my_pygui.locateOnScreen('resource/send_by_client.png',
+                                      confidence=0.85)
+        if loc:
+            my_pygui.click(loc.get())
+        my_pygui.moveTo(100, 100)
+        time.sleep(5)
+        loc = my_pygui.locateOnScreen('resource/close_in_client.png',
+                                      confidence=0.85)
+        if loc:
+            my_pygui.click((loc + Point(1, 0)).get())
+
+    @my.send_explorer_while_error
     def check_if_in_island(self):
         log.info('check_if_in_island')
 
