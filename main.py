@@ -278,7 +278,7 @@ class Adventure:
             while True:
                 if time.time() - t0 < 5 * 60:
                     if self.verify_if_general_active(loc, general_type):
-                        log.info('active general selected after {} s.'.format(time.time()-t0))
+                        log.info('active general selected after {} s.'.format(time.time() - t0))
                         break
                 else:
                     raise Exception('no active general in 5 min found')
@@ -445,7 +445,7 @@ class Adventure:
         for action in self.data['actions']:
             if not (start <= action['no'] <= stop):
                 continue
-            print("------------------->>",time.time() - t0)
+            print("------------------->>", time.time() - t0)
             if time.time() - t0 > interval:
                 log.warning('servicing island and resetting interval')
                 self.go_to_adventure()
@@ -660,10 +660,10 @@ class Adventure:
                                           confidence=0.8,
                                           region=(x_t - 15, y_t - 55, 30, 50))
             if loc:
-                log.info('move verification passed in {} s'.format(time.time()-t0))
+                log.info('move verification passed in {} s'.format(time.time() - t0))
                 break
             else:
-                if time.time()-t0 < 5*60:
+                if time.time() - t0 < 5 * 60:
                     log.info('move verification false - trying again')
                     my_pygui.moveTo(target.get())
                     my_pygui.click(target.get(), clicks=2, interval=0.25)
@@ -684,7 +684,7 @@ class Adventure:
             my_pygui.write('0-----')
             import cv2
             img = cv2.imread('data/{}/loc_reference.png'.format(self.name))
-            factor = 142/246
+            factor = 142 / 246
             r_img = cv2.resize(img, (int(img.shape[1] * factor), int(img.shape[0] * factor)))
             r_finded = my_pygui.locateOnScreen(r_img, confidence=0.65)
             if r_finded:
@@ -845,8 +845,8 @@ class Adventure:
                 explorers = 45 - (rows * 9) + available_explorers
                 available_explorers = 45
                 # co fixed - TODO
-                my_pygui.moveTo(self.coordinations['star_close'].x, self.coordinations['star_close'].y+200)
-                for _ in range(rows-5):
+                my_pygui.moveTo(self.coordinations['star_close'].x, self.coordinations['star_close'].y + 200)
+                for _ in range(rows - 5):
                     my_pygui.scroll(-600)
             else:
                 explorers = available_explorers
@@ -908,7 +908,7 @@ class Adventure:
             while True:
                 t_0 = time.time()
                 coord = get_click.get('DOWN')
-                if not coord: # left mouse button pressed
+                if not coord:  # left mouse button pressed
                     break
                 end_adventure_co.append({"co": (coord - self.coordinations['center_ref']).get(),
                                          "delay": time.time() - t_0})
@@ -944,7 +944,7 @@ class Adventure:
             while True:
                 t_0 = time.time()
                 coord = get_click.get('DOWN')
-                if not coord: # left mouse button pressed
+                if not coord:  # left mouse button pressed
                     break
                 end_adventure_co.append({"co": (coord - self.coordinations['center_ref']).get(),
                                          "delay": time.time() - t_0})
