@@ -44,6 +44,54 @@ def load_generals():
     return data
 
 
+def restart_client_if_gone():
+    # log.info('restart_client')
+    client_window = pgw.getWindowsWithTitle('Nowa Ziemia')
+    if len(client_window) == 1:
+        # log.info('client window exist')
+        client_window = client_window[0]
+    else:
+        settlers_main_page = pgw.getWindowsWithTitle('The Settlers Online')
+        if len(settlers_main_page) == 1:
+            # log.info('main page exist')
+            settlers_main_page = settlers_main_page[0]
+            settlers_main_page.maximize()
+            my_pygui.click(settlers_main_page.center)
+            my_pygui.hotkey('F5')
+            wait(10)
+            loc = my_pygui.locateOnScreen('resource/pre_login_on_main_page.png')
+            if loc:
+                my_pygui.click(loc.get())
+                wait(5)
+            loc = my_pygui.locateOnScreen('resource/ubisoft_on_main_page.png')
+            if loc:
+                loc = my_pygui.locateOnScreen('resource/confirm_on_main_page.png')
+                if loc:
+                    my_pygui.click(loc.get())
+                else:
+                    loc = my_pygui.locateOnScreen('resource/active_login_on_main_page.png')
+                    if not loc:
+                        loc = my_pygui.locateOnScreen('resource/un_active_login_on_main_page.png')
+                    if loc:
+                        # log.info('logged out - so logging in')
+                        my_pygui.click(loc.get())
+                        wait(5)
+                        my_pygui.click(settlers_main_page.centerx, loc.y + 75)
+                        wait(3)
+                        my_pygui.click(settlers_main_page.centerx, loc.y + 155)
+                        wait(3)
+                        my_pygui.click(settlers_main_page.centerx, loc.y + 295)
+                        wait(5)
+            loc = my_pygui.locateOnScreen('resource/play_on_main_page.png')
+            if loc:
+                # log.info('play founded')
+                my_pygui.click(loc.x - 68, loc.y - 71)
+                my_pygui.click(loc.x, loc.y - 104)
+                wait(60, 'maximalising client in')
+                client_window = pgw.getWindowsWithTitle('Nowa Ziemia')
+                client_window[0].maximize()
+
+
 def send_explorer_while_error(func):
     def wrapper_send_explorer_while_error(*args, **kwargs):
         try:
