@@ -638,7 +638,11 @@ class Adventure:
         while True:
             my_pygui.click(self.coordinations['star_txt'].get())
             my_pygui.hotkey('ctrl', 'a')
-            my_pygui.write(text)
+            if text == '':
+                my_pygui.hotkey('del')
+                break
+            else:
+                my_pygui.write(text)
             if not verify:
                 break
             pyperclip.copy('')
