@@ -101,9 +101,11 @@ def send_explorer_while_error(func):
             print("ERROR: {}".format(e))
             my_pygui.press('esc')
             adv = args[0]
-            if adv.check_if_in_island() is False:
+            if not adv.check_if_in_island():
+                restart_client_if_gone()
                 adv.go_to_adventure()
             while True:
+                restart_client_if_gone()
                 adv.send_explorer_by_client(10)
                 adv.buff_by_client(3)
                 wait(15*60, 'sending after error in ')
