@@ -3,6 +3,7 @@ import time
 import json
 import my_pygui
 from my_types import Action
+import pygetwindow as pgw
 
 
 def get_first_free_filename_no(name):
