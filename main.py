@@ -64,6 +64,7 @@ class Adventure:
         if start == 0 or not os.path.exists('data/{}/generals_loc.dat'.format(self.name)):
             generals = dict()
             self.open_star()
+            self.write_star_text('')
             my_pygui.click(self.coordinations['specialists'].get())
             for general in self.data['generals']:
                 print(general)
