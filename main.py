@@ -175,9 +175,7 @@ class Adventure:
 
         self.open_star()
         my_pygui.click(self.coordinations['adventures'].get())
-        my_pygui.click(self.coordinations['star_txt'].get())
-        my_pygui.hotkey('ctrl', 'a')
-        my_pygui.write(adv_name)
+        self.write_star_text(adv_name)
         my.wait(2, 'Adv search')
         star_window_corner = self.coordinations['adventures'] - Point(454, 371)
         loc = my_pygui.locateOnScreen('resource/is_adv.png'.format(self.name),
@@ -199,9 +197,7 @@ class Adventure:
         else:
             my_pygui.click(loc.get())
         self.open_star()
-        my_pygui.click(self.coordinations['star_txt'].get())
-        my_pygui.hotkey('ctrl', 'a')
-        my_pygui.hotkey('del')
+        self.write_star_text('')
 
     def set_army(self, general_loc, general):
         log.info('set_army')
@@ -334,10 +330,8 @@ class Adventure:
         my_pygui.moveTo(x, y, .2)
         self.open_star()
         my_pygui.click(self.coordinations['specialists'].get())
-        my_pygui.click(self.coordinations['star_txt'].get())
-        my_pygui.hotkey('ctrl', 'a')
         general = general_name or general_type
-        my_pygui.write(general)
+        self.write_star_text(general)
         star_window_corner = self.coordinations['specialists'] - Point(137, 400)
         time.sleep(2)
         locations = my_pygui.locateAllOnScreen('resource/{}.png'.format(general_type),
@@ -386,9 +380,7 @@ class Adventure:
         log.info('check_if_army_available')
         self.open_star()
         my_pygui.click(self.coordinations['specialists'].get())
-        my_pygui.click(self.coordinations['star_txt'].get())
-        my_pygui.hotkey('ctrl', 'a')
-        my_pygui.write('genera')
+        self.write_star_text('genera')
         my_pygui.click(self.coordinations['first_general'].get())
         time.sleep(.5)
         for key, val in army.items():
@@ -400,9 +392,7 @@ class Adventure:
                     raise Exception('Not enough {}'.format(key))
         self.open_star()
         my_pygui.click(self.coordinations['specialists'].get())
-        my_pygui.click(self.coordinations['star_txt'].get())
-        my_pygui.hotkey('ctrl', 'a')
-        my_pygui.press('del')
+        self.write_star_text('')
         my_pygui.click(self.coordinations['star_close'].get())
 
     @my.send_explorer_while_error
@@ -427,9 +417,7 @@ class Adventure:
         """reset star window to default"""
         self.open_star()
         my_pygui.click(self.coordinations['specialists'].get())
-        my_pygui.click(self.coordinations['star_txt'].get())
-        my_pygui.hotkey('ctrl', 'a')
-        my_pygui.press('del')
+        self.write_star_text('')
         my_pygui.click(self.coordinations['star_close'].get())
 
     @my.send_explorer_while_error
@@ -906,9 +894,7 @@ class Adventure:
             if available_explorers < 1:
                 break
 
-        my_pygui.click(self.coordinations['star_txt'].get())
-        my_pygui.hotkey('ctrl', 'a')
-        my_pygui.hotkey('del')
+        self.write_star_text('')
 
     @my.send_explorer_while_error
     def end_adventure(self, delay=0, mode=Mode.teach_co):
