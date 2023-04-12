@@ -96,7 +96,7 @@ def restart_client_if_gone():
 def send_explorer_while_error(func):
     def wrapper_send_explorer_while_error(*args, **kwargs):
         try:
-            func(*args, **kwargs)
+            return func(*args, **kwargs)
         except Exception as e:
             print("ERROR: {}".format(e))
             my_pygui.press('esc')
