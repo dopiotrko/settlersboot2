@@ -964,13 +964,18 @@ class Adventure:
 
 
 def run(adv, adv_name, delay, gap, start=0, stop=999):
-    if start == 0:
-        adv.start_adventure(adv_name, delay=delay)
-        adv.send_to_adventure(20, first=0, last=200)
+    if gap > 0:
+        if start == 0:
+            adv.start_adventure(adv_name, delay=delay)
+            delay = 10
+        if start <= 0:
+            send_start = -start
+            start = 0
+            adv.send_to_adventure(delay, first=send_start, last=200)
         adv.send_explorer_by_client(delay=gap)
         adv.go_to_adventure(10)
         my.wait(30, 'making adventure in')
-        delay = delay
+        delay = 0
     else:
         delay = 3
     adv.make_adventure(delay=delay, start=start, stop=stop, mode=Mode.play)
