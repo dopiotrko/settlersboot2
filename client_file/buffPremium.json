@@ -1,0 +1,176 @@
+{
+ "zoneId": 567815,
+ "zoneUser": "DuzyPiotr",
+ "data": [
+  {
+   "buffName": "ProductivityBuffLvl18",
+   "buiGrid": 6016,
+   "buiName": "BronzeWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl18",
+   "buiGrid": 6104,
+   "buiName": "SteelWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl18",
+   "buiGrid": 6283,
+   "buiName": "BronzeWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl18",
+   "buiGrid": 6462,
+   "buiName": "BronzeWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl18",
+   "buiGrid": 6818,
+   "buiName": "IronWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl18",
+   "buiGrid": 6639,
+   "buiName": "IronWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl18",
+   "buiGrid": 6726,
+   "buiName": "PlatinumWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl18",
+   "buiGrid": 6547,
+   "buiName": "PlatinumWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl18",
+   "buiGrid": 6903,
+   "buiName": "PlatinumWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl18",
+   "buiGrid": 6724,
+   "buiName": "PlatinumWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl18",
+   "buiGrid": 6545,
+   "buiName": "BronzeWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl9",
+   "buiGrid": 4391,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl9",
+   "buiGrid": 4922,
+   "buiName": "Friary"
+  },
+  {
+   "buffName": "ProductivityBuffLvl9",
+   "buiGrid": 4389,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl9",
+   "buiGrid": 4566,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl9",
+   "buiGrid": 4743,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl9",
+   "buiGrid": 4564,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl9",
+   "buiGrid": 4297,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl9",
+   "buiGrid": 3941,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl9",
+   "buiGrid": 3674,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl9",
+   "buiGrid": 4120,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl9",
+   "buiGrid": 4210,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl9",
+   "buiGrid": 1808,
+   "buiName": "Friary"
+  },
+  {
+   "buffName": "ProductivityBuffLvl9",
+   "buiGrid": 1894,
+   "buiName": "Friary"
+  },
+  {
+   "buffName": "ProductivityBuffLvl9",
+   "buiGrid": 2246,
+   "buiName": "Friary"
+  },
+  {
+   "buffName": "ProductivityBuffLvl9",
+   "buiGrid": 1892,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl9",
+   "buiGrid": 1713,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl9",
+   "buiGrid": 1534,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl9",
+   "buiGrid": 1357,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl9",
+   "buiGrid": 1715,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl9",
+   "buiGrid": 1538,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl9",
+   "buiGrid": 1180,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl9",
+   "buiGrid": 822,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "SpeedUpPopulationGrowth2",
+   "buiGrid": 8825,
+   "buiName": "Mayorhouse"
+  }
+ ]
+}
