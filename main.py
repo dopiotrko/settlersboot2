@@ -275,8 +275,12 @@ class Adventure:
         if verify:
             log.info('verify if general is active')
             t0 = time.time()
+            t1 = time.time()
             while True:
                 if time.time() - t0 < 5 * 60:
+                    if time.time() - t1 > 55:
+                        t1 = time.time()
+                        my_pygui.hotkey('f2')
                     if self.verify_if_general_active(loc, general_type):
                         log.info('active general selected after {} s.'.format(time.time() - t0))
                         break
@@ -722,6 +726,7 @@ class Adventure:
 
         my_pygui.hotkey('F2')
         my.wait(delay, 'Ending adventure')
+        my_pygui.hotkey('f2')
         my_pygui.click(self.coordinations['book'].get())
         my.wait(2)
         loc = my_pygui.locateOnScreen('resource/start_adventure.png', confidence=0.9)
@@ -745,6 +750,7 @@ class Adventure:
     def send_explorer_by_client(self, delay=0, template='explor'):
         log.info('send_explorer_by_client')
         my.wait(delay, 'Sending explorers')
+
         self.focus()
         my_pygui.hotkey('F3')
         time.sleep(5)
@@ -907,6 +913,7 @@ class Adventure:
         log.info('end_adventure')
 
         my.wait(delay, 'Ending adventure')
+        my_pygui.hotkey('f2')
         self.focus_on_first_general()
         end_adventure_co = []
         get_click = listener.GetClick()
