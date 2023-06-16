@@ -75,30 +75,34 @@ def restart_client_if_gone():
                 wait(5)
             loc = my_pygui.locateOnScreen('resource/ubisoft_on_main_page.png')
             if loc:
-                loc = my_pygui.locateOnScreen('resource/confirm_on_main_page.png')
+                loc = my_pygui.locateOnScreen('resource/active_login_on_main_page.png')
                 if loc:
                     my_pygui.click(loc.get())
-                else:
-                    loc = my_pygui.locateOnScreen('resource/active_login_on_main_page.png')
+                    wait(5)
+                    loc = my_pygui.locateOnScreen('resource/confirm_on_main_page.png')
+                    if loc:
+                        my_pygui.click(loc.get())
                     if not loc:
                         loc = my_pygui.locateOnScreen('resource/un_active_login_on_main_page.png')
-                    if loc:
-                        # log.info('logged out - so logging in')
-                        my_pygui.click(loc.get())
-                        wait(5)
-                        my_pygui.click(settlers_main_page.centerx, loc.y + 75)
-                        wait(3)
-                        my_pygui.click(settlers_main_page.centerx, loc.y + 155)
-                        wait(3)
-                        my_pygui.click(settlers_main_page.centerx, loc.y + 295)
-                        wait(5)
+                        if loc:
+                            # log.info('logged out - so logging in')
+                            my_pygui.click(loc.get())
+                            wait(5)
+                            my_pygui.click(settlers_main_page.centerx, loc.y + 75)
+                            wait(3)
+                            my_pygui.click(settlers_main_page.centerx, loc.y + 155)
+                            wait(3)
+                            my_pygui.click(settlers_main_page.centerx, loc.y + 295)
+                            wait(10)
             loc = my_pygui.locateOnScreen('resource/play_on_main_page.png')
             if loc:
-                # log.info('play founded')
-                my_pygui.click(loc.x - 68, loc.y - 71)
-                my_pygui.click(loc.x, loc.y - 104)
-                wait(60, 'maximalising client in')
-                client_window = pgw.getWindowsWithTitle('Nowa Ziemia')
+                client_window = None
+                while not client_window:
+                    # log.info('play founded')
+                    my_pygui.click(loc.x - 68, loc.y - 71)
+                    my_pygui.click(loc.x, loc.y - 104)
+                    wait(60, 'maximalising client in')
+                    client_window = pgw.getWindowsWithTitle('Nowa Ziemia')
                 client_window[0].maximize()
 
 
@@ -110,10 +114,10 @@ def send_explorer_while_error(func):
             print("ERROR: {}".format(e))
             my_pygui.press('esc')
             adv = args[0]
-            if not adv.check_if_in_island():
-                restart_client_if_gone()
-                adv.go_to_adventure()
+            restart_client_if_gone()
             while True:
+                if not adv.check_if_in_island():
+                    adv.go_to_adventure()
                 restart_client_if_gone()
                 adv.send_explorer_by_client(10)
                 adv.buff_by_client(3)
