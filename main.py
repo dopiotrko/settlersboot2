@@ -457,7 +457,6 @@ class Adventure:
                 self.go_to_adventure(30)
                 my.wait(30, 'Continuing adventure')
                 t0 = time.time()
-            my_pygui.hotkey('F2')
             self.make_action(action, mode, start)
 
     def focus(self):
@@ -724,7 +723,6 @@ class Adventure:
     def end_adventure_(self, delay=0):
         log.info('end_adventure')
 
-        my_pygui.hotkey('F2')
         my.wait(delay, 'Ending adventure')
         my_pygui.hotkey('f2')
         my_pygui.click(self.coordinations['book'].get())
