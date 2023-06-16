@@ -45,6 +45,14 @@ def load_generals():
     return data
 
 
+def minimize_irrelevant_windows(*args):
+    windows = pgw.getWindowsAt(args[0].x, args[0].y)
+    for window in windows:
+        if 'The Settlers Online' in window.title:
+            return
+        window.minimize()
+
+
 def restart_client_if_gone():
     # log.info('restart_client')
     client_window = pgw.getWindowsWithTitle('Nowa Ziemia')
@@ -57,6 +65,7 @@ def restart_client_if_gone():
             # log.info('main page exist')
             settlers_main_page = settlers_main_page[0]
             settlers_main_page.maximize()
+            minimize_irrelevant_windows(settlers_main_page.center)
             my_pygui.click(settlers_main_page.center)
             my_pygui.hotkey('F5')
             wait(10)
