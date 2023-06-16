@@ -608,6 +608,7 @@ class Adventure:
                 json.dump(self.data, f, indent=2)
 
     def retrench(self, general, general_loc, mode):
+        log.info('retrench')
         on_map = self.select_general_by_loc(general_loc, general['type'], verify=False)
         if not on_map:
             return
@@ -625,6 +626,7 @@ class Adventure:
             general['delay'] = int(time.time() - t_0)
 
     def write_star_text(self, text, verify=True):
+        log.info('write_star_text')
         while True:
             my_pygui.click(self.coordinations['star_txt'].get())
             my_pygui.hotkey('ctrl', 'a')
@@ -674,6 +676,7 @@ class Adventure:
                 # TODO niech powtarza action gdy failed - dopisać tu lub bam gdzie wywołyje
 
     def locate_reference_img(self, on_map):
+        log.info('locate_reference_img')
         my_pygui.moveTo((self.coordinations['book'] + Point(100, 0)).get())
         finded = my_pygui.locateOnScreen('data/{}/loc_reference.png'.format(self.name), confidence=0.85)
         if finded:
@@ -699,6 +702,7 @@ class Adventure:
         return finded
 
     def verify_if_generals_active(self, action):
+        log.info('verify_if_generals_active')
         self.open_star()
         while True:
             result = True
