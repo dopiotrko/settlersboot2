@@ -1631,6 +1631,36 @@
    "buffName": "ProductivityBuffLvl23",
    "buiGrid": 6004,
    "buiName": "ImprovedMill"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 3071,
+   "buiName": "PlatinumSmelter"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 2892,
+   "buiName": "PlatinumSmelter"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 3069,
+   "buiName": "PlatinumSmelter"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 3248,
+   "buiName": "PlatinumSmelter"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 3970,
+   "buiName": "ExoticWoodSawmill"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 7678,
+   "buiName": "coal_workyard"
   }
  ]
 }
