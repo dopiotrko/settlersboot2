@@ -13,3 +13,6 @@
 /.idea/settlersbot.iml
 /.idea/vcs.xml
 /venv/
+/client_file/g1.json
+/client_file/chromedriver.exe
+/client_file/aaa.json

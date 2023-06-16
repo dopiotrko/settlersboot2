@@ -6,6 +6,7 @@ pynput~=1.6.8
 opencv-contrib-python~=4.4.0.46
 wxPython~=4.1.1
 pyperclip~=1.8.1
+selenium~=4.8.3
 
 PyGetWindow~=0.0.8
 requests~=2.25.1
