@@ -772,7 +772,7 @@ class Adventure:
             my_pygui.click((loc + Point(60, 0)).get())
 
     @my.send_explorer_while_error
-    def buff_by_client(self, delay=0, template='budTemplate'):
+    def buff_by_client(self, delay=0, template='buffGrill'):
         log.info('buff_by_client')
         my.wait(delay, 'Bufing')
         self.focus()
@@ -991,6 +991,13 @@ def run(adv, adv_name, delay, gap, start=0, stop=999):
     adv.end_adventure(30, Mode.play)
     # adv.go_to_adventure(20)
     my.wait(30, 'waiting')
+
+
+def buff(delay):
+    TN.buff_by_client(delay, "buffArea")
+    TN.buff_by_client(3, "buffPremium")
+    TN.buff_by_client(3, "buffGrill")
+    TN.buff_by_client(3, "buffFish")
 
 
 # Adventure('bon').make_bonus(6, Mode.play)
