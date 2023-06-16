@@ -274,8 +274,8 @@
             "Besieger": 0
           },
           "relative_coordinates": [
-            -311,
-            -128
+            -307,
+            -117
           ],
           "capacity": 200,
           "elite": true
@@ -297,8 +297,8 @@
             "Besieger": 0
           },
           "relative_coordinates": [
-            -289,
-            -385
+            -288,
+            -379
           ],
           "capacity": 200,
           "elite": true
@@ -320,8 +320,8 @@
             "Besieger": 0
           },
           "relative_coordinates": [
-            -351,
-            -371
+            -349,
+            -366
           ],
           "capacity": 195,
           "elite": true
@@ -417,8 +417,8 @@
             "Besieger": 0
           },
           "relative_coordinates": [
-            -65,
-            -152
+            -58,
+            -141
           ],
           "capacity": 200,
           "elite": true
@@ -440,8 +440,8 @@
             "Besieger": 0
           },
           "relative_coordinates": [
-            -179,
-            -122
+            -183,
+            -112
           ],
           "capacity": 195,
           "elite": true
@@ -792,7 +792,7 @@
     {
       "no": 17,
       "type": "move",
-      "delay": 222,
+      "delay": 160,
       "active": true,
       "generals": [
         {
@@ -1365,12 +1365,8 @@
             "Besieger": 0
           },
           "relative_coordinates": [
-            334,
-            121
-          ],
-          "drag": [
-            118,
-            60
+            576,
+            251
           ],
           "capacity": 200,
           "elite": true
@@ -1392,12 +1388,12 @@
             "Besieger": 0
           },
           "relative_coordinates": [
-            373,
-            48
+            399,
+            124
           ],
           "drag": [
-            223,
-            70
+            210,
+            38
           ],
           "capacity": 195,
           "elite": true
@@ -1419,12 +1415,12 @@
             "Besieger": 0
           },
           "relative_coordinates": [
-            307,
-            40
+            370,
+            145
           ],
           "drag": [
-            235,
-            86
+            204,
+            41
           ],
           "capacity": 195,
           "elite": true

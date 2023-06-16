@@ -2,89 +2,144 @@
   "generals": [
     {
       "id": 0,
-      "type": "basic",
+      "type": "Mlodszy",
+      "name": "Mlodszy 1",
+      "delay": 0,
+      "preset": true,
+      "init": true,
       "army": {
-        "recruit": 151,
+        "recruit": 0,
         "bowmen": 0,
         "militia": 0,
         "cavalry": 0,
         "longbowman": 0,
-        "soldier": 0,
+        "soldier": 1,
         "crossbowman": 0,
-        "elite_soldier": 49,
+        "elite_soldier": 0,
         "cannoneer": 0
-      }
+      },
+      "capacity": 155,
+      "elite": false
     },
     {
       "id": 1,
-      "type": "basic",
+      "type": "Mlodszy",
+      "name": "Mlodszy 2",
+      "delay": 0,
+      "preset": true,
+      "init": true,
       "army": {
         "recruit": 0,
         "bowmen": 0,
         "militia": 0,
-        "cavalry": 72,
+        "cavalry": 0,
         "longbowman": 0,
-        "soldier": 0,
+        "soldier": 4,
         "crossbowman": 0,
-        "elite_soldier": 22,
+        "elite_soldier": 0,
         "cannoneer": 0
-      }
+      },
+      "capacity": 155,
+      "elite": false
     },
     {
       "id": 2,
-      "type": "veteran",
+      "type": "Mlodszy",
+      "name": "Mlodszy 3",
+      "delay": 0,
+      "preset": true,
+      "init": true,
       "army": {
-        "recruit": 56,
-        "bowmen": 75,
+        "recruit": 1,
+        "bowmen": 0,
         "militia": 0,
         "cavalry": 0,
         "longbowman": 0,
-        "soldier": 62,
+        "soldier": 0,
         "crossbowman": 0,
         "elite_soldier": 0,
-        "cannoneer": 57
-      }
+        "cannoneer": 0
+      },
+      "capacity": 155,
+      "elite": false
     },
     {
       "id": 3,
-      "type": "grim",
+      "type": "Mlodszy",
+      "name": "Mlodszy 4",
+      "delay": 0,
+      "preset": true,
+      "init": true,
       "army": {
         "recruit": 0,
         "bowmen": 0,
         "militia": 0,
         "cavalry": 0,
         "longbowman": 0,
-        "soldier": 0,
+        "soldier": 12,
         "crossbowman": 0,
-        "elite_soldier": 130,
+        "elite_soldier": 0,
         "cannoneer": 0
-      }
+      },
+      "capacity": 155,
+      "elite": false
     },
     {
       "id": 4,
-      "type": "major",
+      "type": "Mlodszy",
+      "name": "Mlodszy 5",
+      "delay": 0,
+      "preset": true,
+      "init": true,
       "army": {
-        "recruit": 106,
+        "recruit": 0,
         "bowmen": 0,
         "militia": 0,
         "cavalry": 0,
         "longbowman": 0,
-        "soldier": 0,
+        "soldier": 9,
         "crossbowman": 0,
         "elite_soldier": 0,
-        "cannoneer": 164
-      }
+        "cannoneer": 0
+      },
+      "capacity": 155,
+      "elite": false
+    },
+    {
+      "id": 5,
+      "type": "Duch",
+      "name": "Duch 4",
+      "delay": 0,
+      "preset": true,
+      "init": true,
+      "army": {
+        "recruit": 0,
+        "bowmen": 0,
+        "militia": 0,
+        "cavalry": 0,
+        "longbowman": 0,
+        "soldier": 230,
+        "crossbowman": 0,
+        "elite_soldier": 0,
+        "cannoneer": 0
+      },
+      "capacity": 230,
+      "elite": false
     }
   ],
   "actions": [
     {
-      "no": 1,
+      "no": 0,
       "type": "move",
+      "delay": 0,
+      "active": true,
       "generals": [
         {
           "id": 0,
-          "type": "basic",
-          "preset": false,
+          "type": "Mlodszy",
+          "name": "Mlodszy 1",
+          "delay": 0,
+          "preset": true,
           "init": true,
           "army": {
             "recruit": 0,
@@ -92,95 +147,147 @@
             "militia": 0,
             "cavalry": 0,
             "longbowman": 0,
-            "soldier": 0,
+            "soldier": 1,
             "crossbowman": 0,
-            "elite_soldier": 49,
+            "elite_soldier": 0,
             "cannoneer": 0
           },
-          "drag": [
-            341.0,
-            -150
-          ],
           "relative_coordinates": [
             -523,
-            264
-          ]
+            270
+          ],
+          "drag": [
+            323,
+            -150
+          ],
+          "capacity": 155,
+          "elite": false
         }
-      ],
-      "delay": 0
+      ]
+    },
+    {
+      "no": 1,
+      "type": "move",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 1,
+          "type": "Mlodszy",
+          "name": "Mlodszy 2",
+          "delay": 0,
+          "preset": true,
+          "init": true,
+          "army": {
+            "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 4,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          },
+          "relative_coordinates": [
+            -582,
+            282
+          ],
+          "drag": [
+            300,
+            -166
+          ],
+          "capacity": 155,
+          "elite": false
+        }
+      ]
     },
     {
       "no": 2,
       "type": "move",
+      "delay": 0,
+      "active": true,
       "generals": [
         {
-          "id": 1,
-          "type": "basic",
+          "id": 2,
+          "type": "Mlodszy",
+          "name": "Mlodszy 3",
+          "delay": 0,
           "preset": true,
           "init": true,
           "army": {
-            "recruit": 0,
+            "recruit": 1,
             "bowmen": 0,
             "militia": 0,
-            "cavalry": 72,
+            "cavalry": 0,
             "longbowman": 0,
             "soldier": 0,
             "crossbowman": 0,
-            "elite_soldier": 22,
+            "elite_soldier": 0,
             "cannoneer": 0
           },
-          "drag": [
-            312.5,
-            -106.0
-          ],
           "relative_coordinates": [
-            -653,
-            298
-          ]
+            -624,
+            304
+          ],
+          "drag": [
+            301,
+            -156
+          ],
+          "capacity": 155,
+          "elite": false
         }
-      ],
-      "delay": 0
+      ]
     },
     {
       "no": 3,
       "type": "move",
+      "delay": 0,
+      "active": true,
       "generals": [
         {
-          "id": 4,
-          "type": "major",
+          "id": 5,
+          "type": "Duch",
+          "name": "Duch 4",
+          "delay": 0,
           "preset": true,
           "init": true,
           "army": {
-            "recruit": 106,
+            "recruit": 0,
             "bowmen": 0,
             "militia": 0,
             "cavalry": 0,
             "longbowman": 0,
-            "soldier": 0,
+            "soldier": 230,
             "crossbowman": 0,
             "elite_soldier": 0,
-            "cannoneer": 168
+            "cannoneer": 0
           },
-          "drag": [
-            300,
-            -182.5
-          ],
           "relative_coordinates": [
-            -666,
-            405
-          ]
+            -584,
+            238
+          ],
+          "drag": [
+            318,
+            -123
+          ],
+          "capacity": 230,
+          "elite": false
         }
-      ],
-      "delay": 0
+      ]
     },
     {
       "no": 4,
       "type": "move",
+      "delay": 0,
+      "active": true,
       "generals": [
         {
-          "id": 2,
-          "type": "veteran",
-          "preset": false,
+          "id": 3,
+          "type": "Mlodszy",
+          "name": "Mlodszy 4",
+          "delay": 0,
+          "preset": true,
           "init": true,
           "army": {
             "recruit": 0,
@@ -188,27 +295,36 @@
             "militia": 0,
             "cavalry": 0,
             "longbowman": 0,
-            "soldier": 0,
+            "soldier": 12,
             "crossbowman": 0,
             "elite_soldier": 0,
             "cannoneer": 0
           },
           "relative_coordinates": [
-            135,
-            -107
-          ]
+            -628,
+            255
+          ],
+          "drag": [
+            379,
+            -129
+          ],
+          "capacity": 155,
+          "elite": false
         }
-      ],
-      "delay": 0
+      ]
     },
     {
       "no": 5,
-      "type": "unload",
+      "type": "move",
+      "delay": 0,
+      "active": true,
       "generals": [
         {
-          "id": 3,
-          "type": "grim",
-          "preset": false,
+          "id": 4,
+          "type": "Mlodszy",
+          "name": "Mlodszy 5",
+          "delay": 0,
+          "preset": true,
           "init": true,
           "army": {
             "recruit": 0,
@@ -216,120 +332,105 @@
             "militia": 0,
             "cavalry": 0,
             "longbowman": 0,
-            "soldier": 0,
+            "soldier": 9,
             "crossbowman": 0,
             "elite_soldier": 0,
             "cannoneer": 0
-          }
+          },
+          "relative_coordinates": [
+            -648,
+            215
+          ],
+          "drag": [
+            313,
+            -128
+          ],
+          "capacity": 155,
+          "elite": false
         }
-      ],
-      "delay": 0
+      ]
     },
     {
       "no": 6,
       "type": "attack",
+      "delay": 70,
+      "active": true,
       "generals": [
         {
           "id": 0,
-          "type": "basic",
+          "type": "Mlodszy",
+          "name": "Mlodszy 1",
+          "delay": 0,
           "preset": true,
-          "init": false,
+          "init": true,
           "army": {
             "recruit": 0,
             "bowmen": 0,
             "militia": 0,
             "cavalry": 0,
             "longbowman": 0,
-            "soldier": 0,
-            "crossbowman": 0,
-            "elite_soldier": 49,
-            "cannoneer": 0
-          },
-          "relative_coordinates": [
-            -125,
-            17
-          ]
-        },
-        {
-          "id": 1,
-          "type": "basic",
-          "preset": true,
-          "init": false,
-          "army": {
-            "recruit": 0,
-            "bowmen": 0,
-            "militia": 0,
-            "cavalry": 72,
-            "longbowman": 0,
-            "soldier": 0,
-            "crossbowman": 0,
-            "elite_soldier": 22,
-            "cannoneer": 0
-          },
-          "relative_coordinates": [
-            -267,
-            154
-          ]
-        },
-        {
-          "id": 4,
-          "type": "major",
-          "preset": true,
-          "init": false,
-          "army": {
-            "recruit": 106,
-            "bowmen": 0,
-            "militia": 0,
-            "cavalry": 0,
-            "longbowman": 0,
-            "soldier": 0,
+            "soldier": 1,
             "crossbowman": 0,
             "elite_soldier": 0,
-            "cannoneer": 164
+            "cannoneer": 0
           },
           "relative_coordinates": [
-            -208,
-            218
-          ]
+            -406,
+            244
+          ],
+          "capacity": 155,
+          "elite": false
         }
-      ],
-      "delay": 204
+      ]
     },
     {
       "no": 7,
-      "type": "load",
-      "generals": [
-        {
-          "id": 0,
-          "type": "basic",
-          "preset": false,
-          "init": false,
-          "army": {
-            "recruit": 0,
-            "bowmen": 0,
-            "militia": 0,
-            "cavalry": 0,
-            "longbowman": 0,
-            "soldier": 62,
-            "crossbowman": 0,
-            "elite_soldier": 0,
-            "cannoneer": 0
-          }
-        }
-      ],
-      "delay": 132
-    },
-    {
-      "no": 8,
-      "type": "unload",
+      "type": "attack",
+      "delay": 4,
+      "active": true,
       "generals": [
         {
           "id": 1,
-          "type": "basic",
-          "preset": false,
-          "init": false,
+          "type": "Mlodszy",
+          "name": "Mlodszy 2",
+          "delay": 0,
+          "preset": true,
+          "init": true,
           "army": {
             "recruit": 0,
+            "bowmen": 0,
+            "militia": 0,
+            "cavalry": 0,
+            "longbowman": 0,
+            "soldier": 4,
+            "crossbowman": 0,
+            "elite_soldier": 0,
+            "cannoneer": 0
+          },
+          "relative_coordinates": [
+            -17,
+            55
+          ],
+          "capacity": 155,
+          "elite": false
+        }
+      ]
+    },
+    {
+      "no": 8,
+      "type": "attack",
+      "delay": 0,
+      "active": true,
+      "generals": [
+        {
+          "id": 2,
+          "type": "Mlodszy",
+          "name": "Mlodszy 3",
+          "delay": 0,
+          "preset": true,
+          "init": true,
+          "army": {
+            "recruit": 1,
             "bowmen": 0,
             "militia": 0,
             "cavalry": 0,
@@ -340,136 +441,161 @@
             "cannoneer": 0
           },
           "relative_coordinates": [
-            -411,
-            198
-          ]
+            -385,
+            306
+          ],
+          "capacity": 155,
+          "elite": false
         }
-      ],
-      "delay": 20
+      ]
     },
     {
       "no": 9,
-      "type": "move",
+      "type": "attack",
+      "delay": 15,
+      "active": true,
       "generals": [
         {
-          "id": 4,
-          "type": "major",
-          "preset": false,
-          "init": false,
+          "id": 5,
+          "type": "Duch",
+          "name": "Duch 4",
+          "delay": 0,
+          "preset": true,
+          "init": true,
           "army": {
-            "recruit": 43,
+            "recruit": 0,
             "bowmen": 0,
             "militia": 0,
             "cavalry": 0,
             "longbowman": 0,
-            "soldier": 0,
+            "soldier": 230,
             "crossbowman": 0,
-            "elite_soldier": 200,
+            "elite_soldier": 0,
             "cannoneer": 0
           },
           "relative_coordinates": [
-            -411,
-            198
-          ]
+            -467,
+            185
+          ],
+          "capacity": 230,
+          "elite": false
         }
-      ],
-      "delay": 8
+      ]
     },
     {
       "no": 10,
       "type": "attack",
+      "delay": 0,
+      "active": true,
       "generals": [
         {
-          "id": 4,
-          "type": "major",
+          "id": 3,
+          "type": "Mlodszy",
+          "name": "Mlodszy 4",
+          "delay": 0,
           "preset": true,
-          "init": false,
+          "init": true,
           "army": {
-            "recruit": 43,
+            "recruit": 0,
             "bowmen": 0,
             "militia": 0,
             "cavalry": 0,
             "longbowman": 0,
-            "soldier": 0,
+            "soldier": 12,
             "crossbowman": 0,
-            "elite_soldier": 200,
+            "elite_soldier": 0,
             "cannoneer": 0
           },
           "relative_coordinates": [
-            -246,
-            148
-          ]
+            66,
+            310
+          ],
+          "capacity": 155,
+          "elite": false
         }
-      ],
-      "delay": 128
+      ]
     },
     {
       "no": 11,
-      "type": "move",
+      "type": "attack",
+      "delay": 0,
+      "active": true,
       "generals": [
         {
-          "id": 2,
-          "type": "veteran",
+          "id": 4,
+          "type": "Mlodszy",
+          "name": "Mlodszy 5",
+          "delay": 0,
           "preset": true,
-          "init": false,
+          "init": true,
           "army": {
             "recruit": 0,
             "bowmen": 0,
             "militia": 0,
             "cavalry": 0,
             "longbowman": 0,
-            "soldier": 0,
+            "soldier": 9,
             "crossbowman": 0,
             "elite_soldier": 0,
             "cannoneer": 0
           },
           "relative_coordinates": [
-            283,
-            -2
-          ]
+            67,
+            385
+          ],
+          "capacity": 155,
+          "elite": false
         }
-      ],
-      "delay": 80
+      ]
     },
     {
       "no": 12,
-      "type": "move",
+      "type": "attack",
+      "delay": 46,
+      "active": true,
       "generals": [
         {
           "id": 0,
-          "type": "basic",
+          "type": "Mlodszy",
+          "name": "Mlodszy 1",
+          "delay": 0,
           "preset": true,
-          "init": false,
+          "init": true,
           "army": {
             "recruit": 0,
             "bowmen": 0,
             "militia": 0,
             "cavalry": 0,
             "longbowman": 0,
-            "soldier": 62,
+            "soldier": 1,
             "crossbowman": 0,
             "elite_soldier": 0,
             "cannoneer": 0
           },
           "relative_coordinates": [
-            -492,
-            -2
-          ]
+            -303,
+            -173
+          ],
+          "capacity": 155,
+          "elite": false
         }
-      ],
-      "delay": 0
+      ]
     },
     {
       "no": 13,
       "type": "attack",
+      "delay": 20,
+      "active": true,
       "generals": [
         {
-          "id": 4,
-          "type": "major",
-          "preset": false,
-          "init": false,
+          "id": 2,
+          "type": "Mlodszy",
+          "name": "Mlodszy 3",
+          "delay": 0,
+          "preset": true,
+          "init": true,
           "army": {
-            "recruit": 49,
+            "recruit": 1,
             "bowmen": 0,
             "militia": 0,
             "cavalry": 0,
@@ -477,200 +603,49 @@
             "soldier": 0,
             "crossbowman": 0,
             "elite_soldier": 0,
-            "cannoneer": 221
+            "cannoneer": 0
           },
           "relative_coordinates": [
-            120,
-            -101
-          ]
+            -506,
+            -223
+          ],
+          "drag": [
+            2,
+            121
+          ],
+          "capacity": 155,
+          "elite": false
         }
-      ],
-      "delay": 40
+      ]
     },
     {
       "no": 14,
-      "type": "attack",
+      "type": "load",
+      "delay": 172,
+      "active": true,
       "generals": [
         {
-          "id": 2,
-          "type": "veteran",
+          "id": 5,
+          "type": "Duch",
+          "name": "Duch 4",
+          "delay": 0,
           "preset": false,
-          "init": false,
-          "army": {
-            "recruit": 36,
-            "bowmen": 0,
-            "militia": 0,
-            "cavalry": 0,
-            "longbowman": 0,
-            "soldier": 0,
-            "crossbowman": 0,
-            "elite_soldier": 200,
-            "cannoneer": 0
-          },
-          "relative_coordinates": [
-            142,
-            63
-          ]
-        }
-      ],
-      "delay": 20
-    },
-    {
-      "no": 15,
-      "type": "move",
-      "generals": [
-        {
-          "id": 4,
-          "type": "major",
-          "preset": false,
-          "init": false,
-          "army": {
-            "recruit": 24,
-            "bowmen": 75,
-            "militia": 0,
-            "cavalry": 0,
-            "longbowman": 0,
-            "soldier": 0,
-            "crossbowman": 0,
-            "elite_soldier": 1,
-            "cannoneer": 170
-          },
-          "relative_coordinates": [
-            -168,
-            -231
-          ]
-        }
-      ],
-      "delay": 43
-    },
-    {
-      "no": 16,
-      "type": "move",
-      "generals": [
-        {
-          "id": 2,
-          "type": "veteran",
-          "preset": false,
-          "init": false,
-          "army": {
-            "recruit": 36,
-            "bowmen": 0,
-            "militia": 0,
-            "cavalry": 0,
-            "longbowman": 0,
-            "soldier": 0,
-            "crossbowman": 0,
-            "elite_soldier": 200,
-            "cannoneer": 0
-          },
-          "relative_coordinates": [
-            162,
-            176
-          ]
-        }
-      ],
-      "delay": 18
-    },
-    {
-      "no": 17,
-      "type": "attack",
-      "generals": [
-        {
-          "id": 0,
-          "type": "basic",
-          "preset": true,
-          "init": false,
+          "init": true,
           "army": {
             "recruit": 0,
             "bowmen": 0,
             "militia": 0,
             "cavalry": 0,
             "longbowman": 0,
-            "soldier": 62,
+            "soldier": 160,
             "crossbowman": 0,
             "elite_soldier": 0,
             "cannoneer": 0
           },
-          "relative_coordinates": [
-            -107,
-            -37
-          ]
-        },
-        {
-          "id": 4,
-          "type": "major",
-          "preset": true,
-          "init": false,
-          "army": {
-            "recruit": 24,
-            "bowmen": 75,
-            "militia": 0,
-            "cavalry": 0,
-            "longbowman": 0,
-            "soldier": 0,
-            "crossbowman": 0,
-            "elite_soldier": 1,
-            "cannoneer": 170
-          },
-          "relative_coordinates": [
-            -160,
-            45
-          ]
+          "capacity": 230,
+          "elite": false
         }
-      ],
-      "delay": 65
-    },
-    {
-      "no": 18,
-      "type": "attack",
-      "generals": [
-        {
-          "id": 2,
-          "type": "veteran",
-          "preset": true,
-          "init": false,
-          "army": {
-            "recruit": 36,
-            "bowmen": 0,
-            "militia": 0,
-            "cavalry": 0,
-            "longbowman": 0,
-            "soldier": 0,
-            "crossbowman": 0,
-            "elite_soldier": 200,
-            "cannoneer": 0
-          },
-          "relative_coordinates": [
-            182,
-            -72
-          ]
-        }
-      ],
-      "delay": 13
-    },
-    {
-      "no": 19,
-      "type": "load",
-      "generals": [
-        {
-          "id": 3,
-          "type": "grim",
-          "preset": false,
-          "init": false,
-          "army": {
-            "recruit": 77,
-            "bowmen": 0,
-            "militia": 0,
-            "cavalry": 72,
-            "longbowman": 0,
-            "soldier": 0,
-            "crossbowman": 0,
-            "elite_soldier": 0,
-            "cannoneer": 51
-          }
-        }
-      ],
-      "delay": 0
+      ]
     }
   ]
 }

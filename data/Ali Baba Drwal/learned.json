@@ -167,7 +167,7 @@
       "init": false,
       "army": {
         "Swordsman": 0,
-        "Mounted Swordsman": 80,
+        "Mounted Swordsman": 110,
         "Knight": 300,
         "Marksman": 0,
         "Amored Marksman": 0,
@@ -818,43 +818,6 @@
       "active": true,
       "generals": [
         {
-          "id": 7,
-          "type": "major",
-          "name": "GM1",
-          "delay": 0,
-          "preset": true,
-          "init": true,
-          "army": {
-            "recruit": 0,
-            "bowmen": 0,
-            "militia": 0,
-            "cavalry": 0,
-            "longbowman": 0,
-            "soldier": 0,
-            "crossbowman": 0,
-            "elite_soldier": 0,
-            "cannoneer": 0
-          },
-          "relative_coordinates": [
-            1971,
-            -196
-          ],
-          "drag": [
-            -585,
-            37
-          ],
-          "capacity": 285,
-          "elite": false
-        }
-      ]
-    },
-    {
-      "no": 17,
-      "type": "move",
-      "delay": 2,
-      "active": true,
-      "generals": [
-        {
           "id": 5,
           "type": "boris",
           "name": "Boris 1",
@@ -884,7 +847,7 @@
       ]
     },
     {
-      "no": 18,
+      "no": 17,
       "type": "move",
       "delay": 28,
       "active": true,
@@ -919,7 +882,7 @@
       ]
     },
     {
-      "no": 19,
+      "no": 18,
       "type": "move",
       "delay": 36,
       "active": true,
@@ -954,7 +917,7 @@
       ]
     },
     {
-      "no": 20,
+      "no": 19,
       "type": "load",
       "delay": 0,
       "active": true,
@@ -981,7 +944,7 @@
       ]
     },
     {
-      "no": 21,
+      "no": 20,
       "type": "move",
       "delay": 1,
       "active": true,
@@ -1016,7 +979,7 @@
       ]
     },
     {
-      "no": 22,
+      "no": 21,
       "type": "load",
       "delay": 1,
       "active": true,
@@ -1043,7 +1006,7 @@
       ]
     },
     {
-      "no": 23,
+      "no": 22,
       "type": "attack",
       "delay": 1,
       "active": true,
@@ -1105,7 +1068,7 @@
       ]
     },
     {
-      "no": 24,
+      "no": 23,
       "type": "move",
       "delay": 318,
       "active": true,
@@ -1140,7 +1103,7 @@
       ]
     },
     {
-      "no": 25,
+      "no": 24,
       "type": "move",
       "delay": 0,
       "active": true,
@@ -1171,7 +1134,7 @@
       ]
     },
     {
-      "no": 26,
+      "no": 25,
       "type": "move",
       "delay": 1,
       "active": true,
@@ -1206,44 +1169,42 @@
       ]
     },
     {
-      "no": 27,
+      "no": 26,
       "type": "move",
       "delay": 0,
       "active": true,
       "generals": [
         {
-          "id": 7,
-          "type": "major",
-          "name": "GM1",
+          "id": 9,
+          "type": "Vargus",
+          "name": "Vargus",
           "delay": 0,
           "preset": true,
           "init": false,
           "army": {
-            "recruit": 0,
-            "bowmen": 0,
-            "militia": 0,
-            "cavalry": 0,
-            "longbowman": 0,
-            "soldier": 0,
-            "crossbowman": 0,
-            "elite_soldier": 0,
-            "cannoneer": 0
+            "Swordsman": 0,
+            "Mounted Swordsman": 0,
+            "Knight": 0,
+            "Marksman": 0,
+            "Amored Marksman": 0,
+            "Mounted Marksman": 0,
+            "Besieger": 0
           },
           "relative_coordinates": [
-            -60,
-            262
+            -264,
+            395
           ],
           "drag": [
-            -12,
-            91
+            -123,
+            349
           ],
-          "capacity": 285,
-          "elite": false
+          "capacity": 195,
+          "elite": true
         }
       ]
     },
     {
-      "no": 28,
+      "no": 27,
       "type": "move",
       "delay": 0,
       "active": true,
@@ -1265,12 +1226,8 @@
             "Besieger": 0
           },
           "relative_coordinates": [
-            164,
-            270
-          ],
-          "drag": [
-            122,
-            228
+            -39,
+            379
           ],
           "capacity": 195,
           "elite": true
@@ -1278,7 +1235,7 @@
       ]
     },
     {
-      "no": 29,
+      "no": 28,
       "type": "move",
       "delay": 0,
       "active": true,
@@ -1313,7 +1270,7 @@
       ]
     },
     {
-      "no": 30,
+      "no": 29,
       "type": "move",
       "delay": 46,
       "active": true,
@@ -1348,7 +1305,7 @@
       ]
     },
     {
-      "no": 31,
+      "no": 30,
       "type": "load",
       "delay": 4,
       "active": true,
@@ -1375,34 +1332,34 @@
       ]
     },
     {
-      "no": 32,
+      "no": 31,
       "type": "load",
       "delay": 1,
       "active": true,
       "generals": [
         {
-          "id": 7,
-          "type": "major",
-          "name": "GM1",
+          "id": 5,
+          "type": "boris",
+          "name": "Boris 1",
           "delay": 0,
           "preset": false,
           "init": false,
           "army": {
             "Swordsman": 0,
-            "Mounted Swordsman": 35,
+            "Mounted Swordsman": 18,
             "Knight": 0,
             "Marksman": 0,
             "Amored Marksman": 0,
-            "Mounted Marksman": 94,
-            "Besieger": 156
+            "Mounted Marksman": 177,
+            "Besieger": 0
           },
-          "capacity": 285,
+          "capacity": 195,
           "elite": true
         }
       ]
     },
     {
-      "no": 33,
+      "no": 32,
       "type": "unload",
       "delay": 1,
       "active": true,
@@ -1429,7 +1386,7 @@
       ]
     },
     {
-      "no": 34,
+      "no": 33,
       "type": "load",
       "delay": 0,
       "active": true,
@@ -1456,7 +1413,7 @@
       ]
     },
     {
-      "no": 35,
+      "no": 34,
       "type": "load",
       "delay": 0,
       "active": true,
@@ -1483,7 +1440,7 @@
       ]
     },
     {
-      "no": 36,
+      "no": 35,
       "type": "attack",
       "delay": 1,
       "active": true,
@@ -1558,9 +1515,9 @@
           "elite": true
         },
         {
-          "id": 7,
-          "type": "major",
-          "name": "GM1",
+          "id": 5,
+          "type": "boris",
+          "name": "Boris 1",
           "delay": 0,
           "preset": true,
           "init": false,
@@ -1583,13 +1540,13 @@
             217,
             78
           ],
-          "capacity": 285,
+          "capacity": 195,
           "elite": false
         }
       ]
     },
     {
-      "no": 37,
+      "no": 36,
       "type": "move",
       "delay": 238,
       "active": true,
@@ -1624,15 +1581,15 @@
       ]
     },
     {
-      "no": 38,
+      "no": 37,
       "type": "move",
       "delay": 0,
       "active": true,
       "generals": [
         {
-          "id": 5,
-          "type": "boris",
-          "name": "Boris 1",
+          "id": 9,
+          "type": "Vargus",
+          "name": "Vargus",
           "delay": 0,
           "preset": true,
           "init": false,
@@ -1659,7 +1616,7 @@
       ]
     },
     {
-      "no": 39,
+      "no": 38,
       "type": "attack",
       "delay": 0,
       "active": true,
@@ -1694,7 +1651,7 @@
       ]
     },
     {
-      "no": 40,
+      "no": 39,
       "type": "attack",
       "delay": 2,
       "active": true,
@@ -1725,7 +1682,7 @@
       ]
     },
     {
-      "no": 41,
+      "no": 40,
       "type": "move",
       "delay": 1,
       "active": true,
@@ -1760,42 +1717,7 @@
       ]
     },
     {
-      "no": 42,
-      "type": "move",
-      "delay": 0,
-      "active": true,
-      "generals": [
-        {
-          "id": 7,
-          "type": "major",
-          "name": "GM1",
-          "delay": 0,
-          "preset": false,
-          "init": false,
-          "army": {
-            "Swordsman": 0,
-            "Mounted Swordsman": 1,
-            "Knight": 0,
-            "Marksman": 0,
-            "Amored Marksman": 0,
-            "Mounted Marksman": 0,
-            "Besieger": 0
-          },
-          "relative_coordinates": [
-            295,
-            20
-          ],
-          "drag": [
-            343,
-            48
-          ],
-          "capacity": 285,
-          "elite": true
-        }
-      ]
-    },
-    {
-      "no": 43,
+      "no": 41,
       "type": "move",
       "delay": 0,
       "active": true,
@@ -1805,7 +1727,7 @@
           "type": "sylvana",
           "name": "Sylvana 1",
           "delay": 0,
-          "preset": false,
+          "preset": true,
           "init": false,
           "army": {
             "Swordsman": 0,
@@ -1830,8 +1752,8 @@
       ]
     },
     {
-      "no": 44,
-      "type": "attack",
+      "no": 42,
+      "type": "move",
       "delay": 2,
       "active": true,
       "generals": [
@@ -1840,7 +1762,7 @@
           "type": "boris",
           "name": "Boris 1",
           "delay": 0,
-          "preset": true,
+          "preset": false,
           "init": false,
           "army": {
             "Swordsman": 0,
@@ -1852,8 +1774,12 @@
             "Besieger": 0
           },
           "relative_coordinates": [
-            143,
-            -47
+            66,
+            -81
+          ],
+          "drag": [
+            459,
+            103
           ],
           "capacity": 195,
           "elite": true
@@ -1861,7 +1787,7 @@
       ]
     },
     {
-      "no": 45,
+      "no": 43,
       "type": "attack",
       "delay": 0,
       "active": true,
@@ -1892,9 +1818,40 @@
       ]
     },
     {
-      "no": 46,
+      "no": 44,
       "type": "attack",
       "delay": 60,
+      "active": true,
+      "generals": [
+        {
+          "id": 3,
+          "type": "sylvana",
+          "name": "Sylvana 1",
+          "delay": 0,
+          "preset": false,
+          "init": false,
+          "army": {
+            "Swordsman": 0,
+            "Mounted Swordsman": 29,
+            "Knight": 11,
+            "Marksman": 0,
+            "Amored Marksman": 0,
+            "Mounted Marksman": 0,
+            "Besieger": 155
+          },
+          "relative_coordinates": [
+            149,
+            12
+          ],
+          "capacity": 195,
+          "elite": true
+        }
+      ]
+    },
+    {
+      "no": 45,
+      "type": "attack",
+      "delay": 15,
       "active": true,
       "generals": [
         {
@@ -1906,47 +1863,16 @@
           "init": false,
           "army": {
             "Swordsman": 0,
-            "Mounted Swordsman": 21,
-            "Knight": 8,
-            "Marksman": 0,
-            "Amored Marksman": 0,
-            "Mounted Marksman": 0,
-            "Besieger": 166
-          },
-          "relative_coordinates": [
-            145,
-            -46
-          ],
-          "capacity": 195,
-          "elite": true
-        }
-      ]
-    },
-    {
-      "no": 47,
-      "type": "attack",
-      "delay": 48,
-      "active": true,
-      "generals": [
-        {
-          "id": 3,
-          "type": "sylvana",
-          "name": "Sylvana 1",
-          "delay": 0,
-          "preset": true,
-          "init": false,
-          "army": {
-            "Swordsman": 0,
-            "Mounted Swordsman": 24,
+            "Mounted Swordsman": 0,
             "Knight": 0,
             "Marksman": 0,
             "Amored Marksman": 0,
-            "Mounted Marksman": 171,
+            "Mounted Marksman": 195,
             "Besieger": 0
           },
           "relative_coordinates": [
-            287,
-            148
+            329,
+            127
           ],
           "capacity": 195,
           "elite": true
@@ -1954,7 +1880,7 @@
       ]
     },
     {
-      "no": 48,
+      "no": 46,
       "type": "load",
       "delay": 10,
       "active": true,
@@ -1968,8 +1894,8 @@
           "init": false,
           "army": {
             "Swordsman": 0,
-            "Mounted Swordsman": 1,
-            "Knight": 0,
+            "Mounted Swordsman": 0,
+            "Knight": 30,
             "Marksman": 0,
             "Amored Marksman": 0,
             "Mounted Marksman": 0,
@@ -1981,52 +1907,25 @@
       ]
     },
     {
-      "no": 49,
+      "no": 47,
       "type": "load",
       "delay": 2,
       "active": true,
       "generals": [
         {
-          "id": 7,
-          "type": "major",
-          "name": "GM1",
+          "id": 9,
+          "type": "Vargus",
+          "name": "Vargus",
           "delay": 0,
           "preset": false,
           "init": false,
           "army": {
             "Swordsman": 0,
-            "Mounted Swordsman": 0,
-            "Knight": 90,
+            "Mounted Swordsman": 27,
+            "Knight": 0,
             "Marksman": 0,
             "Amored Marksman": 0,
-            "Mounted Marksman": 0,
-            "Besieger": 195
-          },
-          "capacity": 285,
-          "elite": true
-        }
-      ]
-    },
-    {
-      "no": 50,
-      "type": "load",
-      "delay": 59,
-      "active": true,
-      "generals": [
-        {
-          "id": 3,
-          "type": "sylvana",
-          "name": "Sylvana 1",
-          "delay": 0,
-          "preset": false,
-          "init": false,
-          "army": {
-            "Swordsman": 0,
-            "Mounted Swordsman": 0,
-            "Knight": 40,
-            "Marksman": 0,
-            "Amored Marksman": 0,
-            "Mounted Marksman": 0,
+            "Mounted Marksman": 168,
             "Besieger": 0
           },
           "capacity": 195,
@@ -2035,7 +1934,7 @@
       ]
     },
     {
-      "no": 51,
+      "no": 48,
       "type": "attack",
       "delay": 0,
       "active": true,
@@ -2057,8 +1956,8 @@
             "Besieger": 0
           },
           "relative_coordinates": [
-            474,
-            235
+            473,
+            240
           ],
           "capacity": 200,
           "elite": true
@@ -2080,41 +1979,49 @@
             "Besieger": 146
           },
           "relative_coordinates": [
-            573,
-            276
+            614,
+            305
           ],
           "capacity": 195,
           "elite": true
         },
+        {
+          "id": 9,
+          "type": "Vargus",
+          "name": "Vargus",
+          "delay": 5,
+          "preset": true,
+          "init": false,
+          "army": {
+            "Swordsman": 0,
+            "Mounted Swordsman": 27,
+            "Knight": 0,
+            "Marksman": 0,
+            "Amored Marksman": 0,
+            "Mounted Marksman": 168,
+            "Besieger": 0
+          },
+          "relative_coordinates": [
+            572,
+            275
+          ],
+          "capacity": 195,
+          "elite": true
+        }
+      ]
+    },
+    {
+      "no": 49,
+      "type": "load",
+      "delay": 0,
+      "active": true,
+      "generals": [
         {
           "id": 3,
           "type": "sylvana",
           "name": "Sylvana 1",
           "delay": 0,
-          "preset": true,
-          "init": false,
-          "army": {
-            "Swordsman": 0,
-            "Mounted Swordsman": 24,
-            "Knight": 0,
-            "Marksman": 0,
-            "Amored Marksman": 0,
-            "Mounted Marksman": 171,
-            "Besieger": 0
-          },
-          "relative_coordinates": [
-            571,
-            326
-          ],
-          "capacity": 195,
-          "elite": true
-        },
-        {
-          "id": 7,
-          "type": "major",
-          "name": "GM1",
-          "delay": 0,
-          "preset": true,
+          "preset": false,
           "init": false,
           "army": {
             "Swordsman": 0,
@@ -2125,17 +2032,13 @@
             "Mounted Marksman": 0,
             "Besieger": 0
           },
-          "relative_coordinates": [
-            613,
-            301
-          ],
-          "capacity": 285,
+          "capacity": 195,
           "elite": true
         }
       ]
     },
     {
-      "no": 52,
+      "no": 50,
       "type": "load",
       "delay": 0,
       "active": true,
@@ -2162,7 +2065,7 @@
       ]
     },
     {
-      "no": 53,
+      "no": 51,
       "type": "load",
       "delay": 200,
       "active": true,
@@ -2177,11 +2080,11 @@
           "army": {
             "Swordsman": 0,
             "Mounted Swordsman": 150,
-            "Knight": 150,
+            "Knight": 260,
             "Marksman": 0,
             "Amored Marksman": 80,
-            "Mounted Marksman": 354,
-            "Besieger": 0
+            "Mounted Marksman": 185,
+            "Besieger": 201
           },
           "capacity": 1000,
           "elite": true
