@@ -1,0 +1,187 @@
+[
+  {
+    "type": "boris",
+    "name": "Boris 1",
+    "capacity": 195
+  },
+  {
+    "type": "sylvana",
+    "name": "Sylvana 1",
+    "capacity": 195
+  },
+  {
+    "type": "sylvana",
+    "name": "Sylvana 2",
+    "capacity": 195
+  },
+  {
+    "type": "sylvana",
+    "name": "Sylvana 3",
+    "capacity": 195
+  },
+  {
+    "type": "sylvana",
+    "name": "Sylvana 4",
+    "capacity": 195
+  },
+  {
+    "type": "major",
+    "name": "GM1",
+    "capacity": 285
+  },
+  {
+    "type": "major",
+    "name": "GM2",
+    "capacity": 285
+  },
+  {
+    "type": "major",
+    "name": "GM3",
+    "capacity": 285
+  },
+  {
+    "type": "grim",
+    "name": "Grim 1",
+    "capacity": 200
+  },
+  {
+    "type": "grim",
+    "name": "Grim 2",
+    "capacity": 200
+  },
+  {
+    "type": "grim",
+    "name": "Grim 3",
+    "capacity": 200
+  },
+  {
+    "type": "master",
+    "name": "Master 1",
+    "capacity": 235
+  },
+  {
+    "type": "medic",
+    "name": "Medic 1",
+    "capacity": 200
+  },
+  {
+    "type": "veteran",
+    "name": "Veteran 1",
+    "capacity": 250
+  },
+  {
+    "type": "veteran",
+    "name": "Veteran 2",
+    "capacity": 250
+  },
+  {
+    "type": "basic",
+    "name": "Basic 1",
+    "capacity": 200
+  },
+  {
+    "type": "basic",
+    "name": "Basic 2",
+    "capacity": 200
+  },
+  {
+    "type": "basic",
+    "name": "Basic 3",
+    "capacity": 200
+  },
+  {
+    "type": "basic",
+    "name": "Basic 4",
+    "capacity": 200
+  },
+  {
+    "type": "basic",
+    "name": "Basic 5",
+    "capacity": 200
+  },
+  {
+    "type": "basic",
+    "name": "Basic 6",
+    "capacity": 200
+  },
+  {
+    "type": "kwatermistrz",
+    "name": "Q 1",
+    "capacity": 1000
+  },
+  {
+    "type": "kwatermistrz",
+    "name": "Q 2",
+    "capacity": 1000
+  },
+  {
+    "type": "Starszy",
+    "name": "Starszy",
+    "capacity": 295
+  },
+  {
+    "type": "Mlodszy",
+    "name": "Mlodszy 1",
+    "capacity": 155
+  },
+  {
+    "type": "Mlodszy",
+    "name": "Mlodszy 2",
+    "capacity": 155
+  },
+  {
+    "type": "Mlodszy",
+    "name": "Mlodszy 3",
+    "capacity": 155
+  },
+  {
+    "type": "Duch",
+    "name": "Duch 1",
+    "capacity": 230
+  },
+  {
+    "type": "Duch",
+    "name": "Duch 2",
+    "capacity": 230
+  },
+  {
+    "type": "Duch",
+    "name": "Duch 3",
+    "capacity": 230
+  },
+  {
+    "type": "Duch",
+    "name": "Duch 4",
+    "capacity": 230
+  },
+  {
+    "type": "Niezlomna",
+    "name": "Niezlomna 1",
+    "capacity": 235
+  },
+  {
+    "type": "Niezlomna",
+    "name": "Niezlomna 2",
+    "capacity": 235
+  },
+  {
+    "type": "Broda",
+    "name": "Broda",
+    "capacity": 175
+  },
+  {
+    "type": "Krzykliwa",
+    "name": "krzykliwa",
+    "capacity": 185
+  },
+  {
+    "type": "Samotnik",
+    "name": "Samotnik",
+    "capacity": 245
+  },
+  {
+    "type": "Vargus",
+    "name": "Vargus",
+    "capacity": 195
+  }
+]
