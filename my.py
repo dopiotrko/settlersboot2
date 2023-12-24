@@ -4,6 +4,7 @@ import json
 import my_pygui
 from my_types import Action
 import pygetwindow as pgw
+import subprocess
 
 
 def get_first_free_filename_no(name, path):
@@ -43,6 +44,26 @@ def load_generals():
     with open('data/generals.json') as f:
         data = json.load(f)
     return data
+
+
+def restart_compiled_client_if_gone():
+    log.info('restart_client')
+    close_not_responding_windows()
+    client_window = pgw.getWindowsWithTitle('Nowa Ziemia')
+    if len(client_window) == 1:
+        log.info('client window exist')
+        client_window[0].maximize()
+        return
+    else:
+        subprocess.Popen('C:/Users/dopiotrko/AppData/Local/Ubisoft/Client.exe')
+        wait(5)
+        client_window = pgw.getWindowsWithTitle('TSO Game Client')
+        if len(client_window) == 1:
+            log.info('compiled client window opened')
+            client_window[0].moveTo(0, 0)
+            my_pygui.click(130, 290)
+            wait(60, 'maximalising client in')
+            restart_compiled_client_if_gone()
 
 
 def minimize_irrelevant_windows(*args):
@@ -130,11 +151,11 @@ def send_explorer_while_error(func):
             print("ERROR: {}".format(e))
             my_pygui.press('esc')
             adv = args[0]
-            restart_client_if_gone()
+            restart_compiled_client_if_gone()
             while True:
                 if not adv.check_if_in_island():
                     adv.go_to_adventure()
-                restart_client_if_gone()
+                restart_compiled_client_if_gone()
                 adv.send_explorer_by_client(10)
                 adv.buff_by_client(3)
                 wait(15*60, 'sending after error in ')
