@@ -2,6 +2,7 @@ import os
 import time
 import json
 import my_pygui
+import logging as log
 from my_types import Action
 import pygetwindow as pgw
 import subprocess
@@ -75,15 +76,16 @@ def minimize_irrelevant_windows(*args):
 
 
 def restart_client_if_gone():
-    # log.info('restart_client')
+    log.info('restart_client')
+    close_not_responding_windows()
     client_window = pgw.getWindowsWithTitle('Nowa Ziemia')
     if len(client_window) == 1:
-        # log.info('client window exist')
-        client_window = client_window[0]
+        log.info('client window exist')
+        # client_window = client_window[0]
     else:
         settlers_main_page = pgw.getWindowsWithTitle('The Settlers Online')
         if len(settlers_main_page) == 1:
-            # log.info('main page exist')
+            log.info('main page exist')
             settlers_main_page = settlers_main_page[0]
             settlers_main_page.maximize()
             minimize_irrelevant_windows(settlers_main_page.center)
@@ -106,7 +108,7 @@ def restart_client_if_gone():
                     if not loc:
                         loc = my_pygui.locateOnScreen('resource/un_active_login_on_main_page.png')
                         if loc:
-                            # log.info('logged out - so logging in')
+                            log.info('logged out - so logging in')
                             my_pygui.click(loc.get())
                             wait(5)
                             my_pygui.click(settlers_main_page.centerx, loc.y + 75)
@@ -119,11 +121,14 @@ def restart_client_if_gone():
             if loc:
                 client_window = None
                 while not client_window:
-                    # log.info('play founded')
+                    log.info('play founded')
                     my_pygui.click(loc.x - 68, loc.y - 71)
                     my_pygui.click(loc.x, loc.y - 104)
                     wait(60, 'maximalising client in')
                     client_window = pgw.getWindowsWithTitle('Nowa Ziemia')
+                    if close_not_responding_windows():
+                        restart_client_if_gone()
+
                 client_window[0].maximize()
 
 
@@ -157,6 +162,8 @@ def send_explorer_while_error(func):
                     adv.go_to_adventure()
                 restart_compiled_client_if_gone()
                 adv.send_explorer_by_client(10)
-                adv.buff_by_client(3)
-                wait(15*60, 'sending after error in ')
+                adv.buff_by_client(5, "buffPremium")
+                adv.buff_by_client(3, "buffFish")
+                my_pygui.hotkey('ctrl', 'm')
+                wait(10*60, 'sending after error in ')
     return wrapper_send_explorer_while_error
