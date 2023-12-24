@@ -106,6 +106,22 @@ def restart_client_if_gone():
                 client_window[0].maximize()
 
 
+def close_not_responding_windows():
+    not_responding_windows = pgw.getWindowsWithTitle('Not Responding')
+    if len(not_responding_windows) > 0:
+        log.info('not_responding_window exist - closing all')
+        for n_r_win in not_responding_windows:
+            n_r_win.close()
+            loc = my_pygui.locateOnScreen('resource/close_not_responding.png')
+            if loc:
+                my_pygui.click(loc.get())
+                log.info('not_responding_window closed')
+        return True
+    else:
+        log.info('all window responding')
+        return False
+
+
 def send_explorer_while_error(func):
     def wrapper_send_explorer_while_error(*args, **kwargs):
         try:
