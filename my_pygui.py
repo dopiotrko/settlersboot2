@@ -149,6 +149,12 @@ class Alert:
         return pyautogui.alert(*args, **kwargs)
 
 
+class Prompt:
+    def __call__(self, *args, **kwargs):
+        logging.info('Alert: {}, {}'.format(args, kwargs))
+        return pyautogui.prompt(*args, **kwargs)
+
+
 class Press:
     def __call__(self, *args, **kwargs):
         logging.info('Press: {}, {}'.format(args, kwargs))
@@ -192,6 +198,7 @@ pixelMatchesColor = Pixelmatchescolor()
 moveTo = Moveto()
 hotkey = Hotkey()
 alert = Alert()
+prompt = Prompt()
 press = Press()
 scroll = Scroll()
 confirm = Confirm()
