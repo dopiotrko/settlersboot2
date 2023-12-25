@@ -425,17 +425,23 @@ class Adventure:
         my_pygui.click(self.coordinations['star_close'].get())
 
     @my.send_explorer_while_error
-    def go_to_adventure(self, delay=0):
+    def go_to_adventure(self, delay=0, any_=True):
         log.info('go_to_adventure')
 
         my.wait(delay, 'Going to adventure')
-        loc = my_pygui.locateOnScreen('data/{}/goto_adv.png'.format(self.name), confidence=0.85)
+        adv_path = 'resource/any_adv.png' if any_ else 'data/{}/goto_adv.png'.format(self.name)
+        loc = my_pygui.locateOnScreen(adv_path,
+                                      region=(1800, 300, 60, 400),
+                                      confidence=0.85, )
         if loc is None:
-            raise Exception('No active adventure {} found on the screen.'.format(self.name))
+            raise Exception('No active adventure {} found on the screen.'.format('any' if any_ else self.name))
         else:
+            if any_:
+                loc = loc - Point(0, 50)
             x, y = loc.get()
             my_pygui.click(x, y)
             my_pygui.click(x, y + 15)
+            my.wait(10)
 
     @my.send_explorer_while_error
     def make_adventure(self, delay=0, start=0, stop=1000, mode=Mode.play):
