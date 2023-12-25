@@ -678,6 +678,53 @@ class Adventure:
                     raise Exception('verification failed')
                 # TODO niech powtarza action gdy failed - dopisać tu lub bam gdzie wywołyje
 
+    @my.send_explorer_while_error
+    def confirm_task(self, delay=0, ending=True, ending_retested=False):
+        log.info('confirm_task')
+        my.wait(delay, 'confirming task' + (' ending' if ending else ''))
+        self.focus()
+        my_pygui.hotkey('ESC')
+        my_pygui.hotkey('f2')
+        my.wait(3)
+        my_pygui.click(self.coordinations['book'].get())
+
+        while True:
+            my_pygui.click((self.coordinations['book_down']-Point(135, 388)).get())
+            my.wait(5)
+            locations = my_pygui.locateAllOnScreen('resource/task.png', confidence=0.9)
+            if len(locations) == 0:
+                if ending:
+                    if ending_retested:
+                        raise Exception('No task to confirm.')
+                    else:
+                        ending_retested = True
+                        self.confirm_task(3, ending=True, ending_retested=True)
+                else:
+                    log.info('No task to confirm.')
+                    return
+            else:
+                locations.sort(key=lambda i: -i.y)
+                loc = locations[0]
+                my_pygui.click((loc-Point(100, 0)).get())
+                loc = my_pygui.locateOnScreen('resource/start_adventure.png', confidence=0.9)
+                if loc is None:
+                    raise Exception('Button not found.')
+                else:
+                    my_pygui.click(loc.get())
+                my.wait(5)
+                loc = my_pygui.locateOnScreen('resource/confirm.png', confidence=0.9)
+                if loc is None:
+                    continue
+                else:
+                    my_pygui.click(loc.get())
+                    time.sleep(20)
+                    loc = my_pygui.locateOnScreen('resource/return.png'.format(self.name), confidence=0.9)
+                    if loc is None:
+                        raise Exception('Button not found.')
+                    else:
+                        my_pygui.click(loc.get())
+                        return
+
     def locate_reference_img(self, on_map):
         log.info('locate_reference_img')
         my_pygui.moveTo((self.coordinations['book'] + Point(100, 0)).get())
