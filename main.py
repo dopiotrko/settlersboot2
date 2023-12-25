@@ -57,6 +57,8 @@ class Adventure:
             self.coordinations = pickle.load(config_dictionary_file)
         self.generals_loc = None
         self.focused = None
+        self.c_data = None
+        self.c_listdir = None
 
     def init_locate_generals(self, start=0):
         log.info('init_locate_generals:')
@@ -442,6 +444,15 @@ class Adventure:
             my_pygui.click(x, y)
             my_pygui.click(x, y + 15)
             my.wait(10)
+
+    def c_get_listdir(self):
+        json_list = os.listdir('data/{}'.format(self.name))
+        excluded = ['end_adv_co.json', "generals_loc.dat", "goto_adv.png", 'learned.json', 'loc_reference.png']
+        for _ in excluded:
+            if _ in json_list:
+                json_list.remove(_)
+
+        return json_list
 
     @my.send_explorer_while_error
     def make_adventure(self, delay=0, start=0, stop=1000, mode=Mode.play):
