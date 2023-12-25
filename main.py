@@ -802,7 +802,9 @@ class Adventure:
     def send_explorer_by_client(self, delay=0, template='explor'):
         log.info('send_explorer_by_client')
         my.wait(delay, 'Sending explorers')
-
+        if not self.check_if_in_island():
+            my_pygui.hotkey('ESC')
+            self.go_to_adventure()
         self.focus()
         my_pygui.hotkey('F3')
         time.sleep(5)
