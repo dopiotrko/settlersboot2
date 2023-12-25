@@ -1075,6 +1075,13 @@ class Adventure:
             log.info('{} button not found'.format(action_type))
             return None
 
+    @staticmethod
+    def c_reset():
+        loc = my_pygui.locateOnScreen('resource/c_reset.png')
+        if loc:
+            log.info('reset button found - pressing')
+            my_pygui.click(loc.get())
+
     def make_bonus(self, delay=0, mode=Mode.teach_co, area='0'):
         log.info('make_bonus')
 
