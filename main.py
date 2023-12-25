@@ -774,31 +774,6 @@ class Adventure:
                 my.wait(1, 'Trying again')
 
     @my.send_explorer_while_error
-    def end_adventure_(self, delay=0):
-        log.info('end_adventure')
-
-        my.wait(delay, 'Ending adventure')
-        my_pygui.hotkey('f2')
-        my_pygui.click(self.coordinations['book'].get())
-        my.wait(2)
-        loc = my_pygui.locateOnScreen('resource/start_adventure.png', confidence=0.9)
-        if loc is None:
-            raise Exception('Button not found.')
-        else:
-            my_pygui.click(loc.get())
-        loc = my_pygui.locateOnScreen('resource/confirm.png', confidence=0.9)
-        if loc is None:
-            raise Exception('Button not found.')
-        else:
-            my_pygui.click(loc.get())
-        time.sleep(20)
-        loc = my_pygui.locateOnScreen('data/{}/return_ref.png'.format(self.name), confidence=0.9)
-        if loc is None:
-            raise Exception('Button not found.')
-        else:
-            my_pygui.click((loc + Point(160, 234)).get())
-
-    @my.send_explorer_while_error
     def send_explorer_by_client(self, delay=0, template='explor'):
         log.info('send_explorer_by_client')
         my.wait(delay, 'Sending explorers')
