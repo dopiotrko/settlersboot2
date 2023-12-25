@@ -1064,6 +1064,17 @@ class Adventure:
             button_loc = self.c_button_search(action['type'])
         self.c_data.update(dict(type=action['type'], file_loc=swap_text, delay=t))
 
+    @staticmethod
+    def c_button_search(action_type):
+        loc = my_pygui.locateOnScreen('resource/c_{}.png'.format(action_type),
+                                      confidence=0.90)
+        if loc:
+            log.info('{} army button found - pending'.format(action_type))
+            return loc.get()
+        else:
+            log.info('{} button not found'.format(action_type))
+            return None
+
     def make_bonus(self, delay=0, mode=Mode.teach_co, area='0'):
         log.info('make_bonus')
 
