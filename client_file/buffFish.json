@@ -3,11 +3,6 @@
  "zoneUser": "DuzyPiotr",
  "data": [
   {
-   "buffName": "ProvisionerBuffLvl4",
-   "buiGrid": 10159,
-   "buiName": "ProvisionHouse2"
-  },
-  {
    "buffName": "BookbinderBuffLvl6",
    "buiGrid": 9980,
    "buiName": "Bookbinder"
@@ -319,16 +314,6 @@
   },
   {
    "buffName": "ProductivityBuffLvl29",
-   "buiGrid": 3882,
-   "buiName": "coal_workyard"
-  },
-  {
-   "buffName": "ProductivityBuffLvl29",
-   "buiGrid": 4149,
-   "buiName": "coal_workyard"
-  },
-  {
-   "buffName": "ProductivityBuffLvl29",
    "buiGrid": 2717,
    "buiName": "GroutFactory"
   },
@@ -374,11 +359,6 @@
   },
   {
    "buffName": "ProductivityBuffLvl29",
-   "buiGrid": 2709,
-   "buiName": "TitaniumSmelter"
-  },
-  {
-   "buffName": "ProductivityBuffLvl29",
    "buiGrid": 2353,
    "buiName": "Longbowmaker"
   },
@@ -391,16 +371,6 @@
    "buffName": "ProductivityBuffLvl29",
    "buiGrid": 2886,
    "buiName": "SteelForge"
-  },
-  {
-   "buffName": "ProductivityBuffLvl29",
-   "buiGrid": 2973,
-   "buiName": "IronSmelter"
-  },
-  {
-   "buffName": "ProductivityBuffLvl29",
-   "buiGrid": 2707,
-   "buiName": "Bowmaker"
   },
   {
    "buffName": "ProductivityBuffLvl29",
@@ -426,46 +396,6 @@
    "buffName": "ProductivityBuffLvl29",
    "buiGrid": 2436,
    "buiName": "MarbleMason"
-  },
-  {
-   "buffName": "ProductivityBuffLvl29",
-   "buiGrid": 3326,
-   "buiName": "coal_workyard"
-  },
-  {
-   "buffName": "ProductivityBuffLvl29",
-   "buiGrid": 2971,
-   "buiName": "Watermill"
-  },
-  {
-   "buffName": "ProductivityBuffLvl29",
-   "buiGrid": 2791,
-   "buiName": "Watermill"
-  },
-  {
-   "buffName": "ProductivityBuffLvl29",
-   "buiGrid": 2701,
-   "buiName": "Watermill"
-  },
-  {
-   "buffName": "ProductivityBuffLvl29",
-   "buiGrid": 3147,
-   "buiName": "Watermill"
-  },
-  {
-   "buffName": "ProductivityBuffLvl29",
-   "buiGrid": 3413,
-   "buiName": "Watermill"
-  },
-  {
-   "buffName": "ProductivityBuffLvl29",
-   "buiGrid": 3322,
-   "buiName": "Watermill"
-  },
-  {
-   "buffName": "ProductivityBuffLvl29",
-   "buiGrid": 2966,
-   "buiName": "Watermill"
   },
   {
    "buffName": "ProductivityBuffLvl29",
@@ -834,11 +764,6 @@
   },
   {
    "buffName": "ProductivityBuffLvl29",
-   "buiGrid": 8294,
-   "buiName": "WatermillEndless"
-  },
-  {
-   "buffName": "ProductivityBuffLvl29",
    "buiGrid": 8115,
    "buiName": "CokingPlant"
   },
@@ -1174,11 +1099,6 @@
   },
   {
    "buffName": "ProductivityBuffLvl29",
-   "buiGrid": 6172,
-   "buiName": "Watermill"
-  },
-  {
-   "buffName": "ProductivityBuffLvl29",
    "buiGrid": 5640,
    "buiName": "MarbleMason"
   },
@@ -1328,11 +1248,6 @@
    "buiName": "Stable"
   },
   {
-   "buffName": "ProductivityBuffLvl101",
-   "buiGrid": 7140,
-   "buiName": "Stable"
-  },
-  {
    "buffName": "ProductivityBuffLvl29",
    "buiGrid": 5444,
    "buiName": "Shepard"
@@ -1348,247 +1263,217 @@
    "buiName": "SunflowerFarm"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 10089,
    "buiName": "BronzeMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 9735,
    "buiName": "BronzeMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 10005,
    "buiName": "BronzeMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 9377,
    "buiName": "GoldMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
-   "buiGrid": 9201,
-   "buiName": "GoldMine"
-  },
-  {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 8668,
    "buiName": "GoldMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 6775,
    "buiName": "BronzeMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 6420,
    "buiName": "BronzeMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 6154,
    "buiName": "BronzeMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 11864,
    "buiName": "GoldMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 13515,
    "buiName": "GoldMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
-   "buiGrid": 12006,
-   "buiName": "GoldMine"
-  },
-  {
-   "buffName": "ProductivityBuffLvl103",
-   "buiGrid": 1739,
-   "buiName": "GoldMine"
-  },
-  {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 1563,
    "buiName": "GoldMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 768,
    "buiName": "GoldMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 3081,
    "buiName": "GoldMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 785,
    "buiName": "SalpeterMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 697,
    "buiName": "TitaniumMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 5238,
    "buiName": "TitaniumMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
-   "buiGrid": 5502,
-   "buiName": "TitaniumMine"
-  },
-  {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 7814,
    "buiName": "SalpeterMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 7545,
    "buiName": "TitaniumMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 9776,
    "buiName": "SalpeterMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
-   "buiGrid": 13160,
-   "buiName": "SalpeterMine"
-  },
-  {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 13425,
    "buiName": "TitaniumMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 11804,
    "buiName": "SalpeterMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
-   "buiGrid": 13846,
-   "buiName": "SalpeterMine"
-  },
-  {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 13934,
    "buiName": "TitaniumMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 13285,
    "buiName": "IronMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 13373,
    "buiName": "IronMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 11580,
    "buiName": "IronMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 12997,
    "buiName": "IronMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 12288,
    "buiName": "TitaniumMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 6059,
    "buiName": "IronMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 5882,
    "buiName": "IronMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 3672,
    "buiName": "IronMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 3407,
    "buiName": "IronMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 2078,
    "buiName": "IronMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 1725,
    "buiName": "IronMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 1907,
    "buiName": "IronMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 1020,
    "buiName": "IronMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 933,
    "buiName": "IronMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 5123,
    "buiName": "IronMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 5837,
    "buiName": "IronMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 5750,
    "buiName": "IronMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 5484,
    "buiName": "IronMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 7356,
    "buiName": "IronMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 7887,
    "buiName": "IronMine"
   },
   {
-   "buffName": "ProductivityBuffLvl103",
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
    "buiGrid": 8151,
    "buiName": "IronMine"
   },
@@ -1631,6 +1516,421 @@
    "buffName": "ProductivityBuffLvl29",
    "buiGrid": 6004,
    "buiName": "ImprovedMill"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 822,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 1534,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 1357,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 1180,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 1713,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 1892,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 1715,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 1538,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 1894,
+   "buiName": "Friary"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 1808,
+   "buiName": "Friary"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 2246,
+   "buiName": "Friary"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 4922,
+   "buiName": "Friary"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 4389,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 4391,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 4743,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 4564,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 4297,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 3941,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 3674,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 4120,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 4210,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProvisionerBuffLvl3",
+   "buiGrid": 10159,
+   "buiName": "ProvisionHouse2"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 7947,
+   "buiName": "coal_workyard"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 7594,
+   "buiName": "coal_workyard"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 7678,
+   "buiName": "coal_workyard"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 7233,
+   "buiName": "coal_workyard"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 7060,
+   "buiName": "Wheelmaker"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 7151,
+   "buiName": "Wheelmaker"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 2703,
+   "buiName": "TitaniumSmelter"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 2882,
+   "buiName": "TitaniumSmelter"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 2972,
+   "buiName": "TitaniumSmelter"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 3069,
+   "buiName": "PlatinumSmelter"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 2892,
+   "buiName": "PlatinumSmelter"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 3071,
+   "buiName": "PlatinumSmelter"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 3248,
+   "buiName": "PlatinumSmelter"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 2865,
+   "buiName": "DeerstalkerHut"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 12120,
+   "buiName": "ExoticWoodForester"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 12029,
+   "buiName": "ExoticWoodCutter"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 12474,
+   "buiName": "ExoticWoodCutter"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 6016,
+   "buiName": "BronzeWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 6104,
+   "buiName": "SteelWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 6283,
+   "buiName": "BronzeWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 6462,
+   "buiName": "BronzeWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 6818,
+   "buiName": "IronWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 6639,
+   "buiName": "IronWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 6726,
+   "buiName": "PlatinumWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 6547,
+   "buiName": "PlatinumWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 6903,
+   "buiName": "PlatinumWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 6724,
+   "buiName": "PlatinumWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 6545,
+   "buiName": "BronzeWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
+   "buiGrid": 1613,
+   "buiName": "CoalMine"
+  },
+  {
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
+   "buiGrid": 1438,
+   "buiName": "CoalMine"
+  },
+  {
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
+   "buiGrid": 1794,
+   "buiName": "CoalMine"
+  },
+  {
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
+   "buiGrid": 5664,
+   "buiName": "CoalMine"
+  },
+  {
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
+   "buiGrid": 5577,
+   "buiName": "CoalMine"
+  },
+  {
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
+   "buiGrid": 4956,
+   "buiName": "CoalMine"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 6616,
+   "buiName": "CannonForge"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 6706,
+   "buiName": "Carpenter"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 6793,
+   "buiName": "WagonMaker"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 7328,
+   "buiName": "Foundry"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 7775,
+   "buiName": "Crossbowsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 6281,
+   "buiName": "TitaniumWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 9216,
+   "buiName": "ImprovedFarm"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 9309,
+   "buiName": "ImprovedFarm"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 10555,
+   "buiName": "ImprovedSilo"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 3970,
+   "buiName": "ExoticWoodSawmill"
+  },
+  {
+   "buffName": "ProductivityBuffCandyFactoryBuff1",
+   "buiGrid": 3670,
+   "buiName": "IronMine"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 3234,
+   "buiName": "Toolmaker"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 3236,
+   "buiName": "Toolmaker"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 3059,
+   "buiName": "Toolmaker"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 3076,
+   "buiName": "GoldSmelter"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 3680,
+   "buiName": "Toolmaker"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 2876,
+   "buiName": "BronzeSmelter"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 2790,
+   "buiName": "BronzeSmelter"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 2524,
+   "buiName": "BronzeSmelter"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 4566,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 2344,
+   "buiName": "BronzeSmelter"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 2966,
+   "buiName": "BronzeSmelter"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 3413,
+   "buiName": "Toolmaker"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 3326,
+   "buiName": "Toolmaker"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 2709,
+   "buiName": "IronSmelter"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 3882,
+   "buiName": "ExoticWoodSawmill"
+  },
+  {
+   "buffName": "ProductivityBuffLvl29",
+   "buiGrid": 2017,
+   "buiName": "ImprovedWatermill"
   }
  ]
 }

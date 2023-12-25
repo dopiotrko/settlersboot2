@@ -171,6 +171,71 @@
    "buffName": "SpeedUpPopulationGrowth2",
    "buiGrid": 8825,
    "buiName": "Mayorhouse"
+  },
+  {
+   "buffName": "ProvisionerBuffLvl4",
+   "buiGrid": 10159,
+   "buiName": "ProvisionHouse2"
+  },
+  {
+   "buffName": "ProductivityBuffLvl10",
+   "buiGrid": 5654,
+   "buiName": "WhiteCastle"
+  },
+  {
+   "buffName": "ProductivityBuffLvl7",
+   "buiGrid": 3962,
+   "buiName": "pumpkinfield_01"
+  },
+  {
+   "buffName": "ProductivityBuffLvl22",
+   "buiGrid": 4318,
+   "buiName": "pumpkinfield_02"
+  },
+  {
+   "buffName": "ProductivityBuffLvl22",
+   "buiGrid": 4763,
+   "buiName": "pumpkinfield_02"
+  },
+  {
+   "buffName": "ProductivityBuffLvl22",
+   "buiGrid": 4584,
+   "buiName": "pumpkinfield_02"
+  },
+  {
+   "buffName": "ProductivityBuffLvl7",
+   "buiGrid": 4405,
+   "buiName": "pumpkinfield_01"
+  },
+  {
+   "buffName": "ProductivityBuffLvl7",
+   "buiGrid": 4226,
+   "buiName": "pumpkinfield_01"
+  },
+  {
+   "buffName": "ProductivityBuffLvl10",
+   "buiGrid": 6529,
+   "buiName": "Powderhut"
+  },
+  {
+   "buffName": "ProductivityBuffLvl10",
+   "buiGrid": 6439,
+   "buiName": "Powderhut"
+  },
+  {
+   "buffName": "ProductivityBuffCarnivalGrounds1",
+   "buiGrid": 4854,
+   "buiName": "emergencypumpkinfield_03"
+  },
+  {
+   "buffName": "ProductivityBuffCarnivalGrounds1",
+   "buiGrid": 4587,
+   "buiName": "emergencypumpkinfield_03"
+  },
+  {
+   "buffName": "ProductivityBuffCarnivalGrounds1",
+   "buiGrid": 4320,
+   "buiName": "emergencypumpkinfield_03"
   }
  ]
 }

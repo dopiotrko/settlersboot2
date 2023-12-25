@@ -3,11 +3,6 @@
  "zoneUser": "DuzyPiotr",
  "data": [
   {
-   "buffName": "ProvisionerBuffLvl4",
-   "buiGrid": 10159,
-   "buiName": "ProvisionHouse2"
-  },
-  {
    "buffName": "BookbinderBuffLvl6",
    "buiGrid": 9980,
    "buiName": "Bookbinder"
@@ -1634,8 +1629,173 @@
   },
   {
    "buffName": "ProductivityBuffLvl23",
-   "buiGrid": 3071,
-   "buiName": "PlatinumSmelter"
+   "buiGrid": 822,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 1534,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 1357,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 1180,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 1713,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 1892,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 1715,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 1538,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 1894,
+   "buiName": "Friary"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 1808,
+   "buiName": "Friary"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 2246,
+   "buiName": "Friary"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 4922,
+   "buiName": "Friary"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 4389,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 4391,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 4743,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 4564,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 4297,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 3941,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 3674,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 4120,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 4210,
+   "buiName": "Brewery"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 6903,
+   "buiName": "PlatinumWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 6724,
+   "buiName": "PlatinumWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 6545,
+   "buiName": "BronzeWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 6547,
+   "buiName": "PlatinumWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 6726,
+   "buiName": "PlatinumWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 7060,
+   "buiName": "Wheelmaker"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 7151,
+   "buiName": "Wheelmaker"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 7678,
+   "buiName": "coal_workyard"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 7233,
+   "buiName": "coal_workyard"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 7594,
+   "buiName": "coal_workyard"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 2703,
+   "buiName": "TitaniumSmelter"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 2882,
+   "buiName": "TitaniumSmelter"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 2972,
+   "buiName": "TitaniumSmelter"
   },
   {
    "buffName": "ProductivityBuffLvl23",
@@ -1649,18 +1809,28 @@
   },
   {
    "buffName": "ProductivityBuffLvl23",
-   "buiGrid": 3248,
-   "buiName": "PlatinumSmelter"
+   "buiGrid": 3076,
+   "buiName": "GoldSmelter"
   },
   {
    "buffName": "ProductivityBuffLvl23",
-   "buiGrid": 3970,
-   "buiName": "ExoticWoodSawmill"
+   "buiGrid": 6462,
+   "buiName": "BronzeWeaponsmith"
   },
   {
    "buffName": "ProductivityBuffLvl23",
-   "buiGrid": 7678,
-   "buiName": "coal_workyard"
+   "buiGrid": 6283,
+   "buiName": "BronzeWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 6104,
+   "buiName": "SteelWeaponsmith"
+  },
+  {
+   "buffName": "ProductivityBuffLvl23",
+   "buiGrid": 2017,
+   "buiName": "ImprovedWatermill"
   }
  ]
 }
