@@ -994,6 +994,20 @@ class Adventure:
         else:
             return False
 
+    @staticmethod
+    def c_send_army():
+        log.info('c_send_army')
+        loc = my_pygui.locateOnScreen('resource/c_send.png',
+                                      region=(1100, 800, 500, 200),
+                                      confidence=0.90)
+        if loc:
+            log.info('send army found - sending')
+            my_pygui.click(loc.get())
+            my_pygui.click((loc - Point(0, 40)).get())
+            return True
+        else:
+            return False
+
     def make_bonus(self, delay=0, mode=Mode.teach_co, area='0'):
         log.info('make_bonus')
 
