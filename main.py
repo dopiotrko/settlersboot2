@@ -446,11 +446,12 @@ class Adventure:
             self.generals_loc = self.init_locate_generals(start)
         t0 = time.time()
         interval = 15 * 60
+        brake_adv = False
         for action in self.data['actions']:
             if not (start <= action['no'] <= stop):
                 continue
             print("------------------->>", time.time() - t0)
-            if time.time() - t0 > interval:
+            if brake_adv & (time.time() - t0 > interval):
                 log.warning('servicing island and resetting interval')
                 self.go_to_adventure()
                 self.send_explorer_by_client(30)
