@@ -380,7 +380,7 @@ class Adventure:
 
     def check_if_army_available(self, army):
         # TODO temporally disable this function
-        return
+        # return
         log.info('check_if_army_available')
         self.open_star()
         my_pygui.click(self.coordinations['specialists'].get())
@@ -406,7 +406,7 @@ class Adventure:
         my.wait(delay, 'Sending to adventure')
         army = self.sum_armies(first, last)
         print(army)
-        self.check_if_army_available(army)
+        # self.check_if_army_available(army)
         for g_type, generals_of_type in self.group_generals_by_types(first, last).items():
             unnamed_generals_of_type = []
             for general in generals_of_type:
