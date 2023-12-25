@@ -1021,6 +1021,19 @@ class Adventure:
         else:
             return False
 
+    @staticmethod
+    def c_attack_army():
+        log.info('c_attack_army')
+        loc = my_pygui.locateOnScreen('resource/c_attack.png',
+                                      region=(1100, 800, 500, 200),
+                                      confidence=0.90)
+        if loc:
+            log.info('attack army found - attacking')
+            my_pygui.click(loc.get())
+            return True
+        else:
+            return False
+
     def make_bonus(self, delay=0, mode=Mode.teach_co, area='0'):
         log.info('make_bonus')
 
