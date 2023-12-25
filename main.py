@@ -981,6 +981,19 @@ class Adventure:
         my_pygui.press('0')
         my_pygui.hotkey('ctrl', 'F4')
 
+    @staticmethod
+    def c_load_army():
+        log.info('c_load_army')
+        loc = my_pygui.locateOnScreen('resource/c_load.png',
+                                      region=(1100, 900, 300, 100),
+                                      confidence=0.90)
+        if loc:
+            log.info('load army found - loading')
+            my_pygui.click(loc.get())
+            return True
+        else:
+            return False
+
     def make_bonus(self, delay=0, mode=Mode.teach_co, area='0'):
         log.info('make_bonus')
 
