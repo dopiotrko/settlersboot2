@@ -1111,6 +1111,18 @@ class Adventure:
                 my_pygui.moveTo(target.get())
                 my_pygui.click(target.get(), clicks=1, interval=0.25)
 
+    def c_action_file_chose(self):
+        json_list = self.c_get_listdir()
+        text = '\n'.join(['{} - {}'.format(i, file_) for i, file_ in enumerate(json_list)])
+        json_no = my_pygui.prompt(text=text, title='Chose file with next action data - type number')
+        if json_no is None:
+            raise ValueError
+        try:
+            json_no = int(json_no)
+            return json_list[json_no]
+        except ValueError:
+            self.c_action_file_chose()
+
 
 def run(adv, adv_name, delay, gap, start=0, stop=999):
     if gap > 0:
