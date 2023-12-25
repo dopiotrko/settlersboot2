@@ -1034,6 +1034,36 @@ class Adventure:
         else:
             return False
 
+    def c_action(self, action, mode=Mode.play):
+        assert action['type'] in ('load', 'move', 'attack', 'refresh')
+        log.info('c_action_{}'.format(action['type']))
+
+        self.focus()
+        with open('client_file/swap.txt', 'w') as f:
+            if mode is Mode.teach_co:
+                swap_text = '\\'.join([os.getcwd(), 'data', self.name, self.c_action_file_chose()+'[a]'])
+            elif mode is Mode.play:
+                swap_text = action['file_loc']
+            f.write(swap_text.replace('\\', '\\\\'))
+        my_pygui.hotkey('ctrl', 'pageup')
+        my.wait(2)
+        my_pygui.hotkey('ctrl', 'pagedown')
+        my.wait(5)
+        button_loc = self.c_button_search(action['type'])
+        t_0 = time.time()
+        while not button_loc:
+            my.wait(10)
+            self.c_reset()
+            button_loc = self.c_button_search(action['type'])
+        t = time.time() - t_0
+        my_pygui.click(button_loc)
+        # this is to wait/check if function succeed
+        while button_loc:
+            my.wait(10)
+            self.c_reset()
+            button_loc = self.c_button_search(action['type'])
+        self.c_data.update(dict(type=action['type'], file_loc=swap_text, delay=t))
+
     def make_bonus(self, delay=0, mode=Mode.teach_co, area='0'):
         log.info('make_bonus')
 
