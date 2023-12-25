@@ -973,6 +973,14 @@ class Adventure:
         my_pygui.click(self.coordinations['first_general'].get())
         my_pygui.click(self.coordinations['close_general'].get())
 
+    def collectables(self, delay=10):
+        log.info('collectables')
+
+        my.wait(delay, 'collectables')
+        self.focus()
+        my_pygui.press('0')
+        my_pygui.hotkey('ctrl', 'F4')
+
     def make_bonus(self, delay=0, mode=Mode.teach_co, area='0'):
         log.info('make_bonus')
 
