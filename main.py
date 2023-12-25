@@ -617,6 +617,12 @@ class Adventure:
             with open(my.get_new_filename(self.name), 'w') as f:
                 json.dump(self.data, f, indent=2)
 
+    def make_c_action(self, action, mode, start):
+        log.info('make_action')
+        if not self.focused:
+            self.focus()
+        get_click = listener.GetClick()
+
     def retrench(self, general, general_loc, mode):
         log.info('retrench')
         on_map = self.select_general_by_loc(general_loc, general['type'], verify=False)
