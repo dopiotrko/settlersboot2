@@ -38,6 +38,7 @@ import ocr
 import os
 import pyperclip
 from my_types import Point, Mode, AdventureSearch, TreasureSearch
+
 log = logging.getLogger(__name__)
 for handler in logging.root.handlers[:]:
     logging.root.removeHandler(handler)
@@ -476,6 +477,29 @@ class Adventure:
                 my.wait(30, 'Continuing adventure')
                 t0 = time.time()
             self.make_action(action, mode, start)
+
+    @my.send_explorer_while_error
+    def make_c_adventure(self, delay=0, start=0, stop=1000, mode=Mode.play):
+        log.info('make_c_adventure')
+        assert (isinstance(mode, Mode))
+        my.wait(delay, 'Making adventure')
+        with open('data/{}/c_learned.json'.format(self.name)) as f:
+            self.c_data = json.load(f)
+        self.c_listdir = self.c_get_listdir()
+        t0 = time.time()
+        interval = 15 * 60
+        for action in self.c_data['actions']:
+            if not (start <= action['no'] <= stop):
+                continue
+            print("------------------->>", time.time() - t0)
+            if time.time() - t0 > interval:
+                log.warning('servicing island and resetting interval')
+                self.go_to_adventure()
+                self.send_explorer_by_client(30)
+                self.go_to_adventure(30)
+                my.wait(30, 'Continuing adventure')
+                t0 = time.time()
+            self.make_c_action(action, mode, start)
 
     def focus(self):
         log.info('focus')
